@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Monis Workspace Designer 🌴
 
-## Getting Started
+> Built for the **[Desent](https://desent.de)** coding challenge.
 
-First, run the development server:
+A real-time workspace rental configurator for [Monis.rent](https://monis.rent) — the premium Bali workspace rental service.
+
+🔗 **Live Demo:** _Deploy to Vercel coming soon_
+
+---
+
+## ✨ Features
+
+- **3-Panel Layout** — Intuitive workspace builder matching the Desent sketch
+- **Live Visual Preview** — SVG canvas updates in real-time as you pick items
+- **2+ Desk Options** — Oak Standing, Walnut Executive, Minimalist White, Glass Corner
+- **2+ Chair Options** — Herman Miller Aeron, Mesh Chair, Gaming Chair, Bar Stool
+- **Accessories** — Monitors (27"/Ultrawide), ScreenBar lamp, Plant, Keyboard, Webcam
+- **Lifestyle Extras** — Coffee Station · Outdoor Gear · Relax Zone · Garage Space
+- **Dynamic Pricing** — Duration discounts (1 day → 1 month)
+- **Day/Night Mode** — Ambient lighting toggle with visual effects
+- **Checkout Summary** — Full pricing breakdown + WhatsApp booking CTA
+
+## 🛠️ Tech Stack
+
+| Tool | Role |
+|---|---|
+| **Next.js 16** | Framework (App Router + TypeScript) |
+| **Tailwind CSS v4** | Styling |
+| **Framer Motion** | Animations & transitions |
+| **Lucide React** | Icons |
+| **Vercel** | Deployment |
+
+## 🚀 Getting Started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Open http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📁 Project Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+├── app/
+│   ├── layout.tsx          # Root layout (Inter font + SEO)
+│   ├── page.tsx            # Main page
+│   └── globals.css         # Tailwind + custom styles
+├── components/
+│   ├── WorkspaceBuilder.tsx # Main state container
+│   ├── LeftPanel.tsx        # Tab selector (Chairs/Desks/Accessories)
+│   ├── WorkspaceCanvas.tsx  # Real-time SVG visual canvas
+│   ├── RightPanel.tsx       # Quick add-ons panel
+│   ├── BottomExtras.tsx     # Category extras (Coffee/Outdoor/Relax/Garage)
+│   ├── CheckoutModal.tsx    # Summary & booking modal
+│   └── ItemCard.tsx         # Reusable product cards
+└── lib/
+    ├── catalog.ts           # Product data & pricing
+    └── types.ts             # TypeScript types
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 💡 Approach & Design Decisions
 
-## Learn More
+- **No backend/database** — Pure client-side state with React `useState`. Fast, simple, deployable anywhere.
+- **SVG canvas** — Hand-crafted SVG workspace illustration that morphs based on selections. No heavy 3D libraries.
+- **Framer Motion** — Smooth transitions for item selection, tab switching, and modal animations.
+- **Tailwind v4** — Latest version with native CSS variables and no config file needed.
 
-To learn more about Next.js, take a look at the following resources:
+## 🔮 What I'd Improve With More Time
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Drag-and-drop item placement on the canvas
+- More granular desk arrangement (multiple monitors side by side)
+- Saved configurations via localStorage / URL sharing
+- Mobile-optimized swipeable panel navigation
+- Real payment integration (Midtrans/Stripe)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Built with ❤️ by [Christazel](https://github.com/Christazel)
