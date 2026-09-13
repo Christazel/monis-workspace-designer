@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, MessageCircle, ShoppingBag, Clock } from 'lucide-react';
+import { X, MessageCircle, ShoppingBag, Clock, Check } from 'lucide-react';
 import { WorkspaceState } from '@/lib/types';
 import { formatIDR, PRICE_PER_DAY_BASE, DURATION_DISCOUNTS } from '@/lib/catalog';
 
@@ -10,51 +10,47 @@ interface CheckoutModalProps {
   isOpen: boolean;
   onClose: () => void;
   state: WorkspaceState;
+  onSetRentalDays: (days: number) => void;
 }
 
-export default function CheckoutModal({ isOpen, onClose, state }: CheckoutModalProps) {
+export default function CheckoutModal({ isOpen, onClose, state, onSetRentalDays }: CheckoutModalProps) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [startDate, setStartDate] = useState('');
 
-  // Calculate pricing
   const basePrice = PRICE_PER_DAY_BASE;
   const deskPrice = state.selectedDesk?.price ?? 0;
   const chairPrice = state.selectedChair?.price ?? 0;
-  const accessoriesTotal = state.selectedAccessories.reduce((sum, a) => sum + a.price, 0);
-  const extrasTotal = state.selectedExtras.reduce((sum, e) => sum + e.price, 0);
-  const dailyTotal = basePrice + deskPrice + chairPrice + accessoriesTotal + extrasTotal;
+  const accessTotal = state.selectedAccessories.reduce((s, a) => s + a.price, 0);
+  const extrasTotal = state.selectedExtras.reduce((s, e) => s + e.price, 0);
+  const dailyTotal = basePrice + deskPrice + chairPrice + accessTotal + extrasTotal;
 
-  const discount = DURATION_DISCOUNTS.find(d => d.days === state.rentalDays)?.discount ?? 0;
+  const discountObj = DURATION_DISCOUNTS.find(d => d.days === state.rentalDays);
+  const discount = discountObj?.discount ?? 0;
   const subtotal = dailyTotal * state.rentalDays;
-  const discountAmount = subtotal * discount;
-  const grandTotal = subtotal - discountAmount;
+  const discountAmt = subtotal * discount;
+  const grandTotal = subtotal - discountAmt;
+
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const minDate = tomorrow.toISOString().split('T')[0];
 
   const handleWhatsApp = () => {
     const items = [
       state.selectedDesk ? `• Desk: ${state.selectedDesk.name}` : null,
       state.selectedChair ? `• Chair: ${state.selectedChair.name}` : null,
-      state.selectedAccessories.length
-        ? `• Accessories: ${state.selectedAccessories.map(a => a.name).join(', ')}`
-        : null,
-      state.selectedExtras.length
-        ? `• Extras: ${state.selectedExtras.map(e => e.name).join(', ')}`
-        : null,
-    ]
-      .filter(Boolean)
-      .join('\n');
+      state.selectedAccessories.length ? `• Gear: ${state.selectedAccessories.map(a => a.name).join(', ')}` : null,
+      state.selectedExtras.length ? `• Extras: ${state.selectedExtras.map(e => e.name).join(', ')}` : null,
+    ].filter(Boolean).join('\n');
 
-    const startStr = startDate ? `\nStart Date: ${startDate}` : '';
-    const message = encodeURIComponent(
-      `Hi Monis! 🌴\n\nI'd like to book a workspace:\n\n${items}\n\nDuration: ${state.rentalDays} day(s)${startStr}\nTotal: ${formatIDR(grandTotal)}\n\nName: ${name || '(not provided)'}\nEmail: ${email || '(not provided)'}\n\nPlease confirm availability!`
+    const msg = encodeURIComponent(
+      `Hi Monis! 🌴\n\nWorkspace Booking Request:\n\n${items}\n\nDuration: ${state.rentalDays} day(s)${startDate ? `\nStart: ${startDate}` : ''}\nTotal: ${formatIDR(grandTotal)}\n\nName: ${name || '-'}\nEmail: ${email || '-'}\n\nPlease confirm! 🙏`
     );
-    window.open(`https://wa.me/6281234567890?text=${message}`, '_blank');
+    window.open(`https://wa.me/6281234567890?text=${msg}`, '_blank');
   };
 
-  // Get tomorrow as min date
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  const minDate = tomorrow.toISOString().split('T')[0];
+  const missingDesk = !state.selectedDesk;
+  const missingChair = !state.selectedChair;
 
   return (
     <AnimatePresence>
@@ -62,169 +58,189 @@ export default function CheckoutModal({ isOpen, onClose, state }: CheckoutModalP
         <>
           {/* Backdrop */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40"
+            className="fixed inset-0 z-40"
+            style={{ background: 'rgba(2,6,15,0.85)', backdropFilter: 'blur(8px)' }}
           />
 
           {/* Modal */}
           <motion.div
-            initial={{ opacity: 0, y: 50, scale: 0.95 }}
+            initial={{ opacity: 0, y: 60, scale: 0.94 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 50, scale: 0.95 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="fixed inset-x-4 bottom-0 top-16 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-[520px] md:max-h-[85vh] z-50 flex flex-col bg-slate-900 border border-slate-700 rounded-t-2xl md:rounded-2xl overflow-hidden"
+            exit={{ opacity: 0, y: 40, scale: 0.96 }}
+            transition={{ type: 'spring', damping: 28, stiffness: 320 }}
+            className="fixed z-50 flex flex-col overflow-hidden"
+            style={{
+              inset: '0 12px 0',
+              top: '10%',
+              bottom: 0,
+              maxWidth: 540,
+              margin: '0 auto',
+              background: 'linear-gradient(180deg, #0d1829 0%, #0a1220 100%)',
+              border: '1px solid rgba(30,58,92,0.6)',
+              borderBottom: 'none',
+              borderRadius: '20px 20px 0 0',
+              boxShadow: '0 -20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(245,158,11,0.05)',
+            }}
           >
+            {/* Top drag handle */}
+            <div className="shrink-0 flex justify-center pt-3 pb-1">
+              <div className="w-10 h-1 rounded-full" style={{ background: 'rgba(71,85,105,0.6)' }} />
+            </div>
+
             {/* Modal header */}
-            <div className="shrink-0 flex items-center justify-between p-5 border-b border-slate-800 bg-gradient-to-r from-amber-500/10 to-transparent">
+            <div className="shrink-0 flex items-center justify-between px-5 py-3"
+              style={{ borderBottom: '1px solid rgba(30,41,59,0.6)' }}
+            >
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 bg-amber-500/20 rounded-xl flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center"
+                  style={{ background: 'linear-gradient(135deg,rgba(245,158,11,0.2),rgba(217,119,6,0.1))', border: '1px solid rgba(245,158,11,0.2)' }}
+                >
                   <ShoppingBag size={18} className="text-amber-400" />
                 </div>
                 <div>
-                  <h2 className="font-bold text-slate-100 text-base">Your Workspace Summary</h2>
-                  <p className="text-xs text-slate-400">Review your setup before booking</p>
+                  <h2 className="font-black text-base" style={{ color: '#f1f5f9' }}>Your Setup Summary</h2>
+                  <p className="text-[11px]" style={{ color: '#64748b' }}>Review before booking</p>
                 </div>
               </div>
-              <button
-                onClick={onClose}
-                id="modal-close-btn"
-                className="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-400 hover:text-slate-200 transition-colors"
+              <button id="modal-close-btn" onClick={onClose}
+                className="w-8 h-8 rounded-xl flex items-center justify-center transition-all"
+                style={{ background: 'rgba(30,41,59,0.6)', border: '1px solid rgba(51,65,85,0.4)', color: '#94a3b8' }}
               >
-                <X size={16} />
+                <X size={15} />
               </button>
             </div>
 
-            {/* Scrollable content */}
-            <div className="flex-1 overflow-y-auto p-5 space-y-5">
-              {/* Selected items */}
-              <div className="space-y-2">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400">Selected Setup</h3>
-                <div className="bg-slate-800/60 rounded-xl divide-y divide-slate-700/50">
-                  <LineItem label="Room Base" price={PRICE_PER_DAY_BASE} perDay />
-                  {state.selectedDesk && (
-                    <LineItem label={`🪵 ${state.selectedDesk.name}`} price={state.selectedDesk.price} perDay />
-                  )}
-                  {state.selectedChair && (
-                    <LineItem label={`🪑 ${state.selectedChair.name}`} price={state.selectedChair.price} perDay />
-                  )}
-                  {state.selectedAccessories.map(a => (
-                    <LineItem key={a.id} label={`${a.emoji} ${a.name}`} price={a.price} perDay />
-                  ))}
-                  {state.selectedExtras.map(e => (
-                    <LineItem key={e.id} label={`${e.emoji} ${e.name}`} price={e.price} perDay />
-                  ))}
+            {/* Scrollable body */}
+            <div className="flex-1 overflow-y-auto px-5 py-4 space-y-5">
+
+              {/* Items list */}
+              <div>
+                <SectionLabel>Selected Setup</SectionLabel>
+                <div className="rounded-xl overflow-hidden"
+                  style={{ border: '1px solid rgba(30,41,59,0.7)', background: 'rgba(8,14,26,0.5)' }}
+                >
+                  <LineItem label="🏠 Room Base" price={basePrice} />
+                  {state.selectedDesk && <LineItem label={`${state.selectedDesk.emoji} ${state.selectedDesk.name}`} price={state.selectedDesk.price} />}
+                  {state.selectedChair && <LineItem label={`${state.selectedChair.emoji} ${state.selectedChair.name}`} price={state.selectedChair.price} />}
+                  {state.selectedAccessories.map(a => <LineItem key={a.id} label={`${a.emoji} ${a.name}`} price={a.price} />)}
+                  {state.selectedExtras.map(e => <LineItem key={e.id} label={`${e.emoji} ${e.name}`} price={e.price} />)}
                 </div>
               </div>
 
-              {/* Duration selector */}
-              <div className="space-y-2">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                  <Clock size={12} />
-                  Rental Duration
-                </h3>
+              {/* Duration */}
+              <div>
+                <SectionLabel icon={<Clock size={11} />}>Rental Duration</SectionLabel>
                 <div className="flex flex-wrap gap-2">
-                  {DURATION_DISCOUNTS.map(({ days, label, discount }) => {
+                  {DURATION_DISCOUNTS.map(({ days, label, discount: disc }) => {
                     const isActive = state.rentalDays === days;
                     return (
-                      <button
-                        key={days}
-                        id={`duration-${days}`}
-                        onClick={() => {}} // handled by parent via onClose/re-open pattern
-                        className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${
-                          isActive
-                            ? 'border-amber-400 bg-amber-500/15 text-amber-300'
-                            : 'border-slate-700 text-slate-400 hover:border-slate-500'
-                        }`}
+                      <motion.button key={days} id={`modal-duration-${days}`}
+                        onClick={() => onSetRentalDays(days)}
+                        whileTap={{ scale: 0.94 }}
+                        className="relative px-3.5 py-2 rounded-xl text-xs font-semibold transition-all"
+                        style={{
+                          background: isActive ? 'linear-gradient(135deg,#fbbf24,#f59e0b)' : 'rgba(15,23,42,0.6)',
+                          border: isActive ? 'none' : '1px solid rgba(30,41,59,0.7)',
+                          color: isActive ? '#0f172a' : '#64748b',
+                          boxShadow: isActive ? '0 2px 12px rgba(245,158,11,0.35)' : 'none',
+                        }}
                       >
                         {label}
-                        {discount > 0 && (
-                          <span className="ml-1.5 text-green-400 text-[9px]">
-                            -{(discount * 100).toFixed(0)}%
+                        {disc > 0 && (
+                          <span className="absolute -top-2 -right-1 text-[8px] font-bold rounded-full px-1 py-px leading-none"
+                            style={{ background: '#16a34a', color: '#fff' }}
+                          >
+                            -{(disc * 100).toFixed(0)}%
                           </span>
                         )}
-                      </button>
+                      </motion.button>
                     );
                   })}
                 </div>
               </div>
 
-              {/* Contact info */}
-              <div className="space-y-2">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400">Contact Info</h3>
+              {/* Contact */}
+              <div>
+                <SectionLabel>Contact Info</SectionLabel>
                 <div className="space-y-2">
-                  <input
-                    id="checkout-name"
-                    type="text"
-                    placeholder="Your name"
-                    value={name}
-                    onChange={e => setName(e.target.value)}
-                    className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-amber-500 transition-colors"
-                  />
-                  <input
-                    id="checkout-email"
-                    type="email"
-                    placeholder="Email address"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                    className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-amber-500 transition-colors"
-                  />
-                  <input
-                    id="checkout-date"
-                    type="date"
-                    min={minDate}
-                    value={startDate}
+                  {[
+                    { id: 'checkout-name', type: 'text', placeholder: 'Your full name', value: name, onChange: setName },
+                    { id: 'checkout-email', type: 'email', placeholder: 'Email address', value: email, onChange: setEmail },
+                  ].map(f => (
+                    <input key={f.id} id={f.id} type={f.type} placeholder={f.placeholder} value={f.value}
+                      onChange={e => f.onChange(e.target.value)}
+                      className="w-full px-4 py-2.5 rounded-xl text-sm outline-none transition-all"
+                      style={{
+                        background: 'rgba(8,14,26,0.7)',
+                        border: '1px solid rgba(30,41,59,0.8)',
+                        color: '#e2e8f0',
+                      }}
+                      onFocus={e => { e.target.style.borderColor = 'rgba(245,158,11,0.5)'; }}
+                      onBlur={e => { e.target.style.borderColor = 'rgba(30,41,59,0.8)'; }}
+                    />
+                  ))}
+                  <input id="checkout-date" type="date" min={minDate} value={startDate}
                     onChange={e => setStartDate(e.target.value)}
-                    className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-amber-500 transition-colors"
+                    className="w-full px-4 py-2.5 rounded-xl text-sm outline-none transition-all"
+                    style={{
+                      background: 'rgba(8,14,26,0.7)',
+                      border: '1px solid rgba(30,41,59,0.8)',
+                      color: '#e2e8f0',
+                      colorScheme: 'dark',
+                    }}
+                    onFocus={e => { e.target.style.borderColor = 'rgba(245,158,11,0.5)'; }}
+                    onBlur={e => { e.target.style.borderColor = 'rgba(30,41,59,0.8)'; }}
                   />
                 </div>
               </div>
 
               {/* Pricing breakdown */}
-              <div className="bg-slate-800/40 rounded-xl p-4 space-y-2">
-                <div className="flex justify-between text-xs text-slate-400">
-                  <span>Daily rate</span>
-                  <span>{formatIDR(dailyTotal)}</span>
-                </div>
-                <div className="flex justify-between text-xs text-slate-400">
-                  <span>× {state.rentalDays} day(s)</span>
-                  <span>{formatIDR(subtotal)}</span>
-                </div>
-                {discountAmount > 0 && (
-                  <div className="flex justify-between text-xs text-green-400">
-                    <span>Duration discount</span>
-                    <span>-{formatIDR(discountAmount)}</span>
-                  </div>
-                )}
-                <div className="h-px bg-slate-700 my-2" />
-                <div className="flex justify-between items-center">
-                  <span className="text-sm font-semibold text-slate-200">Total</span>
-                  <span className="text-xl font-bold text-amber-400">{formatIDR(grandTotal)}</span>
+              <div className="rounded-xl p-4 space-y-2.5"
+                style={{ background: 'rgba(8,14,26,0.6)', border: '1px solid rgba(245,158,11,0.1)' }}
+              >
+                <PriceLine label="Daily rate" value={formatIDR(dailyTotal)} />
+                <PriceLine label={`× ${state.rentalDays} day${state.rentalDays > 1 ? 's' : ''}`} value={formatIDR(subtotal)} />
+                {discountAmt > 0 && <PriceLine label="Duration discount" value={`-${formatIDR(discountAmt)}`} valueColor="#4ade80" />}
+                <div className="h-px" style={{ background: 'rgba(30,41,59,0.8)' }} />
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-bold" style={{ color: '#cbd5e1' }}>Total</span>
+                  <span className="text-2xl font-black text-gradient-amber">{formatIDR(grandTotal)}</span>
                 </div>
               </div>
             </div>
 
-            {/* CTA footer */}
-            <div className="shrink-0 p-4 border-t border-slate-800 space-y-2">
-              {(!state.selectedDesk || !state.selectedChair) && (
-                <p className="text-xs text-center text-amber-400/80">
-                  ⚠️ You haven't selected a {!state.selectedDesk ? 'desk' : 'chair'} yet
-                </p>
+            {/* Footer CTA */}
+            <div className="shrink-0 px-5 pb-6 pt-3 space-y-2"
+              style={{ borderTop: '1px solid rgba(30,41,59,0.5)', background: 'rgba(8,14,26,0.9)' }}
+            >
+              {(missingDesk || missingChair) && (
+                <motion.div
+                  initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                  className="flex items-center gap-2 text-xs px-3 py-2 rounded-xl"
+                  style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.15)', color: '#fbbf24' }}
+                >
+                  <span>⚠️</span>
+                  <span>You haven't picked a {missingDesk ? 'desk' : 'chair'} yet</span>
+                </motion.div>
               )}
               <motion.button
                 id="whatsapp-cta-btn"
                 onClick={handleWhatsApp}
-                whileHover={{ scale: 1.02 }}
+                whileHover={{ scale: 1.02, y: -1 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full flex items-center justify-center gap-2 py-3.5 bg-green-600 hover:bg-green-500 text-white font-bold rounded-xl transition-colors text-sm"
+                className="w-full flex items-center justify-center gap-2.5 py-4 rounded-xl font-black text-base text-white transition-all"
+                style={{
+                  background: 'linear-gradient(135deg,#22c55e,#16a34a)',
+                  boxShadow: '0 4px 24px rgba(34,197,94,0.35)',
+                }}
               >
-                <MessageCircle size={18} />
+                <MessageCircle size={20} />
                 Book via WhatsApp
               </motion.button>
-              <p className="text-center text-[10px] text-slate-500">
-                We'll confirm availability within 1 hour
+              <p className="text-center text-[10px]" style={{ color: '#475569' }}>
+                We'll confirm within 1 hour · No payment required now
               </p>
             </div>
           </motion.div>
@@ -234,14 +250,35 @@ export default function CheckoutModal({ isOpen, onClose, state }: CheckoutModalP
   );
 }
 
-function LineItem({ label, price, perDay }: { label: string; price: number; perDay?: boolean }) {
+function SectionLabel({ children, icon }: { children: React.ReactNode; icon?: React.ReactNode }) {
   return (
-    <div className="flex items-center justify-between px-4 py-2.5 text-sm">
-      <span className="text-slate-300">{label}</span>
-      <span className="text-slate-400 text-xs">
-        {formatIDR(price)}
-        {perDay && <span className="text-slate-500">/day</span>}
+    <div className="flex items-center gap-1.5 mb-2.5">
+      {icon && <span style={{ color: '#64748b' }}>{icon}</span>}
+      <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: '#64748b' }}>
+        {children}
       </span>
+    </div>
+  );
+}
+
+function LineItem({ label, price }: { label: string; price: number }) {
+  return (
+    <div className="flex items-center justify-between px-4 py-2.5"
+      style={{ borderBottom: '1px solid rgba(30,41,59,0.4)' }}
+    >
+      <span className="text-[11px]" style={{ color: '#94a3b8' }}>{label}</span>
+      <span className="text-[11px] font-semibold" style={{ color: '#64748b' }}>
+        {formatIDR(price)}<span style={{ color: '#475569', fontWeight: 400 }}>/day</span>
+      </span>
+    </div>
+  );
+}
+
+function PriceLine({ label, value, valueColor }: { label: string; value: string; valueColor?: string }) {
+  return (
+    <div className="flex items-center justify-between text-xs">
+      <span style={{ color: '#64748b' }}>{label}</span>
+      <span style={{ color: valueColor ?? '#94a3b8', fontWeight: 600 }}>{value}</span>
     </div>
   );
 }

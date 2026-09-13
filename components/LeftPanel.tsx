@@ -20,73 +20,72 @@ interface LeftPanelProps {
 const TABS: { id: Tab; label: string; emoji: string }[] = [
   { id: 'chairs', label: 'Chairs', emoji: '🪑' },
   { id: 'desks', label: 'Desks', emoji: '🗂️' },
-  { id: 'accessories', label: 'Accessories', emoji: '🖥️' },
+  { id: 'accessories', label: 'Gear', emoji: '🖥️' },
 ];
 
 export default function LeftPanel({
-  selectedDesk,
-  selectedChair,
-  selectedAccessories,
-  onSelectDesk,
-  onSelectChair,
-  onToggleAccessory,
+  selectedDesk, selectedChair, selectedAccessories,
+  onSelectDesk, onSelectChair, onToggleAccessory,
 }: LeftPanelProps) {
   const [activeTab, setActiveTab] = useState<Tab>('chairs');
 
-  const items =
-    activeTab === 'chairs'
-      ? CHAIRS
-      : activeTab === 'desks'
-      ? DESKS
-      : ACCESSORIES;
+  const items = activeTab === 'chairs' ? CHAIRS : activeTab === 'desks' ? DESKS : ACCESSORIES;
 
   return (
-    <div className="flex flex-col h-full bg-slate-900/80 backdrop-blur-sm border-r border-slate-800">
-      {/* Tab bar */}
-      <div className="flex border-b border-slate-800 shrink-0">
-        {TABS.map((tab) => (
-          <button
-            key={tab.id}
-            id={`tab-${tab.id}`}
-            onClick={() => setActiveTab(tab.id)}
-            className={`
-              flex-1 flex flex-col items-center gap-0.5 py-3 px-1 text-xs font-medium transition-all relative
-              ${activeTab === tab.id
-                ? 'text-amber-400'
-                : 'text-slate-400 hover:text-slate-200'
-              }
-            `}
-          >
-            <span className="text-base">{tab.emoji}</span>
-            <span>{tab.label}</span>
-            {activeTab === tab.id && (
-              <motion.div
-                layoutId="tab-indicator"
-                className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-400"
-              />
-            )}
-          </button>
-        ))}
+    <div className="flex flex-col h-full glass-panel">
+
+      {/* ── Tab Bar ── */}
+      <div className="shrink-0 flex" style={{ borderBottom: '1px solid rgba(30,41,59,0.9)' }}>
+        {TABS.map((tab) => {
+          const isActive = activeTab === tab.id;
+          return (
+            <button
+              key={tab.id}
+              id={`tab-${tab.id}`}
+              onClick={() => setActiveTab(tab.id)}
+              className="flex-1 flex flex-col items-center gap-1 py-3 px-1 text-[11px] font-semibold transition-all relative"
+              style={{ color: isActive ? '#fbbf24' : '#64748b' }}
+            >
+              {/* Active tab background */}
+              {isActive && (
+                <motion.div
+                  layoutId="tab-bg"
+                  className="absolute inset-0"
+                  style={{ background: 'rgba(245,158,11,0.06)' }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 35 }}
+                />
+              )}
+              <span className="text-lg relative z-10">{tab.emoji}</span>
+              <span className="relative z-10 tracking-wide uppercase">{tab.label}</span>
+              {/* Bottom indicator */}
+              {isActive && (
+                <motion.div
+                  layoutId="tab-line"
+                  className="absolute bottom-0 left-0 right-0 h-[2px] rounded-t-full"
+                  style={{ background: 'linear-gradient(90deg,transparent,#f59e0b,transparent)' }}
+                />
+              )}
+            </button>
+          );
+        })}
       </div>
 
-      {/* Items grid */}
-      <div className="flex-1 overflow-y-auto p-3">
+      {/* ── Item Grid ── */}
+      <div className="flex-1 overflow-y-auto p-2.5">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 10 }}
-            transition={{ duration: 0.15 }}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.18, ease: 'easeOut' }}
             className="grid grid-cols-2 gap-2"
           >
             {items.map((item) => {
               const isSelected =
-                activeTab === 'chairs'
-                  ? selectedChair?.id === item.id
-                  : activeTab === 'desks'
-                  ? selectedDesk?.id === item.id
-                  : selectedAccessories.some((a) => a.id === item.id);
+                activeTab === 'chairs' ? selectedChair?.id === item.id
+                : activeTab === 'desks' ? selectedDesk?.id === item.id
+                : selectedAccessories.some(a => a.id === item.id);
 
               return (
                 <ItemCard
@@ -106,18 +105,20 @@ export default function LeftPanel({
         </AnimatePresence>
       </div>
 
-      {/* Selection summary strip */}
-      <div className="shrink-0 p-3 border-t border-slate-800 bg-slate-900/60">
-        <div className="space-y-1.5">
-          <SummaryRow label="Chair" item={selectedChair} placeholder="No chair selected" />
-          <SummaryRow label="Desk" item={selectedDesk} placeholder="No desk selected" />
-          {selectedAccessories.length > 0 && (
-            <div className="text-[10px] text-slate-400">
-              <span className="text-amber-400 font-medium">{selectedAccessories.length} accessory</span>
-              {selectedAccessories.length > 1 ? ' items' : ''} added
-            </div>
-          )}
-        </div>
+      {/* ── Selection Summary Strip ── */}
+      <div className="shrink-0 p-3 space-y-1.5"
+        style={{ borderTop: '1px solid rgba(30,41,59,0.9)', background: 'rgba(8,14,26,0.6)' }}
+      >
+        <SummaryRow label="🪑" item={selectedChair} placeholder="Pick a chair" />
+        <SummaryRow label="🗂️" item={selectedDesk} placeholder="Pick a desk" />
+        {selectedAccessories.length > 0 && (
+          <div className="flex items-center gap-2">
+            <span className="text-base">🖥️</span>
+            <span className="text-[10px] font-semibold" style={{ color: '#fbbf24' }}>
+              {selectedAccessories.length} gear item{selectedAccessories.length > 1 ? 's' : ''} added
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -125,15 +126,31 @@ export default function LeftPanel({
 
 function SummaryRow({ label, item, placeholder }: { label: string; item: CatalogItem | null; placeholder: string }) {
   return (
-    <div className="flex items-center gap-2 text-[10px]">
-      <span className="text-slate-500 w-8 shrink-0">{label}:</span>
-      {item ? (
-        <span className="text-amber-300 font-medium truncate">
-          {item.emoji} {item.name}
-        </span>
-      ) : (
-        <span className="text-slate-600 italic">{placeholder}</span>
-      )}
+    <div className="flex items-center gap-2">
+      <span className="text-base shrink-0">{label}</span>
+      <AnimatePresence mode="wait">
+        {item ? (
+          <motion.span
+            key={item.id}
+            initial={{ opacity: 0, x: -4 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 4 }}
+            className="text-[10px] font-semibold truncate"
+            style={{ color: '#fbbf24' }}
+          >
+            {item.name}
+          </motion.span>
+        ) : (
+          <motion.span
+            key="empty"
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+            className="text-[10px] italic"
+            style={{ color: '#475569' }}
+          >
+            {placeholder}
+          </motion.span>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
