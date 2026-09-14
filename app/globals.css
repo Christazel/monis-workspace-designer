@@ -560,9 +560,10 @@ nav.primary-nav a:hover {
   background: #f7f3ea;
 }
 
-.product-card.is-hidden {
-  display: none;
+.product-card:hover .card-hover-overlay {
+  opacity: 1;
 }
+
 
 .product-thumb {
   background: #faf8f4;

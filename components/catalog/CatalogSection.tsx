@@ -47,7 +47,7 @@ export default function CatalogSection() {
   );
 
   return (
-    <section className="catalog" id="catalog">
+    <section className="catalog" id="catalog" style={{ scrollMarginTop: '80px' }}>
       <div className="wrap">
         <div className="section-head">
           <h2>Browse the full catalog</h2>

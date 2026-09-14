@@ -87,6 +87,7 @@ export default function HowItWorks() {
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
             gap: 24,
+            alignItems: 'stretch',
           }}
         >
           {steps.map((step) => (
@@ -136,10 +137,11 @@ export default function HowItWorks() {
                 </div>
                 <span
                   style={{
-                    fontSize: 22,
+                    fontSize: 24,
                     fontWeight: 800,
-                    color: 'var(--line)',
-                    fontFamily: 'var(--font-heading)',
+                    color: 'rgba(22,33,29,0.12)',
+                    fontFamily: 'Bricolage Grotesque, sans-serif',
+                    letterSpacing: '-0.02em',
                   }}
                 >
                   {step.num}
@@ -152,7 +154,7 @@ export default function HowItWorks() {
                   fontWeight: 700,
                   color: 'var(--ink)',
                   marginBottom: 10,
-                  fontFamily: 'var(--font-heading)',
+                  fontFamily: 'Bricolage Grotesque, sans-serif',
                   lineHeight: 1.3,
                 }}
               >
@@ -163,14 +165,67 @@ export default function HowItWorks() {
                 style={{
                   fontSize: 13.5,
                   color: 'var(--ink-soft)',
-                  lineHeight: 1.55,
+                  lineHeight: 1.6,
                   margin: 0,
+                  flex: 1,
                 }}
               >
                 {step.desc}
               </p>
             </div>
           ))}
+        </div>
+
+        {/* CTA strip */}
+        <div
+          style={{
+            marginTop: 44,
+            paddingTop: 36,
+            borderTop: '1px solid var(--line)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: 16,
+          }}
+        >
+          <div>
+            <p style={{ fontSize: 17, fontWeight: 700, color: 'var(--ink)' }}>
+              Ready to build your Bali workspace?
+            </p>
+            <p style={{ fontSize: 14, color: 'var(--ink-soft)', marginTop: 4 }}>
+              Same-day delivery across Canggu, Seminyak, Ubud and Uluwatu.
+            </p>
+          </div>
+          <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+            <a
+              href="https://wa.me/6281234567890"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
+                background: '#25D366',
+                color: '#fff',
+                border: 'none',
+                borderRadius: 'var(--radius)',
+                padding: '12px 20px',
+                fontSize: 14,
+                fontWeight: 600,
+                textDecoration: 'none',
+                transition: 'opacity 0.15s ease',
+              }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = '0.88'; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = '1'; }}
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                <path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.122 1.523 5.853L.057 23.5l5.783-1.517A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.505-5.233-1.382l-.374-.223-3.876 1.016 1.036-3.77-.243-.389A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" />
+              </svg>
+              Chat on WhatsApp
+            </a>
+          </div>
         </div>
       </div>
     </section>

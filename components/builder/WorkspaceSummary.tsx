@@ -119,7 +119,7 @@ export default function WorkspaceSummary() {
         borderLeft: '1px solid var(--line)',
         display: 'flex',
         flexDirection: 'column',
-        overflowY: 'auto',
+        overflow: 'hidden',
       }}
     >
       {/* ── Header ── */}
