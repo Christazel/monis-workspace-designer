@@ -78,36 +78,31 @@ export default function WorkspaceBuilder() {
     state.selectedExtras.length;
 
   return (
-    <div className="flex flex-col h-screen overflow-hidden" style={{ background: '#080e1a' }}>
+    <div className="flex flex-col h-screen overflow-hidden" style={{ background: '#0a0f1e' }}>
 
       {/* ══════════ HEADER ══════════ */}
-      <header className="header-border shrink-0 flex items-center justify-between px-5 py-2.5 z-20"
-        style={{ background: 'rgba(8,14,26,0.95)', backdropFilter: 'blur(20px)' }}
+      <header className="header-bar shrink-0 flex items-center justify-between px-4 h-12 z-20"
+        style={{ background: 'rgba(10,15,30,0.97)', backdropFilter: 'blur(20px)' }}
       >
         {/* Logo */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
           <div className="relative">
-            <div className="w-9 h-9 rounded-xl flex items-center justify-center"
-              style={{ background: 'linear-gradient(135deg,#fcd34d,#f59e0b,#d97706)', boxShadow: '0 4px 16px rgba(245,158,11,0.4)' }}
+            <div className="w-7 h-7 rounded-lg flex items-center justify-center"
+              style={{ background: 'linear-gradient(135deg,#fcd34d,#f59e0b)', boxShadow: '0 2px 10px rgba(245,158,11,0.35)' }}
             >
-              <Zap size={18} className="text-slate-900" fill="currentColor" />
+              <Zap size={14} className="text-slate-900" fill="currentColor" />
             </div>
-            {/* ping dot */}
-            <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-green-400 rounded-full border-2 border-slate-900" />
+            <span className="absolute -top-0.5 -right-0.5 status-dot" />
           </div>
-          <div className="hidden sm:block">
-            <div className="text-sm font-bold leading-none" style={{ color: '#f1f5f9' }}>
-              Monis<span className="text-gradient-amber"> Workspace</span>
-            </div>
-            <div className="text-[10px] font-medium mt-0.5" style={{ color: '#64748b' }}>
-              Bali Workspace Designer
-            </div>
+          <div className="hidden sm:block leading-none">
+            <span className="text-[13px] font-bold text-white">monis</span>
+            <span className="text-[13px] font-bold text-gradient-amber">.rent</span>
           </div>
         </div>
 
         {/* Center: Duration pills */}
-        <div className="flex items-center gap-1 rounded-2xl p-1"
-          style={{ background: 'rgba(30,41,59,0.8)', border: '1px solid rgba(51,65,85,0.6)' }}
+        <div className="flex items-center gap-0.5 rounded-xl p-0.5"
+          style={{ background: 'rgba(20,30,56,0.9)', border: '1px solid rgba(51,65,100,0.6)' }}
         >
           {DURATION_DISCOUNTS.map(({ days, label, discount: disc }) => {
             const isActive = state.rentalDays === days;
@@ -116,18 +111,18 @@ export default function WorkspaceBuilder() {
                 key={days}
                 id={`duration-pill-${days}`}
                 onClick={() => handleSetRentalDays(days)}
-                whileTap={{ scale: 0.94 }}
-                className="relative px-3 py-1.5 rounded-xl text-xs font-semibold transition-all"
+                whileTap={{ scale: 0.93 }}
+                className="relative px-2.5 py-1 rounded-lg text-[11px] font-semibold transition-all"
                 style={{
                   background: isActive ? 'linear-gradient(135deg,#fbbf24,#f59e0b)' : 'transparent',
-                  color: isActive ? '#0f172a' : '#94a3b8',
-                  boxShadow: isActive ? '0 2px 12px rgba(245,158,11,0.35)' : 'none',
+                  color: isActive ? '#0f172a' : '#64748b',
+                  boxShadow: isActive ? '0 1px 8px rgba(245,158,11,0.3)' : 'none',
                 }}
               >
                 {label}
                 {disc > 0 && (
-                  <span className="absolute -top-2 -right-1 text-[8px] font-bold rounded-full px-1 py-px leading-none"
-                    style={{ background: isActive ? '#16a34a' : '#1e3a2e', color: isActive ? '#fff' : '#4ade80' }}
+                  <span className="absolute -top-1.5 -right-0.5 text-[8px] font-bold rounded-full px-1 py-px leading-none"
+                    style={{ background: isActive ? '#16a34a' : '#1c3426', color: isActive ? '#fff' : '#4ade80' }}
                   >
                     -{(disc * 100).toFixed(0)}%
                   </span>
@@ -138,52 +133,49 @@ export default function WorkspaceBuilder() {
         </div>
 
         {/* Right controls */}
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2">
           {/* Ambiance toggle */}
           <motion.button
             id="ambiance-toggle"
             onClick={handleToggleAmbiance}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.93 }}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold transition-all"
+            whileTap={{ scale: 0.92 }}
+            className="w-8 h-8 rounded-lg flex items-center justify-center transition-all"
             style={{
               background: isNight ? 'rgba(99,102,241,0.15)' : 'rgba(250,204,21,0.1)',
-              border: isNight ? '1px solid rgba(99,102,241,0.35)' : '1px solid rgba(250,204,21,0.25)',
+              border: isNight ? '1px solid rgba(99,102,241,0.3)' : '1px solid rgba(250,204,21,0.2)',
               color: isNight ? '#a5b4fc' : '#fde68a',
             }}
+            title={isNight ? 'Switch to Day' : 'Switch to Night'}
           >
             <AnimatePresence mode="wait">
               <motion.span key={isNight ? 'moon' : 'sun'}
-                initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }}
-                transition={{ duration: 0.2 }}
+                initial={{ rotate: -60, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 60, opacity: 0 }}
+                transition={{ duration: 0.15 }}
               >
                 {isNight ? <Moon size={14} /> : <Sun size={14} />}
               </motion.span>
             </AnimatePresence>
-            <span className="hidden sm:inline">{isNight ? 'Night' : 'Day'}</span>
           </motion.button>
 
           {/* CTA checkout button */}
           <motion.button
             id="checkout-btn"
             onClick={() => setIsCheckoutOpen(true)}
-            whileHover={{ scale: 1.03, y: -1 }}
-            whileTap={{ scale: 0.97 }}
-            className="btn-cta relative flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-slate-900"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.96 }}
+            className="btn-cta relative flex items-center gap-1.5 pl-3 pr-3 h-8 rounded-lg font-bold text-slate-900 text-xs"
           >
-            <ShoppingCart size={15} />
-            <span className="hidden sm:inline text-xs">Ready to Rent?</span>
-            <span className="text-sm font-black tabular-nums">
-              {formatIDR(grandTotal)}
-            </span>
+            <ShoppingCart size={13} />
+            <span className="hidden sm:inline font-semibold">Rent Now</span>
+            <span className="font-black tabular-nums text-[12px]">{formatIDR(grandTotal)}</span>
             {/* item count badge */}
             <AnimatePresence>
               {totalItems > 0 && (
                 <motion.span
                   key="badge"
                   initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}
-                  className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full text-[9px] font-black flex items-center justify-center text-amber-900"
-                  style={{ background: '#fef08a', boxShadow: '0 2px 8px rgba(0,0,0,0.3)' }}
+                  className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full text-[9px] font-black flex items-center justify-center"
+                  style={{ background: '#0a0f1e', color: '#fbbf24', border: '1.5px solid #f59e0b' }}
                 >
                   {totalItems}
                 </motion.span>
@@ -196,8 +188,8 @@ export default function WorkspaceBuilder() {
       {/* ══════════ MAIN LAYOUT ══════════ */}
       <div className="flex flex-1 overflow-hidden">
 
-        {/* Left Panel — 240px */}
-        <div className="w-[240px] shrink-0 overflow-hidden" style={{ borderRight: '1px solid rgba(30,41,59,0.8)' }}>
+        {/* Left Panel */}
+        <div className="w-[220px] shrink-0 overflow-hidden panel-border-r">
           <LeftPanel
             selectedDesk={state.selectedDesk}
             selectedChair={state.selectedChair}
@@ -210,7 +202,7 @@ export default function WorkspaceBuilder() {
 
         {/* Center — canvas + bottom */}
         <div className="flex-1 flex flex-col overflow-hidden min-w-0">
-          <div className="flex-1 p-3 overflow-hidden">
+          <div className="flex-1 p-2.5 overflow-hidden">
             <WorkspaceCanvas state={state} />
           </div>
           <div className="shrink-0">
@@ -218,8 +210,8 @@ export default function WorkspaceBuilder() {
           </div>
         </div>
 
-        {/* Right Panel — 175px */}
-        <div className="w-[175px] shrink-0 overflow-hidden" style={{ borderLeft: '1px solid rgba(30,41,59,0.8)' }}>
+        {/* Right Panel */}
+        <div className="w-[168px] shrink-0 overflow-hidden panel-border-l">
           <RightPanel
             selectedAccessories={state.selectedAccessories}
             onToggleAccessory={handleToggleAccessory}

@@ -2,9 +2,10 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, MessageCircle, ShoppingBag, Clock, Check } from 'lucide-react';
+import { X, MessageCircle, ShoppingBag, Clock, Check, Home } from 'lucide-react';
 import { WorkspaceState } from '@/lib/types';
 import { formatIDR, PRICE_PER_DAY_BASE, DURATION_DISCOUNTS } from '@/lib/catalog';
+import ItemIcon from './ItemIcon';
 
 interface CheckoutModalProps {
   isOpen: boolean;
@@ -44,7 +45,7 @@ export default function CheckoutModal({ isOpen, onClose, state, onSetRentalDays 
     ].filter(Boolean).join('\n');
 
     const msg = encodeURIComponent(
-      `Hi Monis! 🌴\n\nWorkspace Booking Request:\n\n${items}\n\nDuration: ${state.rentalDays} day(s)${startDate ? `\nStart: ${startDate}` : ''}\nTotal: ${formatIDR(grandTotal)}\n\nName: ${name || '-'}\nEmail: ${email || '-'}\n\nPlease confirm! 🙏`
+      `Hi Monis!\n\nWorkspace Booking Request:\n\n${items}\n\nDuration: ${state.rentalDays} day(s)${startDate ? `\nStart: ${startDate}` : ''}\nTotal: ${formatIDR(grandTotal)}\n\nName: ${name || '-'}\nEmail: ${email || '-'}\n\nPlease confirm!`
     );
     window.open(`https://wa.me/6281234567890?text=${msg}`, '_blank');
   };
@@ -73,15 +74,15 @@ export default function CheckoutModal({ isOpen, onClose, state, onSetRentalDays 
             className="fixed z-50 flex flex-col overflow-hidden"
             style={{
               inset: '0 12px 0',
-              top: '10%',
+              top: '8%',
               bottom: 0,
               maxWidth: 540,
               margin: '0 auto',
               background: 'linear-gradient(180deg, #0d1829 0%, #0a1220 100%)',
-              border: '1px solid rgba(30,58,92,0.6)',
+              border: '1px solid rgba(51,65,100,0.5)',
               borderBottom: 'none',
-              borderRadius: '20px 20px 0 0',
-              boxShadow: '0 -20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(245,158,11,0.05)',
+              borderRadius: '16px 16px 0 0',
+              boxShadow: '0 -16px 48px rgba(0,0,0,0.55), 0 0 0 1px rgba(245,158,11,0.04)',
             }}
           >
             {/* Top drag handle */}
@@ -91,24 +92,24 @@ export default function CheckoutModal({ isOpen, onClose, state, onSetRentalDays 
 
             {/* Modal header */}
             <div className="shrink-0 flex items-center justify-between px-5 py-3"
-              style={{ borderBottom: '1px solid rgba(30,41,59,0.6)' }}
+              style={{ borderBottom: '1px solid rgba(51,65,100,0.4)' }}
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center"
-                  style={{ background: 'linear-gradient(135deg,rgba(245,158,11,0.2),rgba(217,119,6,0.1))', border: '1px solid rgba(245,158,11,0.2)' }}
+                <div className="w-9 h-9 rounded-xl flex items-center justify-center"
+                  style={{ background: 'rgba(245,158,11,0.12)', border: '1px solid rgba(245,158,11,0.18)' }}
                 >
-                  <ShoppingBag size={18} className="text-amber-400" />
+                  <ShoppingBag size={16} className="text-amber-400" />
                 </div>
                 <div>
-                  <h2 className="font-black text-base" style={{ color: '#f1f5f9' }}>Your Setup Summary</h2>
-                  <p className="text-[11px]" style={{ color: '#64748b' }}>Review before booking</p>
+                  <h2 className="font-bold text-[14px]" style={{ color: '#f1f5f9' }}>Your Setup Summary</h2>
+                  <p className="text-[10px]" style={{ color: '#475569' }}>Review before booking</p>
                 </div>
               </div>
               <button id="modal-close-btn" onClick={onClose}
-                className="w-8 h-8 rounded-xl flex items-center justify-center transition-all"
-                style={{ background: 'rgba(30,41,59,0.6)', border: '1px solid rgba(51,65,85,0.4)', color: '#94a3b8' }}
+                className="w-7 h-7 rounded-lg flex items-center justify-center transition-all"
+                style={{ background: 'rgba(20,30,56,0.8)', border: '1px solid rgba(51,65,100,0.5)', color: '#64748b' }}
               >
-                <X size={15} />
+                <X size={14} />
               </button>
             </div>
 
@@ -119,13 +120,13 @@ export default function CheckoutModal({ isOpen, onClose, state, onSetRentalDays 
               <div>
                 <SectionLabel>Selected Setup</SectionLabel>
                 <div className="rounded-xl overflow-hidden"
-                  style={{ border: '1px solid rgba(30,41,59,0.7)', background: 'rgba(8,14,26,0.5)' }}
+                  style={{ border: '1px solid rgba(51,65,100,0.4)', background: 'rgba(10,15,30,0.6)' }}
                 >
-                  <LineItem label="🏠 Room Base" price={basePrice} />
-                  {state.selectedDesk && <LineItem label={`${state.selectedDesk.emoji} ${state.selectedDesk.name}`} price={state.selectedDesk.price} />}
-                  {state.selectedChair && <LineItem label={`${state.selectedChair.emoji} ${state.selectedChair.name}`} price={state.selectedChair.price} />}
-                  {state.selectedAccessories.map(a => <LineItem key={a.id} label={`${a.emoji} ${a.name}`} price={a.price} />)}
-                  {state.selectedExtras.map(e => <LineItem key={e.id} label={`${e.emoji} ${e.name}`} price={e.price} />)}
+                  <LineItem label="Room Base Platform" price={basePrice} icon={<Home size={13} className="text-slate-400" />} />
+                  {state.selectedDesk && <LineItem label={state.selectedDesk.name} price={state.selectedDesk.price} icon={<ItemIcon id={state.selectedDesk.id} size={13} className="text-amber-400" />} />}
+                  {state.selectedChair && <LineItem label={state.selectedChair.name} price={state.selectedChair.price} icon={<ItemIcon id={state.selectedChair.id} size={13} className="text-amber-400" />} />}
+                  {state.selectedAccessories.map(a => <LineItem key={a.id} label={a.name} price={a.price} icon={<ItemIcon id={a.id} size={13} className="text-amber-400" />} />)}
+                  {state.selectedExtras.map(e => <LineItem key={e.id} label={e.name} price={e.price} icon={<ItemIcon id={e.id} size={13} className="text-sky-400" />} />)}
                 </div>
               </div>
 
@@ -261,12 +262,15 @@ function SectionLabel({ children, icon }: { children: React.ReactNode; icon?: Re
   );
 }
 
-function LineItem({ label, price }: { label: string; price: number }) {
+function LineItem({ label, price, icon }: { label: string; price: number; icon?: React.ReactNode }) {
   return (
     <div className="flex items-center justify-between px-4 py-2.5"
       style={{ borderBottom: '1px solid rgba(30,41,59,0.4)' }}
     >
-      <span className="text-[11px]" style={{ color: '#94a3b8' }}>{label}</span>
+      <div className="flex items-center gap-2">
+        {icon && <span className="shrink-0 flex items-center">{icon}</span>}
+        <span className="text-[11px]" style={{ color: '#94a3b8' }}>{label}</span>
+      </div>
       <span className="text-[11px] font-semibold" style={{ color: '#64748b' }}>
         {formatIDR(price)}<span style={{ color: '#475569', fontWeight: 400 }}>/day</span>
       </span>

@@ -39,8 +39,7 @@ export default function WorkspaceCanvas({ state }: WorkspaceCanvasProps) {
   const hasChair = !!selectedChair;
 
   return (
-    <div className={`relative w-full h-full overflow-hidden rounded-2xl transition-all duration-1000 ${isNight ? 'canvas-night' : 'canvas-day'}`}
-      style={{ boxShadow: 'inset 0 0 80px rgba(0,0,0,0.15)' }}
+    <div className={`relative w-full h-full overflow-hidden rounded-xl transition-all duration-700 ${isNight ? 'canvas-night' : 'canvas-day'}`}
     >
       {/* Night overlay glow */}
       <AnimatePresence>
@@ -69,19 +68,6 @@ export default function WorkspaceCanvas({ state }: WorkspaceCanvasProps) {
         />
       ))}
 
-      {/* Title */}
-      <div className="absolute top-4 inset-x-0 text-center pointer-events-none z-10">
-        <h2 className="text-xl font-black tracking-tight"
-          style={{ color: isNight ? '#e2e8f0' : '#1e3a5f', textShadow: isNight ? '0 2px 20px rgba(0,0,0,0.8)' : '0 1px 4px rgba(255,255,255,0.6)' }}
-        >
-          Design Your Workspace!
-        </h2>
-        <p className="text-xs font-medium mt-1"
-          style={{ color: isNight ? '#64748b' : '#5b86a0' }}
-        >
-          — Create Your Perfect Setup —
-        </p>
-      </div>
 
       {/* ══ SVG Canvas ══ */}
       <svg viewBox="0 0 800 520" className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -325,7 +311,7 @@ export default function WorkspaceCanvas({ state }: WorkspaceCanvasProps) {
         {/* Empty state hint */}
         {!hasDesk && !hasChair && (
           <text x="400" y="460" textAnchor="middle" fontSize="12" fill={isNight ? '#475569' : '#94a3b8'} fontFamily="Inter,sans-serif">
-            👈 Select items from the left panel
+            Select items from the left panel to start
           </text>
         )}
       </svg>

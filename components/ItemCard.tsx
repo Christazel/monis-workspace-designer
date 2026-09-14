@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { CatalogItem } from '@/lib/types';
 import { Extra } from '@/lib/types';
+import ItemIcon from './ItemIcon';
 
 interface ItemCardProps {
   item: CatalogItem;
@@ -11,86 +12,67 @@ interface ItemCardProps {
   multi?: boolean;
 }
 
-export default function ItemCard({ item, isSelected, onClick, multi = false }: ItemCardProps) {
+export default function ItemCard({ item, isSelected, onClick }: ItemCardProps) {
   return (
     <motion.button
       id={`item-card-${item.id}`}
       onClick={onClick}
-      whileHover={{ y: -3, scale: 1.02 }}
       whileTap={{ scale: 0.96 }}
-      transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-      className="relative w-full text-left flex flex-col rounded-xl p-2.5 overflow-hidden"
-      style={{
-        background: isSelected
-          ? 'linear-gradient(135deg, rgba(245,158,11,0.15) 0%, rgba(217,119,6,0.08) 100%)'
-          : 'rgba(15,23,42,0.7)',
-        border: isSelected
-          ? '1px solid rgba(251,191,36,0.5)'
-          : '1px solid rgba(30,41,59,0.8)',
-        boxShadow: isSelected
-          ? '0 0 0 1px rgba(245,158,11,0.2), 0 4px 20px rgba(245,158,11,0.15), 0 1px 4px rgba(0,0,0,0.4)'
-          : '0 1px 4px rgba(0,0,0,0.3)',
-        minHeight: '108px',
-        transition: 'all 0.2s ease',
-      }}
+      className={`item-card ${isSelected ? 'selected' : ''}`}
+      style={{ minHeight: '96px' }}
     >
-      {/* Shimmer on selected */}
-      {isSelected && (
-        <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-xl">
-          <div className="absolute -inset-1 opacity-30"
-            style={{
-              background: 'linear-gradient(105deg, transparent 40%, rgba(251,191,36,0.15) 50%, transparent 60%)',
-              backgroundSize: '200% 100%',
-              animation: 'shimmer 3s ease infinite',
-            }}
-          />
-        </div>
-      )}
-
-      {/* Selected checkmark */}
+      {/* Checkmark badge */}
       <AnimatePresence>
         {isSelected && (
           <motion.div
-            initial={{ scale: 0, opacity: 0, rotate: -45 }}
-            animate={{ scale: 1, opacity: 1, rotate: 0 }}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
-            transition={{ type: 'spring', stiffness: 500, damping: 25 }}
-            className="absolute top-2 right-2 w-5 h-5 rounded-full flex items-center justify-center z-10"
-            style={{ background: 'linear-gradient(135deg,#fbbf24,#f59e0b)', boxShadow: '0 2px 8px rgba(245,158,11,0.5)' }}
+            transition={{ type: 'spring', stiffness: 500, damping: 28 }}
+            className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full flex items-center justify-center z-10"
+            style={{ background: '#f59e0b' }}
           >
-            <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
-              <path d="M1 4L3.5 6.5L9 1" stroke="#0f172a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <svg width="8" height="6" viewBox="0 0 8 6" fill="none">
+              <path d="M1 3L3 5L7 1" stroke="#0f172a" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Emoji icon */}
-      <div className="text-2xl mb-1.5 leading-none">{item.emoji}</div>
+      {/* Icon */}
+      <div
+        className="w-7 h-7 rounded-lg flex items-center justify-center mb-2 transition-colors"
+        style={{
+          background: isSelected ? 'rgba(245,158,11,0.18)' : 'rgba(30,41,69,0.8)',
+          color: isSelected ? '#fbbf24' : '#64748b',
+        }}
+      >
+        <ItemIcon id={item.id} size={15} />
+      </div>
 
       {/* Name */}
-      <div className="text-[11px] font-bold leading-tight pr-5"
-        style={{ color: isSelected ? '#fde68a' : '#e2e8f0' }}
+      <div className="text-[11px] font-semibold leading-tight pr-4 truncate"
+        style={{ color: isSelected ? '#fde68a' : '#cbd5e1' }}
       >
         {item.name}
       </div>
 
       {/* Description */}
-      <div className="text-[9px] mt-1 leading-tight line-clamp-2"
-        style={{ color: '#64748b' }}
+      <div className="text-[9.5px] mt-0.5 leading-tight line-clamp-2"
+        style={{ color: '#475569' }}
       >
         {item.description}
       </div>
 
-      {/* Price badge */}
-      <div className="mt-auto pt-2">
-        <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-md"
+      {/* Price */}
+      <div className="mt-2">
+        <span className="inline-block text-[9px] font-semibold px-1.5 py-0.5 rounded-md"
           style={{
-            background: isSelected ? 'rgba(245,158,11,0.2)' : 'rgba(30,41,59,0.8)',
-            color: isSelected ? '#fbbf24' : '#94a3b8',
+            background: isSelected ? 'rgba(245,158,11,0.18)' : 'rgba(15,23,42,0.7)',
+            color: isSelected ? '#fbbf24' : '#64748b',
           }}
         >
-          +Rp {(item.price / 1000).toFixed(0)}k/day
+          Rp {(item.price / 1000).toFixed(0)}k/day
         </span>
       </div>
     </motion.button>
@@ -115,30 +97,37 @@ export function ExtraCard({ extra, isSelected, onClick, accentColor = '#f59e0b' 
     <motion.button
       id={`extra-card-${extra.id}`}
       onClick={onClick}
-      whileHover={{ x: 2, scale: 1.02 }}
       whileTap={{ scale: 0.96 }}
-      className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-all text-left"
+      className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-left transition-all"
       style={{
-        background: isSelected ? `rgba(${accentRgb},0.1)` : 'rgba(15,23,42,0.5)',
-        border: isSelected ? `1px solid rgba(${accentRgb},0.4)` : '1px solid rgba(30,41,59,0.6)',
+        background: isSelected ? `rgba(${accentRgb},0.1)` : 'rgba(15,23,42,0.4)',
+        border: `1px solid ${isSelected ? `rgba(${accentRgb},0.4)` : 'rgba(51,65,100,0.4)'}`,
         color: isSelected ? accentColor : '#94a3b8',
       }}
     >
-      <span className="text-base shrink-0">{extra.emoji}</span>
-      <span className="flex-1 leading-tight">{extra.name}</span>
+      <div
+        className="w-5 h-5 rounded-md flex items-center justify-center shrink-0 transition-colors"
+        style={{
+          background: isSelected ? `rgba(${accentRgb},0.18)` : 'rgba(30,41,69,0.7)',
+          color: isSelected ? accentColor : '#64748b',
+        }}
+      >
+        <ItemIcon id={extra.id} size={11} />
+      </div>
+      <span className="flex-1 text-[10.5px] font-medium leading-tight truncate">{extra.name}</span>
       <AnimatePresence mode="wait">
         {isSelected ? (
           <motion.div key="check" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}
-            className="w-4 h-4 rounded-full flex items-center justify-center shrink-0"
+            className="w-3.5 h-3.5 rounded-full flex items-center justify-center shrink-0"
             style={{ background: accentColor }}
           >
-            <svg width="8" height="6" viewBox="0 0 8 6" fill="none">
-              <path d="M1 3L3 5L7 1" stroke="#0f172a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <svg width="7" height="5" viewBox="0 0 7 5" fill="none">
+              <path d="M1 2.5L2.5 4L6 1" stroke="#0f172a" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </motion.div>
         ) : (
           <motion.span key="add" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="text-[9px] shrink-0" style={{ color: '#475569' }}
+            className="text-[9px] shrink-0 font-medium" style={{ color: '#334155' }}
           >
             +add
           </motion.span>

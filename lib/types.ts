@@ -7,7 +7,7 @@ export interface CatalogItem {
   subCategory?: string;
   price: number; // per day in IDR
   description: string;
-  emoji: string;
+  emoji?: string;
   tags?: string[];
 }
 
@@ -16,7 +16,7 @@ export interface Extra {
   name: string;
   section: 'coffee' | 'outdoor' | 'relax' | 'garage';
   price: number;
-  emoji: string;
+  emoji?: string;
 }
 
 export interface WorkspaceState {
