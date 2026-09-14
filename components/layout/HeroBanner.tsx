@@ -1,265 +1,232 @@
 'use client';
 
 import { useWorkspaceStore, useCurrency } from '@/store/workspaceStore';
-import { PRESETS } from '@/data/presets';
 import { formatIDR, formatUSD } from '@/data/products';
-
-const HEADLINE_WORDS = ['perfect', 'focused', 'creative', 'productive'];
 
 export default function HeroBanner() {
   const { setMode, applyPreset } = useWorkspaceStore();
   const currency = useCurrency();
 
+  const handleBuildClick = () => {
+    setMode('builder');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleIncludedClick = () => {
+    const el = document.getElementById('catalog');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const formatPrice = (idr: number) => {
+    return currency === 'IDR' ? formatIDR(idr) : formatUSD(idr);
+  };
+
   return (
-    <section
-      style={{
-        background: '#ffffff',
-        borderBottom: '1px solid #e5e7eb',
-        padding: '72px 0 64px',
-      }}
-    >
-      <div className="container">
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: 64,
-            alignItems: 'center',
-          }}
-          className="hero-grid"
-        >
-          {/* Left — Copy */}
+    <>
+      {/* ── HERO SECTION ── */}
+      <section className="hero">
+        <div className="wrap">
           <div>
-            {/* Pill badge */}
-            <div
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 8,
-                background: '#fef3c7',
-                border: '1px solid #fde68a',
-                borderRadius: 99,
-                padding: '5px 14px',
-                marginBottom: 20,
-              }}
-            >
-              <span
-                style={{
-                  width: 7,
-                  height: 7,
-                  background: '#f59e0b',
-                  borderRadius: '50%',
-                  flexShrink: 0,
-                }}
-              />
-              <span style={{ fontSize: 12, fontWeight: 600, color: '#92400e', letterSpacing: '0.02em' }}>
-                Bali Workspace Rental for Remote Workers
-              </span>
-            </div>
-
-            {/* Heading */}
-            <h1
-              style={{
-                fontSize: 'clamp(32px, 5vw, 52px)',
-                fontWeight: 800,
-                color: '#111827',
-                lineHeight: 1.1,
-                letterSpacing: '-0.03em',
-                marginBottom: 20,
-              }}
-            >
-              Design your{' '}
-              <span style={{ color: '#f59e0b' }}>perfect</span>
-              <br />
-              Bali workspace.
-            </h1>
-
-            {/* Subtitle */}
-            <p
-              style={{
-                fontSize: 17,
-                color: '#4b5563',
-                lineHeight: 1.65,
-                maxWidth: 440,
-                marginBottom: 32,
-              }}
-            >
-              Pick a desk, ergonomic chair, monitors, and Bali lifestyle gear.
-              See your setup come to life in real-time — then rent it all, delivered
-              to your villa.
+            <h1>A proper desk, in your villa, by this afternoon.</h1>
+            <p className="lede">
+              Standing desks, ergonomic chairs, dual monitors and the rest of a real workspace — delivered and set up the same day you order, in Canggu, Seminyak, Ubud and Uluwatu. No deposit. Keep it for a day, a week or a month, then we pick it up.
             </p>
-
-            {/* CTAs */}
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 40 }}>
-              <button
-                className="btn btn-primary btn-lg"
-                onClick={() => setMode('builder')}
-              >
-                Start Building Your Setup
+            <div className="hero-ctas">
+              <button className="btn-primary" type="button" onClick={handleBuildClick}>
+                Build your setup
               </button>
-              <button
-                className="btn btn-outline btn-lg"
-                onClick={() => setMode('catalog')}
-              >
-                Browse Catalog
+              <button className="btn-text" type="button" onClick={handleIncludedClick}>
+                See what's included
               </button>
             </div>
-
-            {/* Social proof */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 16,
-                flexWrap: 'wrap',
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                <span style={{ color: '#f59e0b', fontSize: 14 }}>★★★★★</span>
-                <span style={{ fontSize: 13, color: '#4b5563', fontWeight: 500 }}>
-                  4.9 from 1,200+ rentals
-                </span>
-              </div>
-              <span style={{ color: '#d1d5db' }}>·</span>
-              <span style={{ fontSize: 13, color: '#4b5563', fontWeight: 500 }}>
-                Same-day delivery in Canggu, Seminyak & Ubud
-              </span>
+            <div className="hero-trust">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17l-6.1 3.6 1.4-6.8L2.2 9.1l6.9-.8z" />
+              </svg>
+              Rated 4.9 by over 1,200 renters in Bali
             </div>
           </div>
 
-          {/* Right — Preset Quick Cards */}
-          <div>
-            <p
-              style={{
-                fontSize: 11,
-                fontWeight: 700,
-                letterSpacing: '0.08em',
-                color: '#9ca3af',
-                textTransform: 'uppercase',
-                marginBottom: 12,
-              }}
-            >
-              Quick Setups — Apply Instantly
-            </p>
+          <div className="hero-art">
+            <svg viewBox="0 0 520 460" xmlns="http://www.w3.org/2000/svg">
+              {/* Wall & floor */}
+              <rect x="0" y="0" width="520" height="300" fill="#E3DBC7" />
+              <rect x="0" y="300" width="520" height="160" fill="#C9A46B" />
+              <g stroke="#B08E52" strokeWidth="1.3">
+                <line x1="0" y1="330" x2="520" y2="330" />
+                <line x1="0" y1="362" x2="520" y2="362" />
+                <line x1="0" y1="394" x2="520" y2="394" />
+                <line x1="0" y1="426" x2="520" y2="426" />
+              </g>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              {PRESETS.map((preset, i) => (
-                <button
-                  key={preset.id}
-                  onClick={() => applyPreset(preset.id)}
-                  className="preset-card"
-                  style={{
-                    animationDelay: `${i * 80}ms`,
-                  }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
-                    {/* Icon */}
-                    <div
-                      style={{
-                        width: 44,
-                        height: 44,
-                        background: '#f5f5f5',
-                        borderRadius: 8,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: 22,
-                        flexShrink: 0,
-                      }}
-                    >
-                      {preset.icon}
-                    </div>
+              {/* Window with tropical view */}
+              <rect x="46" y="34" width="220" height="200" rx="4" fill="#DCE7DE" stroke="#16211D" strokeWidth="2" />
+              <path d="M60 210 C 100 140, 130 130, 150 60" fill="none" stroke="#56624A" strokeWidth="10" strokeLinecap="round" opacity=".55" />
+              <path d="M250 214 C 210 150, 190 120, 170 50" fill="none" stroke="#56624A" strokeWidth="10" strokeLinecap="round" opacity=".4" />
+              <g stroke="#16211D" strokeWidth="2">
+                <line x1="156" y1="34" x2="156" y2="234" />
+                <line x1="46" y1="134" x2="266" y2="134" />
+              </g>
+              <circle cx="230" cy="60" r="16" fill="#A87A34" opacity=".85" />
 
-                    {/* Content */}
-                    <div style={{ flex: 1, textAlign: 'left' }}>
-                      <div
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
-                          gap: 8,
-                          marginBottom: 2,
-                        }}
-                      >
-                        <span
-                          style={{ fontSize: 14, fontWeight: 700, color: '#111827' }}
-                        >
-                          {preset.name}
-                        </span>
-                        <span
-                          style={{
-                            fontSize: 13,
-                            fontWeight: 700,
-                            color: '#111827',
-                            whiteSpace: 'nowrap',
-                          }}
-                        >
-                          {currency === 'IDR'
-                            ? formatIDR(preset.totalPrice)
-                            : formatUSD(preset.totalPrice)}
-                          <span
-                            style={{ fontWeight: 400, color: '#9ca3af', fontSize: 11 }}
-                          >
-                            /day
-                          </span>
-                        </span>
-                      </div>
-                      <p style={{ fontSize: 12, color: '#6b7280', lineHeight: 1.4 }}>
-                        {preset.tagline}
-                      </p>
-                    </div>
-                  </div>
-                </button>
-              ))}
-            </div>
+              {/* Monitor on desk */}
+              <rect x="330" y="150" width="150" height="106" rx="5" fill="#EFE9DC" stroke="#16211D" strokeWidth="2" />
+              <rect x="340" y="160" width="130" height="72" rx="2" fill="#26355C" />
+              <rect x="393" y="256" width="24" height="16" fill="#16211D" />
+              <rect x="370" y="272" width="70" height="8" rx="2" fill="#16211D" />
 
-            {/* Trust badges */}
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                gap: 8,
-                marginTop: 16,
-              }}
-            >
-              {[
-                { icon: '🚚', text: 'Free delivery in Bali' },
-                { icon: '🔧', text: 'Setup included' },
-                { icon: '📦', text: 'Pickup when done' },
-                { icon: '💬', text: 'WhatsApp support' },
-              ].map((item) => (
-                <div
-                  key={item.text}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 8,
-                    padding: '8px 12px',
-                    background: '#f9fafb',
-                    borderRadius: 6,
-                    border: '1px solid #e5e7eb',
-                  }}
-                >
-                  <span style={{ fontSize: 14 }}>{item.icon}</span>
-                  <span style={{ fontSize: 12, color: '#374151', fontWeight: 500 }}>
-                    {item.text}
-                  </span>
-                </div>
-              ))}
-            </div>
+              {/* Desk */}
+              <rect x="60" y="292" width="230" height="14" rx="3" fill="#16211D" />
+              <rect x="70" y="306" width="8" height="46" fill="#16211D" />
+              <rect x="270" y="306" width="8" height="46" fill="#16211D" />
+              <rect x="70" y="260" width="230" height="34" rx="3" fill="#F1ECDF" stroke="#16211D" strokeWidth="2" />
+
+              {/* Rug under chair */}
+              <ellipse cx="130" cy="390" rx="90" ry="14" fill="#26355C" opacity=".9" />
+              <ellipse cx="130" cy="390" rx="90" ry="14" fill="none" stroke="#A87A34" strokeWidth="2" />
+
+              {/* Chair */}
+              <path d="M120 300 C 108 320, 108 350, 122 378 C 128 384, 144 384, 150 378 C 162 350, 158 320, 144 300 Z" fill="#16211D" />
+              <rect x="112" y="374" width="46" height="8" rx="2" fill="#16211D" />
+              <circle cx="120" cy="386" r="4" fill="#16211D" />
+              <circle cx="150" cy="386" r="4" fill="#16211D" />
+
+              {/* Potted plant */}
+              <path d="M400 300 L400 392" stroke="#16211D" strokeWidth="6" strokeLinecap="round" />
+              <path d="M370 300 C 370 270, 430 270, 430 300 C 430 320, 400 320, 400 300" fill="#9A4B34" />
+              <path d="M400 296 C 380 296, 372 270, 384 250" fill="none" stroke="#56624A" strokeWidth="9" strokeLinecap="round" />
+              <path d="M400 296 C 410 290, 424 262, 420 240" fill="none" stroke="#56624A" strokeWidth="9" strokeLinecap="round" />
+              <path d="M400 296 C 402 280, 396 256, 404 236" fill="none" stroke="#56624A" strokeWidth="9" strokeLinecap="round" />
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      {/* ── TRUST STRIP ── */}
+      <div className="strip" id="how-it-works">
+        <div className="wrap">
+          <div className="strip-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <rect x="1" y="7" width="15" height="10" />
+              <path d="M16 10h4l3 3v4h-7z" />
+              <circle cx="6" cy="19" r="1.8" />
+              <circle cx="18" cy="19" r="1.8" />
+            </svg>
+            <span>Delivered the same day you order, anywhere in South Bali</span>
+          </div>
+
+          <div className="strip-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M14.7 6.3a4 4 0 0 1-5.7 5.7L4 17v3h3l5-5a4 4 0 0 1 5.7-5.7z" />
+            </svg>
+            <span>Assembled and arranged in your room, at no extra cost</span>
+          </div>
+
+          <div className="strip-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6z" />
+            </svg>
+            <span>No deposit — pay only for the days you keep it</span>
+          </div>
+
+          <div className="strip-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M21 11.5a8.4 8.4 0 0 1-8.4 8.4 8.5 8.5 0 0 1-4-1L3 20l1.2-5.6a8.5 8.5 0 0 1-1-4A8.4 8.4 0 0 1 11.6 2 8.4 8.4 0 0 1 21 11.5z" />
+            </svg>
+            <span>Reach a real person on WhatsApp, before and after delivery</span>
           </div>
         </div>
       </div>
 
-      {/* Responsive */}
-      <style jsx>{`
-        @media (max-width: 768px) {
-          .hero-grid {
-            grid-template-columns: 1fr !important;
-            gap: 40px !important;
-          }
-        }
-      `}</style>
-    </section>
+      {/* ── QUICK SETUPS ── */}
+      <section className="setups" id="setups">
+        <div className="wrap">
+          <div className="section-head">
+            <h2>Three setups people actually rent</h2>
+            <p>Each one is a full workspace, ready to load into the builder as a starting point.</p>
+          </div>
+
+          <div className="setup-list">
+            {/* Developer Pro */}
+            <div className="setup-row">
+              <div className="setup-token">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="3" y="14" width="18" height="7" rx="1" />
+                  <rect x="7" y="4" width="10" height="8" rx="1" />
+                </svg>
+              </div>
+              <h3>Developer Pro</h3>
+              <p className="desc">Standing desk, Aeron chair, and an ultrawide monitor for long coding sessions.</p>
+              <div className="setup-price">
+                {formatPrice(395000)}
+                <small>per day</small>
+              </div>
+              <button
+                className="setup-add"
+                type="button"
+                onClick={() => {
+                  applyPreset('preset-dev-pro');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              >
+                Add this setup
+              </button>
+            </div>
+
+            {/* Creator Studio */}
+            <div className="setup-row">
+              <div className="setup-token">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M12 7v5l3 3" />
+                </svg>
+              </div>
+              <h3>Creator Studio</h3>
+              <p className="desc">Executive desk, 4K monitor, and a screen light — built for design and video work.</p>
+              <div className="setup-price">
+                {formatPrice(460000)}
+                <small>per day</small>
+              </div>
+              <button
+                className="setup-add"
+                type="button"
+                onClick={() => {
+                  applyPreset('preset-creator');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              >
+                Add this setup
+              </button>
+            </div>
+
+            {/* Minimal Nomad */}
+            <div className="setup-row">
+              <div className="setup-token">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M4 20c3-9 7-14 8-14s5 5 8 14" />
+                  <path d="M2 20h20" />
+                </svg>
+              </div>
+              <h3>Minimal Nomad</h3>
+              <p className="desc">A compact desk and a light chair — enough for a laptop and a coffee.</p>
+              <div className="setup-price">
+                {formatPrice(310000)}
+                <small>per day</small>
+              </div>
+              <button
+                className="setup-add"
+                type="button"
+                onClick={() => {
+                  applyPreset('preset-minimal');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              >
+                Add this setup
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

@@ -337,21 +337,12 @@ export const DURATION_DISCOUNTS = {
 };
 
 export function formatIDR(amount: number): string {
-  return new Intl.NumberFormat('id-ID', {
-    style: 'currency',
-    currency: 'IDR',
-    maximumFractionDigits: 0,
-  }).format(amount);
+  return 'Rp ' + Math.round(amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
 
 export function formatUSD(amountIDR: number): string {
-  const usd = amountIDR / USD_RATE;
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(usd);
+  const usd = (amountIDR / USD_RATE).toFixed(2);
+  return '$' + usd;
 }
 
 export function calculateTotal(

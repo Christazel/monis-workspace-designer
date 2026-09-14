@@ -1,24 +1,22 @@
 'use client';
 
-import { useWorkspaceStore, useDuration, useCurrency } from '@/store/workspaceStore';
+import { useWorkspaceStore, useCurrency } from '@/store/workspaceStore';
 import { PRESETS } from '@/data/presets';
 import { formatIDR, formatUSD } from '@/data/products';
-import { Zap } from 'lucide-react';
 
 export default function PresetSelector() {
   const { activePresetId, applyPreset } = useWorkspaceStore();
-  const duration = useDuration();
   const currency = useCurrency();
 
   return (
     <div
       style={{
-        background: 'linear-gradient(135deg, #1a1f2e 0%, #111827 100%)',
-        borderBottom: '1px solid rgba(255,255,255,0.08)',
-        padding: '14px 0',
+        background: 'var(--paper-2)',
+        borderBottom: '1px solid var(--line)',
+        padding: '12px 0',
       }}
     >
-      <div className="container">
+      <div className="wrap">
         <div
           style={{
             display: 'flex',
@@ -29,26 +27,24 @@ export default function PresetSelector() {
         >
           {/* Label */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <Zap size={13} color="#f59e0b" />
             <span
               style={{
-                fontSize: 11,
+                fontSize: 12,
                 fontWeight: 700,
-                color: 'rgba(255,255,255,0.45)',
+                color: 'var(--ink-soft)',
                 textTransform: 'uppercase',
-                letterSpacing: '0.08em',
-                whiteSpace: 'nowrap',
+                letterSpacing: '0.06em',
+                fontFamily: 'var(--font-heading)',
               }}
             >
-              Quick Presets
+              Quick Setups
             </span>
           </div>
 
-          {/* Divider */}
-          <div style={{ width: 1, height: 20, background: 'rgba(255,255,255,0.12)' }} />
+          <div style={{ width: 1, height: 18, background: 'var(--line)' }} />
 
-          {/* Preset pills */}
-          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          {/* Preset buttons */}
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
             {PRESETS.map((preset) => {
               const isActive = activePresetId === preset.id;
               const price =
@@ -59,50 +55,29 @@ export default function PresetSelector() {
               return (
                 <button
                   key={preset.id}
+                  type="button"
                   onClick={() => applyPreset(preset.id)}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
                     gap: 8,
-                    padding: '7px 14px',
-                    background: isActive
-                      ? 'rgba(245,158,11,0.15)'
-                      : 'rgba(255,255,255,0.06)',
-                    border: isActive
-                      ? '1px solid rgba(245,158,11,0.5)'
-                      : '1px solid rgba(255,255,255,0.1)',
-                    borderRadius: 99,
-                    cursor: 'pointer',
-                    transition: 'all 0.18s ease',
-                    color: isActive ? '#f59e0b' : 'rgba(255,255,255,0.75)',
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!isActive) {
-                      (e.currentTarget as HTMLButtonElement).style.background =
-                        'rgba(255,255,255,0.11)';
-                      (e.currentTarget as HTMLButtonElement).style.borderColor =
-                        'rgba(255,255,255,0.2)';
-                      (e.currentTarget as HTMLButtonElement).style.color = '#ffffff';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!isActive) {
-                      (e.currentTarget as HTMLButtonElement).style.background =
-                        'rgba(255,255,255,0.06)';
-                      (e.currentTarget as HTMLButtonElement).style.borderColor =
-                        'rgba(255,255,255,0.1)';
-                      (e.currentTarget as HTMLButtonElement).style.color =
-                        'rgba(255,255,255,0.75)';
-                    }
+                    padding: '6px 14px',
+                    borderRadius: 'var(--radius)',
+                    background: isActive ? 'var(--ink)' : 'var(--paper)',
+                    color: isActive ? 'var(--paper)' : 'var(--ink)',
+                    border: '1px solid ' + (isActive ? 'var(--ink)' : 'var(--line)'),
+                    fontSize: 13,
+                    fontWeight: 600,
+                    transition: 'all 0.15s ease',
                   }}
                 >
-                  <span style={{ fontSize: 15 }}>{preset.icon}</span>
-                  <span style={{ fontSize: 13, fontWeight: 600 }}>{preset.name}</span>
+                  <span>{preset.icon}</span>
+                  <span>{preset.name}</span>
                   <span
                     style={{
-                      fontSize: 11,
-                      color: isActive ? 'rgba(245,158,11,0.8)' : 'rgba(255,255,255,0.35)',
-                      fontWeight: 500,
+                      fontSize: 12,
+                      fontWeight: 700,
+                      color: isActive ? 'var(--paper-2)' : 'var(--brass)',
                     }}
                   >
                     {price}/day

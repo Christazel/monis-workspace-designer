@@ -78,6 +78,17 @@ function computeStoreTotal(state: {
 const INITIAL_DURATION: RentalDuration = 'monthly';
 const INITIAL_CURRENCY: Currency = 'IDR';
 
+const initialDesk = ALL_PRODUCTS.find((p) => p.id === 'desk-standing-oak') ?? null;
+const initialChair = ALL_PRODUCTS.find((p) => p.id === 'chair-aeron') ?? null;
+const initialTech = [
+  ALL_PRODUCTS.find((p) => p.id === 'tech-ultrawide'),
+  ALL_PRODUCTS.find((p) => p.id === 'tech-keyboard-mouse'),
+].filter(Boolean) as Product[];
+const initialAccessories = [
+  ALL_PRODUCTS.find((p) => p.id === 'accessory-screenbar'),
+  ALL_PRODUCTS.find((p) => p.id === 'accessory-monstera'),
+].filter(Boolean) as Product[];
+
 // ─────────────────────────────────────────
 // STORE IMPLEMENTATION
 // ─────────────────────────────────────────
@@ -86,12 +97,12 @@ export const useWorkspaceStore = create<WorkspaceStore>((set, get) => ({
   mode: 'catalog',
   setMode: (mode) => set({ mode }),
 
-  // Workspace config — start empty
-  desk: null,
-  chair: null,
-  tech: [],
-  accessories: [],
-  activePresetId: null,
+  // Workspace config — starts with Developer Pro setup
+  desk: initialDesk,
+  chair: initialChair,
+  tech: initialTech,
+  accessories: initialAccessories,
+  activePresetId: 'preset-developer',
 
   // Rental options
   duration: INITIAL_DURATION,
@@ -99,10 +110,10 @@ export const useWorkspaceStore = create<WorkspaceStore>((set, get) => ({
 
   // Precomputed total
   total: computeStoreTotal({
-    desk: null,
-    chair: null,
-    tech: [],
-    accessories: [],
+    desk: initialDesk,
+    chair: initialChair,
+    tech: initialTech,
+    accessories: initialAccessories,
     duration: INITIAL_DURATION,
     currency: INITIAL_CURRENCY,
   }),

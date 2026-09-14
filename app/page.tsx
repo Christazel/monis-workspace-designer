@@ -6,12 +6,13 @@ import HeroBanner from '@/components/layout/HeroBanner';
 import CatalogSection from '@/components/catalog/CatalogSection';
 import BuilderSection from '@/components/builder/BuilderSection';
 import CheckoutDrawer from '@/components/checkout/CheckoutDrawer';
+import Footer from '@/components/layout/Footer';
 
 export default function Home() {
   const mode = useMode();
 
   return (
-    <div style={{ minHeight: '100vh', background: '#f5f5f5' }}>
+    <div style={{ minHeight: '100vh', background: 'var(--paper)' }}>
       {/* Sticky header always visible */}
       <Header />
 
@@ -21,6 +22,7 @@ export default function Home() {
           <>
             <HeroBanner />
             <CatalogSection />
+            <Footer />
           </>
         )}
 
@@ -28,7 +30,7 @@ export default function Home() {
         {mode === 'builder' && <BuilderSection />}
       </main>
 
-      {/* ── CHECKOUT DRAWER (global, overlays everything) ── */}
+      {/* ── CHECKOUT DRAWER ── */}
       <CheckoutDrawer />
     </div>
   );

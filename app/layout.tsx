@@ -1,18 +1,10 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({
-  variable: '--font-inter',
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
-});
-
 export const metadata: Metadata = {
-  title: 'Monis Workspace Builder — Design Your Bali Workspace Setup',
+  title: 'monis.rent — Bali workspace rentals',
   description:
-    'Design your perfect Bali workspace rental. Pick a desk, ergonomic chair, monitors, and lifestyle gear. See it all come to life in real-time, then book instantly.',
+    'Standing desks, ergonomic chairs, dual monitors and the rest of a real workspace — delivered and set up the same day you order, in Canggu, Seminyak, Ubud and Uluwatu. No deposit.',
   keywords: [
     'workspace rental Bali',
     'coworking Bali',
@@ -23,8 +15,8 @@ export const metadata: Metadata = {
     'workspace configurator',
   ],
   openGraph: {
-    title: 'Monis Workspace Builder',
-    description: 'Design your perfect Bali workspace setup and rent instantly.',
+    title: 'monis.rent — Bali workspace rentals',
+    description: 'A proper desk, in your villa, by this afternoon. Same-day delivery across South Bali.',
     type: 'website',
     locale: 'en_US',
   },
@@ -36,10 +28,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="font-[var(--font-inter)] antialiased bg-[#f5f5f5] text-[#111827] min-h-screen">
-        {children}
-      </body>
+    <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body>{children}</body>
     </html>
   );
 }
