@@ -103,7 +103,7 @@ export default function HeroBanner() {
       </section>
 
       {/* ── TRUST STRIP ── */}
-      <div className="strip" id="how-it-works">
+      <div className="strip">
         <div className="wrap">
           <div className="strip-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -139,7 +139,7 @@ export default function HeroBanner() {
       </div>
 
       {/* ── QUICK SETUPS ── */}
-      <section className="setups" id="setups">
+      <section className="setups" id="setups" style={{ scrollMarginTop: '80px' }}>
         <div className="wrap">
           <div className="section-head">
             <h2>Three setups people actually rent</h2>
@@ -165,7 +165,7 @@ export default function HeroBanner() {
                 className="setup-add"
                 type="button"
                 onClick={() => {
-                  applyPreset('preset-dev-pro');
+                  applyPreset('preset-developer');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
               >
@@ -217,7 +217,7 @@ export default function HeroBanner() {
                 className="setup-add"
                 type="button"
                 onClick={() => {
-                  applyPreset('preset-minimal');
+                  applyPreset('preset-nomad');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
               >

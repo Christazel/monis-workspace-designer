@@ -29,8 +29,8 @@ function SummaryItem({ product, onRemove }: { product: Product; onRemove: () => 
         style={{
           width: 34,
           height: 34,
-          background: 'var(--paper-2)',
-          borderRadius: 5,
+          background: '#faf8f4',
+          borderRadius: 6,
           border: '1px solid var(--line)',
           display: 'flex',
           alignItems: 'center',
@@ -41,7 +41,7 @@ function SummaryItem({ product, onRemove }: { product: Product; onRemove: () => 
         }}
       >
         <img
-          src={product.image}
+          src={`${product.image}?v=4`}
           alt={product.name}
           style={{ width: '100%', height: '100%', objectFit: 'contain' }}
         />

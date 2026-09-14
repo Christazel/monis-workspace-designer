@@ -151,14 +151,16 @@ export default function ProductCard({ product, isSelected = false }: ProductCard
       {/* Product Thumbnail */}
       <div className="product-thumb">
         <img
-          src={product.image}
+          src={`${product.image}?v=4`}
           alt={product.name}
           style={{
-            width: '100%',
-            height: '100%',
+            maxWidth: product.id === 'acc-surfboard' ? '60%' : '88%',
+            maxHeight: product.id === 'acc-surfboard' ? '92%' : '86%',
+            width: 'auto',
+            height: 'auto',
             objectFit: 'contain',
-            mixBlendMode: 'multiply',
-            transition: 'transform 0.2s ease',
+            filter: 'drop-shadow(0 4px 10px rgba(22,33,29,0.08))',
+            transition: 'transform 0.25s ease',
           }}
           onError={(e) => {
             const img = e.currentTarget as HTMLImageElement;

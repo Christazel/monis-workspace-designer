@@ -48,9 +48,9 @@ function ItemRow({
         style={{
           width: 38,
           height: 38,
-          background: 'var(--paper-2)',
+          background: '#faf8f4',
           border: '1px solid var(--line)',
-          borderRadius: 5,
+          borderRadius: 6,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -60,7 +60,7 @@ function ItemRow({
         }}
       >
         <img
-          src={product.image}
+          src={`${product.image}?v=4`}
           alt={product.name}
           style={{ width: '100%', height: '100%', objectFit: 'contain' }}
           onError={(e) => {

@@ -11,14 +11,25 @@ export default function Header() {
   const totalCount = (desk ? 1 : 0) + (chair ? 1 : 0) + tech.length + accessories.length;
 
   const handleNav = (targetMode: 'catalog' | 'builder', targetHash?: string) => {
-    setMode(targetMode);
     setNavOpen(false);
+
     if (targetHash) {
-      setTimeout(() => {
+      if (mode !== 'catalog') {
+        setMode('catalog');
+        setTimeout(() => {
+          const el = document.querySelector(targetHash);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 150);
+      } else {
         const el = document.querySelector(targetHash);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 50);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
     } else {
+      setMode(targetMode);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
@@ -58,7 +69,7 @@ export default function Header() {
       <header className={`site-header ${navOpen ? 'nav-open' : ''}`} id="site-header">
         <div className="wrap">
           {/* Logo */}
-          <div className="logo" onClick={() => handleNav('catalog')}>
+          <div className="logo" onClick={() => handleNav('catalog')} style={{ cursor: 'pointer' }}>
             monis<span>.rent</span>
           </div>
 
