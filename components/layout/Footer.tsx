@@ -23,17 +23,20 @@ export default function Footer() {
           </div>
           <div className="areas">
             <div>
-              <h4>Delivery areas</h4>
-              <p>Canggu</p>
-              <p>Seminyak</p>
+              <p className="footer-title">Delivery areas</p>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px 20px' }}>
+                <div>
+                  <p>Canggu</p>
+                  <p>Seminyak</p>
+                </div>
+                <div>
+                  <p>Ubud</p>
+                  <p>Uluwatu</p>
+                </div>
+              </div>
             </div>
             <div>
-              <h4>&nbsp;</h4>
-              <p>Ubud</p>
-              <p>Uluwatu</p>
-            </div>
-            <div>
-              <h4>Talk to us</h4>
+              <p className="footer-title">Talk to us</p>
               <p>WhatsApp, 8am to 9pm daily</p>
               <p style={{ color: 'var(--brass)', fontWeight: 600, marginTop: 4 }}>+62 812 3456 7890</p>
             </div>

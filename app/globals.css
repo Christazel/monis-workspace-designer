@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -9,7 +8,8 @@
   --paper-3: #D8CEB4;
   --indigo: #26355C;
   --indigo-light: #3B4C82;
-  --brass: #A87A34;
+  --brass: #764C12;
+  --brass-light: #D4A559;
   --clay: #96492F;
   --sage: #56624A;
   --line: rgba(22, 33, 29, 0.16);
@@ -30,14 +30,14 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   font-size: 16px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, .font-heading {
-  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-family: var(--font-bricolage), system-ui, sans-serif;
   font-weight: 700;
   letter-spacing: -0.01em;
   margin: 0;
@@ -413,7 +413,7 @@ nav.primary-nav a:hover {
 .strip-item svg {
   width: 16px;
   height: 16px;
-  color: var(--brass);
+  color: var(--brass-light);
   flex: none;
 }
 
@@ -771,7 +771,8 @@ footer.site-footer {
   flex-wrap: wrap;
 }
 
-.areas div h4 {
+.areas div h4,
+.areas div .footer-title {
   font-size: 12.5px;
   color: var(--ink-soft);
   font-weight: 600;

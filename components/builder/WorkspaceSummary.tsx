@@ -41,8 +41,12 @@ function SummaryItem({ product, onRemove }: { product: Product; onRemove: () => 
         }}
       >
         <img
-          src={`${product.image}?v=4`}
+          src={product.image}
           alt={product.name}
+          loading="lazy"
+          decoding="async"
+          width={36}
+          height={36}
           style={{ width: '100%', height: '100%', objectFit: 'contain' }}
         />
       </div>

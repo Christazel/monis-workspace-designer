@@ -65,8 +65,12 @@ export default function ProductCard({ product, isSelected = false }: ProductCard
       <div className="product-thumb">
         {!imgError ? (
           <img
-            src={`${product.image}?v=4`}
+            src={product.image}
             alt={product.name}
+            loading="lazy"
+            decoding="async"
+            width={280}
+            height={200}
             style={{
               maxWidth: product.id === 'acc-surfboard' ? '60%' : '88%',
               maxHeight: product.id === 'acc-surfboard' ? '92%' : '86%',

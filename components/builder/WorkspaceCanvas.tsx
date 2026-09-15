@@ -203,6 +203,8 @@ export default function WorkspaceCanvas() {
         <img
           src={sceneSrc}
           alt="Bali Villa Workspace Setup"
+          width={1280}
+          height={720}
           style={{
             width: '100%',
             height: '100%',
@@ -245,6 +247,10 @@ export default function WorkspaceCanvas() {
             <img
               src="/assets/accessories/surfboard.png"
               alt="Bali Surfboard"
+              width={120}
+              height={360}
+              loading="lazy"
+              decoding="async"
               style={{
                 width: '100%',
                 height: 'auto',
