@@ -1,6 +1,7 @@
 # Monis Workspace Designer 🌴
 
-> Built for the **[Desent](https://desent.de)** Developer Challenge — Workspace Configurator for **[Monis.rent](https://monis.rent)**.
+> Built for the **[Desent](https://desent.de)** Developer Challenge — Workspace Configurator for **[Monis.rent](https://monis.rent)**.  
+> 🔗 **Live Demo**: [https://monis-workspace-designer-swart.vercel.app](https://monis-workspace-designer-swart.vercel.app)
 
 A visual, real-time workspace rental configurator tailored for digital nomads and startups in Bali. Instead of scrolling through a boring catalog spreadsheet, users can design their dream office setup visually in an interactive 3D villa showroom and book it instantly for same-day delivery.
 
@@ -15,7 +16,7 @@ A visual, real-time workspace rental configurator tailored for digital nomads an
 | **Add accessories to the workspace** | ✅ **Passed** | Ultrawide & 4K monitors, BenQ ScreenBar lamp, Monstera plant, Keychron mechanical keyboard, 4K webcam, power station, footrest, surfboard, and coffee station |
 | **Visual preview updates dynamically** | ✅ **Passed** | Photorealistic Villa 3D Showroom with interactive gear pins, day/night lighting modes, and live equipment swapping |
 | **Summary / Checkout view** | ✅ **Passed** | Real-time bill of materials, daily/weekly/monthly rental duration discounts, IDR/USD currency switcher, villa delivery address selector, and instant WhatsApp booking with formatted invoice |
-| **Public Deployment** | ✅ **Passed** | Deployed and live on **Vercel** |
+| **Public Deployment** | ✅ **Passed** | Deployed and live on **[Vercel](https://monis-workspace-designer-swart.vercel.app)** |
 | **GitHub Repository & Collaborator** | ✅ **Passed** | Source code on GitHub with `desent-bot` collaborator access |
 
 ---
