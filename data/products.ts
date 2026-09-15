@@ -235,7 +235,7 @@ export const ACCESSORIES: Product[] = [
     reviewCount: 276,
     image: '/assets/accessories/screenbar.png',
     description: 'Auto-dimming monitor-mounted LED light bar. Illuminates your desk without screen glare. Wireless desk controller for brightness and color temperature.',
-    features: ['Zero screen glare', 'Auto-dimming sensor', 'Wireless desk controller', '2700K–6500K color temp', 'USB-A powered (no outlet needed)'],
+    features: ['Zero screen glare', 'Auto-dimming sensor', 'Wireless desk controller', '2700K to 6500K color temp', 'USB-A powered (no outlet needed)'],
     badge: 'bestseller',
     inStock: true,
   },
@@ -296,7 +296,7 @@ export const ACCESSORIES: Product[] = [
     reviewCount: 312,
     image: '/assets/accessories/laptop-stand.png',
     description: 'Solid aluminum laptop stand that raises your screen to eye level. Reduces neck strain and looks beautiful on any desk. Cable channel built-in.',
-    features: ['Premium aluminum build', 'Eye-level height (15cm)', 'Built-in cable channel', 'Non-slip rubber base', 'Compatible 11"–17" laptops'],
+    features: ['Premium aluminum build', 'Eye-level height (15cm)', 'Built-in cable channel', 'Non-slip rubber base', 'Compatible with 11" to 17" laptops'],
     inStock: true,
   },
   {

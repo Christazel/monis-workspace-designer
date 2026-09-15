@@ -34,13 +34,13 @@ export default function Footer() {
             </div>
             <div>
               <h4>Talk to us</h4>
-              <p>WhatsApp, 8am–9pm daily</p>
+              <p>WhatsApp, 8am to 9pm daily</p>
               <p style={{ color: 'var(--brass)', fontWeight: 600, marginTop: 4 }}>+62 812 3456 7890</p>
             </div>
           </div>
         </div>
         <div className="foot-bottom">
-          <span>© 2026 monis.rent — All rights reserved</span>
+          <span>© 2026 monis.rent · All rights reserved</span>
           <span>Same-day delivery across South Bali (Canggu · Seminyak · Ubud · Uluwatu)</span>
         </div>
       </div>

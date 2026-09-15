@@ -29,7 +29,7 @@ export default function HeroBanner() {
           <div>
             <h1>A proper desk, in your villa, by this afternoon.</h1>
             <p className="lede">
-              Standing desks, ergonomic chairs, dual monitors and the rest of a real workspace — delivered and set up the same day you order, in Canggu, Seminyak, Ubud and Uluwatu. No deposit. Keep it for a day, a week or a month, then we pick it up.
+              Standing desks, ergonomic chairs, dual monitors and the rest of a real workspace, delivered and set up the same day you order, in Canggu, Seminyak, Ubud and Uluwatu. No deposit. Keep it for a day, a week or a month, then we pick it up.
             </p>
             <div className="hero-ctas">
               <button className="btn-primary" type="button" onClick={handleBuildClick}>
@@ -126,7 +126,7 @@ export default function HeroBanner() {
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6z" />
             </svg>
-            <span>No deposit — pay only for the days you keep it</span>
+            <span>No deposit, pay only for the days you keep it</span>
           </div>
 
           <div className="strip-item">
@@ -182,7 +182,7 @@ export default function HeroBanner() {
                 </svg>
               </div>
               <h3>Creator Studio</h3>
-              <p className="desc">Executive desk, 4K monitor, and a screen light — built for design and video work.</p>
+              <p className="desc">Executive desk, 4K monitor, and a screen light for design and video work.</p>
               <div className="setup-price">
                 {formatPrice(460000)}
                 <small>per day</small>
@@ -208,7 +208,7 @@ export default function HeroBanner() {
                 </svg>
               </div>
               <h3>Minimal Nomad</h3>
-              <p className="desc">A compact desk and a light chair — enough for a laptop and a coffee.</p>
+              <p className="desc">A compact desk and a light chair, perfect for a laptop and coffee.</p>
               <div className="setup-price">
                 {formatPrice(310000)}
                 <small>per day</small>

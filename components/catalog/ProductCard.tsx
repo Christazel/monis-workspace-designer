@@ -21,20 +21,29 @@ export default function ProductCard({ product, isSelected = false }: ProductCard
 
   const handleAdd = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (product.category === 'desk') setDesk(product);
-    else if (product.category === 'chair') setChair(product);
-    else if (product.category === 'tech') toggleTech(product);
-    else toggleAccessory(product);
+    if (product.category === 'desk') {
+      setDesk(isSelected ? null : product);
+    } else if (product.category === 'chair') {
+      setChair(isSelected ? null : product);
+    } else if (product.category === 'tech') {
+      toggleTech(product);
+    } else {
+      toggleAccessory(product);
+    }
 
-    setJustAdded(true);
-    setTimeout(() => setJustAdded(false), 800);
+    if (!isSelected) {
+      setJustAdded(true);
+      setTimeout(() => setJustAdded(false), 800);
+    }
   };
 
   const handleOpenBuilder = () => {
-    if (product.category === 'desk') setDesk(product);
-    else if (product.category === 'chair') setChair(product);
-    else if (product.category === 'tech') toggleTech(product);
-    else toggleAccessory(product);
+    if (!isSelected) {
+      if (product.category === 'desk') setDesk(product);
+      else if (product.category === 'chair') setChair(product);
+      else if (product.category === 'tech') toggleTech(product);
+      else toggleAccessory(product);
+    }
 
     setMode('builder');
     window.scrollTo({ top: 0, behavior: 'smooth' });

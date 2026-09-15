@@ -32,7 +32,7 @@ export const PRESETS: Preset[] = [
     name: 'Minimal Nomad',
     tagline: 'Travel light, work sharp, surf after standup',
     description:
-      'Clean minimal white desk, comfortable mesh chair, a 27" 4K display, and the essential Bali perk — a surfboard waiting by the door for sunset sessions.',
+      'Clean minimal white desk, comfortable mesh chair, a 27" 4K display, plus the essential Bali perk: a surfboard waiting by the door for sunset sessions.',
     icon: '🌴',
     deskId: 'desk-white-minimal',
     chairId: 'chair-markus-mesh',

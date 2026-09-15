@@ -14,7 +14,7 @@ export default function HowItWorks() {
       num: '02',
       icon: <Calendar size={22} color="var(--brass)" />,
       title: 'Flexible Rental Terms',
-      desc: 'Rent daily, weekly (-10% off), or monthly (-20% off). No security deposit required — pay only for what you use with zero lock-in.',
+      desc: 'Rent daily, weekly (10% off), or monthly (20% off). No security deposit required. Pay only for what you use with zero lock-in.',
     },
     {
       num: '03',

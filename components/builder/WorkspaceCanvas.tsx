@@ -24,9 +24,9 @@ export default function WorkspaceCanvas() {
   const currency = useCurrency();
 
   const monitor = tech.find((t) => t.id === 'tech-ultrawide' || t.id === 'tech-4k-27');
-  const screenbar = accessories.find((a) => a.id === 'accessory-screenbar');
-  const monstera = accessories.find((a) => a.id === 'accessory-monstera');
-  const surfboard = accessories.find((a) => a.id === 'accessory-surfboard');
+  const screenbar = accessories.find((a) => a.id === 'acc-screenbar');
+  const monstera = accessories.find((a) => a.id === 'acc-monstera');
+  const surfboard = accessories.find((a) => a.id === 'acc-surfboard');
 
   const isEmpty = !desk && !chair && tech.length === 0 && accessories.length === 0;
 

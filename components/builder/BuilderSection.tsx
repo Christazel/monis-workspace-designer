@@ -105,6 +105,7 @@ export default function BuilderSection() {
 
       {/* ── Main 3-column Layout ── */}
       <div
+        className="builder-layout"
         style={{
           display: 'flex',
           height: 'calc(100vh - 200px)',
@@ -113,15 +114,19 @@ export default function BuilderSection() {
         }}
       >
         {/* Left: Items Picker */}
-        <div style={{ display: 'flex' }}>
+        <div className={`builder-col-items ${mobileTab === 'items' ? 'active' : ''}`}>
           <ItemSelector />
         </div>
 
         {/* Center: Canvas Room */}
-        <WorkspaceCanvas />
+        <div className={`builder-col-canvas ${mobileTab === 'canvas' ? 'active' : ''}`}>
+          <WorkspaceCanvas />
+        </div>
 
         {/* Right: Setup Summary */}
-        <WorkspaceSummary />
+        <div className={`builder-col-summary ${mobileTab === 'summary' ? 'active' : ''}`}>
+          <WorkspaceSummary />
+        </div>
       </div>
     </section>
   );

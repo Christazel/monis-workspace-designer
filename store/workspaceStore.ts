@@ -85,8 +85,8 @@ const initialTech = [
   ALL_PRODUCTS.find((p) => p.id === 'tech-keyboard-mouse'),
 ].filter(Boolean) as Product[];
 const initialAccessories = [
-  ALL_PRODUCTS.find((p) => p.id === 'accessory-screenbar'),
-  ALL_PRODUCTS.find((p) => p.id === 'accessory-monstera'),
+  ALL_PRODUCTS.find((p) => p.id === 'acc-screenbar'),
+  ALL_PRODUCTS.find((p) => p.id === 'acc-monstera'),
 ].filter(Boolean) as Product[];
 
 // ─────────────────────────────────────────
