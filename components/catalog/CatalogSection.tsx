@@ -55,13 +55,16 @@ export default function CatalogSection() {
         </div>
 
         {/* Filter tabs */}
-        <div className="tabs" role="tablist">
+        <div className="tabs" role="tablist" aria-label="Product categories">
           {TABS.map((tab) => (
             <button
               key={tab.id}
+              type="button"
+              id={`catalog-tab-${tab.id}`}
               className={`tab ${activeCategory === tab.id ? 'active' : ''}`}
               role="tab"
               aria-selected={activeCategory === tab.id}
+              aria-controls="catalog-product-grid"
               onClick={() => setActiveCategory(tab.id)}
             >
               {tab.label}
@@ -70,15 +73,44 @@ export default function CatalogSection() {
         </div>
 
         {/* Product Grid */}
-        <div className="product-grid">
-          {filtered.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              isSelected={selectedIds.has(product.id)}
-            />
-          ))}
-        </div>
+        {filtered.length > 0 ? (
+          <div className="product-grid" id="catalog-product-grid" role="tabpanel" aria-labelledby={`catalog-tab-${activeCategory}`}>
+            {filtered.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                isSelected={selectedIds.has(product.id)}
+              />
+            ))}
+          </div>
+        ) : (
+          <div
+            style={{
+              padding: '60px 20px',
+              textAlign: 'center',
+              background: 'var(--paper)',
+              border: '1px solid var(--line)',
+              borderRadius: 'var(--radius)',
+            }}
+          >
+            <p style={{ fontSize: 16, fontWeight: 600, color: 'var(--ink)', marginBottom: 6 }}>
+              No products found
+            </p>
+            <p style={{ fontSize: 14, color: 'var(--ink-soft)', marginBottom: 16 }}>
+              We couldn't find any products matching your current selection.
+            </p>
+            <button
+              type="button"
+              className="tab active"
+              onClick={() => {
+                setActiveCategory('all');
+                useWorkspaceStore.getState().setSearchQuery('');
+              }}
+            >
+              Show all products ({ALL_PRODUCTS.length})
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

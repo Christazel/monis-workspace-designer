@@ -118,7 +118,9 @@ export default function ProductCard({ product, isSelected = false }: ProductCard
       {/* Info */}
       <div>
         <p className="product-name">{product.name}</p>
-        <p className="product-spec">{product.subtitle} · {product.dimensions || 'Bali villa edition'}</p>
+        <p className="product-spec">
+          {product.dimensions ? `${product.subtitle} · ${product.dimensions}` : product.subtitle}
+        </p>
       </div>
 
       {/* Swatches */}

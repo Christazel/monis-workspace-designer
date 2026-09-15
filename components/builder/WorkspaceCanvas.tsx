@@ -393,16 +393,17 @@ export default function WorkspaceCanvas() {
           marginTop: 12,
           display: 'flex',
           alignItems: 'center',
-          gap: 12,
+          flexWrap: 'wrap',
+          gap: '6px 14px',
           fontSize: 12,
           color: 'var(--ink-soft)',
         }}
       >
-        <span>📍 Canggu · Seminyak · Ubud · Uluwatu</span>
-        <span>·</span>
-        <span>⚡ White-Glove In-Villa Setup & Cable Management</span>
-        <span>·</span>
-        <span>🛡️ 100% Tested High-Speed Gear</span>
+        <span>📍 South Bali Delivery</span>
+        <span style={{ opacity: 0.35 }}>•</span>
+        <span>⚡ In-Villa White-Glove Setup & Tuning</span>
+        <span style={{ opacity: 0.35 }}>•</span>
+        <span>🛡️ 100% Tested Pro Gear</span>
       </div>
     </div>
   );
