@@ -1,14 +1,52 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useWorkspaceStore, useCurrency, useMode } from '@/store/workspaceStore';
+
+type NavItem = 'catalog' | 'setups' | 'builder' | 'how-it-works';
 
 export default function Header() {
   const [navOpen, setNavOpen] = useState(false);
   const { mode, setMode, currency, setCurrency, setCheckoutOpen } = useWorkspaceStore();
   const { desk, chair, tech, accessories } = useWorkspaceStore();
 
+  const [activeNav, setActiveNav] = useState<NavItem>(mode === 'builder' ? 'builder' : 'catalog');
+  const isClickingRef = useRef(false);
+
   const totalCount = (desk ? 1 : 0) + (chair ? 1 : 0) + tech.length + accessories.length;
+
+  useEffect(() => {
+    if (mode === 'builder') {
+      setActiveNav('builder');
+    }
+  }, [mode]);
+
+  useEffect(() => {
+    if (mode !== 'catalog') return;
+
+    const handleScroll = () => {
+      if (isClickingRef.current) return;
+
+      const setupsEl = document.getElementById('setups');
+      const howItWorksEl = document.getElementById('how-it-works');
+      const catalogEl = document.getElementById('catalog');
+
+      const triggerY = 160;
+
+      if (catalogEl && catalogEl.getBoundingClientRect().top <= triggerY) {
+        setActiveNav('catalog');
+      } else if (howItWorksEl && howItWorksEl.getBoundingClientRect().top <= triggerY) {
+        setActiveNav('how-it-works');
+      } else if (setupsEl && setupsEl.getBoundingClientRect().top <= triggerY) {
+        setActiveNav('setups');
+      } else {
+        setActiveNav('catalog');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [mode]);
 
   const handleNav = (targetMode: 'catalog' | 'builder', targetHash?: string) => {
     setNavOpen(false);
@@ -32,6 +70,15 @@ export default function Header() {
       setMode(targetMode);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+  };
+
+  const navTo = (item: NavItem, targetMode: 'catalog' | 'builder', targetHash?: string) => {
+    isClickingRef.current = true;
+    setActiveNav(item);
+    handleNav(targetMode, targetHash);
+    setTimeout(() => {
+      isClickingRef.current = false;
+    }, 1200);
   };
 
   return (
@@ -69,7 +116,7 @@ export default function Header() {
       <header className={`site-header ${navOpen ? 'nav-open' : ''}`} id="site-header">
         <div className="wrap">
           {/* Logo */}
-          <div className="logo" onClick={() => handleNav('catalog')} style={{ cursor: 'pointer' }}>
+          <div className="logo" onClick={() => navTo('catalog', 'catalog')} style={{ cursor: 'pointer' }}>
             monis<span>.rent</span>
           </div>
 
@@ -77,27 +124,29 @@ export default function Header() {
           <nav className="primary-nav">
             <button
               type="button"
-              className={mode === 'catalog' ? 'current' : ''}
-              onClick={() => handleNav('catalog')}
+              className={mode === 'catalog' && activeNav === 'catalog' ? 'current' : ''}
+              onClick={() => navTo('catalog', 'catalog')}
             >
               Catalog
             </button>
             <button
               type="button"
-              onClick={() => handleNav('catalog', '#setups')}
+              className={mode === 'catalog' && activeNav === 'setups' ? 'current' : ''}
+              onClick={() => navTo('setups', 'catalog', '#setups')}
             >
               Setups
             </button>
             <button
               type="button"
               className={mode === 'builder' ? 'current' : ''}
-              onClick={() => handleNav('builder')}
+              onClick={() => navTo('builder', 'builder')}
             >
               Builder
             </button>
             <button
               type="button"
-              onClick={() => handleNav('catalog', '#how-it-works')}
+              className={mode === 'catalog' && activeNav === 'how-it-works' ? 'current' : ''}
+              onClick={() => navTo('how-it-works', 'catalog', '#how-it-works')}
             >
               How it works
             </button>
@@ -112,6 +161,7 @@ export default function Header() {
                 if (totalCount > 0) {
                   setCheckoutOpen(true);
                 } else {
+                  setActiveNav('builder');
                   setMode('builder');
                 }
               }}

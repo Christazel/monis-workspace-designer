@@ -788,6 +788,12 @@ footer.site-footer {
     padding: 11px 0;
     border-bottom: 1px solid var(--line-soft);
   }
+  nav.primary-nav button.current,
+  nav.primary-nav a.current {
+    color: var(--brass);
+    border-bottom: 2px solid var(--brass);
+    font-weight: 600;
+  }
   .menu-toggle {
     display: flex;
   }
