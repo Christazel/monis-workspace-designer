@@ -26,7 +26,7 @@ export default function HeroBanner() {
       {/* ── HERO SECTION ── */}
       <section className="hero">
         <div className="wrap">
-          <div>
+          <div className="hero-content">
             <h1>A proper desk, in your villa, by this afternoon.</h1>
             <p className="lede">
               Standing desks, ergonomic chairs, dual monitors and the rest of a real workspace, delivered and set up the same day you order, in Canggu, Seminyak, Ubud and Uluwatu. No deposit. Keep it for a day, a week or a month, then we pick it up.
@@ -45,59 +45,6 @@ export default function HeroBanner() {
               </svg>
               Rated 4.9 by over 1,200 renters in Bali
             </div>
-          </div>
-
-          <div className="hero-art">
-            <svg viewBox="0 0 520 460" xmlns="http://www.w3.org/2000/svg">
-              {/* Wall & floor */}
-              <rect x="0" y="0" width="520" height="300" fill="#E3DBC7" />
-              <rect x="0" y="300" width="520" height="160" fill="#C9A46B" />
-              <g stroke="#B08E52" strokeWidth="1.3">
-                <line x1="0" y1="330" x2="520" y2="330" />
-                <line x1="0" y1="362" x2="520" y2="362" />
-                <line x1="0" y1="394" x2="520" y2="394" />
-                <line x1="0" y1="426" x2="520" y2="426" />
-              </g>
-
-              {/* Window with tropical view */}
-              <rect x="46" y="34" width="220" height="200" rx="4" fill="#DCE7DE" stroke="#16211D" strokeWidth="2" />
-              <path d="M60 210 C 100 140, 130 130, 150 60" fill="none" stroke="#56624A" strokeWidth="10" strokeLinecap="round" opacity=".55" />
-              <path d="M250 214 C 210 150, 190 120, 170 50" fill="none" stroke="#56624A" strokeWidth="10" strokeLinecap="round" opacity=".4" />
-              <g stroke="#16211D" strokeWidth="2">
-                <line x1="156" y1="34" x2="156" y2="234" />
-                <line x1="46" y1="134" x2="266" y2="134" />
-              </g>
-              <circle cx="230" cy="60" r="16" fill="#A87A34" opacity=".85" />
-
-              {/* Monitor on desk */}
-              <rect x="330" y="150" width="150" height="106" rx="5" fill="#EFE9DC" stroke="#16211D" strokeWidth="2" />
-              <rect x="340" y="160" width="130" height="72" rx="2" fill="#26355C" />
-              <rect x="393" y="256" width="24" height="16" fill="#16211D" />
-              <rect x="370" y="272" width="70" height="8" rx="2" fill="#16211D" />
-
-              {/* Desk */}
-              <rect x="60" y="292" width="230" height="14" rx="3" fill="#16211D" />
-              <rect x="70" y="306" width="8" height="46" fill="#16211D" />
-              <rect x="270" y="306" width="8" height="46" fill="#16211D" />
-              <rect x="70" y="260" width="230" height="34" rx="3" fill="#F1ECDF" stroke="#16211D" strokeWidth="2" />
-
-              {/* Rug under chair */}
-              <ellipse cx="130" cy="390" rx="90" ry="14" fill="#26355C" opacity=".9" />
-              <ellipse cx="130" cy="390" rx="90" ry="14" fill="none" stroke="#A87A34" strokeWidth="2" />
-
-              {/* Chair */}
-              <path d="M120 300 C 108 320, 108 350, 122 378 C 128 384, 144 384, 150 378 C 162 350, 158 320, 144 300 Z" fill="#16211D" />
-              <rect x="112" y="374" width="46" height="8" rx="2" fill="#16211D" />
-              <circle cx="120" cy="386" r="4" fill="#16211D" />
-              <circle cx="150" cy="386" r="4" fill="#16211D" />
-
-              {/* Potted plant */}
-              <path d="M400 300 L400 392" stroke="#16211D" strokeWidth="6" strokeLinecap="round" />
-              <path d="M370 300 C 370 270, 430 270, 430 300 C 430 320, 400 320, 400 300" fill="#9A4B34" />
-              <path d="M400 296 C 380 296, 372 270, 384 250" fill="none" stroke="#56624A" strokeWidth="9" strokeLinecap="round" />
-              <path d="M400 296 C 410 290, 424 262, 420 240" fill="none" stroke="#56624A" strokeWidth="9" strokeLinecap="round" />
-              <path d="M400 296 C 402 280, 396 256, 404 236" fill="none" stroke="#56624A" strokeWidth="9" strokeLinecap="round" />
-            </svg>
           </div>
         </div>
       </section>
