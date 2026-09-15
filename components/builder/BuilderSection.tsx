@@ -4,26 +4,41 @@ import { useState } from 'react';
 import ItemSelector from './ItemSelector';
 import WorkspaceCanvas from './WorkspaceCanvas';
 import WorkspaceSummary from './WorkspaceSummary';
-import { useWorkspaceStore, useCurrency } from '@/store/workspaceStore';
+import { useWorkspaceStore, useCurrency, useTotal } from '@/store/workspaceStore';
 import { PRESETS } from '@/data/presets';
 import { formatIDR, formatUSD } from '@/data/products';
-import { Eye, List, ShoppingBag, ArrowLeft } from 'lucide-react';
+import { Eye, List, ShoppingBag, ArrowLeft, Code2, Palette, Compass, Sparkles, ArrowRight } from 'lucide-react';
 
 export default function BuilderSection() {
-  const { setMode, getAllSelectedProducts, activePresetId, applyPreset } = useWorkspaceStore();
+  const { setMode, getAllSelectedProducts, activePresetId, applyPreset, setCheckoutOpen } = useWorkspaceStore();
   const currency = useCurrency();
+  const total = useTotal();
   const [mobileTab, setMobileTab] = useState<'canvas' | 'items' | 'summary'>('canvas');
+  // Count selected items for mobile badge
   const selectedCount = getAllSelectedProducts().length;
 
+  const renderPresetIcon = (presetId: string) => {
+    switch (presetId) {
+      case 'preset-developer':
+        return <Code2 size={13} />;
+      case 'preset-creator':
+        return <Palette size={13} />;
+      case 'preset-nomad':
+        return <Compass size={13} />;
+      default:
+        return <Sparkles size={13} />;
+    }
+  };
+
   return (
-    <section style={{ background: 'var(--paper)', minHeight: 'calc(100vh - 110px)' }}>
+    <section style={{ background: 'var(--paper)', minHeight: 'calc(100vh - 110px)', position: 'relative' }}>
 
       {/* ── Unified Builder Toolbar (Back + Presets in one slim bar) ── */}
       <div
         style={{
           background: 'var(--paper)',
           borderBottom: '1px solid var(--line)',
-          padding: '10px 0',
+          padding: '8px 0',
         }}
       >
         <div
@@ -31,8 +46,9 @@ export default function BuilderSection() {
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: 16,
-            flexWrap: 'wrap',
+            gap: 12,
+            overflowX: 'auto',
+            scrollbarWidth: 'none',
           }}
         >
           {/* Back button */}
@@ -45,7 +61,7 @@ export default function BuilderSection() {
               gap: 6,
               background: 'none',
               border: 'none',
-              fontSize: 14,
+              fontSize: 13.5,
               fontWeight: 600,
               color: 'var(--ink-soft)',
               cursor: 'pointer',
@@ -61,12 +77,12 @@ export default function BuilderSection() {
           </button>
 
           {/* Slim vertical divider */}
-          <div style={{ width: 1, height: 18, background: 'var(--line)', flexShrink: 0 }} />
+          <div style={{ width: 1, height: 16, background: 'var(--line)', flexShrink: 0 }} />
 
           {/* Quick Setups label */}
           <span
             style={{
-              fontSize: 11,
+              fontSize: 10.5,
               fontWeight: 700,
               color: 'var(--ink-soft)',
               textTransform: 'uppercase',
@@ -76,11 +92,11 @@ export default function BuilderSection() {
               alignItems: 'center',
             }}
           >
-            Setups
+            Curated Setups
           </span>
 
           {/* Preset buttons — compact */}
-          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', flex: 1, alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: 6, flexWrap: 'nowrap', alignItems: 'center', flexShrink: 0 }}>
             {PRESETS.map((preset) => {
               const isActive = activePresetId === preset.id;
               const price = currency === 'IDR' ? formatIDR(preset.totalPrice) : formatUSD(preset.totalPrice);
@@ -93,24 +109,25 @@ export default function BuilderSection() {
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: 6,
-                    padding: '5px 12px',
+                    gap: 5,
+                    padding: '4px 11px',
                     borderRadius: 'var(--radius)',
                     background: isActive ? 'var(--ink)' : 'transparent',
                     color: isActive ? 'var(--paper)' : 'var(--ink)',
                     border: '1px solid ' + (isActive ? 'var(--ink)' : 'var(--line)'),
-                    fontSize: 12.5,
+                    fontSize: 12,
                     fontWeight: 600,
                     transition: 'all 0.15s ease',
                     cursor: 'pointer',
                     whiteSpace: 'nowrap',
+                    flexShrink: 0,
                   }}
                 >
-                  <span style={{ fontSize: 13 }}>{preset.icon}</span>
+                  {renderPresetIcon(preset.id)}
                   <span>{preset.name}</span>
                   <span
                     style={{
-                      fontSize: 11,
+                      fontSize: 10.5,
                       fontWeight: 700,
                       color: isActive ? 'rgba(239,233,220,0.7)' : 'var(--brass)',
                     }}
@@ -124,7 +141,7 @@ export default function BuilderSection() {
         </div>
       </div>
 
-      {/* ── Mobile Tab Switcher (< 960px) ── */}
+      {/* ── Mobile Tab Switcher (< 1024px) ── */}
       <div
         style={{
           display: 'none',
@@ -136,7 +153,7 @@ export default function BuilderSection() {
       >
         {[
           { id: 'canvas' as const, icon: <Eye size={14} />, label: 'Preview' },
-          { id: 'items' as const, icon: <List size={14} />, label: 'Items' },
+          { id: 'items' as const, icon: <List size={14} />, label: 'Catalog' },
           { id: 'summary' as const, icon: <ShoppingBag size={14} />, label: `Setup (${selectedCount})` },
         ].map((tab) => (
           <button
@@ -169,8 +186,8 @@ export default function BuilderSection() {
         className="builder-layout"
         style={{
           display: 'flex',
-          height: 'calc(100vh - 178px)',
-          minHeight: 520,
+          height: 'calc(100vh - 115px)',
+          minHeight: 480,
           background: 'var(--paper)',
         }}
       >
@@ -189,6 +206,77 @@ export default function BuilderSection() {
           <WorkspaceSummary />
         </div>
       </div>
+
+      {/* ── Mobile Sticky Summary Bar (< 960px, only when not on summary tab) ── */}
+      {mobileTab !== 'summary' && (
+        <div
+          className="builder-mobile-bottom-bar"
+          style={{
+            position: 'fixed',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            background: 'rgba(255, 255, 255, 0.95)',
+            backdropFilter: 'blur(10px)',
+            borderTop: '1px solid var(--line)',
+            padding: '10px 16px',
+            display: 'none',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            zIndex: 90,
+            boxShadow: '0 -4px 16px rgba(0,0,0,0.06)',
+          }}
+        >
+          <div>
+            <span style={{ fontSize: 11, color: 'var(--ink-soft)' }}>
+              {selectedCount} {selectedCount === 1 ? 'item' : 'items'} selected
+            </span>
+            <p style={{ fontSize: 15, fontWeight: 800, color: 'var(--brass)', lineHeight: 1.1 }}>
+              {total.formatted}
+            </p>
+          </div>
+
+          <div style={{ display: 'flex', gap: 8 }}>
+            <button
+              onClick={() => setMobileTab('summary')}
+              type="button"
+              style={{
+                padding: '8px 14px',
+                borderRadius: 'var(--radius)',
+                border: '1px solid var(--line)',
+                background: 'var(--paper)',
+                color: 'var(--ink)',
+                fontSize: 12,
+                fontWeight: 600,
+                cursor: 'pointer',
+              }}
+            >
+              View Setup
+            </button>
+            <button
+              onClick={() => setCheckoutOpen(true)}
+              type="button"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 5,
+                padding: '8px 16px',
+                borderRadius: 'var(--radius)',
+                border: 'none',
+                background: 'var(--ink)',
+                color: 'var(--paper)',
+                fontSize: 12,
+                fontWeight: 700,
+                cursor: 'pointer',
+              }}
+            >
+              <span>Rent</span>
+              <ArrowRight size={13} />
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
+

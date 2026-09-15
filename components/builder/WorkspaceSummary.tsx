@@ -117,10 +117,10 @@ export default function WorkspaceSummary() {
   return (
     <aside
       style={{
-        width: 290,
-        flexShrink: 0,
+        width: '100%',
+        maxWidth: '100%',
+        height: '100%',
         background: 'var(--paper)',
-        borderLeft: '1px solid var(--line)',
         display: 'flex',
         flexDirection: 'column',
         overflow: 'hidden',
@@ -288,8 +288,8 @@ export default function WorkspaceSummary() {
         </div>
 
         {total.discount > 0 && (
-          <p style={{ fontSize: 11.5, color: 'var(--sage)', fontWeight: 600, marginBottom: 12 }}>
-            ✓ Duration discount applied
+          <p style={{ fontSize: 11.5, color: 'var(--sage)', fontWeight: 600, marginBottom: 12, display: 'flex', alignItems: 'center', gap: 4 }}>
+            <span>Duration discount applied</span>
           </p>
         )}
 
