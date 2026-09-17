@@ -147,12 +147,32 @@ ul {
   font-weight: 700;
 }
 
-/* ---------- header ---------- */
+/* ---------- header wrapper & header ---------- */
+.header-outer-wrapper {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 80;
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1), margin-bottom 0.42s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+.header-outer-wrapper.header-hidden {
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+.header-outer-wrapper.header-visible {
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
 header.site-header {
   background: var(--paper);
   border-bottom: 1px solid var(--line);
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 40;
 }
 
@@ -810,7 +830,7 @@ footer.site-footer {
   }
   nav.primary-nav {
     position: absolute;
-    top: 68px;
+    top: 100%;
     left: 0;
     right: 0;
     background: var(--paper);

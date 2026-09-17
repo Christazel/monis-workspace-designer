@@ -38,7 +38,7 @@ export default function BuilderSection() {
         style={{
           background: 'var(--paper)',
           borderBottom: '1px solid var(--line)',
-          padding: '8px 0',
+          padding: '10px 0',
         }}
       >
         <div
