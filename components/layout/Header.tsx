@@ -265,9 +265,13 @@ export default function Header() {
           {/* Top Bar Row (on mobile: row 1; on desktop: inline) */}
           <div className="header-row-one">
             {/* Official Monis Logo */}
-            <div
+            <button
+              type="button"
               onClick={() => handleNav('catalog', '#catalog')}
               style={{
+                background: 'none',
+                border: 'none',
+                padding: 0,
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
@@ -277,13 +281,14 @@ export default function Header() {
               aria-label="Monis rent home"
             >
               <MonisLogo width={102} height={29} color="#000000" />
-            </div>
+            </button>
 
             {/* Mobile-only Quick Actions (Currency + Cart + Menu) */}
             <div className="mobile-actions-row" style={{ display: 'none', alignItems: 'center', gap: '8px' }}>
               <button
                 type="button"
                 onClick={() => setCurrency(currency === 'IDR' ? 'USD' : 'IDR')}
+                aria-label={`Switch currency between IDR and USD, currently ${currency}`}
                 style={{
                   border: '1px solid #e5e7eb',
                   background: '#f9fafb',
@@ -316,7 +321,7 @@ export default function Header() {
                   fontWeight: 600,
                   cursor: 'pointer',
                 }}
-                aria-label="Cart"
+                aria-label={`Your rental cart with ${totalCount} items`}
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M6 6h15l-1.5 9h-12L4 3H2" />
@@ -329,7 +334,8 @@ export default function Header() {
               <button
                 type="button"
                 className="monis-mobile-toggle"
-                aria-label="Toggle menu"
+                aria-label={navOpen ? 'Close navigation menu' : 'Open navigation menu'}
+                aria-expanded={navOpen}
                 onClick={() => {
                   const next = !navOpen;
                   setNavOpen(next);
@@ -379,14 +385,21 @@ export default function Header() {
             }}
           >
             {/* Location section */}
-            <div
+            <button
+              type="button"
               onClick={() => setLocationMenuOpen(!locationMenuOpen)}
+              aria-haspopup="listbox"
+              aria-expanded={locationMenuOpen}
+              aria-label={`Select delivery location in Bali, currently ${selectedArea}`}
               style={{
+                background: 'none',
+                border: 'none',
+                textAlign: 'left',
                 cursor: 'pointer',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
-                paddingRight: '10px',
+                padding: '0 10px 0 0',
                 borderRight: '1px solid #e5e7eb',
                 minWidth: '95px',
               }}
@@ -395,7 +408,7 @@ export default function Header() {
                 style={{
                   fontSize: '9.5px',
                   fontWeight: 600,
-                  color: '#6b7280',
+                  color: '#4b5563',
                   textTransform: 'uppercase',
                   letterSpacing: '0.04em',
                   display: 'flex',
@@ -422,7 +435,7 @@ export default function Header() {
               >
                 {selectedArea}
               </span>
-            </div>
+            </button>
 
             {/* Bali Area Dropdown Popup */}
             {locationMenuOpen && (
@@ -487,7 +500,7 @@ export default function Header() {
                 style={{
                   fontSize: '9.5px',
                   fontWeight: 600,
-                  color: '#6b7280',
+                  color: '#4b5563',
                   textTransform: 'uppercase',
                   letterSpacing: '0.04em',
                   display: 'flex',
@@ -503,7 +516,7 @@ export default function Header() {
                 </svg>
                 Delivery
               </span>
-              <span style={{ fontSize: '11.5px', fontWeight: 600, color: '#10b981' }}>
+              <span style={{ fontSize: '11.5px', fontWeight: 600, color: '#047857' }}>
                 Today in Bali
               </span>
             </div>
@@ -511,8 +524,10 @@ export default function Header() {
             {/* Quick Search input */}
             <div style={{ display: 'flex', alignItems: 'center', flex: 1, paddingLeft: '8px', minWidth: 0 }}>
               <input
+                id="search-gear"
                 type="text"
                 placeholder="Search gear..."
+                aria-label="Search workspace equipment"
                 value={searchQuery}
                 onFocus={() => {
                   isHoveredRef.current = true;
@@ -599,10 +614,11 @@ export default function Header() {
               <button
                 type="button"
                 onClick={() => setCurrency('IDR')}
+                aria-label="Set currency to Indonesian Rupiah"
                 style={{
                   border: 'none',
                   background: currency === 'IDR' ? '#ffffff' : 'transparent',
-                  color: currency === 'IDR' ? '#000000' : '#6b7280',
+                  color: currency === 'IDR' ? '#000000' : '#4b5563',
                   fontWeight: currency === 'IDR' ? 700 : 500,
                   fontSize: '11px',
                   padding: '4px 8px',
@@ -616,10 +632,11 @@ export default function Header() {
               <button
                 type="button"
                 onClick={() => setCurrency('USD')}
+                aria-label="Set currency to US Dollars"
                 style={{
                   border: 'none',
                   background: currency === 'USD' ? '#ffffff' : 'transparent',
-                  color: currency === 'USD' ? '#000000' : '#6b7280',
+                  color: currency === 'USD' ? '#000000' : '#4b5563',
                   fontWeight: currency === 'USD' ? 700 : 500,
                   fontSize: '11px',
                   padding: '4px 8px',
@@ -696,7 +713,7 @@ export default function Header() {
               {totalCount > 0 && (
                 <span
                   style={{
-                    background: '#10b981',
+                    background: '#047857',
                     color: '#ffffff',
                     fontSize: '11px',
                     fontWeight: 700,

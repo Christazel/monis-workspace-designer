@@ -208,7 +208,7 @@ export default function HeroBanner() {
                 fontWeight: 700,
                 textTransform: 'uppercase',
                 letterSpacing: '0.06em',
-                color: '#6b7280',
+                color: '#4b5563',
                 marginBottom: '6px',
               }}
             >
@@ -225,7 +225,7 @@ export default function HeroBanner() {
             >
               Product Bundles
             </h2>
-            <p style={{ fontSize: '15px', color: '#6b7280', maxWidth: '640px' }}>
+            <p style={{ fontSize: '15px', color: '#4b5563', maxWidth: '640px' }}>
               Save more with our curated setups — complete workstations with desks, chairs, monitors and accessories in one click.
             </p>
           </div>
@@ -273,7 +273,7 @@ export default function HeroBanner() {
                       >
                         Curated Bundle
                       </span>
-                      <span style={{ fontSize: '12px', color: '#6b7280', fontWeight: 500 }}>
+                      <span style={{ fontSize: '12px', color: '#4b5563', fontWeight: 600 }}>
                         Save 30% Monthly
                       </span>
                     </div>
@@ -315,13 +315,13 @@ export default function HeroBanner() {
                           <span style={{ fontSize: '20px', fontWeight: 800, color: '#111827' }}>
                             {formatPrice(preset.totalPrice)}
                           </span>
-                          <span style={{ fontSize: '12px', color: '#6b7280', marginLeft: '4px' }}>/day</span>
+                          <span style={{ fontSize: '12px', color: '#4b5563', marginLeft: '4px' }}>/day</span>
                         </div>
                         <div style={{ textAlign: 'right' }}>
                           <span style={{ fontSize: '13px', fontWeight: 600, color: '#047857' }}>
                             {formatPrice(monthlyRate)}/day
                           </span>
-                          <span style={{ display: 'block', fontSize: '11px', color: '#6b7280' }}>monthly rate</span>
+                          <span style={{ display: 'block', fontSize: '11px', color: '#4b5563' }}>monthly rate</span>
                         </div>
                       </div>
                     </div>
@@ -336,6 +336,7 @@ export default function HeroBanner() {
                         setMode('builder');
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                       }}
+                      aria-label={`Customize ${preset.name} in 2D studio configurator`}
                       style={{
                         width: '100%',
                         padding: '11px',
@@ -362,6 +363,7 @@ export default function HeroBanner() {
                         applyPreset(preset.id);
                         setCheckoutOpen(true);
                       }}
+                      aria-label={`Book ${preset.name} on Monis.rent`}
                       style={{
                         width: '100%',
                         padding: '10px',

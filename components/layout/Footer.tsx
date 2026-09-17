@@ -32,19 +32,28 @@ export default function Footer() {
         >
           {/* Col 1: Brand */}
           <div>
-            <div
+            <button
+              type="button"
               onClick={() => {
                 setMode('catalog');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              style={{ cursor: 'pointer', marginBottom: '16px' }}
+              style={{
+                background: 'none',
+                border: 'none',
+                padding: 0,
+                cursor: 'pointer',
+                marginBottom: '16px',
+                display: 'block',
+              }}
+              aria-label="Monis rent home"
             >
               <MonisLogo width={110} height={31} color="#000000" />
-            </div>
+            </button>
             <p
               style={{
                 fontSize: '14px',
-                color: '#6b7280',
+                color: '#4b5563',
                 lineHeight: 1.6,
                 maxWidth: '280px',
                 marginBottom: '16px',
@@ -65,7 +74,7 @@ export default function Footer() {
                 color: '#111827',
               }}
             >
-              <span style={{ color: '#10b981' }}>★ ★ ★ ★ ★</span>
+              <span style={{ color: '#047857' }}>★ ★ ★ ★ ★</span>
               <span>4.9 on Trustpilot</span>
             </div>
           </div>
@@ -132,7 +141,7 @@ export default function Footer() {
                     setMode('builder');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  style={{ background: 'none', border: 'none', padding: 0, color: '#10b981', fontWeight: 600, cursor: 'pointer' }}
+                  style={{ background: 'none', border: 'none', padding: 0, color: '#047857', fontWeight: 600, cursor: 'pointer' }}
                 >
                   ⚡ 2D Studio Configurator
                 </button>
@@ -166,7 +175,7 @@ export default function Footer() {
                 <p style={{ marginBottom: '8px' }}>Sanur</p>
               </div>
             </div>
-            <p style={{ fontSize: '12px', color: '#10b981', fontWeight: 600, marginTop: '8px' }}>
+            <p style={{ fontSize: '12px', color: '#047857', fontWeight: 600, marginTop: '8px' }}>
               ✓ Next-day & Same-day delivery available
             </p>
           </div>
@@ -185,20 +194,21 @@ export default function Footer() {
             >
               Official Website &amp; Support
             </div>
-            <p style={{ fontSize: '14px', color: '#6b7280', marginBottom: '8px' }}>
+            <p style={{ fontSize: '14px', color: '#4b5563', marginBottom: '8px' }}>
               Official Bali workspace rental service. Available 8:00 AM – 9:00 PM WITA daily for assistance.
             </p>
             <a
               href="https://www.monis.rent/"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Visit official Monis.rent website (opens in new tab)"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '8px',
                 fontSize: '15px',
                 fontWeight: 700,
-                color: '#10b981',
+                color: '#047857',
                 textDecoration: 'none',
                 marginTop: '4px',
               }}
@@ -220,7 +230,7 @@ export default function Footer() {
             flexWrap: 'wrap',
             gap: '12px',
             fontSize: '13px',
-            color: '#9ca3af',
+            color: '#4b5563',
           }}
         >
           <div>© 2026 monis.rent · Remote work made efficiently</div>

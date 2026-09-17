@@ -79,6 +79,9 @@ export default function CheckoutDrawer() {
 
       {/* Drawer */}
       <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="drawer-heading"
         style={{
           position: 'fixed',
           top: 0,
@@ -106,10 +109,10 @@ export default function CheckoutDrawer() {
           }}
         >
           <div>
-            <h3 style={{ fontSize: 18, fontWeight: 700, color: '#111827' }}>
+            <h3 id="drawer-heading" style={{ fontSize: 18, fontWeight: 700, color: '#111827' }}>
               Rent Your Workspace
             </h3>
-            <p style={{ fontSize: 13, color: '#6b7280' }}>
+            <p style={{ fontSize: 13, color: '#4b5563' }}>
               {allProducts.length} item{allProducts.length > 1 ? 's' : ''} · {durationLabel}
             </p>
           </div>
@@ -124,7 +127,7 @@ export default function CheckoutDrawer() {
               color: '#111827',
               borderRadius: '50%',
             }}
-            aria-label="Close drawer"
+            aria-label="Close checkout drawer"
           >
             <X size={20} />
           </button>
@@ -273,7 +276,7 @@ export default function CheckoutDrawer() {
                       <div
                         style={{
                           fontSize: 10,
-                          color: duration === d ? 'rgba(255,255,255,0.7)' : '#10b981',
+                          color: duration === d ? 'rgba(255,255,255,0.85)' : '#047857',
                           marginTop: 2,
                         }}
                       >
@@ -288,6 +291,7 @@ export default function CheckoutDrawer() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                 <div>
                   <label
+                    htmlFor="checkout-name"
                     style={{
                       display: 'block',
                       fontSize: 12,
@@ -299,6 +303,8 @@ export default function CheckoutDrawer() {
                     Your Name
                   </label>
                   <input
+                    id="checkout-name"
+                    name="name"
                     type="text"
                     placeholder="e.g. Alex"
                     value={name}
@@ -318,6 +324,7 @@ export default function CheckoutDrawer() {
 
                 <div>
                   <label
+                    htmlFor="checkout-area"
                     style={{
                       display: 'block',
                       fontSize: 12,
@@ -329,6 +336,8 @@ export default function CheckoutDrawer() {
                     Bali Villa Delivery Area *
                   </label>
                   <select
+                    id="checkout-area"
+                    name="area"
                     value={area}
                     onChange={(e) => setArea(e.target.value)}
                     style={{
@@ -353,6 +362,7 @@ export default function CheckoutDrawer() {
 
                 <div>
                   <label
+                    htmlFor="checkout-start-date"
                     style={{
                       display: 'block',
                       fontSize: 12,
@@ -364,6 +374,8 @@ export default function CheckoutDrawer() {
                     Rental Start Date *
                   </label>
                   <input
+                    id="checkout-start-date"
+                    name="startDate"
                     type="date"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
@@ -394,7 +406,7 @@ export default function CheckoutDrawer() {
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12 }}>
-              <span style={{ fontSize: 13, color: '#6b7280' }}>
+              <span style={{ fontSize: 13, color: '#4b5563' }}>
                 Total for {durationLabel}:
               </span>
               <span style={{ fontSize: 18, fontWeight: 700, color: '#111827' }}>
@@ -421,7 +433,7 @@ export default function CheckoutDrawer() {
               Confirm on Official Monis.rent →
             </button>
 
-            <p style={{ fontSize: 11, color: '#6b7280', textAlign: 'center', marginTop: 8 }}>
+            <p style={{ fontSize: 11, color: '#4b5563', textAlign: 'center', marginTop: 8 }}>
               No security deposit · Same-day delivery &amp; in-room setup across Bali
             </p>
           </div>

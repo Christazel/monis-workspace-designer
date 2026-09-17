@@ -163,7 +163,7 @@ export default function ProductCard({ product, isSelected = false }: ProductCard
             fontWeight: 600,
             textTransform: 'uppercase',
             letterSpacing: '0.04em',
-            color: '#6b7280',
+            color: '#4b5563',
             marginBottom: '4px',
           }}
         >
@@ -171,7 +171,7 @@ export default function ProductCard({ product, isSelected = false }: ProductCard
         </div>
 
         {/* Product Title */}
-        <h4
+        <h3
           style={{
             fontSize: '16px',
             fontWeight: 700,
@@ -181,7 +181,7 @@ export default function ProductCard({ product, isSelected = false }: ProductCard
           }}
         >
           {product.name}
-        </h4>
+        </h3>
 
         {/* Specifications */}
         <p
@@ -232,7 +232,7 @@ export default function ProductCard({ product, isSelected = false }: ProductCard
             <span style={{ fontSize: '17px', fontWeight: 800, color: '#111827' }}>
               {priceDaily}
             </span>
-            <span style={{ fontSize: '11px', color: '#6b7280' }}>/day</span>
+            <span style={{ fontSize: '11px', color: '#4b5563' }}>/day</span>
           </div>
           <div style={{ fontSize: '11px', color: '#047857', fontWeight: 600 }}>
             {priceMonthly}/day (monthly)
@@ -242,10 +242,11 @@ export default function ProductCard({ product, isSelected = false }: ProductCard
         <button
           type="button"
           onClick={handleAdd}
+          aria-label={`${isSelected ? 'Remove' : 'Add'} ${product.name} ${isSelected ? 'from' : 'to'} setup`}
           style={{
             padding: '8px 14px',
             borderRadius: '9999px',
-            background: isSelected || justAdded ? '#10b981' : '#000000',
+            background: isSelected || justAdded ? '#047857' : '#000000',
             color: '#ffffff',
             border: 'none',
             fontSize: '12.5px',

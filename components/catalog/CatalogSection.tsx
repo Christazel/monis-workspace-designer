@@ -75,7 +75,7 @@ export default function CatalogSection() {
                 fontWeight: 700,
                 textTransform: 'uppercase',
                 letterSpacing: '0.06em',
-                color: '#6b7280',
+                color: '#4b5563',
                 marginBottom: '6px',
               }}
             >
@@ -92,7 +92,7 @@ export default function CatalogSection() {
             >
               Rent tech & workspace essentials in Bali
             </h2>
-            <p style={{ fontSize: '15px', color: '#6b7280' }}>
+            <p style={{ fontSize: '15px', color: '#4b5563' }}>
               Showing {filtered.length} of {ALL_PRODUCTS.length} curated pieces available for same-day delivery.
             </p>
           </div>
@@ -102,6 +102,7 @@ export default function CatalogSection() {
             <button
               type="button"
               onClick={() => setSearchQuery('')}
+              aria-label={`Clear search filter: ${searchQuery}`}
               style={{
                 padding: '6px 12px',
                 borderRadius: '9999px',
@@ -194,7 +195,7 @@ export default function CatalogSection() {
             <p style={{ fontSize: '17px', fontWeight: 700, color: '#111827', marginBottom: '8px' }}>
               No equipment found
             </p>
-            <p style={{ fontSize: '14px', color: '#6b7280', marginBottom: '20px' }}>
+            <p style={{ fontSize: '14px', color: '#4b5563', marginBottom: '20px' }}>
               We couldn&apos;t find any equipment matching &quot;{searchQuery}&quot;.
             </p>
             <button
@@ -203,6 +204,7 @@ export default function CatalogSection() {
                 setActiveCategory('all');
                 setSearchQuery('');
               }}
+              aria-label="Reset all product filters"
               style={{
                 padding: '10px 20px',
                 borderRadius: '9999px',

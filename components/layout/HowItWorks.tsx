@@ -49,7 +49,7 @@ export default function HowItWorks() {
               fontWeight: 700,
               letterSpacing: '0.06em',
               textTransform: 'uppercase',
-              color: '#6b7280',
+              color: '#4b5563',
               marginBottom: 8,
             }}
           >
@@ -70,7 +70,7 @@ export default function HowItWorks() {
           <p
             style={{
               fontSize: 15,
-              color: '#6b7280',
+              color: '#4b5563',
               lineHeight: 1.6,
             }}
           >
@@ -126,7 +126,7 @@ export default function HowItWorks() {
                   style={{
                     fontSize: 13,
                     fontWeight: 700,
-                    color: '#9ca3af',
+                    color: '#4b5563',
                   }}
                 >
                   {step.num}
@@ -177,7 +177,7 @@ export default function HowItWorks() {
             <p style={{ fontSize: 17, fontWeight: 700, color: '#111827' }}>
               Ready to build your Bali workspace?
             </p>
-            <p style={{ fontSize: 14, color: '#6b7280', marginTop: 4 }}>
+            <p style={{ fontSize: 14, color: '#4b5563', marginTop: 4 }}>
               Same-day delivery across Canggu, Seminyak, Ubud, Uluwatu, and Sanur.
             </p>
           </div>
@@ -186,6 +186,7 @@ export default function HowItWorks() {
               href="https://www.monis.rent/"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Visit the official Monis.rent website to rent workspace gear"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
