@@ -109,6 +109,7 @@ export default function WorkspaceSummary() {
               cursor: 'pointer',
             }}
             title="Ganti mata uang"
+            aria-label={`Switch currency between IDR and USD, currently ${currency}`}
           >
             {currency}
           </button>
@@ -117,6 +118,7 @@ export default function WorkspaceSummary() {
             <button
               onClick={clearWorkspace}
               type="button"
+              aria-label="Reset workspace configuration"
               style={{
                 fontSize: 11,
                 color: 'var(--ink-soft)',
@@ -187,6 +189,7 @@ export default function WorkspaceSummary() {
                 onClick={() => setDesk(null)}
                 style={{ background: 'none', border: 'none', color: 'var(--ink-soft)', cursor: 'pointer', padding: 4 }}
                 title="Hapus meja"
+                aria-label="Remove desk from workspace"
               >
                 <Trash2 size={13} />
               </button>
@@ -253,6 +256,7 @@ export default function WorkspaceSummary() {
                 onClick={() => setChair(null)}
                 style={{ background: 'none', border: 'none', color: 'var(--ink-soft)', cursor: 'pointer', padding: 4 }}
                 title="Hapus kursi"
+                aria-label="Remove chair from workspace"
               >
                 <Trash2 size={13} />
               </button>
@@ -327,6 +331,7 @@ export default function WorkspaceSummary() {
                     }}
                     style={{ background: 'none', border: 'none', color: 'var(--ink-soft)', cursor: 'pointer', padding: 3 }}
                     title={`Hapus ${item.name}`}
+                    aria-label={`Remove ${item.name} from workspace`}
                   >
                     <Trash2 size={12} />
                   </button>

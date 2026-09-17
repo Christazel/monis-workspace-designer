@@ -1062,3 +1062,9 @@ footer.site-footer {
   transform: scale(1.05);
 }
 
+/* Hide Next.js dev indicator portal so it does not pollute accessibility audits */
+nextjs-portal {
+  display: none !important;
+}
+
+

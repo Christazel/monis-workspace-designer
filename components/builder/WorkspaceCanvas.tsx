@@ -1215,6 +1215,7 @@ export default function WorkspaceCanvas() {
               </div>
               <button
                 type="button"
+                aria-label="Close item selection popup"
                 onClick={() => setSelectedSlot(null)}
                 style={{
                   background: 'rgba(255,255,255,0.08)', border: 'none',
