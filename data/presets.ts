@@ -2,42 +2,55 @@ import { Preset } from './types';
 
 export const PRESETS: Preset[] = [
   {
-    id: 'preset-developer',
-    name: 'Developer Pro',
-    tagline: 'Built for deep work and long coding sessions',
+    id: 'preset-essentials',
+    name: 'The Essentials',
+    tagline: 'Essential workspace for solo nomads & quick remote stays in Bali',
     description:
-      'Dual monitors, standing desk, and the iconic Herman Miller Aeron. Everything optimised for 10+ hour coding marathons in your Bali villa.',
-    icon: 'dev',
-    deskId: 'desk-standing-oak',
-    chairId: 'chair-aeron',
-    techIds: ['tech-4k-27', 'tech-keyboard-mouse'],
-    accessoryIds: ['acc-screenbar', 'acc-monstera'],
-    totalPrice: 395000, // IDR/day
-  },
-  {
-    id: 'preset-creator',
-    name: 'Creator Studio',
-    tagline: 'Perfect for designers, video editors, and content creators',
-    description:
-      'Massive ultrawide display for your creative canvas, 4K webcam for pro video calls, and a lush Monstera to keep ideas flowing. Plus your morning espresso.',
-    icon: 'creator',
-    deskId: 'desk-walnut-executive',
-    chairId: 'chair-scandi-cushion',
-    techIds: ['tech-ultrawide', 'tech-webcam-4k'],
-    accessoryIds: ['acc-screenbar', 'acc-monstera', 'acc-espresso'],
-    totalPrice: 460000, // IDR/day
-  },
-  {
-    id: 'preset-nomad',
-    name: 'Minimal Nomad',
-    tagline: 'Travel light, work sharp, surf after standup',
-    description:
-      'Clean minimal white desk, comfortable mesh chair, a 27" 4K display, plus the essential Bali perk: a surfboard waiting by the door for sunset sessions.',
+      'Clean minimalist desk, ergonomic breathable mesh chair, 27" 4K display, aluminum laptop stand, and monitor screenbar. 100% plug & play.',
     icon: 'nomad',
     deskId: 'desk-white-minimal',
     chairId: 'chair-markus-mesh',
     techIds: ['tech-4k-27'],
-    accessoryIds: ['acc-laptop-stand', 'acc-monstera', 'acc-surfboard'],
-    totalPrice: 310000, // IDR/day
+    accessoryIds: ['acc-laptop-stand', 'acc-screenbar'],
+    totalPrice: 295000, // IDR/day
+  },
+  {
+    id: 'preset-trading',
+    name: 'The Trading Setup',
+    tagline: 'Multi-screen ultrawide powerhouse for finance & day-trading',
+    description:
+      'Dual-motor electric standing desk with Herman Miller Aeron, 34" curved ultrawide monitor, MX Master keyboard & mouse, and monitor screenbar.',
+    icon: 'dev',
+    deskId: 'desk-standing-oak',
+    chairId: 'chair-aeron',
+    techIds: ['tech-ultrawide', 'tech-keyboard-mouse'],
+    accessoryIds: ['acc-screenbar', 'acc-monstera'],
+    totalPrice: 445000, // IDR/day
+  },
+  {
+    id: 'preset-founders',
+    name: 'The Founders Setup',
+    tagline: 'The ultimate luxury executive workstation for founders & leaders',
+    description:
+      'Solid walnut executive desk, iconic Herman Miller Aeron chair, 27" 4K display, wireless peripherals, Italian espresso machine, and villa greenery.',
+    icon: 'creator',
+    deskId: 'desk-walnut-executive',
+    chairId: 'chair-aeron',
+    techIds: ['tech-4k-27', 'tech-keyboard-mouse'],
+    accessoryIds: ['acc-espresso', 'acc-screenbar', 'acc-monstera'],
+    totalPrice: 505000, // IDR/day
+  },
+  {
+    id: 'preset-studio',
+    name: 'The Studio Setup',
+    tagline: 'Creative studio setup for designers, podcasters & video editors',
+    description:
+      'Solid oak standing desk, Aeron chair, curved ultrawide canvas, 4K video webcam, studio speakers, eye-care screenbar, and fresh espresso maker.',
+    icon: 'creator',
+    deskId: 'desk-standing-oak',
+    chairId: 'chair-aeron',
+    techIds: ['tech-ultrawide', 'tech-webcam-4k', 'tech-speakers'],
+    accessoryIds: ['acc-screenbar', 'acc-espresso'],
+    totalPrice: 500000, // IDR/day
   },
 ];

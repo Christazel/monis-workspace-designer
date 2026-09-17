@@ -1,51 +1,56 @@
 'use client';
 
 import { useState } from 'react';
+import { useWorkspaceStore, useTotal, useDuration, useCurrency } from '@/store/workspaceStore';
+import { formatIDR, formatUSD } from '@/data/products';
+import { RentalDuration } from '@/data/types';
 import { X, Check } from 'lucide-react';
-import { useWorkspaceStore, useTotal } from '@/store/workspaceStore';
-import { formatIDR, formatUSD, DURATION_DISCOUNTS } from '@/data/products';
 
 const BALI_AREAS = [
-  'Canggu / Batu Bolong',
-  'Pererenan / Berawa',
-  'Seminyak / Kerobokan',
-  'Ubud / Tegalalang',
-  'Uluwatu / Bingin',
-  'Sanur / Denpasar',
-  'Other area in Bali',
+  'Canggu',
+  'Pererenan',
+  'Seminyak',
+  'Berawa',
+  'Ubud',
+  'Uluwatu',
+  'Sanur',
+  'Kerobokan',
+  'Bukit / Bingin',
 ];
 
 export default function CheckoutDrawer() {
-  const { checkoutOpen, setCheckoutOpen, getAllSelectedProducts, clearWorkspace, duration, currency } =
+  const { checkoutOpen, setCheckoutOpen, getAllSelectedProducts, clearWorkspace } =
     useWorkspaceStore();
   const total = useTotal();
+  const duration = useDuration();
+  const currency = useCurrency();
+  const { setDuration } = useWorkspaceStore();
 
-  const [area, setArea] = useState('');
   const [name, setName] = useState('');
-  const [startDate, setStartDate] = useState('');
+  const [area, setArea] = useState('Canggu');
+  const [startDate, setStartDate] = useState(() => {
+    // Default to today
+    return new Date().toISOString().split('T')[0];
+  });
   const [booked, setBooked] = useState(false);
 
   const allProducts = getAllSelectedProducts();
-  const durationLabel = DURATION_DISCOUNTS[duration].label;
+
+  const durationLabel =
+    duration === 'daily'
+      ? '1 Day'
+      : duration === 'weekly'
+      ? '1 Week (15% off)'
+      : '1 Month (30% off)';
 
   const formatPrice = (amt: number) =>
     currency === 'IDR' ? formatIDR(amt) : formatUSD(amt);
 
-  const whatsappMessage = encodeURIComponent(
-    `Hi Monis! I'd like to rent a workspace setup.\n\n` +
-    `Name: ${name || '[Your Name]'}\n` +
-    `Area: ${area || '[Your Bali area]'}\n` +
-    `Start: ${startDate || '[Start date]'}\n` +
-    `Duration: ${durationLabel}\n\n` +
-    `Setup:\n` +
-    allProducts.map((p) => `- ${p.name} (${formatPrice(p.price)}/day)`).join('\n') +
-    `\n\nTotal: ${total.formatted}\n\nPlease confirm availability!`
-  );
-
   const handleBook = () => {
     if (!area || !startDate) return;
     setBooked(true);
-    window.open(`https://wa.me/6281234567890?text=${whatsappMessage}`, '_blank');
+    // Direct to the official real Monis website as requested
+    window.open('https://www.monis.rent/', '_blank');
   };
 
   const handleClose = () => {
@@ -66,9 +71,9 @@ export default function CheckoutDrawer() {
         style={{
           position: 'fixed',
           inset: 0,
-          background: 'rgba(22,33,29,0.5)',
+          background: 'rgba(0, 0, 0, 0.5)',
           backdropFilter: 'blur(4px)',
-          zIndex: 60,
+          zIndex: 110,
         }}
       />
 
@@ -80,31 +85,31 @@ export default function CheckoutDrawer() {
           right: 0,
           bottom: 0,
           width: '100%',
-          maxWidth: 420,
-          background: 'var(--paper)',
-          zIndex: 70,
+          maxWidth: 440,
+          background: '#ffffff',
+          zIndex: 120,
           display: 'flex',
           flexDirection: 'column',
-          boxShadow: '-8px 0 40px rgba(22,33,29,0.18)',
-          borderLeft: '1px solid var(--line)',
+          boxShadow: '-8px 0 40px rgba(0, 0, 0, 0.16)',
+          borderLeft: '1px solid #e5e7eb',
         }}
       >
         {/* Header */}
         <div
           style={{
             padding: '18px 20px',
-            borderBottom: '1px solid var(--line)',
+            borderBottom: '1px solid #e5e7eb',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            background: 'var(--paper)',
+            background: '#ffffff',
           }}
         >
           <div>
-            <h3 style={{ fontSize: 17, fontWeight: 700, color: 'var(--ink)' }}>
+            <h3 style={{ fontSize: 18, fontWeight: 700, color: '#111827' }}>
               Rent Your Workspace
             </h3>
-            <p style={{ fontSize: 13, color: 'var(--ink-soft)' }}>
+            <p style={{ fontSize: 13, color: '#6b7280' }}>
               {allProducts.length} item{allProducts.length > 1 ? 's' : ''} · {durationLabel}
             </p>
           </div>
@@ -116,8 +121,10 @@ export default function CheckoutDrawer() {
               border: 'none',
               cursor: 'pointer',
               padding: 6,
-              color: 'var(--ink)',
+              color: '#111827',
+              borderRadius: '50%',
             }}
+            aria-label="Close drawer"
           >
             <X size={20} />
           </button>
@@ -132,7 +139,7 @@ export default function CheckoutDrawer() {
                 style={{
                   width: 56,
                   height: 56,
-                  background: 'var(--sage)',
+                  background: '#10b981',
                   borderRadius: '50%',
                   display: 'flex',
                   alignItems: 'center',
@@ -142,20 +149,39 @@ export default function CheckoutDrawer() {
               >
                 <Check size={28} color="#ffffff" strokeWidth={3} />
               </div>
-              <h3 style={{ fontSize: 20, fontWeight: 700, color: 'var(--ink)', marginBottom: 8 }}>
-                Booking Sent!
+              <h3 style={{ fontSize: 20, fontWeight: 700, color: '#111827', marginBottom: 8 }}>
+                Redirecting to Monis.rent!
               </h3>
-              <p style={{ fontSize: 14, color: 'var(--ink-soft)', lineHeight: 1.6, marginBottom: 24 }}>
-                Your WhatsApp request has been prepared. Our concierge will confirm delivery time to your villa shortly.
+              <p style={{ fontSize: 14, color: '#4b5563', lineHeight: 1.6, marginBottom: 24 }}>
+                Your {durationLabel} workspace setup has been prepared. We are opening the official Monis.rent website to complete your reservation.
               </p>
-              <button
-                className="btn-primary"
-                type="button"
-                onClick={handleClose}
-                style={{ width: '100%', justifyContent: 'center' }}
-              >
-                Done
-              </button>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <button
+                  className="btn-primary"
+                  type="button"
+                  onClick={() => window.open('https://www.monis.rent/', '_blank')}
+                  style={{ width: '100%', justifyContent: 'center' }}
+                >
+                  Visit Official Monis.rent →
+                </button>
+                <button
+                  type="button"
+                  onClick={handleClose}
+                  style={{
+                    width: '100%',
+                    padding: '10px',
+                    borderRadius: 'var(--radius)',
+                    background: 'transparent',
+                    border: '1px solid #e5e7eb',
+                    fontSize: '13px',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    color: '#374151',
+                  }}
+                >
+                  Done
+                </button>
+              </div>
             </div>
           ) : (
             /* Form */
@@ -163,9 +189,9 @@ export default function CheckoutDrawer() {
               {/* Setup list preview */}
               <div
                 style={{
-                  background: 'var(--paper-2)',
-                  border: '1px solid var(--line)',
-                  borderRadius: 'var(--radius)',
+                  background: '#f9fafb',
+                  border: '1px solid #e5e7eb',
+                  borderRadius: '12px',
                   padding: '12px 14px',
                   marginBottom: 20,
                 }}
@@ -176,31 +202,89 @@ export default function CheckoutDrawer() {
                     fontWeight: 700,
                     textTransform: 'uppercase',
                     letterSpacing: '0.06em',
-                    color: 'var(--ink-soft)',
+                    color: '#6b7280',
                     marginBottom: 8,
                   }}
                 >
-                  Selected Setup ({allProducts.length} items)
+                  Selected Items ({allProducts.length})
                 </p>
-                {allProducts.map((p) => (
-                  <div
-                    key={p.id}
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      fontSize: 12.5,
-                      padding: '4px 0',
-                    }}
-                  >
-                    <span style={{ color: 'var(--ink)' }}>{p.name}</span>
-                    <span style={{ color: 'var(--brass)', fontWeight: 600 }}>
-                      {formatPrice(p.price)}/day
-                    </span>
-                  </div>
-                ))}
+
+                {allProducts.length === 0 ? (
+                  <p style={{ fontSize: 13, color: '#9ca3af', fontStyle: 'italic' }}>
+                    No items selected yet. Choose a desk and chair to begin.
+                  </p>
+                ) : (
+                  <ul style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                    {allProducts.map((p) => (
+                      <li
+                        key={p.id}
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          fontSize: 13,
+                          color: '#111827',
+                        }}
+                      >
+                        <span style={{ fontWeight: 500 }}>{p.name}</span>
+                        <span style={{ color: '#6b7280', flexShrink: 0, marginLeft: 8 }}>
+                          {formatPrice(p.price)}/day
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
 
-              {/* Input fields */}
+              {/* Rental Duration Options */}
+              <div style={{ marginBottom: 20 }}>
+                <label
+                  style={{
+                    display: 'block',
+                    fontSize: 12,
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.06em',
+                    color: '#111827',
+                    marginBottom: 8,
+                  }}
+                >
+                  Rental Duration
+                </label>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
+                  {(['daily', 'weekly', 'monthly'] as RentalDuration[]).map((d) => (
+                    <button
+                      key={d}
+                      type="button"
+                      onClick={() => setDuration(d)}
+                      style={{
+                        padding: '10px 6px',
+                        borderRadius: '10px',
+                        border: '1px solid ' + (duration === d ? '#000000' : '#e5e7eb'),
+                        background: duration === d ? '#000000' : '#ffffff',
+                        color: duration === d ? '#ffffff' : '#374151',
+                        fontSize: 12,
+                        fontWeight: 600,
+                        cursor: 'pointer',
+                        textAlign: 'center',
+                        transition: 'all 0.15s ease',
+                      }}
+                    >
+                      <div style={{ textTransform: 'capitalize' }}>{d}</div>
+                      <div
+                        style={{
+                          fontSize: 10,
+                          color: duration === d ? 'rgba(255,255,255,0.7)' : '#10b981',
+                          marginTop: 2,
+                        }}
+                      >
+                        {d === 'weekly' ? '15% off' : d === 'monthly' ? '30% off' : 'standard'}
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Delivery Info */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                 <div>
                   <label
@@ -208,7 +292,7 @@ export default function CheckoutDrawer() {
                       display: 'block',
                       fontSize: 12,
                       fontWeight: 600,
-                      color: 'var(--ink)',
+                      color: '#111827',
                       marginBottom: 6,
                     }}
                   >
@@ -216,16 +300,16 @@ export default function CheckoutDrawer() {
                   </label>
                   <input
                     type="text"
-                    placeholder="e.g. Alex Graham"
+                    placeholder="e.g. Alex"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     style={{
                       width: '100%',
                       padding: '10px 12px',
-                      borderRadius: 'var(--radius)',
-                      border: '1px solid var(--line)',
-                      background: 'var(--paper-2)',
-                      color: 'var(--ink)',
+                      borderRadius: '10px',
+                      border: '1px solid #e5e7eb',
+                      background: '#ffffff',
+                      color: '#111827',
                       fontSize: 14,
                       outline: 'none',
                     }}
@@ -238,7 +322,7 @@ export default function CheckoutDrawer() {
                       display: 'block',
                       fontSize: 12,
                       fontWeight: 600,
-                      color: 'var(--ink)',
+                      color: '#111827',
                       marginBottom: 6,
                     }}
                   >
@@ -250,10 +334,10 @@ export default function CheckoutDrawer() {
                     style={{
                       width: '100%',
                       padding: '10px 12px',
-                      borderRadius: 'var(--radius)',
-                      border: '1px solid var(--line)',
-                      background: 'var(--paper-2)',
-                      color: 'var(--ink)',
+                      borderRadius: '10px',
+                      border: '1px solid #e5e7eb',
+                      background: '#ffffff',
+                      color: '#111827',
                       fontSize: 14,
                       outline: 'none',
                     }}
@@ -273,7 +357,7 @@ export default function CheckoutDrawer() {
                       display: 'block',
                       fontSize: 12,
                       fontWeight: 600,
-                      color: 'var(--ink)',
+                      color: '#111827',
                       marginBottom: 6,
                     }}
                   >
@@ -286,10 +370,10 @@ export default function CheckoutDrawer() {
                     style={{
                       width: '100%',
                       padding: '10px 12px',
-                      borderRadius: 'var(--radius)',
-                      border: '1px solid var(--line)',
-                      background: 'var(--paper-2)',
-                      color: 'var(--ink)',
+                      borderRadius: '10px',
+                      border: '1px solid #e5e7eb',
+                      background: '#ffffff',
+                      color: '#111827',
                       fontSize: 14,
                       outline: 'none',
                     }}
@@ -305,15 +389,15 @@ export default function CheckoutDrawer() {
           <div
             style={{
               padding: '16px 20px',
-              borderTop: '1px solid var(--line)',
-              background: 'var(--paper)',
+              borderTop: '1px solid #e5e7eb',
+              background: '#ffffff',
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12 }}>
-              <span style={{ fontSize: 13, color: 'var(--ink-soft)' }}>
+              <span style={{ fontSize: 13, color: '#6b7280' }}>
                 Total for {durationLabel}:
               </span>
-              <span style={{ fontSize: 18, fontWeight: 700, color: 'var(--brass)' }}>
+              <span style={{ fontSize: 18, fontWeight: 700, color: '#111827' }}>
                 {total.formatted}
               </span>
             </div>
@@ -328,13 +412,17 @@ export default function CheckoutDrawer() {
                 justifyContent: 'center',
                 opacity: !area || !startDate || allProducts.length === 0 ? 0.5 : 1,
                 cursor: !area || !startDate || allProducts.length === 0 ? 'not-allowed' : 'pointer',
+                borderRadius: '9999px',
+                padding: '13px',
+                fontSize: '14px',
+                fontWeight: 600,
               }}
             >
-              Confirm &amp; Book via WhatsApp
+              Confirm on Official Monis.rent →
             </button>
 
-            <p style={{ fontSize: 11, color: 'var(--ink-soft)', textAlign: 'center', marginTop: 8 }}>
-              No security deposit · Same-day delivery &amp; in-room setup
+            <p style={{ fontSize: 11, color: '#6b7280', textAlign: 'center', marginTop: 8 }}>
+              No security deposit · Same-day delivery &amp; in-room setup across Bali
             </p>
           </div>
         )}

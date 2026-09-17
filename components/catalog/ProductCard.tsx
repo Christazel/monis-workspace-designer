@@ -16,8 +16,11 @@ export default function ProductCard({ product, isSelected = false }: ProductCard
   const [justAdded, setJustAdded] = useState(false);
   const [imgError, setImgError] = useState(false);
 
-  const priceDisplay =
+  const priceDaily =
     currency === 'IDR' ? formatIDR(product.price) : formatUSD(product.price);
+  const monthlyRate = Math.round((product.price * 30 * 0.7) / 30); // 30% discount monthly
+  const priceMonthly =
+    currency === 'IDR' ? formatIDR(monthlyRate) : formatUSD(monthlyRate);
 
   const handleAdd = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -50,119 +53,213 @@ export default function ProductCard({ product, isSelected = false }: ProductCard
   };
 
   return (
-    <div
-      className="product-card"
-      data-category={product.category}
+    <article
       style={{
+        background: '#ffffff',
+        border: isSelected ? '2px solid #000000' : '1px solid #e5e7eb',
+        borderRadius: '16px',
+        padding: '16px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
         cursor: 'pointer',
-        boxShadow: isSelected ? 'inset 0 0 0 2px var(--indigo)' : undefined,
+        boxShadow: isSelected
+          ? '0 8px 20px -4px rgba(0, 0, 0, 0.12)'
+          : '0 1px 3px rgba(0, 0, 0, 0.04)',
+        transition: 'all 0.2s ease',
         position: 'relative',
       }}
+      className="hover:shadow-lg hover:-translate-y-0.5"
       onClick={handleOpenBuilder}
-      title="Click to view in Workspace Builder"
+      title="Click to view in Studio Configurator"
     >
-      {/* Product Thumbnail */}
-      <div className="product-thumb">
-        {!imgError ? (
-          <img
-            src={product.image}
-            alt={product.name}
-            loading="lazy"
-            decoding="async"
-            width={280}
-            height={200}
-            style={{
-              maxWidth: product.id === 'acc-surfboard' ? '60%' : '92%',
-              maxHeight: product.id === 'acc-surfboard' ? '92%' : '90%',
-              width: '100%',
-              height: '100%',
-              objectFit: 'contain',
-              borderRadius: 6,
-              transition: 'transform 0.25s ease',
-            }}
-            onError={() => setImgError(true)}
-          />
-        ) : (
-          <svg viewBox="0 0 100 80" style={{ width: '60%', height: '60%', opacity: 0.25 }}>
-            <rect x="20" y="20" width="60" height="40" rx="4" fill="none" stroke="currentColor" strokeWidth="2" />
-            <circle cx="50" cy="40" r="12" fill="none" stroke="currentColor" strokeWidth="2" />
-          </svg>
-        )}
-
-        {/* Hover overlay: View in Builder */}
+      <div>
+        {/* Product Thumbnail Box */}
         <div
           style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'rgba(22,33,29,0.55)',
-            borderRadius: '8px',
+            position: 'relative',
+            background: '#f9fafb',
+            borderRadius: '12px',
+            height: '210px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            opacity: 0,
-            transition: 'opacity 0.2s ease',
-            backdropFilter: 'blur(2px)',
+            overflow: 'hidden',
+            marginBottom: '14px',
+            padding: '12px',
           }}
-          className="card-hover-overlay"
         >
-          <span style={{
-            color: '#fff',
-            fontSize: 13,
-            fontWeight: 700,
-            letterSpacing: '0.02em',
-            display: 'flex',
-            alignItems: 'center',
-            gap: 6,
-          }}>
-            View in Builder →
-          </span>
-        </div>
-      </div>
+          {/* Top Badge */}
+          {product.badge && (
+            <span
+              style={{
+                position: 'absolute',
+                top: '10px',
+                left: '10px',
+                background: product.badge === 'bestseller' ? '#000000' : '#047857',
+                color: '#ffffff',
+                fontSize: '10px',
+                fontWeight: 700,
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em',
+                padding: '3px 8px',
+                borderRadius: '9999px',
+                zIndex: 2,
+              }}
+            >
+              {product.badge === 'bestseller' ? 'Popular' : product.badge}
+            </span>
+          )}
 
-      {/* Info */}
-      <div>
-        <p className="product-name">{product.name}</p>
-        <p className="product-spec">
+          {!imgError ? (
+            <img
+              src={product.image}
+              alt={product.name}
+              loading="lazy"
+              decoding="async"
+              width={260}
+              height={190}
+              style={{
+                maxWidth: product.id === 'acc-surfboard' ? '50%' : '90%',
+                maxHeight: '90%',
+                width: 'auto',
+                height: 'auto',
+                objectFit: 'contain',
+                transition: 'transform 0.25s ease',
+              }}
+              onError={() => setImgError(true)}
+            />
+          ) : (
+            <svg viewBox="0 0 100 80" style={{ width: '50%', height: '50%', opacity: 0.25 }}>
+              <rect x="20" y="20" width="60" height="40" rx="4" fill="none" stroke="currentColor" strokeWidth="2" />
+              <circle cx="50" cy="40" r="12" fill="none" stroke="currentColor" strokeWidth="2" />
+            </svg>
+          )}
+
+          {/* Hover overlay hint */}
+          <div
+            style={{
+              position: 'absolute',
+              bottom: '8px',
+              right: '8px',
+              background: 'rgba(255, 255, 255, 0.92)',
+              backdropFilter: 'blur(4px)',
+              padding: '4px 10px',
+              borderRadius: '9999px',
+              fontSize: '11px',
+              fontWeight: 600,
+              color: '#111827',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+            }}
+          >
+            ⚡ Studio 2D
+          </div>
+        </div>
+
+        {/* Category Tag */}
+        <div
+          style={{
+            fontSize: '11px',
+            fontWeight: 600,
+            textTransform: 'uppercase',
+            letterSpacing: '0.04em',
+            color: '#6b7280',
+            marginBottom: '4px',
+          }}
+        >
+          {product.category}
+        </div>
+
+        {/* Product Title */}
+        <h4
+          style={{
+            fontSize: '16px',
+            fontWeight: 700,
+            color: '#111827',
+            lineHeight: 1.3,
+            marginBottom: '4px',
+          }}
+        >
+          {product.name}
+        </h4>
+
+        {/* Specifications */}
+        <p
+          style={{
+            fontSize: '13px',
+            color: '#4b5563',
+            lineHeight: 1.4,
+            marginBottom: '14px',
+          }}
+        >
           {product.dimensions ? `${product.subtitle} · ${product.dimensions}` : product.subtitle}
         </p>
-      </div>
 
-      {/* Swatches */}
-      <div className="swatches">
-        {product.colorVariants && product.colorVariants.length > 0 ? (
-          product.colorVariants.map((cv) => (
-            <span
-              key={cv.name}
-              className="swatch"
-              style={{ background: cv.hex }}
-              title={cv.name}
-            />
-          ))
-        ) : (
-          <>
-            <span className="swatch" style={{ background: '#16211D' }} />
-            <span className="swatch" style={{ background: '#C9A46B' }} />
-          </>
+        {/* Key Features Chips */}
+        {product.features && product.features.length > 0 && (
+          <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '14px' }}>
+            {product.features.slice(0, 2).map((feat) => (
+              <span
+                key={feat}
+                style={{
+                  fontSize: '11px',
+                  color: '#374151',
+                  background: '#f3f4f6',
+                  padding: '2px 8px',
+                  borderRadius: '6px',
+                  fontWeight: 500,
+                }}
+              >
+                {feat}
+              </span>
+            ))}
+          </div>
         )}
       </div>
 
-      {/* Footer */}
-      <div className="product-foot">
-        <div className="product-price">
-          {priceDisplay}
-          <small>per day</small>
+      {/* Footer / Price & Add Button */}
+      <div
+        style={{
+          borderTop: '1px solid #f3f4f6',
+          paddingTop: '12px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <div>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px' }}>
+            <span style={{ fontSize: '17px', fontWeight: 800, color: '#111827' }}>
+              {priceDaily}
+            </span>
+            <span style={{ fontSize: '11px', color: '#6b7280' }}>/day</span>
+          </div>
+          <div style={{ fontSize: '11px', color: '#047857', fontWeight: 600 }}>
+            {priceMonthly}/day (monthly)
+          </div>
         </div>
 
         <button
-          className={`add-mini ${isSelected || justAdded ? 'added' : ''}`}
           type="button"
-          aria-label="Add to setup"
           onClick={handleAdd}
-          title={isSelected ? 'Remove from setup' : 'Add to setup'}
+          style={{
+            padding: '8px 14px',
+            borderRadius: '9999px',
+            background: isSelected || justAdded ? '#10b981' : '#000000',
+            color: '#ffffff',
+            border: 'none',
+            fontSize: '12.5px',
+            fontWeight: 600,
+            cursor: 'pointer',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '4px',
+            transition: 'all 0.15s ease',
+          }}
         >
-          {isSelected || justAdded ? '✓' : '+'}
+          {isSelected || justAdded ? '✓ Added' : '+ Add to Setup'}
         </button>
       </div>
-    </div>
+    </article>
   );
 }

@@ -19,12 +19,14 @@ export default function BuilderSection() {
 
   const renderPresetIcon = (presetId: string) => {
     switch (presetId) {
-      case 'preset-developer':
+      case 'preset-trading':
         return <Code2 size={13} />;
-      case 'preset-creator':
+      case 'preset-studio':
         return <Palette size={13} />;
-      case 'preset-nomad':
+      case 'preset-essentials':
         return <Compass size={13} />;
+      case 'preset-founders':
+        return <Sparkles size={13} />;
       default:
         return <Sparkles size={13} />;
     }

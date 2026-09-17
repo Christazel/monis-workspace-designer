@@ -1,20 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --ink: #16211D;
-  --ink-soft: #3C453F;
-  --paper: #EFE9DC;
-  --paper-2: #E3DBC7;
-  --paper-3: #D8CEB4;
-  --indigo: #26355C;
-  --indigo-light: #3B4C82;
-  --brass: #764C12;
-  --brass-light: #D4A559;
-  --clay: #96492F;
-  --sage: #56624A;
-  --line: rgba(22, 33, 29, 0.16);
-  --line-soft: rgba(22, 33, 29, 0.09);
-  --radius: 7px;
+  --ink: #111827;
+  --ink-soft: #4b5563;
+  --ink-subtle: #9ca3af;
+  --paper: #ffffff;
+  --paper-2: #f9fafb;
+  --paper-3: #f3f4f6;
+  --indigo: #000000;
+  --indigo-light: #1f2937;
+  --brass: #10b981;
+  --brass-light: #34d399;
+  --clay: #ef4444;
+  --sage: #059669;
+  --line: #e5e7eb;
+  --line-soft: rgba(0, 0, 0, 0.06);
+  --radius: 12px;
 }
 
 * {
@@ -37,9 +38,9 @@ body {
 }
 
 h1, h2, h3, h4, .font-heading {
-  font-family: var(--font-bricolage), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   margin: 0;
   color: var(--ink);
 }
@@ -873,6 +874,56 @@ footer.site-footer {
   }
   .footer-top {
     flex-direction: column;
+  }
+}
+
+.header-main-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  gap: 16px;
+}
+.header-row-one {
+  display: flex;
+  align-items: center;
+}
+.desktop-actions-row {
+  display: flex !important;
+}
+.mobile-actions-row {
+  display: none !important;
+}
+
+@media (max-width: 860px) {
+  .header-main-nav {
+    flex-direction: column !important;
+    height: auto !important;
+    padding-top: 10px !important;
+    padding-bottom: 8px !important;
+    gap: 8px !important;
+  }
+  .header-row-one {
+    width: 100% !important;
+    justify-content: space-between !important;
+  }
+  .desktop-actions-row {
+    display: none !important;
+  }
+  .mobile-actions-row {
+    display: flex !important;
+  }
+  .monis-search-capsule {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 3px 6px 3px 12px !important;
+  }
+  .delivery-pill-desktop {
+    display: none !important;
+  }
+  .monis-pill-btn {
+    display: none !important;
   }
 }
 
