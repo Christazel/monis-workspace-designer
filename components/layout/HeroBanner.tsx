@@ -36,7 +36,7 @@ export default function HeroBanner() {
                 Build your setup
               </button>
               <button className="btn-text" type="button" onClick={handleIncludedClick}>
-                See what's included
+                See what&apos;s included
               </button>
             </div>
             <div className="hero-trust">

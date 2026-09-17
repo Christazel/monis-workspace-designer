@@ -1,0 +1,210 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" fill="none">
+  <defs>
+    <!-- Desk Mat / Pad Gradient -->
+    <linearGradient id="deskPadGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#1e293b"/>
+      <stop offset="100%" stopColor="#0f172a"/>
+    </linearGradient>
+    <!-- Keyboard Aluminum Frame -->
+    <linearGradient id="kbdFrame" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#475569"/>
+      <stop offset="100%" stopColor="#1e293b"/>
+    </linearGradient>
+    <!-- Keycap Gradients -->
+    <linearGradient id="keyDark" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#334155"/>
+      <stop offset="100%" stopColor="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="keyLight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#64748b"/>
+      <stop offset="100%" stopColor="#475569"/>
+    </linearGradient>
+    <linearGradient id="keyOrange" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#f97316"/>
+      <stop offset="100%" stopColor="#c2410c"/>
+    </linearGradient>
+    <!-- MX Master 3 Mouse Metal Scroll Wheel -->
+    <linearGradient id="scrollWheel" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#94a3b8"/>
+      <stop offset="50%" stopColor="#f1f5f9"/>
+      <stop offset="100%" stopColor="#64748b"/>
+    </linearGradient>
+    <linearGradient id="mouseBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#334155"/>
+      <stop offset="50%" stopColor="#1e293b"/>
+      <stop offset="100%" stopColor="#0f172a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Floor / Mat Contact Shadow -->
+  <ellipse cx="160" cy="195" rx="140" ry="12" fill="rgba(0,0,0,0.22)"/>
+
+  <!-- Minimalist Felt Desk Mat -->
+  <rect x="18" y="24" width="284" height="165" rx="12" fill="url(#deskPadGrad)" stroke="#334155" stroke-width="1.2"/>
+  <!-- Mat Perimeter Stitching -->
+  <rect x="23" y="29" width="274" height="155" rx="8" fill="none" stroke="#475569" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.4"/>
+
+  <!-- ─── KEYCHRON K2 MECHANICAL KEYBOARD (Left / Center) ─── -->
+  <!-- Keyboard Shadow on Mat -->
+  <rect x="33" y="45" width="180" height="125" rx="8" fill="rgba(0,0,0,0.3)"/>
+
+  <!-- Keyboard Aluminum Bezel / Chassis -->
+  <rect x="30" y="42" width="180" height="122" rx="8" fill="url(#kbdFrame)" stroke="#64748b" stroke-width="1"/>
+  <!-- Keyboard Inner Well -->
+  <rect x="34" y="46" width="172" height="114" rx="5" fill="#0f172a"/>
+
+  <!-- Function Row (Row 1) -->
+  <!-- Esc Key (Iconic Keychron Orange) -->
+  <rect x="38" y="50" width="10" height="14" rx="2.5" fill="url(#keyOrange)" stroke="#ea580c" stroke-width="0.6"/>
+  <!-- F1-F12 Keys -->
+  <g fill="url(#keyDark)">
+    <rect x="50" y="50" width="8" height="14" rx="2"/>
+    <rect x="60" y="50" width="8" height="14" rx="2"/>
+    <rect x="70" y="50" width="8" height="14" rx="2"/>
+    <rect x="80" y="50" width="8" height="14" rx="2"/>
+
+    <rect x="92" y="50" width="8" height="14" rx="2"/>
+    <rect x="102" y="50" width="8" height="14" rx="2"/>
+    <rect x="112" y="50" width="8" height="14" rx="2"/>
+    <rect x="122" y="50" width="8" height="14" rx="2"/>
+
+    <rect x="134" y="50" width="8" height="14" rx="2"/>
+    <rect x="144" y="50" width="8" height="14" rx="2"/>
+    <rect x="154" y="50" width="8" height="14" rx="2"/>
+    <rect x="164" y="50" width="8" height="14" rx="2"/>
+  </g>
+  <!-- Del / Light key -->
+  <rect x="176" y="50" width="10" height="14" rx="2" fill="url(#keyOrange)"/>
+  <rect x="188" y="50" width="14" height="14" rx="2" fill="url(#keyLight)"/>
+
+  <!-- Number Row (Row 2) -->
+  <g fill="url(#keyLight)">
+    <rect x="38" y="68" width="9" height="14" rx="2"/>
+    <rect x="49" y="68" width="8" height="14" rx="2"/>
+    <rect x="59" y="68" width="8" height="14" rx="2"/>
+    <rect x="69" y="68" width="8" height="14" rx="2"/>
+    <rect x="79" y="68" width="8" height="14" rx="2"/>
+    <rect x="89" y="68" width="8" height="14" rx="2"/>
+    <rect x="99" y="68" width="8" height="14" rx="2"/>
+    <rect x="109" y="68" width="8" height="14" rx="2"/>
+    <rect x="119" y="68" width="8" height="14" rx="2"/>
+    <rect x="129" y="68" width="8" height="14" rx="2"/>
+    <rect x="139" y="68" width="8" height="14" rx="2"/>
+    <rect x="149" y="68" width="8" height="14" rx="2"/>
+    <rect x="159" y="68" width="8" height="14" rx="2"/>
+    <!-- Backspace -->
+    <rect x="169" y="68" width="18" height="14" rx="2" fill="url(#keyDark)"/>
+    <rect x="189" y="68" width="13" height="14" rx="2" fill="url(#keyDark)"/>
+  </g>
+
+  <!-- QWERTY Row (Row 3) -->
+  <!-- Tab -->
+  <rect x="38" y="86" width="13" height="14" rx="2" fill="url(#keyDark)"/>
+  <g fill="url(#keyLight)">
+    <rect x="53" y="86" width="8" height="14" rx="2"/>
+    <rect x="63" y="86" width="8" height="14" rx="2"/>
+    <rect x="73" y="86" width="8" height="14" rx="2"/>
+    <rect x="83" y="86" width="8" height="14" rx="2"/>
+    <rect x="93" y="86" width="8" height="14" rx="2"/>
+    <rect x="103" y="86" width="8" height="14" rx="2"/>
+    <rect x="113" y="86" width="8" height="14" rx="2"/>
+    <rect x="123" y="86" width="8" height="14" rx="2"/>
+    <rect x="133" y="86" width="8" height="14" rx="2"/>
+    <rect x="143" y="86" width="8" height="14" rx="2"/>
+    <rect x="153" y="86" width="8" height="14" rx="2"/>
+    <rect x="163" y="86" width="8" height="14" rx="2"/>
+  </g>
+  <rect x="173" y="86" width="14" height="14" rx="2" fill="url(#keyDark)"/>
+  <rect x="189" y="86" width="13" height="14" rx="2" fill="url(#keyDark)"/>
+
+  <!-- ASDF Row (Row 4) -->
+  <!-- Caps -->
+  <rect x="38" y="104" width="16" height="14" rx="2" fill="url(#keyDark)"/>
+  <g fill="url(#keyLight)">
+    <rect x="56" y="104" width="8" height="14" rx="2"/>
+    <rect x="66" y="104" width="8" height="14" rx="2"/>
+    <rect x="76" y="104" width="8" height="14" rx="2"/>
+    <rect x="86" y="104" width="8" height="14" rx="2"/>
+    <rect x="96" y="104" width="8" height="14" rx="2"/>
+    <rect x="106" y="104" width="8" height="14" rx="2"/>
+    <rect x="116" y="104" width="8" height="14" rx="2"/>
+    <rect x="126" y="104" width="8" height="14" rx="2"/>
+    <rect x="136" y="104" width="8" height="14" rx="2"/>
+    <rect x="146" y="104" width="8" height="14" rx="2"/>
+    <rect x="156" y="104" width="8" height="14" rx="2"/>
+  </g>
+  <!-- Enter (Orange Accent) -->
+  <rect x="166" y="104" width="21" height="14" rx="2" fill="url(#keyOrange)"/>
+  <rect x="189" y="104" width="13" height="14" rx="2" fill="url(#keyDark)"/>
+
+  <!-- ZXCV Row (Row 5) -->
+  <!-- Shift -->
+  <rect x="38" y="122" width="21" height="14" rx="2" fill="url(#keyDark)"/>
+  <g fill="url(#keyLight)">
+    <rect x="61" y="122" width="8" height="14" rx="2"/>
+    <rect x="71" y="122" width="8" height="14" rx="2"/>
+    <rect x="81" y="122" width="8" height="14" rx="2"/>
+    <rect x="91" y="122" width="8" height="14" rx="2"/>
+    <rect x="101" y="122" width="8" height="14" rx="2"/>
+    <rect x="111" y="122" width="8" height="14" rx="2"/>
+    <rect x="121" y="122" width="8" height="14" rx="2"/>
+    <rect x="131" y="122" width="8" height="14" rx="2"/>
+    <rect x="141" y="122" width="8" height="14" rx="2"/>
+    <rect x="151" y="122" width="8" height="14" rx="2"/>
+  </g>
+  <rect x="161" y="122" width="15" height="14" rx="2" fill="url(#keyDark)"/>
+  <!-- Up Arrow -->
+  <rect x="178" y="122" width="9" height="14" rx="2" fill="url(#keyDark)"/>
+  <rect x="189" y="122" width="13" height="14" rx="2" fill="url(#keyDark)"/>
+
+  <!-- Bottom Row: Modifiers & Spacebar (Row 6) -->
+  <rect x="38" y="140" width="11" height="15" rx="2" fill="url(#keyDark)"/>
+  <rect x="51" y="140" width="11" height="15" rx="2" fill="url(#keyDark)"/>
+  <rect x="64" y="140" width="11" height="15" rx="2" fill="url(#keyDark)"/>
+  <!-- Spacebar -->
+  <rect x="77" y="140" width="70" height="15" rx="3" fill="url(#keyLight)"/>
+  <rect x="149" y="140" width="11" height="15" rx="2" fill="url(#keyDark)"/>
+  <rect x="162" y="140" width="11" height="15" rx="2" fill="url(#keyDark)"/>
+  <!-- Left / Down / Right Arrows -->
+  <rect x="175" y="140" width="8" height="15" rx="2" fill="url(#keyDark)"/>
+  <rect x="185" y="140" width="8" height="15" rx="2" fill="url(#keyDark)"/>
+  <rect x="195" y="140" width="8" height="15" rx="2" fill="url(#keyDark)"/>
+
+  <!-- RGB / Backlight Under-Glow Strip -->
+  <rect x="36" y="157" width="168" height="2" rx="1" fill="#38bdf8" opacity="0.6"/>
+
+  <!-- ─── LOGITECH MX MASTER 3 ERGONOMIC MOUSE (Right) ─── -->
+  <!-- Mouse Drop Shadow -->
+  <ellipse cx="254" cy="116" rx="26" ry="46" fill="rgba(0,0,0,0.35)"/>
+
+  <!-- Ergonomic Thumb Rest Wing (Left curve of mouse) -->
+  <path d="M 238 90 C 220 102, 220 128, 236 138 Z" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <!-- Thumb Gesture Button / Textured Grip Lines -->
+  <path d="M 226 112 Q 228 120 234 126" stroke="#475569" stroke-width="1.5" fill="none"/>
+  <path d="M 223 115 Q 225 122 231 128" stroke="#475569" stroke-width="1.5" fill="none"/>
+
+  <!-- Thumb Scroll Wheel (Metal) -->
+  <rect x="232" y="100" width="4" height="12" rx="2" fill="url(#scrollWheel)"/>
+
+  <!-- Main Ergonomic Mouse Body -->
+  <path d="M 242 58 C 262 58, 276 74, 276 110 C 276 142, 266 156, 252 156 C 238 156, 230 142, 230 110 C 230 74, 234 58, 242 58 Z" fill="url(#mouseBody)" stroke="#475569" stroke-width="1.2"/>
+
+  <!-- Left & Right Primary Buttons Split Line -->
+  <line x1="253" y1="58" x2="253" y2="92" stroke="#0f172a" stroke-width="1.5"/>
+
+  <!-- MagSpeed Stainless Steel Scroll Wheel Island -->
+  <rect x="249" y="66" width="8" height="20" rx="3" fill="#0f172a" stroke="#334155" stroke-width="0.8"/>
+  <rect x="250.5" y="68" width="5" height="16" rx="2.5" fill="url(#scrollWheel)"/>
+  <!-- Ridges on wheel -->
+  <line x1="250.5" y1="72" x2="255.5" y2="72" stroke="#475569" stroke-width="0.8"/>
+  <line x1="250.5" y1="76" x2="255.5" y2="76" stroke="#475569" stroke-width="0.8"/>
+  <line x1="250.5" y1="80" x2="255.5" y2="80" stroke="#475569" stroke-width="0.8"/>
+
+  <!-- Mode Shift Button -->
+  <rect x="250" y="90" width="6" height="4" rx="2" fill="#475569"/>
+
+  <!-- Sleek Body Palm Contours -->
+  <path d="M 240 106 Q 254 116 268 106" stroke="rgba(255,255,255,0.08)" stroke-width="1" fill="none"/>
+  <!-- Status Battery LED (Emerald Green) -->
+  <circle cx="236" cy="94" r="1.5" fill="#22c55e" filter="drop-shadow(0 0 2px #22c55e)"/>
+</svg>

@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { Product, Preset, RentalDuration, Currency } from '@/data/types';
+import { Product, RentalDuration, Currency } from '@/data/types';
 import { ALL_PRODUCTS, calculateTotal } from '@/data/products';
 import { PRESETS } from '@/data/presets';
 

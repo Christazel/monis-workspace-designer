@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" fill="none">
+  <defs>
+    <!-- Dark Slate Metallic Housing -->
+    <linearGradient id="webcamBody" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#334155"/>
+      <stop offset="50%" stopColor="#1e293b"/>
+      <stop offset="100%" stopColor="#0f172a"/>
+    </linearGradient>
+    <!-- Front Glass Bezel -->
+    <linearGradient id="glassFace" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#0f172a"/>
+      <stop offset="100%" stopColor="#020617"/>
+    </linearGradient>
+    <!-- 4K Optical Glass Lens Reflection -->
+    <linearGradient id="lensReflect" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#38bdf8"/>
+      <stop offset="40%" stopColor="#0284c7"/>
+      <stop offset="70%" stopColor="#6366f1"/>
+      <stop offset="100%" stopColor="#0f172a"/>
+    </linearGradient>
+    <!-- Clamp Metallic Gradient -->
+    <linearGradient id="clampGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#1e293b"/>
+      <stop offset="50%" stopColor="#334155"/>
+      <stop offset="100%" stopColor="#1e293b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Ground / Desk Contact Shadow -->
+  <ellipse cx="160" cy="202" rx="90" ry="10" fill="rgba(0,0,0,0.22)"/>
+
+  <!-- ─── MONITOR MOUNT / CLAMP BRACKET ─── -->
+  <!-- Base Foot / Shelf resting pad -->
+  <rect x="110" y="184" width="100" height="16" rx="5" fill="url(#clampGrad)" stroke="#475569" stroke-width="1"/>
+  <rect x="115" y="196" width="90" height="4" rx="2" fill="#0f172a"/>
+
+  <!-- Lower Hinge Articulation -->
+  <rect x="146" y="152" width="28" height="36" rx="4" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <circle cx="160" cy="170" r="5" fill="#475569" stroke="#64748b" stroke-width="1"/>
+  <circle cx="160" cy="170" r="2" fill="#0f172a"/>
+
+  <!-- Vertical Neck Column -->
+  <rect x="148" y="112" width="24" height="44" rx="4" fill="url(#clampGrad)" stroke="#475569" stroke-width="1"/>
+  <rect x="154" y="118" width="12" height="28" rx="3" fill="#0f172a"/>
+
+  <!-- Upper Ball-Joint Neck Mount -->
+  <circle cx="160" cy="110" r="9" fill="#334155" stroke="#475569" stroke-width="1"/>
+
+  <!-- ─── 4K WEBCAM BODY (Pill-Shaped Cylindrical Chassis) ─── -->
+  <!-- Main Outer Aluminum Capsule -->
+  <rect x="40" y="52" width="240" height="66" rx="33" fill="url(#webcamBody)" stroke="#475569" stroke-width="1.8"/>
+
+  <!-- Glossy Front Glass Faceplate -->
+  <rect x="46" y="58" width="228" height="54" rx="27" fill="url(#glassFace)" stroke="#1e293b" stroke-width="1.2"/>
+
+  <!-- Left Omnidirectional Stereo Mic Mesh -->
+  <g fill="#475569">
+    <circle cx="78" cy="80" r="1.5"/>
+    <circle cx="84" cy="76" r="1.5"/>
+    <circle cx="84" cy="84" r="1.5"/>
+    <circle cx="90" cy="72" r="1.5"/>
+    <circle cx="90" cy="80" r="1.5"/>
+    <circle cx="90" cy="88" r="1.5"/>
+    <circle cx="96" cy="76" r="1.5"/>
+    <circle cx="96" cy="84" r="1.5"/>
+    <circle cx="102" cy="80" r="1.5"/>
+  </g>
+
+  <!-- Right Omnidirectional Stereo Mic Mesh -->
+  <g fill="#475569">
+    <circle cx="218" cy="80" r="1.5"/>
+    <circle cx="224" cy="76" r="1.5"/>
+    <circle cx="224" cy="84" r="1.5"/>
+    <circle cx="230" cy="72" r="1.5"/>
+    <circle cx="230" cy="80" r="1.5"/>
+    <circle cx="230" cy="88" r="1.5"/>
+    <circle cx="236" cy="76" r="1.5"/>
+    <circle cx="236" cy="84" r="1.5"/>
+    <circle cx="242" cy="80" r="1.5"/>
+  </g>
+
+  <!-- ─── CENTER 4K OPTICAL GLASS LENS ─── -->
+  <!-- Lens Outer Housing Ring -->
+  <circle cx="160" cy="85" r="28" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+  <circle cx="160" cy="85" r="25" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+
+  <!-- Precision Aperture Ring -->
+  <circle cx="160" cy="85" r="20" fill="#020617"/>
+
+  <!-- Multi-Coated 4K Optical Glass Element with Vibrant Cyan Reflection -->
+  <circle cx="160" cy="85" r="16" fill="url(#lensReflect)"/>
+
+  <!-- Inner Pupil / Sensor Core -->
+  <circle cx="160" cy="85" r="8" fill="#020617"/>
+  <circle cx="160" cy="85" r="4" fill="#0c4a6e"/>
+
+  <!-- Diagonal Glass Specular Highlights -->
+  <ellipse cx="154" cy="79" rx="5" ry="2.5" fill="rgba(255,255,255,0.7)" transform="rotate(-30 154 79)"/>
+  <circle cx="168" cy="92" r="1.5" fill="rgba(255,255,255,0.4)"/>
+
+  <!-- Active Status LED Dot (Emerald Green glow) -->
+  <circle cx="120" cy="85" r="2.5" fill="#22c55e" filter="drop-shadow(0 0 3px #22c55e)"/>
+
+  <!-- Infrared Windows Hello / HDR Sensor Dot -->
+  <circle cx="200" cy="85" r="3" fill="#312e81" stroke="#4338ca" stroke-width="0.8"/>
+  <circle cx="200" cy="85" r="1" fill="#818cf8"/>
+
+  <!-- 4K Ultra HD Badge Text -->
+  <text x="160" y="44" font-family="system-ui, sans-serif" font-size="7.5" font-weight="800" fill="#94a3b8" text-anchor="middle" letter-spacing="1.5">4K ULTRA HD</text>
+</svg>

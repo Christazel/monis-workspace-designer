@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 280" fill="none">
+  <defs>
+    <!-- Stealth Black Leather Gradient -->
+    <linearGradient id="stealthBlack" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#1e293b"/>
+      <stop offset="50%" stopColor="#0f172a"/>
+      <stop offset="100%" stopColor="#020617"/>
+    </linearGradient>
+    <!-- Crimson Red Accent Gradient -->
+    <linearGradient id="crimsonGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#ef4444"/>
+      <stop offset="100%" stopColor="#b91c1c"/>
+    </linearGradient>
+    <!-- Chrome / Steel Gas Lift -->
+    <linearGradient id="racerGas" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#475569"/>
+      <stop offset="50%" stopColor="#94a3b8"/>
+      <stop offset="100%" stopColor="#334155"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Floor Contact Shadow -->
+  <ellipse cx="120" cy="265" rx="72" ry="9" fill="rgba(0,0,0,0.24)"/>
+
+  <!-- Racing Caster Wheels (with Red Accents) -->
+  <circle cx="56" cy="254" r="6" fill="#0f172a" stroke="#ef4444" stroke-width="1.2"/>
+  <circle cx="56" cy="254" r="2.5" fill="#ef4444"/>
+
+  <circle cx="184" cy="254" r="6" fill="#0f172a" stroke="#ef4444" stroke-width="1.2"/>
+  <circle cx="184" cy="254" r="2.5" fill="#ef4444"/>
+
+  <circle cx="82" cy="263" r="6" fill="#0f172a" stroke="#ef4444" stroke-width="1.2"/>
+  <circle cx="82" cy="263" r="2.5" fill="#ef4444"/>
+
+  <circle cx="158" cy="263" r="6" fill="#0f172a" stroke="#ef4444" stroke-width="1.2"/>
+  <circle cx="158" cy="263" r="2.5" fill="#ef4444"/>
+
+  <circle cx="120" cy="266" r="6" fill="#0f172a" stroke="#ef4444" stroke-width="1.2"/>
+  <circle cx="120" cy="266" r="2.5" fill="#ef4444"/>
+
+  <!-- 5-Star Matte Black Starbase -->
+  <path d="M 120 238 L 58 253" stroke="#0f172a" stroke-width="8" stroke-linecap="round"/>
+  <path d="M 120 238 L 182 253" stroke="#0f172a" stroke-width="8" stroke-linecap="round"/>
+  <path d="M 120 238 L 84 261" stroke="#0f172a" stroke-width="9" stroke-linecap="round"/>
+  <path d="M 120 238 L 156 261" stroke="#0f172a" stroke-width="9" stroke-linecap="round"/>
+  <path d="M 120 238 L 120 264" stroke="#0f172a" stroke-width="9" stroke-linecap="round"/>
+
+  <!-- Starbase Red Inset Highlights -->
+  <path d="M 115 240 L 70 252 M 125 240 L 170 252" stroke="#ef4444" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Gas Lift & Recline Mech -->
+  <rect x="114" y="206" width="12" height="32" rx="3" fill="url(#racerGas)" stroke="#334155" stroke-width="0.8"/>
+  <rect x="98" y="196" width="44" height="12" rx="3" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- 3D Adjustable Armrests -->
+  <!-- Left Armrest -->
+  <path d="M 68 180 L 64 138" stroke="#1e293b" stroke-width="7" stroke-linecap="round"/>
+  <rect x="48" y="130" width="32" height="10" rx="5" fill="#0f172a" stroke="#ef4444" stroke-width="0.8"/>
+
+  <!-- Right Armrest -->
+  <path d="M 172 180 L 176 138" stroke="#1e293b" stroke-width="7" stroke-linecap="round"/>
+  <rect x="160" y="130" width="32" height="10" rx="5" fill="#0f172a" stroke="#ef4444" stroke-width="0.8"/>
+
+  <!-- Outer Bucket Shoulder Wings -->
+  <!-- Left Shoulder Wing -->
+  <path d="M 96 32 L 64 68 L 76 130 L 96 156 Z" fill="url(#crimsonGrad)" stroke="#991b1b" stroke-width="1"/>
+  <!-- Right Shoulder Wing -->
+  <path d="M 144 32 L 176 68 L 164 130 L 144 156 Z" fill="url(#crimsonGrad)" stroke="#991b1b" stroke-width="1"/>
+
+  <!-- Main Racing Backrest Body -->
+  <path d="M 88 28 C 88 18, 152 18, 152 28 L 158 156 Q 120 164 82 156 Z" fill="url(#stealthBlack)" stroke="#334155" stroke-width="1.8"/>
+
+  <!-- Twin Harness Eyelets / Shoulder Cutouts -->
+  <rect x="98" y="44" width="16" height="8" rx="4" fill="#020617" stroke="#334155" stroke-width="1"/>
+  <rect x="126" y="44" width="16" height="8" rx="4" fill="#020617" stroke="#334155" stroke-width="1"/>
+
+  <!-- Racing Dual Center Stripes -->
+  <rect x="110" y="60" width="6" height="92" fill="url(#crimsonGrad)"/>
+  <rect x="124" y="60" width="6" height="92" fill="url(#crimsonGrad)"/>
+
+  <!-- Neck Pillow (Red Cushion with Black Strap) -->
+  <rect x="94" y="24" width="52" height="18" rx="9" fill="url(#crimsonGrad)" stroke="#991b1b" stroke-width="1"/>
+  <text x="120" y="36" font-family="sans-serif" font-size="6" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="1">PRO</text>
+
+  <!-- Lumbar Pillow (Lower Back Support) -->
+  <rect x="92" y="128" width="56" height="18" rx="8" fill="url(#crimsonGrad)" stroke="#991b1b" stroke-width="1"/>
+  <line x1="92" y1="137" x2="148" y2="137" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+
+  <!-- Contoured Bucket Seat Base with Thigh Bolsters -->
+  <!-- Left Thigh Bolster -->
+  <path d="M 68 174 Q 66 198 78 200 L 92 188 Z" fill="url(#crimsonGrad)"/>
+  <!-- Right Thigh Bolster -->
+  <path d="M 172 174 Q 174 198 162 200 L 148 188 Z" fill="url(#crimsonGrad)"/>
+
+  <!-- Main Padded Seat -->
+  <ellipse cx="120" cy="180" rx="48" ry="18" fill="url(#stealthBlack)" stroke="#334155" stroke-width="1.5"/>
+  <ellipse cx="120" cy="178" rx="38" ry="12" fill="#0b0f17"/>
+
+  <!-- Seat Red Center Inset -->
+  <path d="M 112 168 L 112 188 M 128 168 L 128 188" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
+</svg>

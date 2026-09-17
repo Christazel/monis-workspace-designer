@@ -72,12 +72,12 @@ export default function ProductCard({ product, isSelected = false }: ProductCard
             width={280}
             height={200}
             style={{
-              maxWidth: product.id === 'acc-surfboard' ? '60%' : '88%',
-              maxHeight: product.id === 'acc-surfboard' ? '92%' : '86%',
-              width: 'auto',
-              height: 'auto',
+              maxWidth: product.id === 'acc-surfboard' ? '60%' : '92%',
+              maxHeight: product.id === 'acc-surfboard' ? '92%' : '90%',
+              width: '100%',
+              height: '100%',
               objectFit: 'contain',
-              filter: 'drop-shadow(0 4px 10px rgba(22,33,29,0.08))',
+              borderRadius: 6,
               transition: 'transform 0.25s ease',
             }}
             onError={() => setImgError(true)}

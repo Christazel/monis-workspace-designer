@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" fill="none">
+  <defs>
+    <!-- Solid Oak Tabletop Gradient -->
+    <linearGradient id="oakTopGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#d4a373"/>
+      <stop offset="35%" stopColor="#c5925e"/>
+      <stop offset="100%" stopColor="#a77242"/>
+    </linearGradient>
+    <linearGradient id="oakEdgeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#966336"/>
+      <stop offset="100%" stopColor="#7a4f27"/>
+    </linearGradient>
+    <!-- White Steel Column Gradient -->
+    <linearGradient id="columnGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#e2e8f0"/>
+      <stop offset="50%" stopColor="#f8fafc"/>
+      <stop offset="100%" stopColor="#cbd5e1"/>
+    </linearGradient>
+    <linearGradient id="columnInner" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#cbd5e1"/>
+      <stop offset="100%" stopColor="#94a3b8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Floor Contact Shadows -->
+  <ellipse cx="65" cy="204" rx="35" ry="6" fill="rgba(0,0,0,0.18)"/>
+  <ellipse cx="255" cy="204" rx="35" ry="6" fill="rgba(0,0,0,0.18)"/>
+
+  <!-- Feet Base -->
+  <rect x="35" y="196" width="60" height="12" rx="4" fill="url(#columnGrad)" stroke="#94a3b8" stroke-width="0.8"/>
+  <rect x="225" y="196" width="60" height="12" rx="4" fill="url(#columnGrad)" stroke="#94a3b8" stroke-width="0.8"/>
+
+  <!-- Lower Telescopic Columns -->
+  <rect x="55" y="125" width="20" height="74" rx="3" fill="url(#columnGrad)" stroke="#94a3b8" stroke-width="0.8"/>
+  <rect x="245" y="125" width="20" height="74" rx="3" fill="url(#columnGrad)" stroke="#94a3b8" stroke-width="0.8"/>
+
+  <!-- Upper Telescopic Columns -->
+  <rect x="57" y="70" width="16" height="60" rx="2" fill="url(#columnInner)" stroke="#64748b" stroke-width="0.8"/>
+  <rect x="247" y="70" width="16" height="60" rx="2" fill="url(#columnInner)" stroke="#64748b" stroke-width="0.8"/>
+
+  <!-- Cable Management Tray -->
+  <rect x="85" y="78" width="150" height="18" rx="4" fill="#334155" stroke="#1e293b" stroke-width="1"/>
+  <!-- Cable slots -->
+  <rect x="95" y="84" width="12" height="6" rx="2" fill="#0f172a"/>
+  <rect x="115" y="84" width="12" height="6" rx="2" fill="#0f172a"/>
+  <rect x="135" y="84" width="12" height="6" rx="2" fill="#0f172a"/>
+  <rect x="155" y="84" width="12" height="6" rx="2" fill="#0f172a"/>
+  <rect x="175" y="84" width="12" height="6" rx="2" fill="#0f172a"/>
+  <rect x="195" y="84" width="12" height="6" rx="2" fill="#0f172a"/>
+  <rect x="215" y="84" width="12" height="6" rx="2" fill="#0f172a"/>
+
+  <!-- Solid Oak Tabletop (Top Surface) -->
+  <polygon points="15,48 305,48 290,68 30,68" fill="url(#oakTopGrad)" stroke="#b88355" stroke-width="1"/>
+
+  <!-- Natural Wood Grain Lines -->
+  <path d="M 50 56 Q 140 54 270 56" stroke="rgba(255,255,255,0.2)" stroke-width="1" fill="none"/>
+  <path d="M 40 62 Q 170 60 280 62" stroke="rgba(120,60,10,0.15)" stroke-width="1" fill="none"/>
+  <path d="M 80 52 Q 190 51 250 52" stroke="rgba(255,255,255,0.15)" stroke-width="0.8" fill="none"/>
+
+  <!-- Tabletop Front Bevel Edge -->
+  <rect x="30" y="68" width="260" height="10" rx="2" fill="url(#oakEdgeGrad)" stroke="#5e3816" stroke-width="0.8"/>
+
+  <!-- Under-desk frame bar -->
+  <rect x="45" y="74" width="230" height="4" rx="2" fill="#64748b"/>
+
+  <!-- Smart Digital Keypad Controller on Right Front -->
+  <rect x="250" y="74" width="32" height="12" rx="3" fill="#0f172a" stroke="#334155" stroke-width="0.8"/>
+  <text x="258" y="83" font-family="monospace" font-size="6" fill="#38bdf8" font-weight="bold">74.5</text>
+  <circle cx="275" cy="80" r="1.5" fill="#22c55e"/>
+</svg>

@@ -1,94 +1,9 @@
 'use client';
 
-import { Trash2 } from 'lucide-react';
-import { useWorkspaceStore, useTotal, useDuration, useCurrency } from '@/store/workspaceStore';
-import { formatIDR, formatUSD, DURATION_DISCOUNTS } from '@/data/products';
+import { Check, Trash2, ArrowRight, ShieldCheck } from 'lucide-react';
+import { useWorkspaceStore } from '@/store/workspaceStore';
+import { formatMonthlyRate, formatIDR, formatUSD, DURATION_DISCOUNTS } from '@/data/products';
 import { Product } from '@/data/types';
-
-const DURATION_OPTIONS = [
-  { id: 'daily', label: '1 Day', badge: null },
-  { id: 'weekly', label: '1 Week', badge: '-10%' },
-  { id: 'monthly', label: '1 Month', badge: '-20%' },
-] as const;
-
-function SummaryItem({ product, onRemove }: { product: Product; onRemove: () => void }) {
-  const currency = useCurrency();
-  const price = currency === 'IDR' ? formatIDR(product.price) : formatUSD(product.price);
-
-  return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 10,
-        padding: '8px 0',
-        borderBottom: '1px solid var(--line-soft)',
-      }}
-    >
-      <div
-        style={{
-          width: 34,
-          height: 34,
-          background: '#faf8f4',
-          borderRadius: 6,
-          border: '1px solid var(--line)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexShrink: 0,
-          overflow: 'hidden',
-          padding: 2,
-        }}
-      >
-        <img
-          src={product.image}
-          alt={product.name}
-          loading="lazy"
-          decoding="async"
-          width={36}
-          height={36}
-          style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-        />
-      </div>
-
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <p
-          style={{
-            fontSize: 12.5,
-            fontWeight: 600,
-            color: 'var(--ink)',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          {product.name}
-        </p>
-        <p style={{ fontSize: 11, color: 'var(--brass)', fontWeight: 600 }}>{price}/day</p>
-      </div>
-
-      <button
-        onClick={onRemove}
-        type="button"
-        style={{
-          background: 'none',
-          border: 'none',
-          cursor: 'pointer',
-          padding: 4,
-          color: 'var(--ink-soft)',
-          display: 'flex',
-          alignItems: 'center',
-          borderRadius: 4,
-          transition: 'color 0.12s',
-          flexShrink: 0,
-        }}
-        title={`Remove ${product.name}`}
-      >
-        <Trash2 size={13} />
-      </button>
-    </div>
-  );
-}
 
 export default function WorkspaceSummary() {
   const {
@@ -102,34 +17,46 @@ export default function WorkspaceSummary() {
     toggleAccessory,
     clearWorkspace,
     setCheckoutOpen,
-    duration,
-    setDuration,
+    currency,
+    setCurrency,
   } = useWorkspaceStore();
 
-  const total = useTotal();
-  const allItems = [
+  const allAccessories: Product[] = [...tech, ...accessories];
+  const allItems: Product[] = [
     ...(desk ? [desk] : []),
     ...(chair ? [chair] : []),
-    ...tech,
-    ...accessories,
+    ...allAccessories,
   ];
+
+  // Calculate monthly rental total
+  const dailySubtotal = allItems.reduce((sum, p) => sum + p.price, 0);
+  const monthlyMultiplier = DURATION_DISCOUNTS.monthly.multiplier; // 30
+  const monthlyDiscount = DURATION_DISCOUNTS.monthly.discount; // 0.20
+  const monthlySubtotal = dailySubtotal * monthlyMultiplier;
+  const monthlySavings = monthlySubtotal * monthlyDiscount;
+  const monthlyTotal = monthlySubtotal - monthlySavings;
+
+  const formattedMonthlyTotal =
+    currency === 'IDR' ? `${formatIDR(monthlyTotal)}/bulan` : `${formatUSD(monthlyTotal)}/month`;
 
   return (
     <aside
       style={{
-        width: '100%',
+        width: 320,
         maxWidth: '100%',
-        height: '100%',
+        flexShrink: 0,
         background: 'var(--paper)',
+        borderLeft: '1px solid var(--line)',
         display: 'flex',
         flexDirection: 'column',
+        height: '100%',
         overflow: 'hidden',
       }}
     >
       {/* ── Header ── */}
       <div
         style={{
-          padding: '14px 16px',
+          padding: '16px 18px',
           borderBottom: '1px solid var(--line)',
           display: 'flex',
           alignItems: 'center',
@@ -137,13 +64,23 @@ export default function WorkspaceSummary() {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--ink)' }}>Your Setup</h3>
+          <h3
+            style={{
+              fontSize: 14.5,
+              fontWeight: 800,
+              color: 'var(--ink)',
+              letterSpacing: '-0.01em',
+              margin: 0,
+            }}
+          >
+            Workspace Saya
+          </h3>
           <span
             style={{
-              background: 'var(--brass)',
-              color: 'var(--ink)',
+              background: 'var(--ink)',
+              color: 'var(--paper)',
               fontSize: 11,
-              fontWeight: 700,
+              fontWeight: 800,
               width: 20,
               height: 20,
               borderRadius: '50%',
@@ -156,168 +93,341 @@ export default function WorkspaceSummary() {
           </span>
         </div>
 
-        {allItems.length > 0 && (
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          {/* Currency Switcher */}
           <button
-            onClick={clearWorkspace}
             type="button"
+            onClick={() => setCurrency(currency === 'IDR' ? 'USD' : 'IDR')}
             style={{
-              fontSize: 12,
-              color: 'var(--ink-soft)',
-              background: 'none',
-              border: 'none',
+              fontSize: 10.5,
+              fontWeight: 700,
+              padding: '2px 8px',
+              borderRadius: 12,
+              border: '1px solid var(--line)',
+              background: 'var(--paper-2)',
+              color: 'var(--ink)',
               cursor: 'pointer',
-              textDecoration: 'underline',
             }}
+            title="Ganti mata uang"
           >
-            Clear all
+            {currency}
           </button>
-        )}
+
+          {allItems.length > 0 && (
+            <button
+              onClick={clearWorkspace}
+              type="button"
+              style={{
+                fontSize: 11,
+                color: 'var(--ink-soft)',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: '2px 4px',
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.color = '#dc2626';
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.color = 'var(--ink-soft)';
+              }}
+            >
+              Reset
+            </button>
+          )}
+        </div>
       </div>
 
-      {/* ── Items List ── */}
-      <div style={{ flex: 1, padding: '12px 16px', overflowY: 'auto' }}>
-        {allItems.length === 0 ? (
-          <div
-            style={{
-              padding: '36px 12px',
-              textAlign: 'center',
-              color: 'var(--ink-soft)',
-            }}
-          >
-            <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)' }}>No items yet</p>
-            <p style={{ fontSize: 12, marginTop: 4 }}>
-              Pick from the left catalog or choose a quick setup above.
-            </p>
-          </div>
-        ) : (
-          <div>
-            {desk && (
-              <SummaryItem product={desk} onRemove={() => setDesk(null)} />
-            )}
-            {chair && (
-              <SummaryItem product={chair} onRemove={() => setChair(null)} />
-            )}
-            {tech.map((item) => (
-              <SummaryItem key={item.id} product={item} onRemove={() => toggleTech(item)} />
-            ))}
-            {accessories.map((item) => (
-              <SummaryItem key={item.id} product={item} onRemove={() => toggleAccessory(item)} />
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* ── Rental Duration ── */}
-      <div
-        style={{
-          padding: '14px 16px',
-          borderTop: '1px solid var(--line)',
-          background: 'var(--paper-2)',
-        }}
-      >
-        <p
-          style={{
-            fontSize: 11,
-            fontWeight: 700,
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-            color: 'var(--ink-soft)',
-            marginBottom: 8,
-          }}
-        >
-          Rental Duration
-        </p>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 6 }}>
-          {DURATION_OPTIONS.map((opt) => {
-            const isSelected = duration === opt.id;
-            return (
-              <button
-                key={opt.id}
-                type="button"
-                onClick={() => setDuration(opt.id)}
+      {/* ── Scrollable Items Body ── */}
+      <div style={{ flex: 1, overflowY: 'auto', padding: '16px 18px', display: 'flex', flexDirection: 'column', gap: 18 }}>
+        
+        {/* SECTION: MEJA (DESK) */}
+        <div>
+          <p style={{ fontSize: 11, fontWeight: 700, color: 'var(--ink-soft)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8, margin: 0 }}>
+            Meja (Desk)
+          </p>
+          {desk ? (
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 10,
+                padding: '8px 10px',
+                borderRadius: 10,
+                background: 'var(--paper-2)',
+                border: '1px solid var(--line)',
+                marginTop: 6,
+              }}
+            >
+              <div
                 style={{
-                  padding: '8px 4px',
-                  borderRadius: 'var(--radius)',
-                  border: '1px solid ' + (isSelected ? 'var(--ink)' : 'var(--line)'),
-                  background: isSelected ? 'var(--ink)' : 'var(--paper)',
-                  color: isSelected ? 'var(--paper)' : 'var(--ink)',
-                  fontSize: 12,
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  textAlign: 'center',
-                  transition: 'all 0.12s ease',
-                  position: 'relative',
+                  width: 22,
+                  height: 22,
+                  borderRadius: '50%',
+                  background: '#16a34a',
+                  color: '#fff',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
                 }}
               >
-                <div>{opt.label}</div>
-                {opt.badge && (
-                  <span
+                <Check size={13} strokeWidth={3} />
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <p style={{ fontSize: 12.5, fontWeight: 700, color: 'var(--ink)', margin: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {desk.name}
+                </p>
+                <p style={{ fontSize: 11, color: 'var(--brass)', fontWeight: 600, margin: 0 }}>
+                  {formatMonthlyRate(desk.price, currency)}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setDesk(null)}
+                style={{ background: 'none', border: 'none', color: 'var(--ink-soft)', cursor: 'pointer', padding: 4 }}
+                title="Hapus meja"
+              >
+                <Trash2 size={13} />
+              </button>
+            </div>
+          ) : (
+            <div
+              style={{
+                padding: '8px 10px',
+                borderRadius: 8,
+                border: '1px dashed var(--line)',
+                color: 'var(--ink-soft)',
+                fontSize: 11.5,
+                marginTop: 6,
+              }}
+            >
+              Belum memilih meja
+            </div>
+          )}
+        </div>
+
+        {/* SECTION: KURSI (CHAIR) */}
+        <div>
+          <p style={{ fontSize: 11, fontWeight: 700, color: 'var(--ink-soft)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8, margin: 0 }}>
+            Kursi (Chair)
+          </p>
+          {chair ? (
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 10,
+                padding: '8px 10px',
+                borderRadius: 10,
+                background: 'var(--paper-2)',
+                border: '1px solid var(--line)',
+                marginTop: 6,
+              }}
+            >
+              <div
+                style={{
+                  width: 22,
+                  height: 22,
+                  borderRadius: '50%',
+                  background: '#16a34a',
+                  color: '#fff',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                }}
+              >
+                <Check size={13} strokeWidth={3} />
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <p style={{ fontSize: 12.5, fontWeight: 700, color: 'var(--ink)', margin: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {chair.name}
+                </p>
+                <p style={{ fontSize: 11, color: 'var(--brass)', fontWeight: 600, margin: 0 }}>
+                  {formatMonthlyRate(chair.price, currency)}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setChair(null)}
+                style={{ background: 'none', border: 'none', color: 'var(--ink-soft)', cursor: 'pointer', padding: 4 }}
+                title="Hapus kursi"
+              >
+                <Trash2 size={13} />
+              </button>
+            </div>
+          ) : (
+            <div
+              style={{
+                padding: '8px 10px',
+                borderRadius: 8,
+                border: '1px dashed var(--line)',
+                color: 'var(--ink-soft)',
+                fontSize: 11.5,
+                marginTop: 6,
+              }}
+            >
+              Belum memilih kursi
+            </div>
+          )}
+        </div>
+
+        {/* SECTION: ACCESSORIES */}
+        <div>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
+            <p style={{ fontSize: 11, fontWeight: 700, color: 'var(--ink-soft)', textTransform: 'uppercase', letterSpacing: '0.08em', margin: 0 }}>
+              Accessories ({allAccessories.length})
+            </p>
+          </div>
+
+          {allAccessories.length > 0 ? (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 6 }}>
+              {allAccessories.map((item) => (
+                <div
+                  key={item.id}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 10,
+                    padding: '7px 10px',
+                    borderRadius: 8,
+                    background: 'var(--paper-2)',
+                    border: '1px solid var(--line-soft)',
+                  }}
+                >
+                  <div
                     style={{
-                      fontSize: 10,
-                      fontWeight: 700,
-                      color: isSelected ? 'var(--paper-2)' : 'var(--sage)',
-                      display: 'block',
-                      marginTop: 2,
+                      width: 18,
+                      height: 18,
+                      borderRadius: '50%',
+                      background: '#16a34a',
+                      color: '#fff',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
                     }}
                   >
-                    {opt.badge}
-                  </span>
-                )}
-              </button>
-            );
-          })}
+                    <Check size={11} strokeWidth={3} />
+                  </div>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--ink)', margin: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      {item.name}
+                    </p>
+                    <p style={{ fontSize: 10.5, color: 'var(--brass)', fontWeight: 600, margin: 0 }}>
+                      {formatMonthlyRate(item.price, currency)}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (item.category === 'tech') toggleTech(item);
+                      else toggleAccessory(item);
+                    }}
+                    style={{ background: 'none', border: 'none', color: 'var(--ink-soft)', cursor: 'pointer', padding: 3 }}
+                    title={`Hapus ${item.name}`}
+                  >
+                    <Trash2 size={12} />
+                  </button>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div
+              style={{
+                padding: '8px 10px',
+                borderRadius: 8,
+                border: '1px dashed var(--line)',
+                color: 'var(--ink-soft)',
+                fontSize: 11.5,
+                marginTop: 6,
+              }}
+            >
+              Belum ada aksesoris ditambahkan
+            </div>
+          )}
         </div>
       </div>
 
-      {/* ── Price Summary & CTA ── */}
+      {/* ── Footer: Total & CTA Button ── */}
       <div
         style={{
-          padding: '16px',
+          padding: '16px 18px',
           borderTop: '1px solid var(--line)',
           background: 'var(--paper)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 12,
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
-          <span style={{ fontSize: 13, color: 'var(--ink-soft)' }}>
-            Total ({allItems.length} {allItems.length === 1 ? 'item' : 'items'}):
-          </span>
-          <span style={{ fontSize: 17, fontWeight: 700, color: 'var(--brass)' }}>
-            {total.formatted}
-          </span>
+        {/* Total Price Display */}
+        <div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+            <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--ink-soft)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              Total Rental
+            </span>
+            <span
+              style={{
+                fontSize: 11,
+                fontWeight: 700,
+                color: '#16a34a',
+                background: 'rgba(22, 163, 74, 0.12)',
+                padding: '2px 7px',
+                borderRadius: 12,
+              }}
+            >
+              Hemat 20% Bulanan
+            </span>
+          </div>
+          <div style={{ marginTop: 4 }}>
+            <span
+              style={{
+                fontSize: 22,
+                fontWeight: 900,
+                color: 'var(--ink)',
+                fontFamily: 'var(--font-heading)',
+                letterSpacing: '-0.02em',
+              }}
+            >
+              {allItems.length > 0 ? formattedMonthlyTotal : (currency === 'IDR' ? 'Rp 0/bln' : '$0/mo')}
+            </span>
+          </div>
         </div>
 
-        {total.discount > 0 && (
-          <p style={{ fontSize: 11.5, color: 'var(--sage)', fontWeight: 600, marginBottom: 12, display: 'flex', alignItems: 'center', gap: 4 }}>
-            <span>Duration discount applied</span>
-          </p>
-        )}
-
+        {/* Rent Workspace CTA Button */}
         <button
-          className="btn-primary"
           type="button"
-          disabled={allItems.length === 0}
           onClick={() => setCheckoutOpen(true)}
+          disabled={allItems.length === 0}
           style={{
-            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
             justifyContent: 'center',
-            opacity: allItems.length === 0 ? 0.45 : 1,
-            cursor: allItems.length === 0 ? 'not-allowed' : 'pointer',
+            gap: 8,
+            width: '100%',
+            padding: '12px 16px',
+            background: allItems.length > 0 ? 'var(--ink)' : 'var(--line)',
+            color: allItems.length > 0 ? 'var(--paper)' : 'var(--ink-soft)',
+            border: 'none',
+            borderRadius: 12,
+            fontSize: 14,
+            fontWeight: 800,
+            cursor: allItems.length > 0 ? 'pointer' : 'not-allowed',
+            transition: 'all 0.2s ease',
+            boxShadow: allItems.length > 0 ? '0 8px 20px rgba(22, 33, 29, 0.22)' : 'none',
           }}
         >
-          Rent This Workspace
+          <span>Rent Workspace</span>
+          <ArrowRight size={15} />
         </button>
 
-        <p
-          style={{
-            fontSize: 11,
-            color: 'var(--ink-soft)',
-            textAlign: 'center',
-            marginTop: 10,
-          }}
-        >
-          No deposit required · Same-day delivery
-        </p>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+          <ShieldCheck size={13} color="var(--brass)" />
+          <span style={{ fontSize: 11, color: 'var(--ink-soft)', fontWeight: 500 }}>
+            Gratis antar, rakit, & garansi di Bali
+          </span>
+        </div>
       </div>
     </aside>
   );

@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 280" fill="none">
+  <defs>
+    <!-- Graphite Frame Gradient -->
+    <linearGradient id="aeronFrame" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#334155"/>
+      <stop offset="50%" stopColor="#1e293b"/>
+      <stop offset="100%" stopColor="#0f172a"/>
+    </linearGradient>
+    <!-- 8Z Pellicle Mesh Gradient -->
+    <linearGradient id="pellicleMesh" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#1e293b"/>
+      <stop offset="50%" stopColor="#0f172a"/>
+      <stop offset="100%" stopColor="#1e293b"/>
+    </linearGradient>
+    <!-- Chrome Cylinder -->
+    <linearGradient id="gasLift" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#64748b"/>
+      <stop offset="50%" stopColor="#cbd5e1"/>
+      <stop offset="100%" stopColor="#475569"/>
+    </linearGradient>
+    <!-- Armrest Pad Gradient -->
+    <linearGradient id="armPad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#334155"/>
+      <stop offset="100%" stopColor="#111827"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Floor Contact Shadow -->
+  <ellipse cx="120" cy="264" rx="72" ry="9" fill="rgba(0,0,0,0.22)"/>
+
+  <!-- 5-Star Caster Wheels (Bottom) -->
+  <circle cx="56" cy="254" r="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <circle cx="56" cy="254" r="2.5" fill="#64748b"/>
+
+  <circle cx="184" cy="254" r="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <circle cx="184" cy="254" r="2.5" fill="#64748b"/>
+
+  <circle cx="82" cy="262" r="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <circle cx="82" cy="262" r="2.5" fill="#64748b"/>
+
+  <circle cx="158" cy="262" r="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <circle cx="158" cy="262" r="2.5" fill="#64748b"/>
+
+  <circle cx="120" cy="265" r="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <circle cx="120" cy="265" r="2.5" fill="#64748b"/>
+
+  <!-- 5-Star Base Legs (Arched Aluminum / Graphite) -->
+  <path d="M 120 236 L 58 253" stroke="url(#aeronFrame)" stroke-width="7" stroke-linecap="round"/>
+  <path d="M 120 236 L 182 253" stroke="url(#aeronFrame)" stroke-width="7" stroke-linecap="round"/>
+  <path d="M 120 236 L 84 260" stroke="url(#aeronFrame)" stroke-width="8" stroke-linecap="round"/>
+  <path d="M 120 236 L 156 260" stroke="url(#aeronFrame)" stroke-width="8" stroke-linecap="round"/>
+  <path d="M 120 236 L 120 263" stroke="url(#aeronFrame)" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Central Hub -->
+  <circle cx="120" cy="236" r="10" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Pneumatic Gas Cylinder -->
+  <rect x="114" y="202" width="12" height="34" rx="3" fill="url(#gasLift)" stroke="#334155" stroke-width="0.8"/>
+  <rect x="112" y="222" width="16" height="6" rx="2" fill="#1e293b"/>
+
+  <!-- Harmonic Tilt Mechanism Housing -->
+  <path d="M 100 188 L 140 188 L 134 204 L 106 204 Z" fill="#0f172a" stroke="#334155" stroke-width="1.2"/>
+  <!-- Tilt tension knob -->
+  <circle cx="138" cy="196" r="4" fill="#334155"/>
+
+  <!-- Armrest Stems (Upright Aluminum / Graphite) -->
+  <path d="M 72 174 Q 62 145 66 128" stroke="url(#aeronFrame)" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <path d="M 168 174 Q 178 145 174 128" stroke="url(#aeronFrame)" stroke-width="7" stroke-linecap="round" fill="none"/>
+
+  <!-- Armrest Pads (Contoured Polyurethane) -->
+  <rect x="52" y="122" width="28" height="10" rx="5" fill="url(#armPad)" stroke="#475569" stroke-width="0.8"/>
+  <rect x="160" y="122" width="28" height="10" rx="5" fill="url(#armPad)" stroke="#475569" stroke-width="0.8"/>
+
+  <!-- Backrest Y-Spine (Iconic Aeron Back Structure) -->
+  <path d="M 120 180 L 120 120 M 120 120 L 88 56 M 120 120 L 152 56" stroke="#0f172a" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- PostureFit SL Lumbar Support Dual Pads -->
+  <rect x="102" y="122" width="16" height="22" rx="4" fill="#1e293b" stroke="#475569" stroke-width="0.8"/>
+  <rect x="122" y="122" width="16" height="22" rx="4" fill="#1e293b" stroke="#475569" stroke-width="0.8"/>
+  <path d="M 96 133 L 144 133" stroke="#475569" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Backrest Outer Frame (Curved Organic Shape) -->
+  <path d="M 80 44 C 95 32, 145 32, 160 44 C 174 58, 170 124, 154 150 C 142 162, 98 162, 86 150 C 70 124, 66 58, 80 44 Z" fill="#1e293b" stroke="url(#aeronFrame)" stroke-width="3"/>
+
+  <!-- 8Z Pellicle Mesh Inner Area -->
+  <path d="M 84 48 C 98 38, 142 38, 156 48 C 167 60, 163 120, 149 144 C 138 155, 102 155, 91 144 C 77 120, 73 60, 84 48 Z" fill="url(#pellicleMesh)"/>
+
+  <!-- Mesh Weave Horizontal Pattern -->
+  <g opacity="0.35" stroke="#64748b" stroke-width="0.9">
+    <line x1="90" y1="56" x2="150" y2="56"/>
+    <line x1="86" y1="66" x2="154" y2="66"/>
+    <line x1="82" y1="76" x2="158" y2="76"/>
+    <line x1="80" y1="86" x2="160" y2="86"/>
+    <line x1="80" y1="96" x2="160" y2="96"/>
+    <line x1="81" y1="106" x2="159" y2="106"/>
+    <line x1="83" y1="116" x2="157" y2="116"/>
+    <line x1="86" y1="126" x2="154" y2="126"/>
+    <line x1="92" y1="136" x2="148" y2="136"/>
+    <line x1="100" y1="146" x2="140" y2="146"/>
+  </g>
+
+  <!-- Mesh Weave Vertical Contours -->
+  <g opacity="0.25" stroke="#64748b" stroke-width="0.9">
+    <line x1="96" y1="50" x2="98" y2="146"/>
+    <line x1="108" y1="42" x2="109" y2="152"/>
+    <line x1="120" y1="40" x2="120" y2="154"/>
+    <line x1="132" y1="42" x2="131" y2="152"/>
+    <line x1="144" y1="50" x2="142" y2="146"/>
+  </g>
+
+  <!-- Seat Pan (Waterfall Contoured Mesh Seat) -->
+  <ellipse cx="120" cy="176" rx="52" ry="18" fill="#111827" stroke="url(#aeronFrame)" stroke-width="3"/>
+  <ellipse cx="120" cy="174" rx="46" ry="14" fill="url(#pellicleMesh)"/>
+
+  <!-- Seat Mesh Pattern Lines -->
+  <g opacity="0.3" stroke="#64748b" stroke-width="0.8">
+    <path d="M 82 174 Q 120 182 158 174" fill="none"/>
+    <path d="M 88 170 Q 120 177 152 170" fill="none"/>
+    <path d="M 95 166 Q 120 172 145 166" fill="none"/>
+  </g>
+</svg>

@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" fill="none">
+  <defs>
+    <!-- Space Gray Aluminum Gradient -->
+    <linearGradient id="barMetal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#475569"/>
+      <stop offset="40%" stopColor="#334155"/>
+      <stop offset="100%" stopColor="#1e293b"/>
+    </linearGradient>
+    <!-- Warm LED Light Glow -->
+    <linearGradient id="screenbarGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="rgba(253, 224, 71, 0.45)"/>
+      <stop offset="40%" stopColor="rgba(245, 158, 11, 0.2)"/>
+      <stop offset="100%" stopColor="rgba(245, 158, 11, 0)"/>
+    </linearGradient>
+    <!-- Rotary Controller Dial -->
+    <linearGradient id="dialGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#475569"/>
+      <stop offset="50%" stopColor="#1e293b"/>
+      <stop offset="100%" stopColor="#0f172a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Ground / Ambient Contact Shadow -->
+  <ellipse cx="160" cy="200" rx="120" ry="8" fill="rgba(0,0,0,0.18)"/>
+
+  <!-- Warm LED Asymmetric Downward Light Cone -->
+  <polygon points="44,80 276,80 306,175 14,175" fill="url(#screenbarGlow)"/>
+
+  <!-- ─── COUNTERWEIGHT MONITOR CLAMP ─── -->
+  <!-- Rear Counterweight Cylinder -->
+  <circle cx="160" cy="38" r="14" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <circle cx="160" cy="38" r="10" fill="#0f172a"/>
+
+  <!-- Curved Articulating Hinge Arm -->
+  <path d="M 152 46 C 148 58, 152 70, 156 74" stroke="#334155" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <path d="M 168 46 C 172 58, 168 70, 164 74" stroke="#334155" stroke-width="8" stroke-linecap="round" fill="none"/>
+
+  <!-- Front Bezel Clip Grip -->
+  <rect x="150" y="66" width="20" height="12" rx="3" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+
+  <!-- ─── ALUMINUM LIGHT BAR TUBE ─── -->
+  <!-- Main Horizontal Cylindrical Housing -->
+  <rect x="36" y="70" width="248" height="16" rx="8" fill="url(#barMetal)" stroke="#64748b" stroke-width="1"/>
+
+  <!-- Left End Cap -->
+  <ellipse cx="44" cy="78" rx="4" ry="7" fill="#1e293b" stroke="#475569" stroke-width="0.8"/>
+  <!-- Right End Cap -->
+  <ellipse cx="276" cy="78" rx="4" ry="7" fill="#1e293b" stroke="#475569" stroke-width="0.8"/>
+
+  <!-- Underside Precision Optical Lens Hood -->
+  <rect x="48" y="80" width="224" height="6" rx="3" fill="#fef08a" opacity="0.95"/>
+  <rect x="52" y="81" width="216" height="3" rx="1.5" fill="#ffffff"/>
+
+  <!-- Ambient Light Sensor Pin on top center of bar -->
+  <circle cx="160" cy="71" r="2" fill="#38bdf8" filter="drop-shadow(0 0 2px #38bdf8)"/>
+
+  <!-- ─── DESKTOP WIRELESS ROTARY DIAL CONTROLLER ─── -->
+  <!-- Controller Shadow -->
+  <ellipse cx="230" cy="180" rx="34" ry="12" fill="rgba(0,0,0,0.35)"/>
+
+  <!-- Controller Outer Base Ring -->
+  <ellipse cx="230" cy="174" rx="32" ry="12" fill="#0f172a" stroke="#334155" stroke-width="1.2"/>
+
+  <!-- Chamfered Metallic Edge / Dial Body -->
+  <path d="M 200 162 C 200 154, 260 154, 260 162 L 262 172 C 262 178, 198 178, 198 172 Z" fill="url(#dialGrad)" stroke="#475569" stroke-width="1"/>
+
+  <!-- Dial Top Surface -->
+  <ellipse cx="230" cy="162" rx="28" ry="9" fill="#1e293b" stroke="#64748b" stroke-width="1"/>
+
+  <!-- Knurling Texture Dots on Dial Edge -->
+  <circle cx="210" cy="167" r="1" fill="#94a3b8"/>
+  <circle cx="220" cy="169" r="1" fill="#94a3b8"/>
+  <circle cx="230" cy="170" r="1" fill="#94a3b8"/>
+  <circle cx="240" cy="169" r="1" fill="#94a3b8"/>
+  <circle cx="250" cy="167" r="1" fill="#94a3b8"/>
+
+  <!-- Center Tactile Button -->
+  <ellipse cx="230" cy="162" rx="14" ry="4.5" fill="#0f172a" stroke="#475569" stroke-width="0.8"/>
+  <!-- Auto-Dimming Mode Indicator (Amber Ring LED) -->
+  <circle cx="230" cy="162" r="2" fill="#f59e0b" filter="drop-shadow(0 0 2px #f59e0b)"/>
+</svg>

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" fill="none">
+  <defs>
+    <!-- Solid Walnut Gradient -->
+    <linearGradient id="walnutTop" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#6e4730"/>
+      <stop offset="50%" stopColor="#55331e"/>
+      <stop offset="100%" stopColor="#432513"/>
+    </linearGradient>
+    <linearGradient id="walnutFront" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#4a2a17"/>
+      <stop offset="100%" stopColor="#321b0e"/>
+    </linearGradient>
+    <linearGradient id="walnutPedestal" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#3a1e10"/>
+      <stop offset="60%" stopColor="#4e2c19"/>
+      <stop offset="100%" stopColor="#321a0d"/>
+    </linearGradient>
+    <!-- Brushed Brass / Gold Handle -->
+    <linearGradient id="brassGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#fef08a"/>
+      <stop offset="50%" stopColor="#d4af37"/>
+      <stop offset="100%" stopColor="#a17d1e"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Floor Contact Shadow -->
+  <ellipse cx="160" cy="204" rx="140" ry="8" fill="rgba(0,0,0,0.25)"/>
+
+  <!-- Left Leg / Panel -->
+  <path d="M 30 76 L 30 198 Q 30 202 34 202 L 52 202 Q 56 202 56 198 L 56 76 Z" fill="url(#walnutPedestal)" stroke="#221107" stroke-width="0.8"/>
+
+  <!-- Modesty Back Panel -->
+  <rect x="52" y="90" width="168" height="96" fill="#2d170b" stroke="#1f0f07" stroke-width="0.8"/>
+
+  <!-- Right Drawer Unit (Pedestal with 2 Drawers) -->
+  <rect x="200" y="76" width="90" height="124" rx="4" fill="url(#walnutPedestal)" stroke="#221107" stroke-width="1"/>
+
+  <!-- Drawer 1 (Upper) -->
+  <rect x="206" y="86" width="78" height="48" rx="3" fill="url(#walnutFront)" stroke="#201006" stroke-width="0.8"/>
+  <!-- Brass Handle 1 -->
+  <rect x="235" y="108" width="22" height="4" rx="2" fill="url(#brassGrad)" filter="drop-shadow(0 1px 2px rgba(0,0,0,0.4))"/>
+
+  <!-- Drawer 2 (Lower) -->
+  <rect x="206" y="142" width="78" height="48" rx="3" fill="url(#walnutFront)" stroke="#201006" stroke-width="0.8"/>
+  <!-- Brass Handle 2 -->
+  <rect x="235" y="164" width="22" height="4" rx="2" fill="url(#brassGrad)" filter="drop-shadow(0 1px 2px rgba(0,0,0,0.4))"/>
+
+  <!-- Walnut Tabletop (Top Surface) -->
+  <polygon points="12,50 308,50 294,76 26,76" fill="url(#walnutTop)" stroke="#6b4226" stroke-width="1"/>
+
+  <!-- Wood Grain Highlights -->
+  <path d="M 40 60 Q 150 58 280 60" stroke="rgba(255,255,255,0.1)" stroke-width="1" fill="none"/>
+  <path d="M 60 68 Q 180 66 260 68" stroke="rgba(0,0,0,0.2)" stroke-width="1" fill="none"/>
+  <path d="M 80 54 Q 190 53 250 54" stroke="rgba(255,255,255,0.08)" stroke-width="0.8" fill="none"/>
+
+  <!-- Tabletop Front Edge -->
+  <rect x="24" y="74" width="272" height="10" rx="3" fill="#2b1509" stroke="#1c0c05" stroke-width="0.8"/>
+
+  <!-- USB-C & Power Port on Edge -->
+  <rect x="256" y="76" width="16" height="5" rx="1.5" fill="#090d16"/>
+  <circle cx="261" cy="78.5" r="1" fill="#38bdf8"/>
+  <circle cx="267" cy="78.5" r="1" fill="#22c55e"/>
+</svg>
