@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" fill="none">
+  <defs>
+    <!-- Warm Walnut Wood Side Panels -->
+    <linearGradient id="speakerWood" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#8b5a2b"/>
+      <stop offset="50%" stopColor="#6e421c"/>
+      <stop offset="100%" stopColor="#533113"/>
+    </linearGradient>
+    <!-- Charcoal Front Baffle -->
+    <linearGradient id="speakerBaffle" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#1e293b"/>
+      <stop offset="50%" stopColor="#0f172a"/>
+      <stop offset="100%" stopColor="#020617"/>
+    </linearGradient>
+    <!-- Woofer Cone Gradient -->
+    <linearGradient id="wooferCone" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#334155"/>
+      <stop offset="50%" stopColor="#1e293b"/>
+      <stop offset="100%" stopColor="#0f172a"/>
+    </linearGradient>
+    <!-- Silk Dome Tweeter Gradient -->
+    <linearGradient id="tweeterDome" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#475569"/>
+      <stop offset="100%" stopColor="#020617"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Floor Contact Shadows -->
+  <ellipse cx="90" cy="204" rx="65" ry="9" fill="rgba(0,0,0,0.24)"/>
+  <ellipse cx="230" cy="204" rx="65" ry="9" fill="rgba(0,0,0,0.24)"/>
+
+  <!-- ─── LEFT SPEAKER (PASSIVE MONITOR) ─── -->
+  <!-- Outer Wood Cabinet -->
+  <rect x="36" y="32" width="108" height="168" rx="8" fill="url(#speakerWood)" stroke="#3e230c" stroke-width="1.2"/>
+  <!-- Wood grain lines -->
+  <path d="M 40 45 Q 48 110 42 185 M 138 45 Q 134 120 138 185" stroke="rgba(255,255,255,0.12)" stroke-width="1" fill="none"/>
+
+  <!-- Inset Front Charcoal Baffle -->
+  <rect x="44" y="36" width="92" height="160" rx="5" fill="url(#speakerBaffle)" stroke="#334155" stroke-width="1"/>
+
+  <!-- Silk Dome Tweeter Housing -->
+  <circle cx="90" cy="74" r="22" fill="#0f172a" stroke="#334155" stroke-width="1.2"/>
+  <circle cx="90" cy="74" r="16" fill="#1e293b"/>
+  <circle cx="90" cy="74" r="10" fill="url(#tweeterDome)" stroke="#475569" stroke-width="0.8"/>
+  <circle cx="90" cy="74" r="4" fill="#020617"/>
+  <circle cx="88" cy="72" r="1.5" fill="rgba(255,255,255,0.4)"/>
+
+  <!-- 4-Inch Woofer Housing -->
+  <circle cx="90" cy="142" r="36" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <circle cx="90" cy="142" r="30" fill="url(#wooferCone)" stroke="#475569" stroke-width="1"/>
+  <circle cx="90" cy="142" r="20" fill="#0f172a" stroke="#334155" stroke-width="0.8"/>
+  <circle cx="90" cy="142" r="12" fill="#1e293b"/>
+  <circle cx="90" cy="142" r="5" fill="#334155"/>
+
+  <!-- Front Bass Reflex Port -->
+  <rect x="70" y="184" width="40" height="7" rx="3.5" fill="#020617" stroke="#334155" stroke-width="0.8"/>
+
+
+  <!-- ─── RIGHT SPEAKER (ACTIVE MONITOR WITH CONTROLS & LED) ─── -->
+  <!-- Outer Wood Cabinet -->
+  <rect x="176" y="32" width="108" height="168" rx="8" fill="url(#speakerWood)" stroke="#3e230c" stroke-width="1.2"/>
+  <!-- Wood grain lines -->
+  <path d="M 180 45 Q 188 110 182 185 M 278 45 Q 274 120 278 185" stroke="rgba(255,255,255,0.12)" stroke-width="1" fill="none"/>
+
+  <!-- Inset Front Charcoal Baffle -->
+  <rect x="184" y="36" width="92" height="160" rx="5" fill="url(#speakerBaffle)" stroke="#334155" stroke-width="1"/>
+
+  <!-- Silk Dome Tweeter Housing -->
+  <circle cx="230" cy="74" r="22" fill="#0f172a" stroke="#334155" stroke-width="1.2"/>
+  <circle cx="230" cy="74" r="16" fill="#1e293b"/>
+  <circle cx="230" cy="74" r="10" fill="url(#tweeterDome)" stroke="#475569" stroke-width="0.8"/>
+  <circle cx="230" cy="74" r="4" fill="#020617"/>
+  <circle cx="228" cy="72" r="1.5" fill="rgba(255,255,255,0.4)"/>
+
+  <!-- 4-Inch Woofer Housing -->
+  <circle cx="230" cy="142" r="36" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <circle cx="230" cy="142" r="30" fill="url(#wooferCone)" stroke="#475569" stroke-width="1"/>
+  <circle cx="230" cy="142" r="20" fill="#0f172a" stroke="#334155" stroke-width="0.8"/>
+  <circle cx="230" cy="142" r="12" fill="#1e293b"/>
+  <circle cx="230" cy="142" r="5" fill="#334155"/>
+
+  <!-- Front Bass Reflex Port -->
+  <rect x="210" y="184" width="40" height="7" rx="3.5" fill="#020617" stroke="#334155" stroke-width="0.8"/>
+
+  <!-- Active Power Indicator LED (Emerald Green Glow) -->
+  <circle cx="200" cy="48" r="2" fill="#22c55e" filter="drop-shadow(0 0 3px #22c55e)"/>
+
+  <!-- Side Control Knobs Inset (Volume, Bass, Treble) on Right Outer Side -->
+  <rect x="282" y="70" width="4" height="12" rx="1.5" fill="#94a3b8" stroke="#475569" stroke-width="0.6"/>
+  <rect x="282" y="90" width="4" height="12" rx="1.5" fill="#94a3b8" stroke="#475569" stroke-width="0.6"/>
+  <rect x="282" y="110" width="4" height="12" rx="1.5" fill="#94a3b8" stroke="#475569" stroke-width="0.6"/>
+</svg>

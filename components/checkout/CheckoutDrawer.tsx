@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { X, Check } from 'lucide-react';
-import { useWorkspaceStore, useTotal, useDuration, useCurrency } from '@/store/workspaceStore';
+import { useWorkspaceStore, useTotal } from '@/store/workspaceStore';
 import { formatIDR, formatUSD, DURATION_DISCOUNTS } from '@/data/products';
 
 const BALI_AREAS = [

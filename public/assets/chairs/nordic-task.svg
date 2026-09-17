@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 280" fill="none">
+  <defs>
+    <!-- Scandinavian Beige Fabric Gradient -->
+    <linearGradient id="scandiFabric" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#eedcc7"/>
+      <stop offset="50%" stopColor="#dfc5a6"/>
+      <stop offset="100%" stopColor="#caa984"/>
+    </linearGradient>
+    <linearGradient id="scandiBackrest" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#f5e6d3"/>
+      <stop offset="100%" stopColor="#d5b897"/>
+    </linearGradient>
+    <!-- Solid Oak Wood Leg Gradient -->
+    <linearGradient id="oakLegGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#c5925e"/>
+      <stop offset="40%" stopColor="#dbaa77"/>
+      <stop offset="100%" stopColor="#b3824f"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Floor Contact Shadows -->
+  <ellipse cx="68" cy="260" rx="14" ry="4" fill="rgba(0,0,0,0.18)"/>
+  <ellipse cx="172" cy="260" rx="14" ry="4" fill="rgba(0,0,0,0.18)"/>
+  <ellipse cx="102" cy="252" rx="12" ry="3.5" fill="rgba(0,0,0,0.12)"/>
+  <ellipse cx="138" cy="252" rx="12" ry="3.5" fill="rgba(0,0,0,0.12)"/>
+  <ellipse cx="120" cy="264" rx="65" ry="7" fill="rgba(0,0,0,0.12)"/>
+
+  <!-- Back Wooden Legs (Angled) -->
+  <polygon points="116,212 124,212 108,252 100,252" fill="#8f6338"/>
+  <polygon points="116,212 124,212 140,252 132,252" fill="#8f6338"/>
+
+  <!-- Black Steel Swivel Spider Hub -->
+  <circle cx="120" cy="212" r="12" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <path d="M 120 212 L 68 260 M 120 212 L 172 260" stroke="#0f172a" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Front Wooden Legs (Splayed Solid Oak) -->
+  <!-- Left Leg -->
+  <polygon points="115,210 125,210 74,260 62,260" fill="url(#oakLegGrad)" stroke="#8f6338" stroke-width="0.8"/>
+  <rect x="62" y="258" width="12" height="3" rx="1.5" fill="#1e293b"/>
+
+  <!-- Right Leg -->
+  <polygon points="115,210 125,210 178,260 166,260" fill="url(#oakLegGrad)" stroke="#8f6338" stroke-width="0.8"/>
+  <rect x="166" y="258" width="12" height="3" rx="1.5" fill="#1e293b"/>
+
+  <!-- Chrome Swivel Ring -->
+  <circle cx="120" cy="204" r="7" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1"/>
+
+  <!-- Curved Scandinavian Shell Backrest -->
+  <path d="M 76 56 C 76 34, 164 34, 164 56 C 168 96, 162 146, 154 156 C 146 164, 94 164, 86 156 C 78 146, 72 96, 76 56 Z" fill="url(#scandiBackrest)" stroke="#b59470" stroke-width="1.5"/>
+
+  <!-- Inner Backrest Cushion -->
+  <path d="M 84 62 C 84 46, 156 46, 156 62 C 158 92, 154 140, 146 148 C 140 154, 100 154, 94 148 C 86 140, 82 92, 84 62 Z" fill="url(#scandiFabric)"/>
+
+  <!-- Scandinavian Button Tufting / Seam Indentations -->
+  <circle cx="106" cy="80" r="3.5" fill="#a47d52" opacity="0.6"/>
+  <circle cx="134" cy="80" r="3.5" fill="#a47d52" opacity="0.6"/>
+  <circle cx="106" cy="112" r="3.5" fill="#a47d52" opacity="0.6"/>
+  <circle cx="134" cy="112" r="3.5" fill="#a47d52" opacity="0.6"/>
+
+  <!-- Gentle Diamond Seam Lines between Tufts -->
+  <path d="M 106 80 L 120 96 L 106 112 M 134 80 L 120 96 L 134 112" stroke="#a47d52" stroke-width="1" stroke-dasharray="2 2" opacity="0.45" fill="none"/>
+
+  <!-- Thick Ergonomic Scandinavian Padded Seat Cushion -->
+  <path d="M 66 164 C 66 152, 174 152, 174 164 C 176 182, 168 200, 152 204 C 138 207, 102 207, 88 204 C 72 200, 64 182, 66 164 Z" fill="url(#scandiFabric)" stroke="#a47d52" stroke-width="1.5"/>
+
+  <!-- Soft Upper Seat Surface Highlight -->
+  <ellipse cx="120" cy="172" rx="46" ry="12" fill="url(#scandiBackrest)" opacity="0.5"/>
+
+  <!-- Bottom Seat Piping Stitch Edge -->
+  <path d="M 72 188 Q 120 198 168 188" stroke="#926c42" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+</svg>

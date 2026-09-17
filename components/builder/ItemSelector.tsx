@@ -1,166 +1,68 @@
 'use client';
 
-import { useWorkspaceStore, useCurrency } from '@/store/workspaceStore';
-import { DESKS, CHAIRS, TECH, ACCESSORIES, formatIDR, formatUSD } from '@/data/products';
-import { Product } from '@/data/types';
-import { Check } from 'lucide-react';
+import React, { useState } from 'react';
+import DeskSelector from './DeskSelector';
+import ChairSelector from './ChairSelector';
+import AccessorySelector from './AccessorySelector';
+import { useWorkspaceStore } from '@/store/workspaceStore';
+import { Armchair, Sparkles } from 'lucide-react';
 
-const SECTIONS = [
-  { label: 'Desks', items: DESKS, type: 'desk' as const },
-  { label: 'Chairs', items: CHAIRS, type: 'chair' as const },
-  { label: 'Tech & Displays', items: TECH, type: 'tech' as const },
-  { label: 'Accessories', items: ACCESSORIES, type: 'accessory' as const },
-];
-
-function ItemRow({
-  product,
-  selected,
-  onToggle,
-}: {
-  product: Product;
-  selected: boolean;
-  onToggle: () => void;
-}) {
-  const currency = useCurrency();
-  const priceDisplay = currency === 'IDR' ? formatIDR(product.price) : formatUSD(product.price);
-
-  return (
-    <button
-      onClick={onToggle}
-      type="button"
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 10,
-        width: '100%',
-        padding: '8px 10px',
-        background: selected ? 'var(--paper-2)' : 'transparent',
-        border: selected ? '1px solid var(--ink)' : '1px solid transparent',
-        borderRadius: 'var(--radius)',
-        cursor: 'pointer',
-        textAlign: 'left',
-        transition: 'all 0.12s ease',
-        marginBottom: 4,
-      }}
-    >
-      {/* Thumbnail */}
-      <div
-        style={{
-          width: 38,
-          height: 38,
-          background: '#faf8f4',
-          border: '1px solid var(--line)',
-          borderRadius: 6,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexShrink: 0,
-          overflow: 'hidden',
-          padding: 3,
-        }}
-      >
-        <img
-          src={product.image}
-          alt={product.name}
-          loading="lazy"
-          decoding="async"
-          width={36}
-          height={36}
-          style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-          onError={(e) => {
-            const img = e.currentTarget as HTMLImageElement;
-            img.style.display = 'none';
-          }}
-        />
-      </div>
-
-      {/* Name & Price */}
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <p
-          style={{
-            fontSize: 13,
-            fontWeight: 600,
-            color: 'var(--ink)',
-            whiteSpace: 'normal',
-            lineHeight: 1.3,
-          }}
-        >
-          {product.name}
-        </p>
-        <p style={{ fontSize: 11.5, color: 'var(--brass)', fontWeight: 700, marginTop: 2 }}>
-          {priceDisplay}
-          <span style={{ fontWeight: 400, color: 'var(--ink-soft)' }}>/day</span>
-        </p>
-      </div>
-
-      {/* Check indicator */}
-      {selected && (
-        <div
-          style={{
-            width: 20,
-            height: 20,
-            borderRadius: '50%',
-            background: 'var(--ink)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexShrink: 0,
-          }}
-        >
-          <Check size={12} color="var(--paper)" strokeWidth={3} />
-        </div>
-      )}
-    </button>
-  );
-}
+type CategoryTab = 'desk' | 'chair' | 'accessory';
 
 export default function ItemSelector() {
-  const {
-    desk,
-    chair,
-    tech,
-    accessories,
-    setDesk,
-    setChair,
-    toggleTech,
-    toggleAccessory,
-  } = useWorkspaceStore();
+  const [activeTab, setActiveTab] = useState<CategoryTab>('desk');
+  const { desk, chair, tech, accessories } = useWorkspaceStore();
 
-  const isSelected = (product: Product): boolean => {
-    if (product.category === 'desk') return desk?.id === product.id;
-    if (product.category === 'chair') return chair?.id === product.id;
-    if (product.category === 'tech') return tech.some((t) => t.id === product.id);
-    if (product.category === 'accessory') return accessories.some((a) => a.id === product.id);
-    return false;
-  };
+  const accessoryCount = tech.length + accessories.length;
 
-  const handleToggle = (product: Product) => {
-    if (product.category === 'desk') {
-      setDesk(desk?.id === product.id ? null : product);
-    } else if (product.category === 'chair') {
-      setChair(chair?.id === product.id ? null : product);
-    } else if (product.category === 'tech') {
-      toggleTech(product);
-    } else if (product.category === 'accessory') {
-      toggleAccessory(product);
-    }
-  };
+  const TABS = [
+    {
+      id: 'desk' as const,
+      label: 'Meja',
+      sublabel: 'Desk',
+      badge: desk ? '✓' : null,
+      icon: (
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M4 6h16" />
+          <path d="M4 10h16" />
+          <path d="M4 6v12" />
+          <path d="M20 6v12" />
+        </svg>
+      ),
+    },
+    {
+      id: 'chair' as const,
+      label: 'Kursi',
+      sublabel: 'Chair',
+      badge: chair ? '✓' : null,
+      icon: <Armchair size={15} />,
+    },
+    {
+      id: 'accessory' as const,
+      label: 'Gear',
+      sublabel: 'Accessories',
+      badge: accessoryCount > 0 ? `${accessoryCount}` : null,
+      icon: <Sparkles size={15} />,
+    },
+  ];
 
   return (
     <aside
       style={{
-        width: 270,
+        width: 320,
         flexShrink: 0,
         background: 'var(--paper)',
         borderRight: '1px solid var(--line)',
         overflowY: 'auto',
         display: 'flex',
         flexDirection: 'column',
+        height: '100%',
       }}
     >
+      {/* ── Header ── */}
       <div
         style={{
-          padding: '14px 16px',
+          padding: '14px 16px 12px',
           borderBottom: '1px solid var(--line)',
           background: 'var(--paper)',
           position: 'sticky',
@@ -168,49 +70,90 @@ export default function ItemSelector() {
           zIndex: 10,
         }}
       >
-        <h3
-          style={{
-            fontSize: 14,
-            fontWeight: 700,
-            color: 'var(--ink)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.04em',
-          }}
-        >
-          Pick Your Items
-        </h3>
-        <p style={{ fontSize: 12, color: 'var(--ink-soft)', marginTop: 2 }}>
-          Click to add or replace in setup
-        </p>
-      </div>
-
-      <div style={{ padding: '14px 12px', flex: 1 }}>
-        {SECTIONS.map((sec) => (
-          <div key={sec.type} style={{ marginBottom: 20 }}>
-            <p
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div>
+            <h3
               style={{
-                fontSize: 11,
-                fontWeight: 700,
-                color: 'var(--ink-soft)',
+                fontSize: 13.5,
+                fontWeight: 800,
+                color: 'var(--ink)',
                 textTransform: 'uppercase',
-                letterSpacing: '0.08em',
-                marginBottom: 8,
-                paddingLeft: 4,
+                letterSpacing: '0.06em',
+                margin: 0,
               }}
             >
-              {sec.label}
+              Rancang Workspace Anda
+            </h3>
+            <p style={{ fontSize: 11.5, color: 'var(--ink-soft)', marginTop: 2, marginBottom: 0 }}>
+              Pilih meja, kursi, monitor &amp; aksesoris
             </p>
-
-            {sec.items.map((product) => (
-              <ItemRow
-                key={product.id}
-                product={product}
-                selected={isSelected(product)}
-                onToggle={() => handleToggle(product)}
-              />
-            ))}
           </div>
-        ))}
+        </div>
+
+        {/* ── Category Pill Tabs ── */}
+        <div
+          style={{
+            display: 'flex',
+            gap: 6,
+            marginTop: 12,
+            padding: 3,
+            background: 'var(--paper-2)',
+            borderRadius: 10,
+            border: '1px solid var(--line)',
+          }}
+        >
+          {TABS.map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setActiveTab(tab.id)}
+                style={{
+                  flex: 1,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 5,
+                  padding: '7px 8px',
+                  borderRadius: 7,
+                  border: 'none',
+                  background: isActive ? 'var(--paper)' : 'transparent',
+                  color: isActive ? 'var(--ink)' : 'var(--ink-soft)',
+                  fontWeight: isActive ? 700 : 600,
+                  fontSize: 12,
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease',
+                  boxShadow: isActive ? '0 2px 6px rgba(0,0,0,0.06)' : 'none',
+                }}
+              >
+                {tab.icon}
+                <span>{tab.label}</span>
+                {tab.badge && (
+                  <span
+                    style={{
+                      fontSize: 10,
+                      fontWeight: 800,
+                      padding: '1px 5px',
+                      borderRadius: 10,
+                      background: isActive ? 'var(--ink)' : 'var(--line)',
+                      color: isActive ? 'var(--paper)' : 'var(--ink)',
+                    }}
+                  >
+                    {tab.badge}
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ── Active Category Content ── */}
+      <div style={{ padding: '14px 14px 24px', flex: 1 }}>
+        {activeTab === 'desk' && <DeskSelector />}
+        {activeTab === 'chair' && <ChairSelector />}
+        {activeTab === 'accessory' && <AccessorySelector />}
       </div>
     </aside>
   );

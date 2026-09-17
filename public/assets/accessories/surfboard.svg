@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 320" fill="none">
+  <defs>
+    <!-- Pearl White Fiberglass Resin Deck Gradient -->
+    <linearGradient id="surfDeck" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#e2e8f0"/>
+      <stop offset="35%" stopColor="#ffffff"/>
+      <stop offset="70%" stopColor="#f8fafc"/>
+      <stop offset="100%" stopColor="#cbd5e1"/>
+    </linearGradient>
+    <!-- Tropical Canggu Stripe Gradient -->
+    <linearGradient id="cangguStripe" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#0284c7"/>
+      <stop offset="35%" stopColor="#0ea5e9"/>
+      <stop offset="70%" stopColor="#f59e0b"/>
+      <stop offset="100%" stopColor="#d97706"/>
+    </linearGradient>
+    <!-- Gloss Sheen Reflection -->
+    <linearGradient id="surfGloss" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="rgba(255,255,255,0.7)"/>
+      <stop offset="40%" stopColor="rgba(255,255,255,0.05)"/>
+      <stop offset="100%" stopColor="rgba(255,255,255,0)"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Floor / Ground Contact Shadow -->
+  <ellipse cx="70" cy="308" rx="38" ry="7" fill="rgba(0,0,0,0.22)"/>
+
+  <!-- ─── REAR THRUSTER FINS (Under Tail) ─── -->
+  <polygon points="56,288 48,306 58,300" fill="#94a3b8"/>
+  <polygon points="84,288 92,306 82,300" fill="#94a3b8"/>
+  <polygon points="70,292 70,308 73,304" fill="#64748b"/>
+
+  <!-- ─── 7'0" MINI MALIBU SURFBOARD BODY ─── -->
+  <!-- Main Fiberglass Board Outline -->
+  <path d="M 70 8 C 102 44, 112 140, 108 240 C 106 280, 92 296, 78 298 L 62 298 C 48 296, 34 280, 32 240 C 28 140, 38 44, 70 8 Z" fill="url(#surfDeck)" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <!-- Natural Wooden Central Stringer Line -->
+  <line x1="70" y1="9" x2="70" y2="297" stroke="#b45309" stroke-width="1.2" opacity="0.6"/>
+
+  <!-- Tropical Bali Ocean & Sunset Racing Stripe (Right of Stringer) -->
+  <path d="M 74 24 C 88 56, 94 130, 90 220 C 88 255, 80 285, 74 294 Z" fill="url(#cangguStripe)" opacity="0.85"/>
+  <line x1="74" y1="24" x2="74" y2="294" stroke="#ffffff" stroke-width="0.8" opacity="0.7"/>
+
+  <!-- Secondary Teal Accent Pin-Stripe -->
+  <path d="M 66 36 C 54 68, 50 140, 54 220 C 56 255, 62 280, 66 290 Z" fill="#0284c7" opacity="0.2"/>
+
+  <!-- Diagonal Gloss Finish Sunlight Sheen -->
+  <polygon points="70,8 100,50 64,280 34,240" fill="url(#surfGloss)" opacity="0.5"/>
+
+  <!-- ─── BALI CANGGU SURF LOGO BADGE (Center Chest Deck) ─── -->
+  <circle cx="70" cy="140" r="14" fill="#0f172a" stroke="#0ea5e9" stroke-width="1.2"/>
+  <!-- Palm tree & Wave vector inside badge -->
+  <path d="M 64 146 Q 70 140 76 146" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+  <line x1="70" y1="144" x2="70" y2="134" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/>
+  <circle cx="70" cy="133" r="1.5" fill="#f59e0b"/>
+  <text x="70" y="162" font-family="sans-serif" font-size="5" font-weight="900" fill="#64748b" text-anchor="middle" letter-spacing="1">CANGGU · 7'0"</text>
+
+  <!-- Leash Plug at Tail -->
+  <circle cx="70" cy="286" r="3.5" fill="#1e293b" stroke="#475569" stroke-width="0.8"/>
+  <line x1="68" y1="286" x2="72" y2="286" stroke="#94a3b8" stroke-width="1"/>
+</svg>

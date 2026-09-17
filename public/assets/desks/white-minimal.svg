@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" fill="none">
+  <defs>
+    <!-- Matte White Surface Gradient -->
+    <linearGradient id="whiteTop" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#ffffff"/>
+      <stop offset="60%" stopColor="#f8fafc"/>
+      <stop offset="100%" stopColor="#e2e8f0"/>
+    </linearGradient>
+    <linearGradient id="whiteEdge" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#cbd5e1"/>
+      <stop offset="100%" stopColor="#94a3b8"/>
+    </linearGradient>
+    <!-- Scandinavian Natural Oak Leg Gradient -->
+    <linearGradient id="scandiLeg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#c59f77"/>
+      <stop offset="40%" stopColor="#d8b998"/>
+      <stop offset="100%" stopColor="#b38960"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Floor Contact Shadows -->
+  <ellipse cx="44" cy="202" rx="14" ry="4" fill="rgba(0,0,0,0.15)"/>
+  <ellipse cx="276" cy="202" rx="14" ry="4" fill="rgba(0,0,0,0.15)"/>
+  <ellipse cx="88" cy="192" rx="12" ry="3.5" fill="rgba(0,0,0,0.1)"/>
+  <ellipse cx="232" cy="192" rx="12" ry="3.5" fill="rgba(0,0,0,0.1)"/>
+
+  <!-- Back Legs (Slightly Angled) -->
+  <polygon points="86,75 96,75 90,192 84,192" fill="#9c7551"/>
+  <polygon points="224,75 234,75 236,192 230,192" fill="#9c7551"/>
+
+  <!-- Under-Desk Frame Rail -->
+  <rect x="52" y="72" width="216" height="8" rx="2" fill="#cbd5e1"/>
+
+  <!-- Front Left Tapered Leg -->
+  <polygon points="50,75 62,75 48,202 38,202" fill="url(#scandiLeg)" stroke="#8c643e" stroke-width="0.5"/>
+  <rect x="38" y="200" width="10" height="3" rx="1.5" fill="#1e293b"/>
+
+  <!-- Front Right Tapered Leg -->
+  <polygon points="258,75 270,75 282,202 272,202" fill="url(#scandiLeg)" stroke="#8c643e" stroke-width="0.5"/>
+  <rect x="272" y="200" width="10" height="3" rx="1.5" fill="#1e293b"/>
+
+  <!-- White Studio Tabletop Surface -->
+  <polygon points="20,48 300,48 286,72 34,72" fill="url(#whiteTop)" stroke="#cbd5e1" stroke-width="1.2"/>
+
+  <!-- Cable Cutout Notch -->
+  <rect x="145" y="49" width="30" height="4" rx="2" fill="#94a3b8" opacity="0.6"/>
+
+  <!-- Tabletop Front Edge with Clean Bevel -->
+  <rect x="32" y="70" width="256" height="8" rx="2" fill="url(#whiteEdge)" stroke="#94a3b8" stroke-width="0.6"/>
+</svg>

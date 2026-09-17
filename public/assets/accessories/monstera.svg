@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 280" fill="none">
+  <defs>
+    <!-- Deep Jungle Green Leaf Gradients -->
+    <linearGradient id="leafGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#16a34a"/>
+      <stop offset="50%" stopColor="#15803d"/>
+      <stop offset="100%" stopColor="#14532d"/>
+    </linearGradient>
+    <linearGradient id="leafGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#22c55e"/>
+      <stop offset="60%" stopColor="#16a34a"/>
+      <stop offset="100%" stopColor="#166534"/>
+    </linearGradient>
+    <linearGradient id="leafGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#4ade80"/>
+      <stop offset="50%" stopColor="#16a34a"/>
+      <stop offset="100%" stopColor="#14532d"/>
+    </linearGradient>
+    <!-- White Ceramic Pot Gradient -->
+    <linearGradient id="potGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#e2e8f0"/>
+      <stop offset="35%" stopColor="#ffffff"/>
+      <stop offset="80%" stopColor="#f8fafc"/>
+      <stop offset="100%" stopColor="#cbd5e1"/>
+    </linearGradient>
+    <!-- Teak Wood Stand Gradient -->
+    <linearGradient id="teakGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#a16207"/>
+      <stop offset="50%" stopColor="#ca8a04"/>
+      <stop offset="100%" stopColor="#854d0e"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Floor Contact Shadow -->
+  <ellipse cx="130" cy="265" rx="55" ry="8" fill="rgba(0,0,0,0.2)"/>
+
+  <!-- ─── MID-CENTURY TEAK WOOD TRIPOD STAND ─── -->
+  <!-- Left Leg -->
+  <polygon points="98,206 106,206 88,262 78,262" fill="url(#teakGrad)" stroke="#713f12" stroke-width="0.8"/>
+  <!-- Right Leg -->
+  <polygon points="154,206 162,206 182,262 172,262" fill="url(#teakGrad)" stroke="#713f12" stroke-width="0.8"/>
+  <!-- Center Leg -->
+  <polygon points="126,206 134,206 132,264 124,264" fill="#713f12" stroke="#522b07" stroke-width="0.8"/>
+
+  <!-- Cross Brace Ring -->
+  <rect x="94" y="218" width="72" height="7" rx="3.5" fill="url(#teakGrad)" stroke="#713f12" stroke-width="0.8"/>
+
+  <!-- ─── WHITE CERAMIC CYLINDER POT ─── -->
+  <!-- Pot Shadow on Stand -->
+  <ellipse cx="130" cy="214" rx="42" ry="7" fill="rgba(0,0,0,0.18)"/>
+
+  <!-- Main Ceramic Pot Body -->
+  <rect x="88" y="148" width="84" height="66" rx="10" fill="url(#potGrad)" stroke="#cbd5e1" stroke-width="1.2"/>
+
+  <!-- Pot Rim / Opening -->
+  <ellipse cx="130" cy="148" rx="42" ry="11" fill="url(#potGrad)" stroke="#94a3b8" stroke-width="1"/>
+
+  <!-- Dark Organic Potting Soil -->
+  <ellipse cx="130" cy="150" rx="38" ry="9" fill="#2d1808"/>
+  <ellipse cx="130" cy="150" rx="35" ry="7" fill="#1c0f05"/>
+
+  <!-- ─── MONSTERA PLANT STEMS & ARCHING CANOPY ─── -->
+  <!-- Main Arching Stems -->
+  <path d="M 130 152 Q 128 110 100 70" stroke="#15803d" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M 130 152 Q 135 105 168 62" stroke="#15803d" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M 130 152 Q 122 120 74 116" stroke="#166534" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  <path d="M 130 152 Q 140 120 188 114" stroke="#166534" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  <path d="M 130 152 Q 130 90 130 38" stroke="#22c55e" stroke-width="3.8" stroke-linecap="round" fill="none"/>
+
+  <!-- ─── ICONIC PERFORATED LEAVES ─── -->
+
+  <!-- Leaf 1: Left Hanging Giant Leaf -->
+  <g transform="rotate(-18 74 116)">
+    <path d="M 74 116 C 50 94, 28 92, 22 108 C 16 122, 24 140, 48 152 C 68 160, 84 148, 86 132 Z" fill="url(#leafGrad1)" stroke="#14532d" stroke-width="1"/>
+    <!-- Leaf Splits / Fenestrations -->
+    <path d="M 44 110 L 28 104 M 40 122 L 20 122 M 46 136 L 28 144" stroke="#0f172a" stroke-width="3" stroke-linecap="round" opacity="0.15"/>
+    <ellipse cx="46" cy="120" rx="4" ry="2" fill="#ffffff" opacity="0.05"/>
+    <!-- Central Vein -->
+    <path d="M 74 116 Q 52 130 32 144" stroke="#4ade80" stroke-width="1.2" opacity="0.6" fill="none"/>
+  </g>
+
+  <!-- Leaf 2: Right Hanging Leaf -->
+  <g transform="rotate(20 188 114)">
+    <path d="M 188 114 C 210 94, 234 92, 240 108 C 246 122, 238 140, 214 152 C 194 160, 178 148, 176 132 Z" fill="url(#leafGrad2)" stroke="#14532d" stroke-width="1"/>
+    <!-- Splits -->
+    <path d="M 218 110 L 234 104 M 222 122 L 242 122 M 216 136 L 234 144" stroke="#0f172a" stroke-width="3" stroke-linecap="round" opacity="0.15"/>
+    <!-- Central Vein -->
+    <path d="M 188 114 Q 210 130 230 144" stroke="#4ade80" stroke-width="1.2" opacity="0.6" fill="none"/>
+  </g>
+
+  <!-- Leaf 3: Top-Left Arching Monstera Leaf -->
+  <g transform="rotate(-10 100 70)">
+    <path d="M 100 70 C 82 44, 52 40, 42 58 C 34 76, 44 98, 76 108 C 96 114, 116 98, 114 82 Z" fill="url(#leafGrad2)" stroke="#15803d" stroke-width="1"/>
+    <!-- Swiss Cheese Fenestration Holes -->
+    <ellipse cx="68" cy="68" rx="5" ry="2.5" fill="#f8fafc" opacity="0.1" transform="rotate(-30 68 68)"/>
+    <ellipse cx="78" cy="84" rx="6" ry="3" fill="#f8fafc" opacity="0.1" transform="rotate(-30 78 84)"/>
+    <!-- Cutout splits -->
+    <path d="M 72 56 L 50 48 M 62 76 L 38 78 M 74 94 L 54 104" stroke="rgba(0,0,0,0.3)" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M 100 70 Q 74 80 50 96" stroke="#86efac" stroke-width="1.5" opacity="0.7" fill="none"/>
+  </g>
+
+  <!-- Leaf 4: Top-Right Arching Monstera Leaf -->
+  <g transform="rotate(12 168 62)">
+    <path d="M 168 62 C 188 38, 218 34, 226 52 C 234 70, 222 92, 192 102 C 172 108, 152 92, 154 76 Z" fill="url(#leafGrad1)" stroke="#14532d" stroke-width="1"/>
+    <!-- Fenestration Holes -->
+    <ellipse cx="200" cy="60" rx="5" ry="2.5" fill="#f8fafc" opacity="0.1" transform="rotate(30 200 60)"/>
+    <ellipse cx="190" cy="76" rx="6" ry="3" fill="#f8fafc" opacity="0.1" transform="rotate(30 190 76)"/>
+    <!-- Splits -->
+    <path d="M 196 48 L 218 40 M 206 68 L 230 70 M 194 86 L 214 96" stroke="rgba(0,0,0,0.3)" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M 168 62 Q 194 72 218 88" stroke="#86efac" stroke-width="1.5" opacity="0.7" fill="none"/>
+  </g>
+
+  <!-- Leaf 5: Top Center Young Leaf (Fresh Bright Emerald Green) -->
+  <g>
+    <path d="M 130 38 C 114 16, 146 16, 130 38 Z" fill="none"/>
+    <path d="M 130 42 C 104 22, 112 2, 130 2 C 148 2, 156 22, 130 42 Z" fill="url(#leafGrad3)" stroke="#16a34a" stroke-width="1"/>
+    <!-- Central vein -->
+    <line x1="130" y1="42" x2="130" y2="4" stroke="#bbf7d0" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+</svg>

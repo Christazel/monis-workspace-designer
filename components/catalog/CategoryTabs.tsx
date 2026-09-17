@@ -10,8 +10,6 @@ const CATEGORIES = [
   { id: 'accessory', label: 'Accessories' },
 ] as const;
 
-type CategoryId = typeof CATEGORIES[number]['id'];
-
 export default function CategoryTabs() {
   const { activeCategory, setActiveCategory } = useWorkspaceStore();
 

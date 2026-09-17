@@ -24,7 +24,7 @@ export const PRESETS: Preset[] = [
     deskId: 'desk-walnut-executive',
     chairId: 'chair-scandi-cushion',
     techIds: ['tech-ultrawide', 'tech-webcam-4k'],
-    accessoryIds: ['acc-screenbar', 'acc-monstera', 'acc-coffee-espresso'],
+    accessoryIds: ['acc-screenbar', 'acc-monstera', 'acc-espresso'],
     totalPrice: 460000, // IDR/day
   },
   {

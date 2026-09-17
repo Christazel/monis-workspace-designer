@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" fill="none">
+  <defs>
+    <!-- Tempered Glass Top Surface Gradient -->
+    <linearGradient id="glassTopGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="rgba(207, 235, 245, 0.45)"/>
+      <stop offset="50%" stopColor="rgba(165, 215, 235, 0.25)"/>
+      <stop offset="100%" stopColor="rgba(140, 195, 225, 0.35)"/>
+    </linearGradient>
+    <!-- Tempered Glass Edge (Teal Tint) -->
+    <linearGradient id="glassEdgeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#0284c7"/>
+      <stop offset="30%" stopColor="#0ea5e9"/>
+      <stop offset="70%" stopColor="#38bdf8"/>
+      <stop offset="100%" stopColor="#0284c7"/>
+    </linearGradient>
+    <!-- Chrome Steel Frame Gradient -->
+    <linearGradient id="chromeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#94a3b8"/>
+      <stop offset="25%" stopColor="#f1f5f9"/>
+      <stop offset="60%" stopColor="#cbd5e1"/>
+      <stop offset="100%" stopColor="#64748b"/>
+    </linearGradient>
+    <!-- Glass Sheen / Reflection -->
+    <linearGradient id="glassReflection" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="rgba(255,255,255,0.6)"/>
+      <stop offset="30%" stopColor="rgba(255,255,255,0.05)"/>
+      <stop offset="100%" stopColor="rgba(255,255,255,0)"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Floor Contact Shadow -->
+  <ellipse cx="160" cy="204" rx="140" ry="7" fill="rgba(0,0,0,0.16)"/>
+
+  <!-- Back Frame & Cross Struts (L-Shape Corner) -->
+  <polygon points="45,72 53,72 65,198 57,198" fill="#64748b"/>
+  <polygon points="267,72 275,72 263,198 255,198" fill="#64748b"/>
+  <rect x="52" y="160" width="216" height="4" rx="2" fill="#94a3b8" opacity="0.6"/>
+
+  <!-- Chrome Legs (Main Front Columns) -->
+  <rect x="36" y="70" width="10" height="130" rx="4" fill="url(#chromeGrad)" stroke="#64748b" stroke-width="0.8"/>
+  <rect x="274" y="70" width="10" height="130" rx="4" fill="url(#chromeGrad)" stroke="#64748b" stroke-width="0.8"/>
+  <rect x="155" y="70" width="10" height="130" rx="4" fill="url(#chromeGrad)" stroke="#64748b" stroke-width="0.8"/>
+
+  <!-- Chrome Floor Base Skids -->
+  <rect x="28" y="196" width="26" height="6" rx="3" fill="url(#chromeGrad)" stroke="#475569" stroke-width="0.6"/>
+  <rect x="266" y="196" width="26" height="6" rx="3" fill="url(#chromeGrad)" stroke="#475569" stroke-width="0.6"/>
+  <rect x="147" y="196" width="26" height="6" rx="3" fill="url(#chromeGrad)" stroke="#475569" stroke-width="0.6"/>
+
+  <!-- Chrome Under-Glass Rail Structure -->
+  <rect x="24" y="66" width="272" height="6" rx="2" fill="url(#chromeGrad)" stroke="#475569" stroke-width="0.6"/>
+
+  <!-- Monitor Riser Platform (Tempered Glass Riser in Center) -->
+  <rect x="110" y="36" width="100" height="4" rx="2" fill="url(#chromeGrad)"/>
+  <rect x="120" y="40" width="6" height="24" rx="2" fill="url(#chromeGrad)"/>
+  <rect x="194" y="40" width="6" height="24" rx="2" fill="url(#chromeGrad)"/>
+  <polygon points="100,32 220,32 214,40 106,40" fill="url(#glassTopGrad)" stroke="#38bdf8" stroke-width="0.8"/>
+  <rect x="106" y="40" width="108" height="3" rx="1.5" fill="url(#glassEdgeGrad)"/>
+
+  <!-- Main 10mm Tempered Glass Desktop (Isometric Angle) -->
+  <!-- L-Shaped Surface -->
+  <polygon points="18,48 302,48 288,72 32,72" fill="url(#glassTopGrad)" stroke="rgba(56,189,248,0.7)" stroke-width="1.2"/>
+
+  <!-- Diagonal Glass Light Sheen / Polish Reflection -->
+  <polygon points="25,49 120,49 70,71 28,71" fill="url(#glassReflection)"/>
+  <polygon points="180,49 240,49 210,71 165,71" fill="url(#glassReflection)" opacity="0.6"/>
+
+  <!-- Distinct 10mm Polished Cyan Glass Bevel Edge -->
+  <rect x="30" y="72" width="260" height="7" rx="2" fill="url(#glassEdgeGrad)" opacity="0.95"/>
+
+  <!-- Corner Protectors / Suction Discs -->
+  <circle cx="38" cy="54" r="3.5" fill="rgba(255,255,255,0.7)" stroke="#38bdf8" stroke-width="0.6"/>
+  <circle cx="282" cy="54" r="3.5" fill="rgba(255,255,255,0.7)" stroke="#38bdf8" stroke-width="0.6"/>
+  <circle cx="160" cy="54" r="3.5" fill="rgba(255,255,255,0.7)" stroke="#38bdf8" stroke-width="0.6"/>
+</svg>

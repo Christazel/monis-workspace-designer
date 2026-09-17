@@ -97,7 +97,7 @@ export default function CatalogSection() {
               No products found
             </p>
             <p style={{ fontSize: 14, color: 'var(--ink-soft)', marginBottom: 16 }}>
-              We couldn't find any products matching your current selection.
+              We couldn&apos;t find any products matching your current selection.
             </p>
             <button
               type="button"

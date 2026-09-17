@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 280" fill="none">
+  <defs>
+    <!-- Royal Indigo Outdoor Canvas Gradient -->
+    <linearGradient id="beanbagGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#3b82f6"/>
+      <stop offset="40%" stopColor="#2563eb"/>
+      <stop offset="80%" stopColor="#1d4ed8"/>
+      <stop offset="100%" stopColor="#1e3a8a"/>
+    </linearGradient>
+    <!-- Deep Crease Shadow Gradient -->
+    <linearGradient id="beanbagCrease" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="rgba(30, 58, 138, 0.5)"/>
+      <stop offset="100%" stopColor="rgba(15, 23, 42, 0)"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Floor Contact Shadow -->
+  <ellipse cx="130" cy="256" rx="95" ry="14" fill="rgba(0,0,0,0.25)"/>
+
+  <!-- ─── RED BRAND LABEL TAG (Right Side) ─── -->
+  <polygon points="214,142 244,138 248,168 218,172" fill="#ef4444" stroke="#b91c1c" stroke-width="1"/>
+  <text x="231" y="157" font-family="sans-serif" font-size="7" font-weight="900" fill="#ffffff" text-anchor="middle" transform="rotate(-6 231 157)">MONIS</text>
+
+  <!-- ─── MAIN OVERSIZED BEAN BAG BODY ─── -->
+  <path d="M 130 36 C 180 44, 218 90, 222 154 C 226 210, 196 250, 130 252 C 64 250, 34 210, 38 154 C 42 90, 80 44, 130 36 Z" fill="url(#beanbagGrad)" stroke="#1d4ed8" stroke-width="2"/>
+
+  <!-- ─── NATURAL FABRIC CREASES & LOUNGE FOLDS ─── -->
+  <!-- Top Tuft & Grab Handle Fold -->
+  <path d="M 115 42 Q 130 30 145 42" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+  <!-- Upper Front Highlight Creases -->
+  <path d="M 80 88 C 110 68, 150 72, 178 92" stroke="rgba(255,255,255,0.22)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M 72 120 C 105 100, 155 104, 186 126" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+  <!-- Deep Sitting Indentation Center Shadow -->
+  <ellipse cx="130" cy="154" rx="58" ry="34" fill="url(#beanbagCrease)"/>
+
+  <!-- Bottom Lounge Roll / Support Crease -->
+  <path d="M 64 178 C 96 212, 164 212, 196 178" stroke="#172554" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M 80 196 Q 130 226 180 196" stroke="#172554" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+  <!-- Heavy Duty Double-Stitched Edge Seam -->
+  <path d="M 44 156 C 48 100, 84 56, 128 48 M 216 156 C 212 100, 176 56, 132 48" stroke="#60a5fa" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.4" fill="none"/>
+  <path d="M 48 190 C 72 232, 188 232, 212 190" stroke="#60a5fa" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.3" fill="none"/>
+</svg>

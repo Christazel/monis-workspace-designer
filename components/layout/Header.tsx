@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { useWorkspaceStore, useCurrency, useMode } from '@/store/workspaceStore';
+import { useWorkspaceStore } from '@/store/workspaceStore';
 
 type NavItem = 'catalog' | 'setups' | 'builder' | 'how-it-works';
 
@@ -10,16 +10,10 @@ export default function Header() {
   const { mode, setMode, currency, setCurrency, setCheckoutOpen } = useWorkspaceStore();
   const { desk, chair, tech, accessories } = useWorkspaceStore();
 
-  const [activeNav, setActiveNav] = useState<NavItem>(mode === 'builder' ? 'builder' : 'catalog');
+  const [activeNav, setActiveNav] = useState<NavItem>('catalog');
   const isClickingRef = useRef(false);
 
   const totalCount = (desk ? 1 : 0) + (chair ? 1 : 0) + tech.length + accessories.length;
-
-  useEffect(() => {
-    if (mode === 'builder') {
-      setActiveNav('builder');
-    }
-  }, [mode]);
 
   useEffect(() => {
     if (mode !== 'catalog') return;
