@@ -921,6 +921,9 @@ footer.site-footer {
   .monis-search-capsule {
     width: 100% !important;
     max-width: 100% !important;
+    height: 42px !important;
+    min-height: 42px !important;
+    flex: none !important;
     margin: 0 !important;
     padding: 3px 6px 3px 12px !important;
   }

@@ -380,7 +380,9 @@ export default function Header() {
               padding: '4px 6px 4px 14px',
               boxShadow: '0 1px 4px rgba(0, 0, 0, 0.04)',
               maxWidth: '560px',
-              flex: '1 1 480px',
+              width: '100%',
+              height: '44px',
+              flex: '1 1 auto',
               position: 'relative',
             }}
           >
