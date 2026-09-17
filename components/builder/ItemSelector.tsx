@@ -50,6 +50,7 @@ export default function ItemSelector() {
     <aside
       style={{
         width: 320,
+        maxWidth: '100%',
         flexShrink: 0,
         background: 'var(--paper)',
         borderRight: '1px solid var(--line)',

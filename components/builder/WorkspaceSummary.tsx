@@ -43,6 +43,7 @@ export default function WorkspaceSummary() {
     <aside
       style={{
         width: 320,
+        maxWidth: '100%',
         flexShrink: 0,
         background: 'var(--paper)',
         borderLeft: '1px solid var(--line)',

@@ -7,7 +7,7 @@ export const PRESETS: Preset[] = [
     tagline: 'Built for deep work and long coding sessions',
     description:
       'Dual monitors, standing desk, and the iconic Herman Miller Aeron. Everything optimised for 10+ hour coding marathons in your Bali villa.',
-    icon: '👨‍💻',
+    icon: 'dev',
     deskId: 'desk-standing-oak',
     chairId: 'chair-aeron',
     techIds: ['tech-4k-27', 'tech-keyboard-mouse'],
@@ -20,7 +20,7 @@ export const PRESETS: Preset[] = [
     tagline: 'Perfect for designers, video editors, and content creators',
     description:
       'Massive ultrawide display for your creative canvas, 4K webcam for pro video calls, and a lush Monstera to keep ideas flowing. Plus your morning espresso.',
-    icon: '🎨',
+    icon: 'creator',
     deskId: 'desk-walnut-executive',
     chairId: 'chair-scandi-cushion',
     techIds: ['tech-ultrawide', 'tech-webcam-4k'],
@@ -33,7 +33,7 @@ export const PRESETS: Preset[] = [
     tagline: 'Travel light, work sharp, surf after standup',
     description:
       'Clean minimal white desk, comfortable mesh chair, a 27" 4K display, plus the essential Bali perk: a surfboard waiting by the door for sunset sessions.',
-    icon: '🌴',
+    icon: 'nomad',
     deskId: 'desk-white-minimal',
     chairId: 'chair-markus-mesh',
     techIds: ['tech-4k-27'],
