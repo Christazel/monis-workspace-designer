@@ -1067,4 +1067,12 @@ nextjs-portal {
   display: none !important;
 }
 
+/* Optimize rendering performance of offscreen sections */
+#how-it-works,
+#catalog,
+footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
 

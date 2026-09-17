@@ -1,7 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useMode } from '@/store/workspaceStore';
+import { useWorkspaceStore } from '@/store/workspaceStore';
 import Header from '@/components/layout/Header';
 import HeroBanner from '@/components/layout/HeroBanner';
 import HowItWorks from '@/components/layout/HowItWorks';
@@ -16,7 +16,8 @@ const CheckoutDrawer = dynamic(() => import('@/components/checkout/CheckoutDrawe
 });
 
 export default function Home() {
-  const mode = useMode();
+  const mode = useWorkspaceStore((s) => s.mode);
+  const checkoutOpen = useWorkspaceStore((s) => s.checkoutOpen);
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--paper)' }}>
@@ -38,8 +39,8 @@ export default function Home() {
         {mode === 'builder' && <BuilderSection />}
       </main>
 
-      {/* ── CHECKOUT DRAWER ── */}
-      <CheckoutDrawer />
+      {/* ── CHECKOUT DRAWER (loaded on demand) ── */}
+      {checkoutOpen && <CheckoutDrawer />}
     </div>
   );
 }
