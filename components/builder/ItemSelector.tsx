@@ -60,43 +60,57 @@ export default function ItemSelector() {
         height: '100%',
       }}
     >
-      {/* ── Header ── */}
+      {/* ── Fixed 58px Horizon Top Header ── */}
       <div
         style={{
-          padding: '14px 16px 12px',
+          height: 58,
+          padding: '0 16px',
           borderBottom: '1px solid var(--line)',
           background: 'var(--paper)',
           position: 'sticky',
           top: 0,
           zIndex: 10,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexShrink: 0,
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <div>
-            <h3
-              style={{
-                fontSize: 13.5,
-                fontWeight: 800,
-                color: 'var(--ink)',
-                textTransform: 'uppercase',
-                letterSpacing: '0.06em',
-                margin: 0,
-              }}
-            >
-              Rancang Workspace Anda
-            </h3>
-            <p style={{ fontSize: 11.5, color: 'var(--ink-soft)', marginTop: 2, marginBottom: 0 }}>
-              Pilih meja, kursi, monitor &amp; aksesoris
-            </p>
-          </div>
+        <div>
+          <h3
+            style={{
+              fontSize: 13,
+              fontWeight: 800,
+              color: 'var(--ink)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.06em',
+              margin: 0,
+              lineHeight: 1.2,
+            }}
+          >
+            Katalog Item
+          </h3>
+          <p style={{ fontSize: 11, color: 'var(--ink-soft)', marginTop: 2, marginBottom: 0 }}>
+            Pilih meja, kursi &amp; aksesoris
+          </p>
         </div>
+      </div>
 
-        {/* ── Category Pill Tabs ── */}
+      {/* ── Category Pill Tabs (Segmented Control) ── */}
+      <div
+        style={{
+          padding: '12px 14px 8px',
+          background: 'var(--paper)',
+          position: 'sticky',
+          top: 58,
+          zIndex: 9,
+          borderBottom: '1px solid var(--line-soft)',
+        }}
+      >
         <div
           style={{
             display: 'flex',
-            gap: 6,
-            marginTop: 12,
+            gap: 4,
             padding: 3,
             background: 'var(--paper-2)',
             borderRadius: 10,
@@ -116,7 +130,7 @@ export default function ItemSelector() {
                   alignItems: 'center',
                   justifyContent: 'center',
                   gap: 5,
-                  padding: '7px 8px',
+                  padding: '7px 6px',
                   borderRadius: 7,
                   border: 'none',
                   background: isActive ? 'var(--paper)' : 'transparent',
@@ -133,12 +147,17 @@ export default function ItemSelector() {
                 {tab.badge && (
                   <span
                     style={{
-                      fontSize: 10,
+                      fontSize: 9.5,
                       fontWeight: 800,
-                      padding: '1px 5px',
-                      borderRadius: 10,
-                      background: isActive ? 'var(--ink)' : 'var(--line)',
-                      color: isActive ? 'var(--paper)' : 'var(--ink)',
+                      minWidth: 16,
+                      height: 16,
+                      borderRadius: 8,
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      padding: '0 4px',
+                      background: isActive ? 'var(--ink)' : 'rgba(22, 163, 74, 0.14)',
+                      color: isActive ? 'var(--paper)' : '#16a34a',
                     }}
                   >
                     {tab.badge}
@@ -151,7 +170,7 @@ export default function ItemSelector() {
       </div>
 
       {/* ── Active Category Content ── */}
-      <div style={{ padding: '14px 14px 24px', flex: 1 }}>
+      <div style={{ padding: '12px 14px 32px', flex: 1 }}>
         {activeTab === 'desk' && <DeskSelector />}
         {activeTab === 'chair' && <ChairSelector />}
         {activeTab === 'accessory' && <AccessorySelector />}

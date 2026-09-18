@@ -53,40 +53,46 @@ export default function WorkspaceSummary() {
         overflow: 'hidden',
       }}
     >
-      {/* ── Header ── */}
+      {/* ── Fixed 58px Horizon Top Header ── */}
       <div
         style={{
-          padding: '16px 18px',
+          height: 58,
+          padding: '0 16px',
           borderBottom: '1px solid var(--line)',
+          background: 'var(--paper)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
+          flexShrink: 0,
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <h3
             style={{
-              fontSize: 14.5,
+              fontSize: 13,
               fontWeight: 800,
               color: 'var(--ink)',
-              letterSpacing: '-0.01em',
+              textTransform: 'uppercase',
+              letterSpacing: '0.06em',
               margin: 0,
+              lineHeight: 1.2,
             }}
           >
-            Workspace Saya
+            Ringkasan Setup
           </h3>
           <span
             style={{
               background: 'var(--ink)',
               color: 'var(--paper)',
-              fontSize: 11,
+              fontSize: 10.5,
               fontWeight: 800,
-              width: 20,
-              height: 20,
-              borderRadius: '50%',
+              minWidth: 18,
+              height: 18,
+              borderRadius: 9,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              padding: '0 4px',
             }}
           >
             {allItems.length}
@@ -101,12 +107,13 @@ export default function WorkspaceSummary() {
             style={{
               fontSize: 10.5,
               fontWeight: 700,
-              padding: '2px 8px',
-              borderRadius: 12,
+              padding: '3px 8px',
+              borderRadius: 6,
               border: '1px solid var(--line)',
               background: 'var(--paper-2)',
               color: 'var(--ink)',
               cursor: 'pointer',
+              transition: 'all 0.15s ease',
             }}
             title="Ganti mata uang"
             aria-label={`Switch currency between IDR and USD, currently ${currency}`}
@@ -121,17 +128,22 @@ export default function WorkspaceSummary() {
               aria-label="Reset workspace configuration"
               style={{
                 fontSize: 11,
+                fontWeight: 600,
                 color: 'var(--ink-soft)',
                 background: 'none',
                 border: 'none',
                 cursor: 'pointer',
-                padding: '2px 4px',
+                padding: '3px 6px',
+                borderRadius: 6,
+                transition: 'all 0.15s ease',
               }}
               onMouseEnter={(e) => {
                 (e.currentTarget as HTMLButtonElement).style.color = '#dc2626';
+                (e.currentTarget as HTMLButtonElement).style.background = 'rgba(220, 38, 38, 0.08)';
               }}
               onMouseLeave={(e) => {
                 (e.currentTarget as HTMLButtonElement).style.color = 'var(--ink-soft)';
+                (e.currentTarget as HTMLButtonElement).style.background = 'none';
               }}
             >
               Reset
@@ -141,12 +153,12 @@ export default function WorkspaceSummary() {
       </div>
 
       {/* ── Scrollable Items Body ── */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '16px 18px', display: 'flex', flexDirection: 'column', gap: 18 }}>
+      <div style={{ flex: 1, overflowY: 'auto', padding: '14px 16px 24px', display: 'flex', flexDirection: 'column', gap: 16 }}>
         
         {/* SECTION: MEJA (DESK) */}
         <div>
-          <p style={{ fontSize: 11, fontWeight: 700, color: 'var(--ink-soft)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8, margin: 0 }}>
-            Meja (Desk)
+          <p style={{ fontSize: 10.5, fontWeight: 700, color: 'var(--ink-soft)', textTransform: 'uppercase', letterSpacing: '0.08em', margin: 0, marginBottom: 6 }}>
+            Meja Kerja
           </p>
           {desk ? (
             <div
@@ -158,13 +170,12 @@ export default function WorkspaceSummary() {
                 borderRadius: 10,
                 background: 'var(--paper-2)',
                 border: '1px solid var(--line)',
-                marginTop: 6,
               }}
             >
               <div
                 style={{
-                  width: 22,
-                  height: 22,
+                  width: 20,
+                  height: 20,
                   borderRadius: '50%',
                   background: '#16a34a',
                   color: '#fff',
@@ -174,24 +185,46 @@ export default function WorkspaceSummary() {
                   flexShrink: 0,
                 }}
               >
-                <Check size={13} strokeWidth={3} />
+                <Check size={12} strokeWidth={3} />
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <p style={{ fontSize: 12.5, fontWeight: 700, color: 'var(--ink)', margin: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                <p style={{ fontSize: 12, fontWeight: 700, color: 'var(--ink)', margin: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {desk.name}
                 </p>
-                <p style={{ fontSize: 11, color: 'var(--brass)', fontWeight: 600, margin: 0 }}>
+                <p style={{ fontSize: 10.5, color: 'var(--brass)', fontWeight: 600, margin: 0 }}>
                   {formatMonthlyRate(desk.price, currency)}
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => setDesk(null)}
-                style={{ background: 'none', border: 'none', color: 'var(--ink-soft)', cursor: 'pointer', padding: 4 }}
+                style={{
+                  width: 24,
+                  height: 24,
+                  borderRadius: 6,
+                  background: 'transparent',
+                  border: 'none',
+                  color: 'var(--ink-soft)',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: 0,
+                  transition: 'all 0.15s ease',
+                  flexShrink: 0,
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.background = 'rgba(239, 68, 68, 0.1)';
+                  (e.currentTarget as HTMLButtonElement).style.color = '#dc2626';
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.background = 'transparent';
+                  (e.currentTarget as HTMLButtonElement).style.color = 'var(--ink-soft)';
+                }}
                 title="Hapus meja"
                 aria-label="Remove desk from workspace"
               >
-                <Trash2 size={13} />
+                <Trash2 size={12} />
               </button>
             </div>
           ) : (
@@ -202,7 +235,6 @@ export default function WorkspaceSummary() {
                 border: '1px dashed var(--line)',
                 color: 'var(--ink-soft)',
                 fontSize: 11.5,
-                marginTop: 6,
               }}
             >
               Belum memilih meja
@@ -212,8 +244,8 @@ export default function WorkspaceSummary() {
 
         {/* SECTION: KURSI (CHAIR) */}
         <div>
-          <p style={{ fontSize: 11, fontWeight: 700, color: 'var(--ink-soft)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8, margin: 0 }}>
-            Kursi (Chair)
+          <p style={{ fontSize: 10.5, fontWeight: 700, color: 'var(--ink-soft)', textTransform: 'uppercase', letterSpacing: '0.08em', margin: 0, marginBottom: 6 }}>
+            Kursi Ergonomis
           </p>
           {chair ? (
             <div
@@ -225,13 +257,12 @@ export default function WorkspaceSummary() {
                 borderRadius: 10,
                 background: 'var(--paper-2)',
                 border: '1px solid var(--line)',
-                marginTop: 6,
               }}
             >
               <div
                 style={{
-                  width: 22,
-                  height: 22,
+                  width: 20,
+                  height: 20,
                   borderRadius: '50%',
                   background: '#16a34a',
                   color: '#fff',
@@ -241,24 +272,46 @@ export default function WorkspaceSummary() {
                   flexShrink: 0,
                 }}
               >
-                <Check size={13} strokeWidth={3} />
+                <Check size={12} strokeWidth={3} />
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <p style={{ fontSize: 12.5, fontWeight: 700, color: 'var(--ink)', margin: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                <p style={{ fontSize: 12, fontWeight: 700, color: 'var(--ink)', margin: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {chair.name}
                 </p>
-                <p style={{ fontSize: 11, color: 'var(--brass)', fontWeight: 600, margin: 0 }}>
+                <p style={{ fontSize: 10.5, color: 'var(--brass)', fontWeight: 600, margin: 0 }}>
                   {formatMonthlyRate(chair.price, currency)}
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => setChair(null)}
-                style={{ background: 'none', border: 'none', color: 'var(--ink-soft)', cursor: 'pointer', padding: 4 }}
+                style={{
+                  width: 24,
+                  height: 24,
+                  borderRadius: 6,
+                  background: 'transparent',
+                  border: 'none',
+                  color: 'var(--ink-soft)',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: 0,
+                  transition: 'all 0.15s ease',
+                  flexShrink: 0,
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.background = 'rgba(239, 68, 68, 0.1)';
+                  (e.currentTarget as HTMLButtonElement).style.color = '#dc2626';
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.background = 'transparent';
+                  (e.currentTarget as HTMLButtonElement).style.color = 'var(--ink-soft)';
+                }}
                 title="Hapus kursi"
                 aria-label="Remove chair from workspace"
               >
-                <Trash2 size={13} />
+                <Trash2 size={12} />
               </button>
             </div>
           ) : (
@@ -269,7 +322,6 @@ export default function WorkspaceSummary() {
                 border: '1px dashed var(--line)',
                 color: 'var(--ink-soft)',
                 fontSize: 11.5,
-                marginTop: 6,
               }}
             >
               Belum memilih kursi
@@ -280,13 +332,13 @@ export default function WorkspaceSummary() {
         {/* SECTION: ACCESSORIES */}
         <div>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
-            <p style={{ fontSize: 11, fontWeight: 700, color: 'var(--ink-soft)', textTransform: 'uppercase', letterSpacing: '0.08em', margin: 0 }}>
-              Accessories ({allAccessories.length})
+            <p style={{ fontSize: 10.5, fontWeight: 700, color: 'var(--ink-soft)', textTransform: 'uppercase', letterSpacing: '0.08em', margin: 0 }}>
+              Aksesoris &amp; Gear ({allAccessories.length})
             </p>
           </div>
 
           {allAccessories.length > 0 ? (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 6 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
               {allAccessories.map((item) => (
                 <div
                   key={item.id}
@@ -329,7 +381,29 @@ export default function WorkspaceSummary() {
                       if (item.category === 'tech') toggleTech(item);
                       else toggleAccessory(item);
                     }}
-                    style={{ background: 'none', border: 'none', color: 'var(--ink-soft)', cursor: 'pointer', padding: 3 }}
+                    style={{
+                      width: 24,
+                      height: 24,
+                      borderRadius: 6,
+                      background: 'transparent',
+                      border: 'none',
+                      color: 'var(--ink-soft)',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      padding: 0,
+                      transition: 'all 0.15s ease',
+                      flexShrink: 0,
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLButtonElement).style.background = 'rgba(239, 68, 68, 0.1)';
+                      (e.currentTarget as HTMLButtonElement).style.color = '#dc2626';
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLButtonElement).style.background = 'transparent';
+                      (e.currentTarget as HTMLButtonElement).style.color = 'var(--ink-soft)';
+                    }}
                     title={`Hapus ${item.name}`}
                     aria-label={`Remove ${item.name} from workspace`}
                   >
@@ -346,7 +420,6 @@ export default function WorkspaceSummary() {
                 border: '1px dashed var(--line)',
                 color: 'var(--ink-soft)',
                 fontSize: 11.5,
-                marginTop: 6,
               }}
             >
               Belum ada aksesoris ditambahkan
@@ -358,23 +431,24 @@ export default function WorkspaceSummary() {
       {/* ── Footer: Total & CTA Button ── */}
       <div
         style={{
-          padding: '16px 18px',
+          padding: '14px 16px',
           borderTop: '1px solid var(--line)',
           background: 'var(--paper)',
           display: 'flex',
           flexDirection: 'column',
-          gap: 12,
+          gap: 10,
+          flexShrink: 0,
         }}
       >
         {/* Total Price Display */}
         <div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-            <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--ink-soft)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--ink-soft)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
               Total Rental
             </span>
             <span
               style={{
-                fontSize: 11,
+                fontSize: 10.5,
                 fontWeight: 700,
                 color: '#16a34a',
                 background: 'rgba(22, 163, 74, 0.12)',
@@ -385,10 +459,10 @@ export default function WorkspaceSummary() {
               Hemat 20% Bulanan
             </span>
           </div>
-          <div style={{ marginTop: 4 }}>
+          <div style={{ marginTop: 2 }}>
             <span
               style={{
-                fontSize: 22,
+                fontSize: 20,
                 fontWeight: 900,
                 color: 'var(--ink)',
                 fontFamily: 'var(--font-heading)',
@@ -411,26 +485,26 @@ export default function WorkspaceSummary() {
             justifyContent: 'center',
             gap: 8,
             width: '100%',
-            padding: '12px 16px',
+            padding: '11px 16px',
             background: allItems.length > 0 ? 'var(--ink)' : 'var(--line)',
             color: allItems.length > 0 ? 'var(--paper)' : 'var(--ink-soft)',
             border: 'none',
-            borderRadius: 12,
-            fontSize: 14,
+            borderRadius: 10,
+            fontSize: 13.5,
             fontWeight: 800,
             cursor: allItems.length > 0 ? 'pointer' : 'not-allowed',
             transition: 'all 0.2s ease',
-            boxShadow: allItems.length > 0 ? '0 8px 20px rgba(22, 33, 29, 0.22)' : 'none',
+            boxShadow: allItems.length > 0 ? '0 6px 16px rgba(22, 33, 29, 0.2)' : 'none',
           }}
         >
           <span>Rent Workspace</span>
-          <ArrowRight size={15} />
+          <ArrowRight size={14} />
         </button>
 
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
-          <ShieldCheck size={13} color="var(--brass)" />
-          <span style={{ fontSize: 11, color: 'var(--ink-soft)', fontWeight: 500 }}>
-            Gratis antar, rakit, & garansi di Bali
+          <ShieldCheck size={12} color="var(--brass)" />
+          <span style={{ fontSize: 10.5, color: 'var(--ink-soft)', fontWeight: 500 }}>
+            Gratis antar, rakit, &amp; garansi di Bali
           </span>
         </div>
       </div>
