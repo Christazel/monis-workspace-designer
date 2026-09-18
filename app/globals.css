@@ -991,27 +991,32 @@ footer.site-footer {
   .builder-layout {
     display: flex !important;
     flex-direction: row !important;
+    height: calc(100vh - 108px) !important;
+    min-height: 560px !important;
+    overflow: hidden !important;
   }
   .builder-col-items {
     display: flex !important;
-    width: 280px !important;
+    width: 300px !important;
     flex-shrink: 0;
     border-right: 1px solid var(--line);
     overflow: hidden;
+    height: 100% !important;
   }
   .builder-col-canvas {
     display: flex !important;
     flex: 1;
     min-width: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden !important;
+    height: 100% !important;
   }
   .builder-col-summary {
     display: flex !important;
-    width: 270px !important;
+    width: 290px !important;
     flex-shrink: 0;
     border-left: 1px solid var(--line);
     overflow: hidden;
+    height: 100% !important;
   }
   .builder-items-grid {
     display: flex !important;
@@ -1024,30 +1029,30 @@ footer.site-footer {
 /* Desktop 1280px - 1439px */
 @media (min-width: 1280px) and (max-width: 1439px) {
   .builder-col-items {
-    width: 290px !important;
+    width: 320px !important;
   }
   .builder-col-summary {
-    width: 280px !important;
+    width: 310px !important;
   }
 }
 
 /* Large Desktop >= 1440px */
 @media (min-width: 1440px) {
   .builder-col-items {
-    width: 320px !important;
+    width: 340px !important;
   }
   .builder-col-summary {
-    width: 300px !important;
+    width: 330px !important;
   }
 }
 
 /* Wide Desktop >= 1680px */
 @media (min-width: 1680px) {
   .builder-col-items {
-    width: 350px !important;
+    width: 360px !important;
   }
   .builder-col-summary {
-    width: 330px !important;
+    width: 340px !important;
   }
 }
 

@@ -652,45 +652,59 @@ export default function WorkspaceCanvas() {
         position: 'relative',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '16px 20px',
         background: 'var(--paper)',
         overflow: 'hidden',
         height: '100%',
       }}
     >
-      {/* ── Top Bar ── */}
+      {/* ── Fixed 58px Horizon Top Header ── */}
       <div
         style={{
+          height: 58,
           width: '100%',
-          maxWidth: 900,
+          padding: '0 20px',
+          borderBottom: '1px solid var(--line)',
+          background: 'var(--paper)',
           display: 'flex',
-          justifyContent: 'space-between',
           alignItems: 'center',
-          marginBottom: 10,
-          zIndex: 30,
+          justifyContent: 'space-between',
+          flexShrink: 0,
+          zIndex: 10,
         }}
       >
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 8,
-            padding: '5px 14px',
-            background: 'var(--paper-2)',
-            border: '1px solid var(--line)',
-            borderRadius: 20,
-            fontSize: 12,
-            fontWeight: 700,
-            color: 'var(--ink)',
-          }}
-        >
-          <Layers size={12} color="var(--brass)" />
-          <span>Workspace Configurator</span>
-          <span style={{ fontSize: 11, color: 'var(--ink-soft)', fontWeight: 500 }}>
-            · Studio Preview
-          </span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: 28,
+              height: 28,
+              borderRadius: 8,
+              background: 'var(--paper-2)',
+              border: '1px solid var(--line)',
+            }}
+          >
+            <Layers size={14} color="var(--brass)" />
+          </div>
+          <div>
+            <h3
+              style={{
+                fontSize: 13,
+                fontWeight: 800,
+                color: 'var(--ink)',
+                textTransform: 'uppercase',
+                letterSpacing: '0.06em',
+                margin: 0,
+                lineHeight: 1.2,
+              }}
+            >
+              Studio 2D Preview
+            </h3>
+            <p style={{ fontSize: 11, color: 'var(--ink-soft)', marginTop: 2, marginBottom: 0 }}>
+              Visualisasi ruang kerja interaktif
+            </p>
+          </div>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -707,7 +721,7 @@ export default function WorkspaceCanvas() {
               border: '1px solid var(--line)',
               background: 'var(--paper-2)',
               color: 'var(--ink)',
-              fontSize: 12,
+              fontSize: 11.5,
               fontWeight: 600,
               cursor: 'pointer',
               transition: 'all 0.2s ease',
@@ -732,13 +746,13 @@ export default function WorkspaceCanvas() {
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: 7,
-              padding: '5px 14px',
+              gap: 6,
+              padding: '5px 11px',
               borderRadius: 20,
               border: '1px solid var(--line)',
               background: 'var(--paper-2)',
               color: 'var(--ink)',
-              fontSize: 12,
+              fontSize: 11.5,
               fontWeight: 600,
             }}
           >
@@ -752,33 +766,47 @@ export default function WorkspaceCanvas() {
                 boxShadow: '0 0 8px rgba(34, 197, 94, 0.6)',
               }}
             />
-            <span>{itemCount} item dipilih</span>
+            <span>{itemCount} item</span>
           </div>
         </div>
       </div>
 
-      {/* ── STUDIO CANVAS ── */}
+      {/* ── Canvas Stage Area ── */}
       <div
         style={{
+          flex: 1,
           width: '100%',
-          maxWidth: 900,
-          aspectRatio: '16 / 9',
-          borderRadius: 20,
-          border: isNight
-            ? '1px solid rgba(255,255,255,0.08)'
-            : '1px solid rgba(0,0,0,0.08)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '16px 20px',
           overflow: 'hidden',
-          position: 'relative',
-          boxShadow: isNight
-            ? '0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04)'
-            : '0 16px 40px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04)',
-          isolation: 'isolate',
-          background: isNight
-            ? 'linear-gradient(165deg, #111827 0%, #0b0f19 50%, #030712 100%)'
-            : 'linear-gradient(165deg, #f8fafc 0%, #edf2f7 50%, #e2e8f0 100%)',
-          transition: 'background 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease',
+          minHeight: 0,
         }}
       >
+        {/* ── STUDIO CANVAS ── */}
+        <div
+          style={{
+            width: '100%',
+            maxWidth: 920,
+            maxHeight: '100%',
+            aspectRatio: '16 / 9',
+            borderRadius: 16,
+            border: isNight
+              ? '1px solid rgba(255,255,255,0.1)'
+              : '1px solid rgba(0,0,0,0.1)',
+            overflow: 'hidden',
+            position: 'relative',
+            boxShadow: isNight
+              ? '0 20px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05)'
+              : '0 16px 40px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04)',
+            isolation: 'isolate',
+            background: isNight
+              ? 'linear-gradient(165deg, #111827 0%, #0b0f19 50%, #030712 100%)'
+              : 'linear-gradient(165deg, #f8fafc 0%, #edf2f7 50%, #e2e8f0 100%)',
+            transition: 'background 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease',
+          }}
+        >
         {/* Grid pattern */}
         <svg
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: isNight ? 0.05 : 0.08, pointerEvents: 'none', transition: 'opacity 0.5s ease' }}
@@ -1250,18 +1278,18 @@ export default function WorkspaceCanvas() {
                 transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
                 style={{
                   padding: '22px 36px',
-                  background: 'rgba(255,255,255,0.04)',
-                  border: '1px dashed rgba(255,255,255,0.12)',
+                  background: isNight ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.03)',
+                  border: isNight ? '1px dashed rgba(255,255,255,0.15)' : '1px dashed rgba(0,0,0,0.15)',
                   borderRadius: 20, textAlign: 'center',
                   backdropFilter: 'blur(8px)',
                 }}
               >
                 <p style={{ margin: 0, fontSize: 26, marginBottom: 8 }}>🪑</p>
-                <p style={{ margin: 0, fontSize: 13.5, fontWeight: 700, color: 'rgba(255,255,255,0.6)' }}>
+                <p style={{ margin: 0, fontSize: 13.5, fontWeight: 700, color: isNight ? 'rgba(255,255,255,0.75)' : 'var(--ink)' }}>
                   Workspace Anda kosong
                 </p>
-                <p style={{ margin: 0, fontSize: 12, color: 'rgba(255,255,255,0.35)', marginTop: 4 }}>
-                  Pilih meja & kursi dari panel kiri untuk memulai
+                <p style={{ margin: 0, fontSize: 12, color: isNight ? 'rgba(255,255,255,0.45)' : 'var(--ink-soft)', marginTop: 4 }}>
+                  Pilih meja &amp; kursi dari panel kiri untuk memulai
                 </p>
               </motion.div>
             </motion.div>
@@ -1271,16 +1299,18 @@ export default function WorkspaceCanvas() {
         {/* Watermark */}
         <div
           style={{
-            position: 'absolute', bottom: 10, right: 14,
+            position: 'absolute', bottom: 12, right: 16,
             fontSize: 10, fontWeight: 700,
-            color: 'rgba(255,255,255,0.1)',
-            letterSpacing: '0.1em', textTransform: 'uppercase',
+            color: isNight ? 'rgba(255,255,255,0.18)' : 'rgba(0,0,0,0.22)',
+            letterSpacing: '0.12em', textTransform: 'uppercase',
             pointerEvents: 'none', zIndex: 2,
+            transition: 'color 0.5s ease',
           }}
         >
           MONIS Studio
         </div>
       </div>
     </div>
-  );
+  </div>
+);
 }

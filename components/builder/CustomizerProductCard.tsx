@@ -81,17 +81,18 @@ export default function CustomizerProductCard({
 
         {/* Title, Subtitle, & Description */}
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 6 }}>
+          <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 6 }}>
             <h4
               style={{
-                fontSize: 13.5,
+                fontSize: 13,
                 fontWeight: 700,
                 color: 'var(--ink)',
                 margin: 0,
-                lineHeight: 1.25,
+                lineHeight: 1.3,
+                display: '-webkit-box',
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: 'vertical',
                 overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap',
               }}
             >
               {product.name}
@@ -102,16 +103,17 @@ export default function CustomizerProductCard({
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: 3,
-                  fontSize: 10.5,
+                  fontSize: 10,
                   fontWeight: 700,
                   color: '#16a34a',
-                  background: 'rgba(22, 163, 74, 0.12)',
-                  padding: '2px 7px',
+                  background: 'rgba(22, 163, 74, 0.1)',
+                  padding: '2px 6px',
                   borderRadius: 20,
                   flexShrink: 0,
+                  whiteSpace: 'nowrap',
                 }}
               >
-                <Check size={11} strokeWidth={3} />
+                <Check size={10} strokeWidth={3} />
                 Terpilih
               </span>
             )}
@@ -120,7 +122,7 @@ export default function CustomizerProductCard({
           {product.subtitle && (
             <p
               style={{
-                fontSize: 11.5,
+                fontSize: 11,
                 color: 'var(--ink-soft)',
                 marginTop: 2,
                 marginBottom: 0,
@@ -159,15 +161,17 @@ export default function CustomizerProductCard({
           paddingTop: 8,
           borderTop: '1px solid var(--line-soft)',
           marginTop: 2,
+          gap: 8,
         }}
       >
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 1, minWidth: 0 }}>
           <span
             style={{
-              fontSize: 13,
+              fontSize: 12.5,
               fontWeight: 800,
               color: 'var(--ink)',
               letterSpacing: '-0.01em',
+              whiteSpace: 'nowrap',
             }}
           >
             {monthlyPrice}
@@ -176,11 +180,11 @@ export default function CustomizerProductCard({
             style={{
               fontSize: 10.5,
               color: 'var(--ink-soft)',
-              marginLeft: 5,
               fontWeight: 500,
+              whiteSpace: 'nowrap',
             }}
           >
-            ({dailyPrice}/hari)
+            {dailyPrice}/hari
           </span>
         </div>
 
@@ -194,12 +198,16 @@ export default function CustomizerProductCard({
           style={{
             display: 'inline-flex',
             alignItems: 'center',
-            gap: 5,
+            justifyContent: 'center',
+            gap: 4,
             padding: '5px 12px',
+            minWidth: 64,
+            height: 28,
             borderRadius: 20,
             fontSize: 11.5,
             fontWeight: 700,
             cursor: 'pointer',
+            flexShrink: 0,
             transition: 'all 0.15s ease',
             border: selected
               ? '1px solid var(--ink)'
@@ -215,18 +223,18 @@ export default function CustomizerProductCard({
           {isMultiSelect ? (
             selected ? (
               <>
-                <Minus size={12} strokeWidth={2.5} />
+                <Minus size={11} strokeWidth={2.5} />
                 <span>Hapus</span>
               </>
             ) : (
               <>
-                <Plus size={12} strokeWidth={2.5} />
+                <Plus size={11} strokeWidth={2.5} />
                 <span>Tambah</span>
               </>
             )
           ) : selected ? (
             <>
-              <Check size={12} strokeWidth={2.5} />
+              <Check size={11} strokeWidth={2.5} />
               <span>Aktif</span>
             </>
           ) : (

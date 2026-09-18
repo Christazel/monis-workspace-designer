@@ -187,9 +187,6 @@ export default function BuilderSection() {
       <div
         className="builder-layout"
         style={{
-          display: 'flex',
-          height: 'calc(100vh - 115px)',
-          minHeight: 480,
           background: 'var(--paper)',
         }}
       >
