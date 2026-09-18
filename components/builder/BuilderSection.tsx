@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import ItemSelector from './ItemSelector';
 import WorkspaceCanvas from './WorkspaceCanvas';
 import WorkspaceSummary from './WorkspaceSummary';
@@ -10,10 +9,17 @@ import { formatIDR, formatUSD } from '@/data/products';
 import { Eye, List, ShoppingBag, ArrowLeft, Code2, Palette, Compass, Sparkles, ArrowRight } from 'lucide-react';
 
 export default function BuilderSection() {
-  const { setMode, getAllSelectedProducts, activePresetId, applyPreset, setCheckoutOpen } = useWorkspaceStore();
+  const {
+    setMode,
+    getAllSelectedProducts,
+    activePresetId,
+    applyPreset,
+    setCheckoutOpen,
+    builderMobileTab: mobileTab,
+    setBuilderMobileTab: setMobileTab,
+  } = useWorkspaceStore();
   const currency = useCurrency();
   const total = useTotal();
-  const [mobileTab, setMobileTab] = useState<'canvas' | 'items' | 'summary'>('canvas');
   // Count selected items for mobile badge
   const selectedCount = getAllSelectedProducts().length;
 

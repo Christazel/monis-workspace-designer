@@ -1,17 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import DeskSelector from './DeskSelector';
 import ChairSelector from './ChairSelector';
 import AccessorySelector from './AccessorySelector';
 import { useWorkspaceStore } from '@/store/workspaceStore';
 import { Armchair, Sparkles } from 'lucide-react';
 
-type CategoryTab = 'desk' | 'chair' | 'accessory';
-
 export default function ItemSelector() {
-  const [activeTab, setActiveTab] = useState<CategoryTab>('desk');
-  const { desk, chair, tech, accessories } = useWorkspaceStore();
+  const { desk, chair, tech, accessories, builderTab, setBuilderTab } = useWorkspaceStore();
 
   const accessoryCount = tech.length + accessories.length;
 
@@ -118,12 +115,12 @@ export default function ItemSelector() {
           }}
         >
           {TABS.map((tab) => {
-            const isActive = activeTab === tab.id;
+            const isActive = builderTab === tab.id;
             return (
               <button
                 key={tab.id}
                 type="button"
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => setBuilderTab(tab.id)}
                 style={{
                   flex: 1,
                   display: 'flex',
@@ -171,9 +168,9 @@ export default function ItemSelector() {
 
       {/* ── Active Category Content ── */}
       <div style={{ padding: '12px 14px 32px', flex: 1 }}>
-        {activeTab === 'desk' && <DeskSelector />}
-        {activeTab === 'chair' && <ChairSelector />}
-        {activeTab === 'accessory' && <AccessorySelector />}
+        {builderTab === 'desk' && <DeskSelector />}
+        {builderTab === 'chair' && <ChairSelector />}
+        {builderTab === 'accessory' && <AccessorySelector />}
       </div>
     </aside>
   );

@@ -35,6 +35,14 @@ interface WorkspaceStore {
   checkoutOpen: boolean;
   setCheckoutOpen: (open: boolean) => void;
 
+  // Builder active category tab
+  builderTab: 'desk' | 'chair' | 'accessory';
+  setBuilderTab: (tab: 'desk' | 'chair' | 'accessory') => void;
+
+  // Builder mobile view tab
+  builderMobileTab: 'canvas' | 'items' | 'summary';
+  setBuilderMobileTab: (tab: 'canvas' | 'items' | 'summary') => void;
+
   // Catalog search & filter state
   searchQuery: string;
   activeCategory: 'all' | 'desk' | 'chair' | 'tech' | 'accessory';
@@ -133,6 +141,14 @@ export const useWorkspaceStore = create<WorkspaceStore>((set, get) => ({
   // Checkout
   checkoutOpen: false,
   setCheckoutOpen: (checkoutOpen) => set({ checkoutOpen }),
+
+  // Builder active category tab
+  builderTab: 'desk',
+  setBuilderTab: (builderTab) => set({ builderTab, builderMobileTab: 'items' }),
+
+  // Builder mobile view tab
+  builderMobileTab: 'canvas',
+  setBuilderMobileTab: (builderMobileTab) => set({ builderMobileTab }),
 
   // Catalog state
   searchQuery: '',
