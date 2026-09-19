@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { Product } from '@/data/types';
 import { useCurrency } from '@/store/workspaceStore';
 import { formatMonthlyRate, formatIDR, formatUSD } from '@/data/products';
@@ -65,11 +66,12 @@ export default function CustomizerProductCard({
             boxShadow: '0 2px 4px rgba(0,0,0,0.04)',
           }}
         >
-          <img
+          <Image
             src={product.image}
             alt={product.name}
-            loading="lazy"
-            decoding="async"
+            width={44}
+            height={44}
+            unoptimized
             style={{
               width: '100%',
               height: '100%',

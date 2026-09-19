@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { Product } from '@/data/types';
 import { formatIDR, formatUSD } from '@/data/products';
 import { useWorkspaceStore, useCurrency } from '@/store/workspaceStore';
@@ -112,13 +113,12 @@ export default function ProductCard({ product, isSelected = false }: ProductCard
           )}
 
           {!imgError ? (
-            <img
+            <Image
               src={product.image}
               alt={product.name}
-              loading="lazy"
-              decoding="async"
               width={260}
               height={190}
+              unoptimized
               style={{
                 maxWidth: product.id === 'acc-surfboard' ? '50%' : '90%',
                 maxHeight: '90%',

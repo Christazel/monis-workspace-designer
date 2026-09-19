@@ -459,7 +459,8 @@ export default function Header() {
                   POPULAR BALI HUBS
                 </div>
                 {BALI_AREAS.map((area) => (
-                  <div
+                  <button
+                    type="button"
                     key={area}
                     onClick={(e) => {
                       e.stopPropagation();
@@ -467,6 +468,9 @@ export default function Header() {
                       setLocationMenuOpen(false);
                     }}
                     style={{
+                      width: '100%',
+                      border: 'none',
+                      textAlign: 'left',
                       padding: '8px 12px',
                       borderRadius: '8px',
                       fontSize: '13px',
@@ -477,11 +481,12 @@ export default function Header() {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
+                      fontFamily: 'inherit',
                     }}
                   >
                     <span>{area}</span>
                     <span style={{ fontSize: '10px', color: '#10b981', fontWeight: 600 }}>Same-day</span>
-                  </div>
+                  </button>
                 ))}
               </div>
             )}

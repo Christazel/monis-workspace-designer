@@ -14,8 +14,16 @@ const TABS = [
 ] as const;
 
 export default function CatalogSection() {
-  const { activeCategory, setActiveCategory, searchQuery, setSearchQuery } = useWorkspaceStore();
-  const { desk, chair, tech, accessories } = useWorkspaceStore();
+  const {
+    activeCategory,
+    setActiveCategory,
+    searchQuery,
+    setSearchQuery,
+    desk,
+    chair,
+    tech,
+    accessories,
+  } = useWorkspaceStore();
 
   const filtered = useMemo(() => {
     let items = ALL_PRODUCTS;
