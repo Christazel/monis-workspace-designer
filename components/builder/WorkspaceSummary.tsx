@@ -31,7 +31,7 @@ export default function WorkspaceSummary() {
   // Calculate monthly rental total
   const dailySubtotal = allItems.reduce((sum, p) => sum + p.price, 0);
   const monthlyMultiplier = DURATION_DISCOUNTS.monthly.multiplier; // 30
-  const monthlyDiscount = DURATION_DISCOUNTS.monthly.discount; // 0.20
+  const monthlyDiscount = DURATION_DISCOUNTS.monthly.discount; // 0.30
   const monthlySubtotal = dailySubtotal * monthlyMultiplier;
   const monthlySavings = monthlySubtotal * monthlyDiscount;
   const monthlyTotal = monthlySubtotal - monthlySavings;
@@ -456,7 +456,7 @@ export default function WorkspaceSummary() {
                 borderRadius: 12,
               }}
             >
-              Hemat 20% Bulanan
+              Hemat 30% Bulanan
             </span>
           </div>
           <div style={{ marginTop: 2 }}>

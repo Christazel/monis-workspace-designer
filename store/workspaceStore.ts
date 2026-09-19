@@ -110,7 +110,7 @@ export const useWorkspaceStore = create<WorkspaceStore>((set, get) => ({
   chair: initialChair,
   tech: initialTech,
   accessories: initialAccessories,
-  activePresetId: 'preset-developer',
+  activePresetId: 'preset-trading',
 
   // Rental options
   duration: INITIAL_DURATION,

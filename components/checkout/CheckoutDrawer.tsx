@@ -29,8 +29,8 @@ export default function CheckoutDrawer() {
   const [name, setName] = useState('');
   const [area, setArea] = useState('Canggu');
   const [startDate, setStartDate] = useState(() => {
-    // Default to today
-    return new Date().toISOString().split('T')[0];
+    // Default to today in local date (YYYY-MM-DD)
+    return new Date().toLocaleDateString('en-CA');
   });
   const [booked, setBooked] = useState(false);
 
@@ -377,6 +377,7 @@ export default function CheckoutDrawer() {
                     id="checkout-start-date"
                     name="startDate"
                     type="date"
+                    min={new Date().toLocaleDateString('en-CA')}
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
                     style={{

@@ -347,8 +347,8 @@ export const USD_RATE = 15800; // IDR per 1 USD
 
 export const DURATION_DISCOUNTS = {
   daily:   { label: '1 Day',    multiplier: 1,    discount: 0 },
-  weekly:  { label: '1 Week',   multiplier: 7,    discount: 0.10 },
-  monthly: { label: '1 Month',  multiplier: 30,   discount: 0.20 },
+  weekly:  { label: '1 Week',   multiplier: 7,    discount: 0.15 },
+  monthly: { label: '1 Month',  multiplier: 30,   discount: 0.30 },
 };
 
 export function formatIDR(amount: number): string {
