@@ -58,9 +58,9 @@ export default function CatalogSection() {
     <section
       id="catalog"
       style={{
-        background: '#ffffff',
+        background: 'var(--paper)',
         padding: '64px 0 80px',
-        borderBottom: '1px solid #e5e7eb',
+        borderBottom: '1px solid var(--line)',
         scrollMarginTop: '80px',
       }}
     >
@@ -83,7 +83,7 @@ export default function CatalogSection() {
                 fontWeight: 700,
                 textTransform: 'uppercase',
                 letterSpacing: '0.06em',
-                color: '#4b5563',
+                color: 'var(--ink-soft)',
                 marginBottom: '6px',
               }}
             >
@@ -93,14 +93,14 @@ export default function CatalogSection() {
               style={{
                 fontSize: 'clamp(24px, 3.5vw, 36px)',
                 fontWeight: 800,
-                color: '#111827',
+                color: 'var(--ink)',
                 letterSpacing: '-0.02em',
                 marginBottom: '6px',
               }}
             >
               Rent tech & workspace essentials in Bali
             </h2>
-            <p style={{ fontSize: '15px', color: '#4b5563' }}>
+            <p style={{ fontSize: '15px', color: 'var(--ink-soft)' }}>
               Showing {filtered.length} of {ALL_PRODUCTS.length} curated pieces available for same-day delivery.
             </p>
           </div>
@@ -114,10 +114,10 @@ export default function CatalogSection() {
               style={{
                 padding: '6px 12px',
                 borderRadius: '9999px',
-                background: '#f3f4f6',
-                border: '1px solid #e5e7eb',
+                background: 'var(--paper-3)',
+                border: '1px solid var(--line)',
                 fontSize: '12px',
-                color: '#374151',
+                color: 'var(--ink-soft)',
                 cursor: 'pointer',
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -161,9 +161,9 @@ export default function CatalogSection() {
                   whiteSpace: 'nowrap',
                   cursor: 'pointer',
                   border: '1px solid',
-                  borderColor: isActive ? '#000000' : '#e5e7eb',
-                  background: isActive ? '#000000' : '#ffffff',
-                  color: isActive ? '#ffffff' : '#374151',
+                  borderColor: isActive ? 'var(--ink)' : 'var(--line)',
+                  background: isActive ? 'var(--ink)' : 'var(--paper)',
+                  color: isActive ? 'var(--paper)' : 'var(--ink-soft)',
                   transition: 'all 0.15s ease',
                 }}
               >
@@ -195,15 +195,15 @@ export default function CatalogSection() {
             style={{
               padding: '64px 20px',
               textAlign: 'center',
-              background: '#f9fafb',
-              border: '1px dashed #e5e7eb',
+              background: 'var(--paper-2)',
+              border: '1px dashed var(--line)',
               borderRadius: '16px',
             }}
           >
-            <p style={{ fontSize: '17px', fontWeight: 700, color: '#111827', marginBottom: '8px' }}>
+            <p style={{ fontSize: '17px', fontWeight: 700, color: 'var(--ink)', marginBottom: '8px' }}>
               No equipment found
             </p>
-            <p style={{ fontSize: '14px', color: '#4b5563', marginBottom: '20px' }}>
+            <p style={{ fontSize: '14px', color: 'var(--ink-soft)', marginBottom: '20px' }}>
               We couldn&apos;t find any equipment matching &quot;{searchQuery}&quot;.
             </p>
             <button
@@ -216,8 +216,8 @@ export default function CatalogSection() {
               style={{
                 padding: '10px 20px',
                 borderRadius: '9999px',
-                background: '#000000',
-                color: '#ffffff',
+                background: 'var(--ink)',
+                color: 'var(--paper)',
                 border: 'none',
                 fontSize: '13px',
                 fontWeight: 600,

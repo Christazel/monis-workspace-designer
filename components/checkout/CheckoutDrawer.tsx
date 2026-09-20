@@ -29,7 +29,6 @@ export default function CheckoutDrawer() {
   const [name, setName] = useState('');
   const [area, setArea] = useState('Canggu');
   const [startDate, setStartDate] = useState(() => {
-    // Default to today in local date (YYYY-MM-DD)
     return new Date().toLocaleDateString('en-CA');
   });
   const [booked, setBooked] = useState(false);
@@ -49,7 +48,6 @@ export default function CheckoutDrawer() {
   const handleBook = () => {
     if (!area || !startDate) return;
     setBooked(true);
-    // Direct to the official real Monis website as requested
     window.open('https://www.monis.rent/', '_blank');
   };
 
@@ -59,15 +57,24 @@ export default function CheckoutDrawer() {
       setBooked(false);
       clearWorkspace();
     }
+    // Reset form state so next open starts fresh
+    setName('');
+    setArea('Canggu');
+    setStartDate(new Date().toLocaleDateString('en-CA'));
   };
 
   if (!checkoutOpen) return null;
+
+  const isDisabled = !name.trim() || !area || !startDate || allProducts.length === 0;
 
   return (
     <>
       {/* Overlay */}
       <div
         onClick={handleClose}
+        aria-label="Close checkout drawer overlay"
+        role="button"
+        tabIndex={-1}
         style={{
           position: 'fixed',
           inset: 0,
@@ -89,30 +96,31 @@ export default function CheckoutDrawer() {
           bottom: 0,
           width: '100%',
           maxWidth: 440,
-          background: '#ffffff',
+          background: 'var(--paper)',
           zIndex: 120,
           display: 'flex',
           flexDirection: 'column',
           boxShadow: '-8px 0 40px rgba(0, 0, 0, 0.16)',
-          borderLeft: '1px solid #e5e7eb',
+          borderLeft: '1px solid var(--line)',
         }}
       >
         {/* Header */}
         <div
           style={{
             padding: '18px 20px',
-            borderBottom: '1px solid #e5e7eb',
+            borderBottom: '1px solid var(--line)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            background: '#ffffff',
+            background: 'var(--paper)',
+            flexShrink: 0,
           }}
         >
           <div>
-            <h3 id="drawer-heading" style={{ fontSize: 18, fontWeight: 700, color: '#111827' }}>
+            <h3 id="drawer-heading" style={{ fontSize: 18, fontWeight: 700, color: 'var(--ink)' }}>
               Rent Your Workspace
             </h3>
-            <p style={{ fontSize: 13, color: '#4b5563' }}>
+            <p style={{ fontSize: 13, color: 'var(--ink-soft)', marginTop: 2 }}>
               {allProducts.length} item{allProducts.length > 1 ? 's' : ''} · {durationLabel}
             </p>
           </div>
@@ -124,8 +132,12 @@ export default function CheckoutDrawer() {
               border: 'none',
               cursor: 'pointer',
               padding: 6,
-              color: '#111827',
+              color: 'var(--ink)',
               borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'background 0.15s ease',
             }}
             aria-label="Close checkout drawer"
           >
@@ -142,7 +154,7 @@ export default function CheckoutDrawer() {
                 style={{
                   width: 56,
                   height: 56,
-                  background: '#10b981',
+                  background: 'var(--brass)',
                   borderRadius: '50%',
                   display: 'flex',
                   alignItems: 'center',
@@ -150,12 +162,12 @@ export default function CheckoutDrawer() {
                   margin: '0 auto 16px',
                 }}
               >
-                <Check size={28} color="#ffffff" strokeWidth={3} />
+                <Check size={28} color="var(--paper)" strokeWidth={3} />
               </div>
-              <h3 style={{ fontSize: 20, fontWeight: 700, color: '#111827', marginBottom: 8 }}>
+              <h3 style={{ fontSize: 20, fontWeight: 700, color: 'var(--ink)', marginBottom: 8 }}>
                 Redirecting to Monis.rent!
               </h3>
-              <p style={{ fontSize: 14, color: '#4b5563', lineHeight: 1.6, marginBottom: 24 }}>
+              <p style={{ fontSize: 14, color: 'var(--ink-soft)', lineHeight: 1.6, marginBottom: 24 }}>
                 Your {durationLabel} workspace setup has been prepared. We are opening the official Monis.rent website to complete your reservation.
               </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -175,11 +187,12 @@ export default function CheckoutDrawer() {
                     padding: '10px',
                     borderRadius: 'var(--radius)',
                     background: 'transparent',
-                    border: '1px solid #e5e7eb',
+                    border: '1px solid var(--line)',
                     fontSize: '13px',
                     fontWeight: 600,
                     cursor: 'pointer',
-                    color: '#374151',
+                    color: 'var(--ink-soft)',
+                    fontFamily: 'inherit',
                   }}
                 >
                   Done
@@ -192,9 +205,9 @@ export default function CheckoutDrawer() {
               {/* Setup list preview */}
               <div
                 style={{
-                  background: '#f9fafb',
-                  border: '1px solid #e5e7eb',
-                  borderRadius: '12px',
+                  background: 'var(--paper-2)',
+                  border: '1px solid var(--line)',
+                  borderRadius: 'var(--radius)',
                   padding: '12px 14px',
                   marginBottom: 20,
                 }}
@@ -205,7 +218,7 @@ export default function CheckoutDrawer() {
                     fontWeight: 700,
                     textTransform: 'uppercase',
                     letterSpacing: '0.06em',
-                    color: '#6b7280',
+                    color: 'var(--ink-subtle)',
                     marginBottom: 8,
                   }}
                 >
@@ -213,7 +226,7 @@ export default function CheckoutDrawer() {
                 </p>
 
                 {allProducts.length === 0 ? (
-                  <p style={{ fontSize: 13, color: '#9ca3af', fontStyle: 'italic' }}>
+                  <p style={{ fontSize: 13, color: 'var(--ink-subtle)', fontStyle: 'italic' }}>
                     No items selected yet. Choose a desk and chair to begin.
                   </p>
                 ) : (
@@ -225,11 +238,11 @@ export default function CheckoutDrawer() {
                           display: 'flex',
                           justifyContent: 'space-between',
                           fontSize: 13,
-                          color: '#111827',
+                          color: 'var(--ink)',
                         }}
                       >
                         <span style={{ fontWeight: 500 }}>{p.name}</span>
-                        <span style={{ color: '#6b7280', flexShrink: 0, marginLeft: 8 }}>
+                        <span style={{ color: 'var(--ink-soft)', flexShrink: 0, marginLeft: 8 }}>
                           {formatPrice(p.price)}/day
                         </span>
                       </li>
@@ -247,7 +260,7 @@ export default function CheckoutDrawer() {
                     fontWeight: 700,
                     textTransform: 'uppercase',
                     letterSpacing: '0.06em',
-                    color: '#111827',
+                    color: 'var(--ink)',
                     marginBottom: 8,
                   }}
                 >
@@ -261,22 +274,23 @@ export default function CheckoutDrawer() {
                       onClick={() => setDuration(d)}
                       style={{
                         padding: '10px 6px',
-                        borderRadius: '10px',
-                        border: '1px solid ' + (duration === d ? '#000000' : '#e5e7eb'),
-                        background: duration === d ? '#000000' : '#ffffff',
-                        color: duration === d ? '#ffffff' : '#374151',
+                        borderRadius: 'var(--radius)',
+                        border: '1.5px solid ' + (duration === d ? 'var(--ink)' : 'var(--line)'),
+                        background: duration === d ? 'var(--ink)' : 'var(--paper)',
+                        color: duration === d ? 'var(--paper)' : 'var(--ink-soft)',
                         fontSize: 12,
                         fontWeight: 600,
                         cursor: 'pointer',
                         textAlign: 'center',
                         transition: 'all 0.15s ease',
+                        fontFamily: 'inherit',
                       }}
                     >
                       <div style={{ textTransform: 'capitalize' }}>{d}</div>
                       <div
                         style={{
                           fontSize: 10,
-                          color: duration === d ? 'rgba(255,255,255,0.85)' : '#047857',
+                          color: duration === d ? 'rgba(255,255,255,0.75)' : 'var(--sage)',
                           marginTop: 2,
                         }}
                       >
@@ -296,7 +310,7 @@ export default function CheckoutDrawer() {
                       display: 'block',
                       fontSize: 12,
                       fontWeight: 600,
-                      color: '#111827',
+                      color: 'var(--ink)',
                       marginBottom: 6,
                     }}
                   >
@@ -312,12 +326,14 @@ export default function CheckoutDrawer() {
                     style={{
                       width: '100%',
                       padding: '10px 12px',
-                      borderRadius: '10px',
-                      border: '1px solid #e5e7eb',
-                      background: '#ffffff',
-                      color: '#111827',
+                      borderRadius: 'var(--radius)',
+                      border: '1px solid var(--line)',
+                      background: 'var(--paper)',
+                      color: 'var(--ink)',
                       fontSize: 14,
                       outline: 'none',
+                      fontFamily: 'inherit',
+                      transition: 'border-color 0.15s ease',
                     }}
                   />
                 </div>
@@ -329,7 +345,7 @@ export default function CheckoutDrawer() {
                       display: 'block',
                       fontSize: 12,
                       fontWeight: 600,
-                      color: '#111827',
+                      color: 'var(--ink)',
                       marginBottom: 6,
                     }}
                   >
@@ -343,12 +359,13 @@ export default function CheckoutDrawer() {
                     style={{
                       width: '100%',
                       padding: '10px 12px',
-                      borderRadius: '10px',
-                      border: '1px solid #e5e7eb',
-                      background: '#ffffff',
-                      color: '#111827',
+                      borderRadius: 'var(--radius)',
+                      border: '1px solid var(--line)',
+                      background: 'var(--paper)',
+                      color: 'var(--ink)',
                       fontSize: 14,
                       outline: 'none',
+                      fontFamily: 'inherit',
                     }}
                   >
                     <option value="">Select your area...</option>
@@ -367,7 +384,7 @@ export default function CheckoutDrawer() {
                       display: 'block',
                       fontSize: 12,
                       fontWeight: 600,
-                      color: '#111827',
+                      color: 'var(--ink)',
                       marginBottom: 6,
                     }}
                   >
@@ -383,12 +400,13 @@ export default function CheckoutDrawer() {
                     style={{
                       width: '100%',
                       padding: '10px 12px',
-                      borderRadius: '10px',
-                      border: '1px solid #e5e7eb',
-                      background: '#ffffff',
-                      color: '#111827',
+                      borderRadius: 'var(--radius)',
+                      border: '1px solid var(--line)',
+                      background: 'var(--paper)',
+                      color: 'var(--ink)',
                       fontSize: 14,
                       outline: 'none',
+                      fontFamily: 'inherit',
                     }}
                   />
                 </div>
@@ -402,15 +420,16 @@ export default function CheckoutDrawer() {
           <div
             style={{
               padding: '16px 20px',
-              borderTop: '1px solid #e5e7eb',
-              background: '#ffffff',
+              borderTop: '1px solid var(--line)',
+              background: 'var(--paper)',
+              flexShrink: 0,
             }}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12 }}>
-              <span style={{ fontSize: 13, color: '#4b5563' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 12 }}>
+              <span style={{ fontSize: 13, color: 'var(--ink-soft)' }}>
                 Total for {durationLabel}:
               </span>
-              <span style={{ fontSize: 18, fontWeight: 700, color: '#111827' }}>
+              <span style={{ fontSize: 20, fontWeight: 800, color: 'var(--ink)', letterSpacing: '-0.02em' }}>
                 {total.formatted}
               </span>
             </div>
@@ -419,22 +438,22 @@ export default function CheckoutDrawer() {
               className="btn-primary"
               type="button"
               onClick={handleBook}
-              disabled={!area || !startDate || allProducts.length === 0}
+              disabled={isDisabled}
               style={{
                 width: '100%',
                 justifyContent: 'center',
-                opacity: !area || !startDate || allProducts.length === 0 ? 0.5 : 1,
-                cursor: !area || !startDate || allProducts.length === 0 ? 'not-allowed' : 'pointer',
+                opacity: isDisabled ? 0.5 : 1,
+                cursor: isDisabled ? 'not-allowed' : 'pointer',
                 borderRadius: '9999px',
                 padding: '13px',
                 fontSize: '14px',
-                fontWeight: 600,
+                fontWeight: 700,
               }}
             >
               Confirm on Official Monis.rent →
             </button>
 
-            <p style={{ fontSize: 11, color: '#4b5563', textAlign: 'center', marginTop: 8 }}>
+            <p style={{ fontSize: 11, color: 'var(--ink-soft)', textAlign: 'center', marginTop: 8 }}>
               No security deposit · Same-day delivery &amp; in-room setup across Bali
             </p>
           </div>

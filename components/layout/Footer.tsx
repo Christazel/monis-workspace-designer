@@ -13,11 +13,23 @@ export default function Footer() {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const navLinkStyle: React.CSSProperties = {
+    background: 'none',
+    border: 'none',
+    padding: 0,
+    color: 'inherit',
+    cursor: 'pointer',
+    fontFamily: 'inherit',
+    fontSize: 'inherit',
+    textAlign: 'left',
+    transition: 'color 0.15s ease',
+  };
+
   return (
     <footer
       style={{
-        background: '#ffffff',
-        borderTop: '1px solid #e5e7eb',
+        background: 'var(--paper)',
+        borderTop: '1px solid var(--line)',
         padding: '60px 0 32px',
       }}
     >
@@ -48,33 +60,34 @@ export default function Footer() {
               }}
               aria-label="Monis rent home"
             >
-              <MonisLogo width={110} height={31} color="#000000" />
+              <MonisLogo width={110} height={31} color="var(--ink)" />
             </button>
             <p
               style={{
                 fontSize: '14px',
-                color: '#4b5563',
+                color: 'var(--ink-soft)',
                 lineHeight: 1.6,
                 maxWidth: '280px',
                 marginBottom: '16px',
               }}
             >
-              Rent workspace essentials in Bali — monitors, standing desks, ergonomic chairs & tech gear delivered to your villa or coworking space.
+              Rent workspace essentials in Bali — monitors, standing desks, ergonomic chairs &amp; tech gear delivered to your villa or coworking space.
             </p>
             <div
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '6px',
-                background: '#f3f4f6',
+                background: 'var(--paper-3)',
                 padding: '6px 12px',
                 borderRadius: '9999px',
                 fontSize: '12px',
                 fontWeight: 600,
-                color: '#111827',
+                color: 'var(--ink)',
+                border: '1px solid var(--line-soft)',
               }}
             >
-              <span style={{ color: '#047857' }}>★ ★ ★ ★ ★</span>
+              <span style={{ color: 'var(--sage)' }}>★ ★ ★ ★ ★</span>
               <span>4.9 on Trustpilot</span>
             </div>
           </div>
@@ -87,37 +100,25 @@ export default function Footer() {
                 fontWeight: 700,
                 textTransform: 'uppercase',
                 letterSpacing: '0.06em',
-                color: '#111827',
+                color: 'var(--ink)',
                 marginBottom: '14px',
               }}
             >
               Explore
             </div>
-            <ul style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '14px', color: '#4b5563' }}>
+            <ul style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '14px', color: 'var(--ink-soft)' }}>
               <li>
-                <button
-                  type="button"
-                  onClick={() => handleCategoryClick('tech')}
-                  style={{ background: 'none', border: 'none', padding: 0, color: 'inherit', cursor: 'pointer' }}
-                >
-                  Monitors & Displays
+                <button type="button" onClick={() => handleCategoryClick('tech')} style={navLinkStyle}>
+                  Monitors &amp; Displays
                 </button>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => handleCategoryClick('desk')}
-                  style={{ background: 'none', border: 'none', padding: 0, color: 'inherit', cursor: 'pointer' }}
-                >
+                <button type="button" onClick={() => handleCategoryClick('desk')} style={navLinkStyle}>
                   Standing Desks
                 </button>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => handleCategoryClick('chair')}
-                  style={{ background: 'none', border: 'none', padding: 0, color: 'inherit', cursor: 'pointer' }}
-                >
+                <button type="button" onClick={() => handleCategoryClick('chair')} style={navLinkStyle}>
                   Ergonomic Chairs
                 </button>
               </li>
@@ -129,7 +130,7 @@ export default function Footer() {
                     const el = document.getElementById('setups');
                     if (el) el.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  style={{ background: 'none', border: 'none', padding: 0, color: 'inherit', cursor: 'pointer' }}
+                  style={navLinkStyle}
                 >
                   Product Bundles
                 </button>
@@ -141,7 +142,7 @@ export default function Footer() {
                     setMode('builder');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  style={{ background: 'none', border: 'none', padding: 0, color: '#047857', fontWeight: 600, cursor: 'pointer' }}
+                  style={{ ...navLinkStyle, color: 'var(--sage)', fontWeight: 600 }}
                 >
                   ⚡ 2D Studio Configurator
                 </button>
@@ -157,13 +158,13 @@ export default function Footer() {
                 fontWeight: 700,
                 textTransform: 'uppercase',
                 letterSpacing: '0.06em',
-                color: '#111827',
+                color: 'var(--ink)',
                 marginBottom: '14px',
               }}
             >
               Delivery Across Bali
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', fontSize: '14px', color: '#4b5563' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', fontSize: '14px', color: 'var(--ink-soft)' }}>
               <div>
                 <p style={{ marginBottom: '8px' }}>Canggu</p>
                 <p style={{ marginBottom: '8px' }}>Pererenan</p>
@@ -175,12 +176,12 @@ export default function Footer() {
                 <p style={{ marginBottom: '8px' }}>Sanur</p>
               </div>
             </div>
-            <p style={{ fontSize: '12px', color: '#047857', fontWeight: 600, marginTop: '8px' }}>
-              ✓ Next-day & Same-day delivery available
+            <p style={{ fontSize: '12px', color: 'var(--sage)', fontWeight: 600, marginTop: '8px' }}>
+              ✓ Next-day &amp; Same-day delivery available
             </p>
           </div>
 
-          {/* Col 4: WhatsApp Concierge */}
+          {/* Col 4: Support */}
           <div>
             <div
               style={{
@@ -188,13 +189,13 @@ export default function Footer() {
                 fontWeight: 700,
                 textTransform: 'uppercase',
                 letterSpacing: '0.06em',
-                color: '#111827',
+                color: 'var(--ink)',
                 marginBottom: '14px',
               }}
             >
               Official Website &amp; Support
             </div>
-            <p style={{ fontSize: '14px', color: '#4b5563', marginBottom: '8px' }}>
+            <p style={{ fontSize: '14px', color: 'var(--ink-soft)', marginBottom: '8px' }}>
               Official Bali workspace rental service. Available 8:00 AM – 9:00 PM WITA daily for assistance.
             </p>
             <a
@@ -208,7 +209,7 @@ export default function Footer() {
                 gap: '8px',
                 fontSize: '15px',
                 fontWeight: 700,
-                color: '#047857',
+                color: 'var(--sage)',
                 textDecoration: 'none',
                 marginTop: '4px',
               }}
@@ -222,7 +223,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div
           style={{
-            borderTop: '1px solid #f3f4f6',
+            borderTop: '1px solid var(--line-soft)',
             paddingTop: '24px',
             display: 'flex',
             alignItems: 'center',
@@ -230,7 +231,7 @@ export default function Footer() {
             flexWrap: 'wrap',
             gap: '12px',
             fontSize: '13px',
-            color: '#4b5563',
+            color: 'var(--ink-soft)',
           }}
         >
           <div>© 2026 monis.rent · Remote work made efficiently</div>

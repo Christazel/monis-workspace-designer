@@ -24,16 +24,17 @@ export default function HeroBanner() {
 
   return (
     <>
-      {/* ── HERO BANNER (Official Monis.rent style) ── */}
+      {/* ── HERO BANNER ── */}
       <section
         style={{
-          background: 'linear-gradient(180deg, #ffffff 0%, #f9fafb 100%)',
+          background: 'linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%)',
           padding: '54px 0 40px',
-          borderBottom: '1px solid #e5e7eb',
+          borderBottom: '1px solid var(--line)',
         }}
       >
         <div className="wrap">
           <div style={{ maxWidth: '820px' }}>
+            {/* Status badge */}
             <div
               style={{
                 display: 'inline-flex',
@@ -41,11 +42,11 @@ export default function HeroBanner() {
                 gap: '8px',
                 padding: '6px 14px',
                 borderRadius: '9999px',
-                background: '#f3f4f6',
-                border: '1px solid #e5e7eb',
+                background: 'var(--paper-3)',
+                border: '1px solid var(--line)',
                 fontSize: '12px',
                 fontWeight: 600,
-                color: '#374151',
+                color: 'var(--ink-soft)',
                 marginBottom: '20px',
               }}
             >
@@ -54,11 +55,12 @@ export default function HeroBanner() {
                   width: '8px',
                   height: '8px',
                   borderRadius: '50%',
-                  background: '#10b981',
+                  background: 'var(--brass)',
                   display: 'inline-block',
+                  flexShrink: 0,
                 }}
               />
-              <span>Next-Day & Same-Day Villa Delivery Across Bali</span>
+              <span>Next-Day &amp; Same-Day Villa Delivery Across Bali</span>
             </div>
 
             <h1
@@ -67,7 +69,7 @@ export default function HeroBanner() {
                 lineHeight: 1.15,
                 fontWeight: 800,
                 letterSpacing: '-0.03em',
-                color: '#111827',
+                color: 'var(--ink)',
                 marginBottom: '18px',
               }}
             >
@@ -78,7 +80,7 @@ export default function HeroBanner() {
               style={{
                 fontSize: 'clamp(16px, 2vw, 19px)',
                 lineHeight: 1.55,
-                color: '#4b5563',
+                color: 'var(--ink-soft)',
                 marginBottom: '28px',
                 maxWidth: '680px',
               }}
@@ -93,8 +95,8 @@ export default function HeroBanner() {
                 style={{
                   padding: '13px 26px',
                   borderRadius: '9999px',
-                  background: '#000000',
-                  color: '#ffffff',
+                  background: 'var(--ink)',
+                  color: 'var(--paper)',
                   border: 'none',
                   fontSize: '14.5px',
                   fontWeight: 600,
@@ -102,8 +104,9 @@ export default function HeroBanner() {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '8px',
-                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-                  transition: 'transform 0.15s ease, background 0.15s ease',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.12)',
+                  transition: 'transform 0.15s ease, opacity 0.15s ease',
+                  fontFamily: 'inherit',
                 }}
               >
                 <span>⚡ Open 2D Studio Configurator</span>
@@ -115,9 +118,9 @@ export default function HeroBanner() {
                 style={{
                   padding: '13px 24px',
                   borderRadius: '9999px',
-                  background: '#ffffff',
-                  color: '#111827',
-                  border: '1px solid #e5e7eb',
+                  background: 'var(--paper)',
+                  color: 'var(--ink)',
+                  border: '1px solid var(--line)',
                   fontSize: '14.5px',
                   fontWeight: 600,
                   cursor: 'pointer',
@@ -125,6 +128,7 @@ export default function HeroBanner() {
                   alignItems: 'center',
                   gap: '6px',
                   boxShadow: '0 1px 3px rgba(0, 0, 0, 0.04)',
+                  fontFamily: 'inherit',
                 }}
               >
                 <span>Browse All Products</span>
@@ -137,11 +141,11 @@ export default function HeroBanner() {
         </div>
       </section>
 
-      {/* ── TRUST BADGES BAR (Official Monis.rent style) ── */}
+      {/* ── TRUST BADGES BAR ── */}
       <div
         style={{
-          background: '#ffffff',
-          borderBottom: '1px solid #e5e7eb',
+          background: 'var(--paper)',
+          borderBottom: '1px solid var(--line)',
           padding: '14px 0',
         }}
       >
@@ -154,48 +158,72 @@ export default function HeroBanner() {
             gap: '16px',
             overflowX: 'auto',
             scrollbarWidth: 'none',
+            flexWrap: 'wrap',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', whiteSpace: 'nowrap', fontSize: '13px', fontWeight: 500, color: '#374151' }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2">
-              <rect x="1" y="7" width="15" height="10" />
-              <path d="M16 10h4l3 3v4h-7z" />
-              <circle cx="6" cy="19" r="1.8" />
-              <circle cx="18" cy="19" r="1.8" />
-            </svg>
-            <span>Same-Day Villa Delivery</span>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', whiteSpace: 'nowrap', fontSize: '13px', fontWeight: 500, color: '#374151' }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2">
-              <path d="M14.7 6.3a4 4 0 0 1-5.7 5.7L4 17v3h3l5-5a4 4 0 0 1 5.7-5.7z" />
-            </svg>
-            <span>In-Room Assembly & Testing</span>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', whiteSpace: 'nowrap', fontSize: '13px', fontWeight: 500, color: '#374151' }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-            </svg>
-            <span>Zero Security Deposit</span>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', whiteSpace: 'nowrap', fontSize: '13px', fontWeight: 500, color: '#374151' }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2">
-              <path d="M21 11.5a8.4 8.4 0 0 1-8.4 8.4 8.5 8.5 0 0 1-4-1L3 20l1.2-5.6a8.5 8.5 0 0 1-1-4A8.4 8.4 0 0 1 11.6 2 8.4 8.4 0 0 1 21 11.5z" />
-            </svg>
-            <span>WhatsApp Concierge (8am-9pm)</span>
-          </div>
+          {[
+            {
+              label: 'Same-Day Villa Delivery',
+              icon: (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="1" y="7" width="15" height="10" />
+                  <path d="M16 10h4l3 3v4h-7z" />
+                  <circle cx="6" cy="19" r="1.8" />
+                  <circle cx="18" cy="19" r="1.8" />
+                </svg>
+              ),
+            },
+            {
+              label: 'In-Room Assembly & Testing',
+              icon: (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M14.7 6.3a4 4 0 0 1-5.7 5.7L4 17v3h3l5-5a4 4 0 0 1 5.7-5.7z" />
+                </svg>
+              ),
+            },
+            {
+              label: 'Zero Security Deposit',
+              icon: (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+              ),
+            },
+            {
+              label: 'WhatsApp Concierge (8am-9pm)',
+              icon: (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 11.5a8.4 8.4 0 0 1-8.4 8.4 8.5 8.5 0 0 1-4-1L3 20l1.2-5.6a8.5 8.5 0 0 1-1-4A8.4 8.4 0 0 1 11.6 2 8.4 8.4 0 0 1 21 11.5z" />
+                </svg>
+              ),
+            },
+          ].map(({ label, icon }) => (
+            <div
+              key={label}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                whiteSpace: 'nowrap',
+                fontSize: '13px',
+                fontWeight: 500,
+                color: 'var(--ink-soft)',
+              }}
+            >
+              <span style={{ color: 'var(--brass)', display: 'flex' }}>{icon}</span>
+              <span>{label}</span>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* ── PRODUCT BUNDLES (Official Monis.rent section) ── */}
+      {/* ── PRODUCT BUNDLES ── */}
       <section
         id="setups"
         style={{
-          background: '#f9fafb',
+          background: 'var(--paper-2)',
           padding: '60px 0 68px',
-          borderBottom: '1px solid #e5e7eb',
+          borderBottom: '1px solid var(--line)',
           scrollMarginTop: '80px',
         }}
       >
@@ -208,7 +236,7 @@ export default function HeroBanner() {
                 fontWeight: 700,
                 textTransform: 'uppercase',
                 letterSpacing: '0.06em',
-                color: '#4b5563',
+                color: 'var(--ink-soft)',
                 marginBottom: '6px',
               }}
             >
@@ -218,19 +246,19 @@ export default function HeroBanner() {
               style={{
                 fontSize: 'clamp(24px, 3.5vw, 36px)',
                 fontWeight: 800,
-                color: '#111827',
+                color: 'var(--ink)',
                 letterSpacing: '-0.02em',
                 marginBottom: '8px',
               }}
             >
               Product Bundles
             </h2>
-            <p style={{ fontSize: '15px', color: '#4b5563', maxWidth: '640px' }}>
+            <p style={{ fontSize: '15px', color: 'var(--ink-soft)', maxWidth: '640px' }}>
               Save more with our curated setups — complete workstations with desks, chairs, monitors and accessories in one click.
             </p>
           </div>
 
-          {/* 4 Bundles Grid */}
+          {/* Bundles Grid */}
           <div
             style={{
               display: 'grid',
@@ -239,13 +267,13 @@ export default function HeroBanner() {
             }}
           >
             {PRESETS.map((preset) => {
-              const monthlyRate = Math.round((preset.totalPrice * 30 * 0.7) / 30); // 30% monthly discount
+              const monthlyRate = Math.round((preset.totalPrice * 30 * 0.7) / 30);
               return (
                 <article
                   key={preset.id}
                   style={{
-                    background: '#ffffff',
-                    border: '1px solid #e5e7eb',
+                    background: 'var(--paper)',
+                    border: '1px solid var(--line)',
                     borderRadius: '16px',
                     padding: '24px',
                     display: 'flex',
@@ -254,7 +282,6 @@ export default function HeroBanner() {
                     boxShadow: '0 1px 3px rgba(0, 0, 0, 0.04)',
                     transition: 'all 0.2s ease',
                   }}
-                  className="hover:shadow-lg hover:-translate-y-0.5"
                 >
                   <div>
                     {/* Top Tag & Title */}
@@ -265,15 +292,15 @@ export default function HeroBanner() {
                           fontWeight: 700,
                           textTransform: 'uppercase',
                           letterSpacing: '0.05em',
-                          color: '#047857',
-                          background: '#d1fae5',
+                          color: 'var(--sage)',
+                          background: 'rgba(5, 150, 105, 0.1)',
                           padding: '4px 10px',
                           borderRadius: '9999px',
                         }}
                       >
                         Curated Bundle
                       </span>
-                      <span style={{ fontSize: '12px', color: '#4b5563', fontWeight: 600 }}>
+                      <span style={{ fontSize: '12px', color: 'var(--ink-soft)', fontWeight: 600 }}>
                         Save 30% Monthly
                       </span>
                     </div>
@@ -282,7 +309,7 @@ export default function HeroBanner() {
                       style={{
                         fontSize: '20px',
                         fontWeight: 700,
-                        color: '#111827',
+                        color: 'var(--ink)',
                         marginBottom: '6px',
                       }}
                     >
@@ -293,7 +320,7 @@ export default function HeroBanner() {
                       style={{
                         fontSize: '13.5px',
                         lineHeight: 1.45,
-                        color: '#4b5563',
+                        color: 'var(--ink-soft)',
                         marginBottom: '18px',
                       }}
                     >
@@ -304,24 +331,24 @@ export default function HeroBanner() {
                     <div
                       style={{
                         padding: '14px',
-                        borderRadius: '12px',
-                        background: '#f9fafb',
-                        border: '1px solid #f3f4f6',
+                        borderRadius: 'var(--radius)',
+                        background: 'var(--paper-2)',
+                        border: '1px solid var(--line-soft)',
                         marginBottom: '20px',
                       }}
                     >
                       <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between' }}>
                         <div>
-                          <span style={{ fontSize: '20px', fontWeight: 800, color: '#111827' }}>
+                          <span style={{ fontSize: '20px', fontWeight: 800, color: 'var(--ink)' }}>
                             {formatPrice(preset.totalPrice)}
                           </span>
-                          <span style={{ fontSize: '12px', color: '#4b5563', marginLeft: '4px' }}>/day</span>
+                          <span style={{ fontSize: '12px', color: 'var(--ink-soft)', marginLeft: '4px' }}>/day</span>
                         </div>
                         <div style={{ textAlign: 'right' }}>
-                          <span style={{ fontSize: '13px', fontWeight: 600, color: '#047857' }}>
+                          <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--sage)' }}>
                             {formatPrice(monthlyRate)}/day
                           </span>
-                          <span style={{ display: 'block', fontSize: '11px', color: '#4b5563' }}>monthly rate</span>
+                          <span style={{ display: 'block', fontSize: '11px', color: 'var(--ink-subtle)' }}>monthly rate</span>
                         </div>
                       </div>
                     </div>
@@ -340,9 +367,9 @@ export default function HeroBanner() {
                       style={{
                         width: '100%',
                         padding: '11px',
-                        borderRadius: '10px',
-                        background: '#000000',
-                        color: '#ffffff',
+                        borderRadius: 'var(--radius)',
+                        background: 'var(--ink)',
+                        color: 'var(--paper)',
                         border: 'none',
                         fontSize: '13.5px',
                         fontWeight: 600,
@@ -351,7 +378,8 @@ export default function HeroBanner() {
                         alignItems: 'center',
                         justifyContent: 'center',
                         gap: '6px',
-                        transition: 'background 0.15s ease',
+                        transition: 'opacity 0.15s ease',
+                        fontFamily: 'inherit',
                       }}
                     >
                       <span>⚡ Customize in Studio</span>
@@ -367,10 +395,10 @@ export default function HeroBanner() {
                       style={{
                         width: '100%',
                         padding: '10px',
-                        borderRadius: '10px',
+                        borderRadius: 'var(--radius)',
                         background: 'transparent',
-                        color: '#374151',
-                        border: '1px solid #e5e7eb',
+                        color: 'var(--ink-soft)',
+                        border: '1px solid var(--line)',
                         fontSize: '13px',
                         fontWeight: 500,
                         cursor: 'pointer',
@@ -378,6 +406,8 @@ export default function HeroBanner() {
                         alignItems: 'center',
                         justifyContent: 'center',
                         gap: '6px',
+                        fontFamily: 'inherit',
+                        transition: 'border-color 0.15s ease, color 0.15s ease',
                       }}
                     >
                       <span>Book on Monis.rent →</span>
