@@ -56,8 +56,8 @@ export default function ProductCard({ product, isSelected = false }: ProductCard
   return (
     <article
       style={{
-        background: '#ffffff',
-        border: isSelected ? '2px solid #000000' : '1px solid #e5e7eb',
+        background: 'var(--paper)',
+        border: isSelected ? '2px solid var(--ink)' : '1px solid var(--line)',
         borderRadius: '16px',
         padding: '16px',
         display: 'flex',
@@ -79,7 +79,7 @@ export default function ProductCard({ product, isSelected = false }: ProductCard
         <div
           style={{
             position: 'relative',
-            background: '#f9fafb',
+            background: 'var(--paper-2)',
             borderRadius: '12px',
             height: '210px',
             display: 'flex',
@@ -97,8 +97,8 @@ export default function ProductCard({ product, isSelected = false }: ProductCard
                 position: 'absolute',
                 top: '10px',
                 left: '10px',
-                background: product.badge === 'bestseller' ? '#000000' : '#047857',
-                color: '#ffffff',
+                background: product.badge === 'bestseller' ? 'var(--ink)' : 'var(--sage)',
+                color: 'var(--paper)',
                 fontSize: '10px',
                 fontWeight: 700,
                 textTransform: 'uppercase',
@@ -148,7 +148,7 @@ export default function ProductCard({ product, isSelected = false }: ProductCard
               borderRadius: '9999px',
               fontSize: '11px',
               fontWeight: 600,
-              color: '#111827',
+              color: 'var(--ink)',
               boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
             }}
           >
@@ -163,7 +163,7 @@ export default function ProductCard({ product, isSelected = false }: ProductCard
             fontWeight: 600,
             textTransform: 'uppercase',
             letterSpacing: '0.04em',
-            color: '#4b5563',
+            color: 'var(--ink-soft)',
             marginBottom: '4px',
           }}
         >
@@ -175,7 +175,7 @@ export default function ProductCard({ product, isSelected = false }: ProductCard
           style={{
             fontSize: '16px',
             fontWeight: 700,
-            color: '#111827',
+            color: 'var(--ink)',
             lineHeight: 1.3,
             marginBottom: '4px',
           }}
@@ -187,7 +187,7 @@ export default function ProductCard({ product, isSelected = false }: ProductCard
         <p
           style={{
             fontSize: '13px',
-            color: '#4b5563',
+            color: 'var(--ink-soft)',
             lineHeight: 1.4,
             marginBottom: '14px',
           }}
@@ -203,8 +203,8 @@ export default function ProductCard({ product, isSelected = false }: ProductCard
                 key={feat}
                 style={{
                   fontSize: '11px',
-                  color: '#374151',
-                  background: '#f3f4f6',
+                  color: 'var(--ink-soft)',
+                  background: 'var(--paper-3)',
                   padding: '2px 8px',
                   borderRadius: '6px',
                   fontWeight: 500,
@@ -220,7 +220,7 @@ export default function ProductCard({ product, isSelected = false }: ProductCard
       {/* Footer / Price & Add Button */}
       <div
         style={{
-          borderTop: '1px solid #f3f4f6',
+          borderTop: '1px solid var(--line-soft)',
           paddingTop: '12px',
           display: 'flex',
           alignItems: 'center',
@@ -229,12 +229,12 @@ export default function ProductCard({ product, isSelected = false }: ProductCard
       >
         <div>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px' }}>
-            <span style={{ fontSize: '17px', fontWeight: 800, color: '#111827' }}>
+            <span style={{ fontSize: '17px', fontWeight: 800, color: 'var(--ink)' }}>
               {priceDaily}
             </span>
-            <span style={{ fontSize: '11px', color: '#4b5563' }}>/day</span>
+            <span style={{ fontSize: '11px', color: 'var(--ink-soft)' }}>/day</span>
           </div>
-          <div style={{ fontSize: '11px', color: '#047857', fontWeight: 600 }}>
+          <div style={{ fontSize: '11px', color: 'var(--sage)', fontWeight: 600 }}>
             {priceMonthly}/day (monthly)
           </div>
         </div>
@@ -246,8 +246,8 @@ export default function ProductCard({ product, isSelected = false }: ProductCard
           style={{
             padding: '8px 14px',
             borderRadius: '9999px',
-            background: isSelected || justAdded ? '#047857' : '#000000',
-            color: '#ffffff',
+            background: isSelected || justAdded ? 'var(--sage)' : 'var(--ink)',
+            color: 'var(--paper)',
             border: 'none',
             fontSize: '12.5px',
             fontWeight: 600,

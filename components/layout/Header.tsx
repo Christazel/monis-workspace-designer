@@ -34,6 +34,7 @@ export default function Header() {
   const [headerHeight, setHeaderHeight] = useState(130);
 
   const headerWrapperRef = useRef<HTMLDivElement>(null);
+  const locationDropdownRef = useRef<HTMLDivElement>(null);
   const hideTimerRef = useRef<NodeJS.Timeout | null>(null);
   const lastScrollYRef = useRef(0);
   const touchStartYRef = useRef(0);
@@ -89,6 +90,18 @@ export default function Header() {
     clearHideTimer();
     setIsVisible(false);
   }, [clearHideTimer, navOpen, locationMenuOpen]);
+
+  // Bug #10: Close location dropdown on outside click
+  useEffect(() => {
+    if (!locationMenuOpen) return;
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (locationDropdownRef.current && !locationDropdownRef.current.contains(e.target as Node)) {
+        setLocationMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
+  }, [locationMenuOpen]);
 
   // Measure header height
   useEffect(() => {
@@ -442,6 +455,7 @@ export default function Header() {
             {/* Bali Area Dropdown Popup */}
             {locationMenuOpen && (
               <div
+                ref={locationDropdownRef}
                 style={{
                   position: 'absolute',
                   top: '115%',

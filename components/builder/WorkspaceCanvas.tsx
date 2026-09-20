@@ -651,6 +651,21 @@ export default function WorkspaceCanvas() {
 
   const itemCount = [desk, chair, activeMonitor, webcamItem, keyboardItem, screenbar, monstera, espresso, laptopStand, speakerItem, beanBag, surfboard].filter(Boolean).length;
 
+  // Bug #14: Auto-clear selected slot badge if the item was removed from store
+  // This prevents showing stale info when user deletes an item from WorkspaceSummary
+  // while a canvas badge for that item is still visible.
+  React.useEffect(() => {
+    if (selectedSlot && !getSlotItem(selectedSlot)) {
+      setSelectedSlot(null);
+    }
+  }); // intentionally no deps — runs on every render to stay in sync
+
+  // Bug #3: Fix speaker/laptopStand overlap — speaker shifts left when laptopStand is also present
+  // Without laptopStand: speaker at calc(50% - 140px)
+  // With laptopStand: speaker shifts more left to calc(50% - 152px) to avoid overlap
+  const speakerLeftPos = (speakerItem && laptopStand) ? 'calc(50% - 152px)' : 'calc(50% - 140px)';
+  const laptopStandLeftPos = speakerItem ? 'calc(50% - 140px)' : 'calc(50% - 146px)';
+
   return (
     <div
       style={{
@@ -668,27 +683,34 @@ export default function WorkspaceCanvas() {
         style={{
           height: 58,
           width: '100%',
-          padding: '0 20px',
+          padding: '0 16px',
           borderBottom: '1px solid var(--line)',
-          background: 'var(--paper)',
+          background: isNight
+            ? 'rgba(11,15,25,0.95)'
+            : 'rgba(252,252,251,0.95)',
+          backdropFilter: 'blur(8px)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           flexShrink: 0,
           zIndex: 10,
+          transition: 'background 0.5s ease',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
+        {/* Left: Title */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <div
             style={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              width: 28,
-              height: 28,
-              borderRadius: 8,
-              background: 'var(--paper-2)',
-              border: '1px solid var(--line)',
+              width: 30,
+              height: 30,
+              borderRadius: 9,
+              background: isNight
+                ? 'linear-gradient(135deg, rgba(168,122,52,0.2), rgba(168,122,52,0.08))'
+                : 'linear-gradient(135deg, rgba(168,122,52,0.15), rgba(168,122,52,0.05))',
+              border: '1px solid rgba(168,122,52,0.3)',
             }}
           >
             <Layers size={14} color="var(--brass)" />
@@ -696,84 +718,131 @@ export default function WorkspaceCanvas() {
           <div>
             <h3
               style={{
-                fontSize: 13,
+                fontSize: 12.5,
                 fontWeight: 800,
-                color: 'var(--ink)',
+                color: isNight ? '#e2e8f0' : 'var(--ink)',
                 textTransform: 'uppercase',
-                letterSpacing: '0.06em',
+                letterSpacing: '0.07em',
                 margin: 0,
                 lineHeight: 1.2,
               }}
             >
               Studio 2D Preview
             </h3>
-            <p style={{ fontSize: 11, color: 'var(--ink-soft)', marginTop: 2, marginBottom: 0 }}>
+            <p style={{ fontSize: 10.5, color: isNight ? 'rgba(255,255,255,0.35)' : 'var(--ink-soft)', marginTop: 1, marginBottom: 0 }}>
               Visualisasi ruang kerja interaktif
             </p>
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          {/* Ambiance Day/Night Toggle */}
-          <button
-            type="button"
-            onClick={() => setAmbiance(isNight ? 'day' : 'night')}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 6,
-              padding: '5px 12px',
-              borderRadius: 20,
-              border: '1px solid var(--line)',
-              background: 'var(--paper-2)',
-              color: 'var(--ink)',
-              fontSize: 11.5,
-              fontWeight: 600,
-              cursor: 'pointer',
-              transition: 'all 0.2s ease',
-            }}
-            title="Ganti Suasana Siang / Malam"
-          >
-            {isNight ? (
-              <>
-                <Moon size={13} color="#7dd3fc" />
-                <span>Evening</span>
-              </>
-            ) : (
-              <>
-                <Sun size={13} color="#f59e0b" />
-                <span>Daylight</span>
-              </>
-            )}
-          </button>
-
-          {/* Item counter */}
+        {/* Right: Controls */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+          {/* Item counter pill */}
           <div
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: 6,
-              padding: '5px 11px',
+              gap: 5,
+              padding: '4px 10px',
               borderRadius: 20,
-              border: '1px solid var(--line)',
-              background: 'var(--paper-2)',
-              color: 'var(--ink)',
-              fontSize: 11.5,
+              border: isNight ? '1px solid rgba(255,255,255,0.1)' : '1px solid var(--line)',
+              background: isNight ? 'rgba(255,255,255,0.05)' : 'var(--paper-2)',
+              color: isNight ? 'rgba(255,255,255,0.7)' : 'var(--ink)',
+              fontSize: 11,
               fontWeight: 600,
             }}
           >
             <span
               style={{
-                width: 7,
-                height: 7,
+                width: 6,
+                height: 6,
                 borderRadius: '50%',
                 background: '#22c55e',
                 display: 'inline-block',
-                boxShadow: '0 0 8px rgba(34, 197, 94, 0.6)',
+                boxShadow: '0 0 6px rgba(34, 197, 94, 0.7)',
               }}
             />
             <span>{itemCount} item</span>
           </div>
+
+          {/* Ambiance Toggle — pill style */}
+          <button
+            type="button"
+            id="canvas-ambiance-toggle"
+            onClick={() => setAmbiance(isNight ? 'day' : 'night')}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 0,
+              padding: 2,
+              borderRadius: 20,
+              border: isNight ? '1px solid rgba(255,255,255,0.12)' : '1px solid var(--line)',
+              background: isNight ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.04)',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
+              position: 'relative',
+              width: 72,
+              height: 28,
+            }}
+            title="Ganti Suasana Siang / Malam"
+            aria-label={isNight ? 'Switch to day mode' : 'Switch to night mode'}
+          >
+            {/* Sliding thumb */}
+            <motion.div
+              layout
+              style={{
+                position: 'absolute',
+                top: 2,
+                left: isNight ? 2 : 36,
+                width: 32,
+                height: 22,
+                borderRadius: 16,
+                background: isNight
+                  ? 'linear-gradient(135deg, #1e3a5f, #0f172a)'
+                  : 'linear-gradient(135deg, #fef3c7, #f59e0b)',
+                boxShadow: isNight
+                  ? '0 2px 6px rgba(0,0,0,0.4)'
+                  : '0 2px 6px rgba(245,158,11,0.35)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'left 0.22s ease, background 0.3s ease',
+              }}
+            >
+              {isNight ? (
+                <Moon size={11} color="#7dd3fc" />
+              ) : (
+                <Sun size={11} color="#92400e" />
+              )}
+            </motion.div>
+            {/* Labels */}
+            <span
+              style={{
+                position: 'absolute',
+                left: 10,
+                fontSize: 9,
+                fontWeight: 700,
+                color: isNight ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.9)',
+                letterSpacing: '0.03em',
+                opacity: isNight ? 0 : 1,
+                transition: 'opacity 0.2s ease',
+                pointerEvents: 'none',
+              }}
+            >☀️</span>
+            <span
+              style={{
+                position: 'absolute',
+                right: 9,
+                fontSize: 9,
+                fontWeight: 700,
+                color: isNight ? 'rgba(150,180,220,0.8)' : 'rgba(0,0,0,0.3)',
+                letterSpacing: '0.03em',
+                opacity: isNight ? 1 : 0,
+                transition: 'opacity 0.2s ease',
+                pointerEvents: 'none',
+              }}
+            >🌙</span>
+          </button>
         </div>
       </div>
 
@@ -785,9 +854,11 @@ export default function WorkspaceCanvas() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          padding: '16px 20px',
+          padding: '14px 16px',
           overflow: 'hidden',
           minHeight: 0,
+          background: isNight ? '#080c14' : '#f1f3f6',
+          transition: 'background 0.5s ease',
         }}
       >
         {/* ── STUDIO CANVAS ── */}
@@ -797,666 +868,719 @@ export default function WorkspaceCanvas() {
             maxWidth: 920,
             maxHeight: '100%',
             aspectRatio: '16 / 9',
-            borderRadius: 16,
+            borderRadius: 18,
             border: isNight
-              ? '1px solid rgba(255,255,255,0.1)'
-              : '1px solid rgba(0,0,0,0.1)',
+              ? '1px solid rgba(255,255,255,0.08)'
+              : '1px solid rgba(0,0,0,0.08)',
             overflow: 'hidden',
             position: 'relative',
             boxShadow: isNight
-              ? '0 20px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05)'
-              : '0 16px 40px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04)',
+              ? '0 0 0 1px rgba(255,255,255,0.04), 0 24px 60px rgba(0,0,0,0.6), 0 8px 20px rgba(0,0,0,0.3)'
+              : '0 0 0 1px rgba(0,0,0,0.03), 0 20px 48px rgba(0,0,0,0.08), 0 6px 16px rgba(0,0,0,0.04)',
             isolation: 'isolate',
             background: isNight
-              ? 'linear-gradient(165deg, #111827 0%, #0b0f19 50%, #030712 100%)'
-              : 'linear-gradient(165deg, #f8fafc 0%, #edf2f7 50%, #e2e8f0 100%)',
+              ? 'linear-gradient(160deg, #10172a 0%, #090d18 40%, #04060f 100%)'
+              : 'linear-gradient(160deg, #f9fbff 0%, #eef2f8 50%, #e4ecf4 100%)',
             transition: 'background 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease',
           }}
         >
-        {/* Grid pattern */}
-        <svg
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: isNight ? 0.05 : 0.08, pointerEvents: 'none', transition: 'opacity 0.5s ease' }}
-        >
-          <defs>
-            <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
-              <path d="M 32 0 L 0 0 0 32" fill="none" stroke={isNight ? '#6b7280' : '#94a3b8'} strokeWidth="0.5"/>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)"/>
-        </svg>
+          {/* ── Dot grid pattern (more modern than line grid) ── */}
+          <svg
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: isNight ? 0.3 : 0.4, pointerEvents: 'none', transition: 'opacity 0.5s ease' }}
+          >
+            <defs>
+              <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
+                <circle cx="1" cy="1" r="0.8" fill={isNight ? '#4b5563' : '#94a3b8'}/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#dots)"/>
+          </svg>
 
-        {/* Floor platform glow */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '-5%',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: '80%',
-            height: '50%',
-            background: isNight
-              ? 'radial-gradient(ellipse at 50% 90%, rgba(99,112,145,0.18) 0%, rgba(168,122,52,0.06) 50%, transparent 80%)'
-              : 'radial-gradient(ellipse at 50% 90%, rgba(168,122,52,0.14) 0%, rgba(99,112,145,0.05) 50%, transparent 80%)',
-            pointerEvents: 'none',
-            zIndex: 2,
-            transition: 'background 0.5s ease',
-          }}
-        />
-
-        {/* Floor line — Anchor baseline for workspace (Rule 1) */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '20%',
-            left: '6%',
-            right: '6%',
-            height: '1px',
-            background: isNight
-              ? 'linear-gradient(90deg, transparent, rgba(168,122,52,0.2) 20%, rgba(168,122,52,0.38) 50%, rgba(168,122,52,0.2) 80%, transparent)'
-              : 'linear-gradient(90deg, transparent, rgba(0,0,0,0.06) 20%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.06) 80%, transparent)',
-            zIndex: 3,
-            pointerEvents: 'none',
-            transition: 'background 0.5s ease',
-          }}
-        />
-
-        {/* ────── LAYERS (Strict Z-Index & Anchor Hierarchy) ────── */}
-
-        {/* 1. Bean Bag — Ground Left (z:5) */}
-        <AnimatePresence>
-          {beanBag && (
-            <motion.div
-              key="beanBag"
-              variants={itemVariants}
-              initial="hidden" animate="visible" exit="exit"
-              style={{ position: 'absolute', left: '4%', bottom: '17%', zIndex: 5, cursor: 'pointer' }}
-              whileHover={{ scale: 1.04 }}
-              onMouseEnter={() => setHoveredSlot('beanBag')}
-              onMouseLeave={() => setHoveredSlot(null)}
-              onClick={() => setSelectedSlot(s => s === 'beanBag' ? null : 'beanBag')}
-            >
-              <BeanBagSVG height={85} />
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* 2. Surfboard — Ground Right (z:5) */}
-        <AnimatePresence>
-          {surfboard && (
-            <motion.div
-              key="surfboard"
-              variants={itemVariants}
-              initial="hidden" animate="visible" exit="exit"
-              style={{ position: 'absolute', right: '3%', bottom: '17%', zIndex: 5, cursor: 'pointer' }}
-              whileHover={{ scale: 1.04 }}
-              onMouseEnter={() => setHoveredSlot('surfboard')}
-              onMouseLeave={() => setHoveredSlot(null)}
-              onClick={() => setSelectedSlot(s => s === 'surfboard' ? null : 'surfboard')}
-            >
-              <SurfboardSVG height={118} />
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* 3. DESK — Floor Baseline center anchor (z:8) */}
-        <div
-          style={{
-            position: 'absolute',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            bottom: '20%',
-            zIndex: 8,
-            cursor: desk ? 'pointer' : 'default',
-          }}
-          onMouseEnter={() => desk && setHoveredSlot('desk')}
-          onMouseLeave={() => setHoveredSlot(null)}
-          onClick={() => desk && setSelectedSlot(s => s === 'desk' ? null : 'desk')}
-        >
-          <AnimatePresence mode="wait">
-            {desk ? (
-              <motion.div
-                key={desk.id}
-                variants={itemVariants}
-                initial="hidden" animate="visible" exit="exit"
-                whileHover={{ scale: 1.015 }}
-              >
-                {getDeskIllustration(desk.id)}
-              </motion.div>
-            ) : chair ? (
-              /* Inline prompt only if chair is chosen but desk is not yet chosen */
-              <motion.div
-                key="empty-desk"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                style={{ textAlign: 'center', padding: '16px 0' }}
-              >
-                <button
-                  type="button"
-                  onClick={() => setBuilderTab('desk')}
-                  style={{
-                    display: 'inline-flex', alignItems: 'center', gap: 7,
-                    padding: '8px 20px', borderRadius: 30,
-                    border: '1.5px dashed rgba(168,122,52,0.5)',
-                    background: isNight ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)',
-                    color: isNight ? 'rgba(255,255,255,0.7)' : 'var(--ink)',
-                    fontSize: 12, fontWeight: 700, cursor: 'pointer',
-                  }}
-                >
-                  <Plus size={13} color="var(--brass)" />
-                  <span>Pilih Meja</span>
-                </button>
-              </motion.div>
-            ) : null}
-          </AnimatePresence>
-        </div>
-
-        {/* 4. Ambient Screen Glow — behind monitor (z:9) */}
-        {desk && activeMonitor && (
+          {/* ── Subtle top vignette for depth ── */}
           <div
             style={{
               position: 'absolute',
-              bottom: '41%',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              width: ultrawide ? 230 : 185,
-              height: 90,
+              top: 0,
+              left: 0,
+              right: 0,
+              height: '35%',
               background: isNight
-                ? 'radial-gradient(ellipse, rgba(56,189,248,0.2) 0%, rgba(99,102,241,0.08) 50%, transparent 75%)'
-                : 'radial-gradient(ellipse, rgba(56,189,248,0.12) 0%, transparent 70%)',
-              zIndex: 9,
+                ? 'linear-gradient(180deg, rgba(4,6,15,0.6) 0%, transparent 100%)'
+                : 'linear-gradient(180deg, rgba(228,236,244,0.5) 0%, transparent 100%)',
               pointerEvents: 'none',
-              filter: 'blur(12px)',
+              zIndex: 1,
               transition: 'background 0.5s ease',
             }}
           />
-        )}
 
-        {/* 5. MONITOR — on desk surface center anchor (z:10) */}
-        {desk && (
+          {/* ── Perspective floor glow — warm upward light ── */}
+          <div
+            style={{
+              position: 'absolute',
+              bottom: '-8%',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: '90%',
+              height: '55%',
+              background: isNight
+                ? 'radial-gradient(ellipse at 50% 95%, rgba(80,90,120,0.22) 0%, rgba(168,122,52,0.08) 45%, transparent 75%)'
+                : 'radial-gradient(ellipse at 50% 95%, rgba(168,122,52,0.16) 0%, rgba(99,112,145,0.06) 45%, transparent 75%)',
+              pointerEvents: 'none',
+              zIndex: 2,
+              transition: 'background 0.5s ease',
+            }}
+          />
+
+          {/* ── Floor / Baseline ── */}
+          <div
+            style={{
+              position: 'absolute',
+              bottom: '20%',
+              left: '4%',
+              right: '4%',
+              height: '1px',
+              background: isNight
+                ? 'linear-gradient(90deg, transparent 0%, rgba(168,122,52,0.12) 12%, rgba(168,122,52,0.45) 30%, rgba(168,122,52,0.6) 50%, rgba(168,122,52,0.45) 70%, rgba(168,122,52,0.12) 88%, transparent 100%)'
+                : 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.04) 12%, rgba(0,0,0,0.14) 30%, rgba(0,0,0,0.22) 50%, rgba(0,0,0,0.14) 70%, rgba(0,0,0,0.04) 88%, transparent 100%)',
+              zIndex: 3,
+              pointerEvents: 'none',
+              transition: 'background 0.5s ease',
+            }}
+          />
+
+          {/* ── Subtle floor reflection band below baseline ── */}
+          <div
+            style={{
+              position: 'absolute',
+              bottom: '14%',
+              left: '10%',
+              right: '10%',
+              height: '6%',
+              background: isNight
+                ? 'linear-gradient(180deg, rgba(168,122,52,0.08) 0%, transparent 100%)'
+                : 'linear-gradient(180deg, rgba(0,0,0,0.04) 0%, transparent 100%)',
+              pointerEvents: 'none',
+              zIndex: 3,
+              filter: 'blur(2px)',
+              transition: 'background 0.5s ease',
+            }}
+          />
+
+          {/* ────── LAYERS (Strict Z-Index & Anchor Hierarchy) ────── */}
+
+          {/* 1. Bean Bag — Ground Left (z:5) */}
+          <AnimatePresence>
+            {beanBag && (
+              <motion.div
+                key="beanBag"
+                variants={itemVariants}
+                initial="hidden" animate="visible" exit="exit"
+                style={{ position: 'absolute', left: '3%', bottom: '17%', zIndex: 5, cursor: 'pointer' }}
+                whileHover={{ scale: 1.04 }}
+                onMouseEnter={() => setHoveredSlot('beanBag')}
+                onMouseLeave={() => setHoveredSlot(null)}
+                onClick={() => setSelectedSlot(s => s === 'beanBag' ? null : 'beanBag')}
+              >
+                <BeanBagSVG height={85} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* 2. Surfboard — Ground Right (z:5) */}
+          <AnimatePresence>
+            {surfboard && (
+              <motion.div
+                key="surfboard"
+                variants={itemVariants}
+                initial="hidden" animate="visible" exit="exit"
+                style={{ position: 'absolute', right: '3%', bottom: '17%', zIndex: 5, cursor: 'pointer' }}
+                whileHover={{ scale: 1.04 }}
+                onMouseEnter={() => setHoveredSlot('surfboard')}
+                onMouseLeave={() => setHoveredSlot(null)}
+                onClick={() => setSelectedSlot(s => s === 'surfboard' ? null : 'surfboard')}
+              >
+                <SurfboardSVG height={118} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* 3. DESK — Floor Baseline center anchor (z:8) */}
           <div
             style={{
               position: 'absolute',
               left: '50%',
               transform: 'translateX(-50%)',
-              bottom: '39%',
-              zIndex: 10,
-              cursor: activeMonitor ? 'pointer' : 'default',
+              bottom: '20%',
+              zIndex: 8,
+              cursor: desk ? 'pointer' : 'default',
             }}
-            onMouseEnter={() => activeMonitor && setHoveredSlot('monitor')}
+            onMouseEnter={() => desk && setHoveredSlot('desk')}
             onMouseLeave={() => setHoveredSlot(null)}
-            onClick={() => activeMonitor && setSelectedSlot(s => s === 'monitor' ? null : 'monitor')}
+            onClick={() => desk && setSelectedSlot(s => s === 'desk' ? null : 'desk')}
           >
             <AnimatePresence mode="wait">
-              {activeMonitor ? (
+              {desk ? (
                 <motion.div
-                  key={activeMonitor.id}
+                  key={desk.id}
                   variants={itemVariants}
                   initial="hidden" animate="visible" exit="exit"
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ scale: 1.015 }}
                 >
-                  {ultrawide
-                    ? <MonitorUltrawide width={210} isNight={isNight} />
-                    : <Monitor4K width={165} isNight={isNight} />
-                  }
+                  {getDeskIllustration(desk.id)}
                 </motion.div>
-              ) : (
+              ) : chair ? (
+                /* Inline prompt only if chair is chosen but desk is not yet chosen */
                 <motion.div
-                  key="empty-monitor"
+                  key="empty-desk"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  style={{ textAlign: 'center' }}
+                  style={{ textAlign: 'center', padding: '16px 0' }}
                 >
-                  <button
-                    type="button"
-                    onClick={() => setBuilderTab('accessory')}
-                    style={{
-                      display: 'inline-flex', alignItems: 'center', gap: 5,
-                      padding: '5px 12px', borderRadius: 20,
-                      border: '1px dashed rgba(168,122,52,0.3)',
-                      background: 'rgba(255,255,255,0.03)',
-                      color: 'rgba(255,255,255,0.4)', fontSize: 10.5, fontWeight: 700,
-                      cursor: 'pointer',
-                    }}
-                  >
-                    <Plus size={10} color="rgba(168,122,52,0.6)" />
-                    <span>+ Monitor</span>
-                  </button>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        )}
-
-        {/* 6. Studio Speakers — Symmetrical stereo pair flanking monitor (z:12) */}
-        <AnimatePresence>
-          {desk && speakerItem && (
-            <>
-              {/* Left Speaker */}
-              <motion.div
-                key="speaker-left"
-                variants={itemVariants}
-                initial="hidden" animate="visible" exit="exit"
-                style={{ position: 'absolute', left: 'calc(50% - 138px)', bottom: '39%', zIndex: 12, cursor: 'pointer' }}
-                whileHover={{ scale: 1.06 }}
-                onMouseEnter={() => setHoveredSlot('speakers')}
-                onMouseLeave={() => setHoveredSlot(null)}
-                onClick={() => setSelectedSlot(s => s === 'speakers' ? null : 'speakers')}
-              >
-                <SpeakersSVG height={44} />
-              </motion.div>
-              {/* Right Speaker */}
-              <motion.div
-                key="speaker-right"
-                variants={itemVariants}
-                initial="hidden" animate="visible" exit="exit"
-                style={{ position: 'absolute', left: 'calc(50% + 94px)', bottom: '39%', zIndex: 12, cursor: 'pointer' }}
-                whileHover={{ scale: 1.06 }}
-                onMouseEnter={() => setHoveredSlot('speakers')}
-                onMouseLeave={() => setHoveredSlot(null)}
-                onClick={() => setSelectedSlot(s => s === 'speakers' ? null : 'speakers')}
-              >
-                <SpeakersSVG height={44} />
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
-
-        {/* 7. Laptop Stand — Left desk surface (z:12) */}
-        <AnimatePresence>
-          {desk && laptopStand && (
-            <motion.div
-              key="laptopStand"
-              variants={itemVariants}
-              initial="hidden" animate="visible" exit="exit"
-              style={{ position: 'absolute', left: 'calc(50% - 146px)', bottom: '39%', zIndex: 12, cursor: 'pointer' }}
-              whileHover={{ scale: 1.06 }}
-              onMouseEnter={() => setHoveredSlot('laptopStand')}
-              onMouseLeave={() => setHoveredSlot(null)}
-              onClick={() => setSelectedSlot(s => s === 'laptopStand' ? null : 'laptopStand')}
-            >
-              <LaptopStandSVG height={48} />
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* 8. Espresso Machine — Right desk surface (z:12) */}
-        <AnimatePresence>
-          {desk && espresso && (
-            <motion.div
-              key="espresso"
-              variants={itemVariants}
-              initial="hidden" animate="visible" exit="exit"
-              style={{ position: 'absolute', left: 'calc(50% + 102px)', bottom: '39%', zIndex: 12, cursor: 'pointer' }}
-              whileHover={{ scale: 1.06 }}
-              onMouseEnter={() => setHoveredSlot('espresso')}
-              onMouseLeave={() => setHoveredSlot(null)}
-              onClick={() => setSelectedSlot(s => s === 'espresso' ? null : 'espresso')}
-            >
-              <EspressoMachine height={50} />
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* 9. ScreenBar Lamp + Soft Downlight Gradient — on top of monitor (z:14) */}
-        <AnimatePresence>
-          {desk && activeMonitor && screenbar && (
-            <motion.div
-              key="screenbar"
-              variants={topItemVariants}
-              initial="hidden" animate="visible" exit="exit"
-              style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', bottom: '60%', zIndex: 14, cursor: 'pointer' }}
-              whileHover={{ scale: 1.05 }}
-              onMouseEnter={() => setHoveredSlot('screenbar')}
-              onMouseLeave={() => setHoveredSlot(null)}
-              onClick={() => setSelectedSlot(s => s === 'screenbar' ? null : 'screenbar')}
-            >
-              <ScreenBarLamp width={110} />
-              {/* Soft warm downlight gradient onto desk surface (Rule 4) */}
-              <div
-                style={{
-                  position: 'absolute',
-                  top: '85%',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  width: 210,
-                  height: 100,
-                  background: isNight
-                    ? 'radial-gradient(ellipse at 50% 0%, rgba(251,191,36,0.24) 0%, rgba(251,191,36,0.06) 55%, transparent 80%)'
-                    : 'radial-gradient(ellipse at 50% 0%, rgba(251,191,36,0.14) 0%, rgba(251,191,36,0.03) 55%, transparent 80%)',
-                  pointerEvents: 'none',
-                  filter: 'blur(3px)',
-                  transition: 'background 0.4s ease',
-                }}
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* 10. Webcam — top of monitor when no screenbar (z:14) */}
-        <AnimatePresence>
-          {desk && activeMonitor && webcamItem && !screenbar && (
-            <motion.div
-              key="webcam"
-              variants={topItemVariants}
-              initial="hidden" animate="visible" exit="exit"
-              style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', bottom: '60.5%', zIndex: 14, cursor: 'pointer' }}
-              whileHover={{ scale: 1.08 }}
-              onMouseEnter={() => setHoveredSlot('webcam')}
-              onMouseLeave={() => setHoveredSlot(null)}
-              onClick={() => setSelectedSlot(s => s === 'webcam' ? null : 'webcam')}
-            >
-              <WebcamSVG width={32} />
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* 11. Keyboard & Mouse — on front of desk (z:16) */}
-        <AnimatePresence>
-          {desk && keyboardItem && (
-            <motion.div
-              key="keyboard"
-              variants={itemVariants}
-              initial="hidden" animate="visible" exit="exit"
-              style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', bottom: '35.5%', zIndex: 16, cursor: 'pointer' }}
-              whileHover={{ scale: 1.04 }}
-              onMouseEnter={() => setHoveredSlot('keyboard')}
-              onMouseLeave={() => setHoveredSlot(null)}
-              onClick={() => setSelectedSlot(s => s === 'keyboard' ? null : 'keyboard')}
-            >
-              <KeyboardIllustration width={115} />
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* 12. CHAIR — Ground offset in front of desk (z:18)
-            Headrest terminates safely below the monitor screen display (Rule 2) */}
-        <div
-          style={{
-            position: 'absolute',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            bottom: '12%',
-            zIndex: 18,
-            cursor: chair ? 'pointer' : 'default',
-          }}
-          onMouseEnter={() => chair && setHoveredSlot('chair')}
-          onMouseLeave={() => setHoveredSlot(null)}
-          onClick={() => chair && setSelectedSlot(s => s === 'chair' ? null : 'chair')}
-        >
-          <AnimatePresence mode="wait">
-            {chair ? (
-              <motion.div
-                key={chair.id}
-                variants={itemVariants}
-                initial="hidden" animate="visible" exit="exit"
-                whileHover={{ scale: 1.02, y: -3 }}
-              >
-                {getChairIllustration(chair.id)}
-              </motion.div>
-            ) : desk ? (
-              /* Inline prompt only if desk is chosen but chair is not yet chosen */
-              <motion.div
-                key="empty-chair"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                style={{ textAlign: 'center', padding: '10px 0' }}
-              >
-                <button
-                  type="button"
-                  onClick={() => setBuilderTab('chair')}
-                  style={{
-                    display: 'inline-flex', alignItems: 'center', gap: 6,
-                    padding: '7px 18px', borderRadius: 30,
-                    border: '1.5px dashed rgba(168,122,52,0.5)',
-                    background: isNight ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)',
-                    color: isNight ? 'rgba(255,255,255,0.7)' : 'var(--ink)',
-                    fontSize: 11.5, fontWeight: 700, cursor: 'pointer',
-                  }}
-                >
-                  <Plus size={12} color="var(--brass)" />
-                  <span>Pilih Kursi</span>
-                </button>
-              </motion.div>
-            ) : null}
-          </AnimatePresence>
-        </div>
-
-        {/* 13. Monstera Plant — Foreground side element (z:22) */}
-        <AnimatePresence>
-          {monstera && (
-            <motion.div
-              key="monstera"
-              variants={itemVariants}
-              initial="hidden" animate="visible" exit="exit"
-              style={{ position: 'absolute', left: '6%', bottom: '17%', zIndex: 22, cursor: 'pointer' }}
-              whileHover={{ scale: 1.04 }}
-              onMouseEnter={() => setHoveredSlot('plant')}
-              onMouseLeave={() => setHoveredSlot(null)}
-              onClick={() => setSelectedSlot(s => s === 'plant' ? null : 'plant')}
-            >
-              <MonsteraPlant height={110} />
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* 14. Hover Tooltip (z:40) */}
-        <AnimatePresence>
-          {hoveredSlot && hoveredItem && (
-            <motion.div
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 6 }}
-              transition={{ duration: 0.15 }}
-              style={{
-                position: 'absolute', bottom: 14,
-                left: '50%', transform: 'translateX(-50%)',
-                background: 'rgba(15,20,30,0.94)',
-                backdropFilter: 'blur(12px)',
-                border: '1px solid rgba(168,122,52,0.4)',
-                borderRadius: 30, padding: '6px 18px',
-                color: '#fff',
-                display: 'flex', alignItems: 'center', gap: 10,
-                zIndex: 40, boxShadow: '0 8px 24px rgba(0,0,0,0.35)',
-                pointerEvents: 'none', whiteSpace: 'nowrap',
-              }}
-            >
-              <Sparkles size={12} color="var(--brass)" />
-              <span style={{ fontSize: 12, fontWeight: 700 }}>{hoveredItem.name}</span>
-              <span style={{ fontSize: 11, color: '#fbbf24', fontWeight: 600 }}>
-                {formatPrice(hoveredItem.price)}
-              </span>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* 15. Selected item top badge (z:50) */}
-        <AnimatePresence>
-          {selectedSlot && getSlotItem(selectedSlot) && (
-            <motion.div
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.18 }}
-              style={{
-                position: 'absolute', top: 12,
-                left: '50%', transform: 'translateX(-50%)',
-                background: 'rgba(15,20,30,0.96)',
-                backdropFilter: 'blur(16px)',
-                border: '1px solid rgba(168,122,52,0.45)',
-                borderRadius: 30, padding: '7px 18px',
-                display: 'flex', alignItems: 'center', gap: 12,
-                zIndex: 50, boxShadow: '0 8px 28px rgba(0,0,0,0.4)',
-              }}
-            >
-              <Sparkles size={13} color="var(--brass)" />
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <span style={{ fontSize: 12.5, fontWeight: 700, color: '#fff', lineHeight: 1.3 }}>
-                  {getSlotItem(selectedSlot)!.name}
-                </span>
-                <span style={{ fontSize: 11, color: '#fbbf24', fontWeight: 600 }}>
-                  {formatPrice(getSlotItem(selectedSlot)!.price)}
-                </span>
-              </div>
-              <button
-                type="button"
-                aria-label="Close item selection popup"
-                onClick={() => setSelectedSlot(null)}
-                style={{
-                  background: 'rgba(255,255,255,0.08)', border: 'none',
-                  borderRadius: '50%', width: 22, height: 22,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  cursor: 'pointer', color: '#9ca3af',
-                }}
-              >
-                <X size={12} />
-              </button>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* 16. Empty State Card with Armchair Icon & Two Integrated CTAs (Rule 6) */}
-        <AnimatePresence>
-          {!desk && !chair && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.25 }}
-              style={{
-                position: 'absolute',
-                inset: 0,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                pointerEvents: 'none',
-                zIndex: 30,
-              }}
-            >
-              <div
-                style={{
-                  pointerEvents: 'auto',
-                  maxWidth: 380,
-                  width: '90%',
-                  padding: '24px 28px',
-                  background: isNight ? 'rgba(17,24,39,0.85)' : 'rgba(255,255,255,0.88)',
-                  backdropFilter: 'blur(16px)',
-                  border: isNight ? '1px solid rgba(255,255,255,0.12)' : '1px solid rgba(0,0,0,0.08)',
-                  borderRadius: 20,
-                  textAlign: 'center',
-                  boxShadow: isNight
-                    ? '0 16px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05)'
-                    : '0 16px 40px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04)',
-                }}
-              >
-                <div
-                  style={{
-                    width: 44,
-                    height: 44,
-                    borderRadius: 12,
-                    margin: '0 auto 12px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    background: isNight ? 'rgba(168,122,52,0.15)' : 'rgba(168,122,52,0.1)',
-                    border: '1px solid rgba(168,122,52,0.3)',
-                    color: 'var(--brass)',
-                  }}
-                >
-                  <Armchair size={22} />
-                </div>
-                <h4
-                  style={{
-                    margin: 0,
-                    fontSize: 15,
-                    fontWeight: 800,
-                    color: isNight ? '#fff' : 'var(--ink)',
-                    letterSpacing: '-0.01em',
-                  }}
-                >
-                  Workspace Anda Masih Kosong
-                </h4>
-                <p
-                  style={{
-                    margin: '6px 0 18px',
-                    fontSize: 12,
-                    color: isNight ? 'rgba(255,255,255,0.55)' : 'var(--ink-soft)',
-                    lineHeight: 1.45,
-                  }}
-                >
-                  Pilih meja dan kursi dari panel konfigurator untuk melihat komposisi workspace Anda
-                </p>
-                <div style={{ display: 'flex', gap: 10, justifyContent: 'center' }}>
                   <button
                     type="button"
                     onClick={() => setBuilderTab('desk')}
                     style={{
-                      flex: 1,
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: 6,
-                      padding: '9px 14px',
-                      borderRadius: 12,
-                      background: 'var(--brass)',
-                      color: '#fff',
-                      fontSize: 12,
-                      fontWeight: 700,
-                      border: 'none',
-                      cursor: 'pointer',
-                      boxShadow: '0 4px 14px rgba(168,122,52,0.3)',
-                      transition: 'all 0.2s ease',
+                      display: 'inline-flex', alignItems: 'center', gap: 7,
+                      padding: '8px 20px', borderRadius: 30,
+                      border: '1.5px dashed rgba(168,122,52,0.5)',
+                      background: isNight ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)',
+                      color: isNight ? 'rgba(255,255,255,0.7)' : 'var(--ink)',
+                      fontSize: 12, fontWeight: 700, cursor: 'pointer',
                     }}
                   >
-                    <Plus size={13} strokeWidth={2.5} />
+                    <Plus size={13} color="var(--brass)" />
                     <span>Pilih Meja</span>
                   </button>
+                </motion.div>
+              ) : null}
+            </AnimatePresence>
+          </div>
+
+          {/* 4. Ambient Screen Glow — behind monitor (z:9) */}
+          {desk && activeMonitor && (
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '41%',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                width: ultrawide ? 230 : 185,
+                height: 90,
+                background: isNight
+                  ? 'radial-gradient(ellipse, rgba(56,189,248,0.2) 0%, rgba(99,102,241,0.08) 50%, transparent 75%)'
+                  : 'radial-gradient(ellipse, rgba(56,189,248,0.12) 0%, transparent 70%)',
+                zIndex: 9,
+                pointerEvents: 'none',
+                filter: 'blur(12px)',
+                transition: 'background 0.5s ease',
+              }}
+            />
+          )}
+
+          {/* 5. MONITOR — on desk surface center anchor (z:10) */}
+          {desk && (
+            <div
+              style={{
+                position: 'absolute',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                bottom: '39%',
+                zIndex: 10,
+                cursor: activeMonitor ? 'pointer' : 'default',
+              }}
+              onMouseEnter={() => activeMonitor && setHoveredSlot('monitor')}
+              onMouseLeave={() => setHoveredSlot(null)}
+              onClick={() => activeMonitor && setSelectedSlot(s => s === 'monitor' ? null : 'monitor')}
+            >
+              <AnimatePresence mode="wait">
+                {activeMonitor ? (
+                  <motion.div
+                    key={activeMonitor.id}
+                    variants={itemVariants}
+                    initial="hidden" animate="visible" exit="exit"
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    {ultrawide
+                      ? <MonitorUltrawide width={210} isNight={isNight} />
+                      : <Monitor4K width={165} isNight={isNight} />
+                    }
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="empty-monitor"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    style={{ textAlign: 'center' }}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setBuilderTab('accessory')}
+                      style={{
+                        display: 'inline-flex', alignItems: 'center', gap: 5,
+                        padding: '5px 12px', borderRadius: 20,
+                        border: '1px dashed rgba(168,122,52,0.3)',
+                        background: isNight ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.04)',
+                        color: isNight ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.5)', fontSize: 10.5, fontWeight: 700,
+                        cursor: 'pointer',
+                      }}
+                    >
+                      <Plus size={10} color="rgba(168,122,52,0.6)" />
+                      <span>+ Monitor</span>
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          )}
+
+          {/* 6. Studio Speakers — Symmetrical stereo pair flanking monitor (z:12) */}
+          <AnimatePresence>
+            {desk && speakerItem && (
+              <>
+                {/* Left Speaker */}
+                <motion.div
+                  key="speaker-left"
+                  variants={itemVariants}
+                  initial="hidden" animate="visible" exit="exit"
+                  style={{ position: 'absolute', left: speakerLeftPos, bottom: '39%', zIndex: 12, cursor: 'pointer' }}
+                  whileHover={{ scale: 1.06 }}
+                  onMouseEnter={() => setHoveredSlot('speakers')}
+                  onMouseLeave={() => setHoveredSlot(null)}
+                  onClick={() => setSelectedSlot(s => s === 'speakers' ? null : 'speakers')}
+                >
+                  <SpeakersSVG height={44} />
+                </motion.div>
+                {/* Right Speaker */}
+                <motion.div
+                  key="speaker-right"
+                  variants={itemVariants}
+                  initial="hidden" animate="visible" exit="exit"
+                  style={{ position: 'absolute', left: 'calc(50% + 98px)', bottom: '39%', zIndex: 12, cursor: 'pointer' }}
+                  whileHover={{ scale: 1.06 }}
+                  onMouseEnter={() => setHoveredSlot('speakers')}
+                  onMouseLeave={() => setHoveredSlot(null)}
+                  onClick={() => setSelectedSlot(s => s === 'speakers' ? null : 'speakers')}
+                >
+                  <SpeakersSVG height={44} />
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
+
+          {/* 7. Laptop Stand — Left desk surface (z:12) — dynamically offset if speaker present */}
+          <AnimatePresence>
+            {desk && laptopStand && (
+              <motion.div
+                key="laptopStand"
+                variants={itemVariants}
+                initial="hidden" animate="visible" exit="exit"
+                style={{ position: 'absolute', left: laptopStandLeftPos, bottom: '39%', zIndex: 12, cursor: 'pointer' }}
+                whileHover={{ scale: 1.06 }}
+                onMouseEnter={() => setHoveredSlot('laptopStand')}
+                onMouseLeave={() => setHoveredSlot(null)}
+                onClick={() => setSelectedSlot(s => s === 'laptopStand' ? null : 'laptopStand')}
+              >
+                <LaptopStandSVG height={48} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* 8. Espresso Machine — Right desk surface (z:12) */}
+          <AnimatePresence>
+            {desk && espresso && (
+              <motion.div
+                key="espresso"
+                variants={itemVariants}
+                initial="hidden" animate="visible" exit="exit"
+                style={{ position: 'absolute', left: 'calc(50% + 106px)', bottom: '39%', zIndex: 12, cursor: 'pointer' }}
+                whileHover={{ scale: 1.06 }}
+                onMouseEnter={() => setHoveredSlot('espresso')}
+                onMouseLeave={() => setHoveredSlot(null)}
+                onClick={() => setSelectedSlot(s => s === 'espresso' ? null : 'espresso')}
+              >
+                <EspressoMachine height={50} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* 9. ScreenBar Lamp + Soft Downlight Gradient — on top of monitor (z:14) */}
+          <AnimatePresence>
+            {desk && activeMonitor && screenbar && (
+              <motion.div
+                key="screenbar"
+                variants={topItemVariants}
+                initial="hidden" animate="visible" exit="exit"
+                style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', bottom: '60%', zIndex: 14, cursor: 'pointer' }}
+                whileHover={{ scale: 1.05 }}
+                onMouseEnter={() => setHoveredSlot('screenbar')}
+                onMouseLeave={() => setHoveredSlot(null)}
+                onClick={() => setSelectedSlot(s => s === 'screenbar' ? null : 'screenbar')}
+              >
+                <ScreenBarLamp width={110} />
+                {/* Soft warm downlight gradient onto desk surface */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '85%',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    width: 210,
+                    height: 100,
+                    background: isNight
+                      ? 'radial-gradient(ellipse at 50% 0%, rgba(251,191,36,0.24) 0%, rgba(251,191,36,0.06) 55%, transparent 80%)'
+                      : 'radial-gradient(ellipse at 50% 0%, rgba(251,191,36,0.14) 0%, rgba(251,191,36,0.03) 55%, transparent 80%)',
+                    pointerEvents: 'none',
+                    filter: 'blur(3px)',
+                    transition: 'background 0.4s ease',
+                  }}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* 10. Webcam — top of monitor when no screenbar (z:14) */}
+          <AnimatePresence>
+            {desk && activeMonitor && webcamItem && !screenbar && (
+              <motion.div
+                key="webcam"
+                variants={topItemVariants}
+                initial="hidden" animate="visible" exit="exit"
+                style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', bottom: '60.5%', zIndex: 14, cursor: 'pointer' }}
+                whileHover={{ scale: 1.08 }}
+                onMouseEnter={() => setHoveredSlot('webcam')}
+                onMouseLeave={() => setHoveredSlot(null)}
+                onClick={() => setSelectedSlot(s => s === 'webcam' ? null : 'webcam')}
+              >
+                <WebcamSVG width={32} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* 11. Keyboard & Mouse — on front of desk (z:16) */}
+          <AnimatePresence>
+            {desk && keyboardItem && (
+              <motion.div
+                key="keyboard"
+                variants={itemVariants}
+                initial="hidden" animate="visible" exit="exit"
+                style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', bottom: '35.5%', zIndex: 16, cursor: 'pointer' }}
+                whileHover={{ scale: 1.04 }}
+                onMouseEnter={() => setHoveredSlot('keyboard')}
+                onMouseLeave={() => setHoveredSlot(null)}
+                onClick={() => setSelectedSlot(s => s === 'keyboard' ? null : 'keyboard')}
+              >
+                <KeyboardIllustration width={115} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* 12. CHAIR — Ground offset in front of desk (z:18)
+              Headrest terminates safely below the monitor screen display */}
+          <div
+            style={{
+              position: 'absolute',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              bottom: '12%',
+              zIndex: 18,
+              cursor: chair ? 'pointer' : 'default',
+            }}
+            onMouseEnter={() => chair && setHoveredSlot('chair')}
+            onMouseLeave={() => setHoveredSlot(null)}
+            onClick={() => chair && setSelectedSlot(s => s === 'chair' ? null : 'chair')}
+          >
+            <AnimatePresence mode="wait">
+              {chair ? (
+                <motion.div
+                  key={chair.id}
+                  variants={itemVariants}
+                  initial="hidden" animate="visible" exit="exit"
+                  whileHover={{ scale: 1.02, y: -3 }}
+                >
+                  {getChairIllustration(chair.id)}
+                </motion.div>
+              ) : desk ? (
+                /* Inline prompt only if desk is chosen but chair is not yet chosen */
+                <motion.div
+                  key="empty-chair"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  style={{ textAlign: 'center', padding: '10px 0' }}
+                >
                   <button
                     type="button"
                     onClick={() => setBuilderTab('chair')}
                     style={{
-                      flex: 1,
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: 6,
-                      padding: '9px 14px',
-                      borderRadius: 12,
-                      background: isNight ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.04)',
-                      color: isNight ? '#fff' : 'var(--ink)',
-                      border: isNight ? '1px solid rgba(255,255,255,0.15)' : '1px solid rgba(0,0,0,0.12)',
-                      fontSize: 12,
-                      fontWeight: 700,
-                      cursor: 'pointer',
-                      transition: 'all 0.2s ease',
+                      display: 'inline-flex', alignItems: 'center', gap: 6,
+                      padding: '7px 18px', borderRadius: 30,
+                      border: '1.5px dashed rgba(168,122,52,0.5)',
+                      background: isNight ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)',
+                      color: isNight ? 'rgba(255,255,255,0.7)' : 'var(--ink)',
+                      fontSize: 11.5, fontWeight: 700, cursor: 'pointer',
                     }}
                   >
-                    <Plus size={13} strokeWidth={2.5} />
+                    <Plus size={12} color="var(--brass)" />
                     <span>Pilih Kursi</span>
                   </button>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+                </motion.div>
+              ) : null}
+            </AnimatePresence>
+          </div>
 
-        {/* Watermark */}
-        <div
-          style={{
-            position: 'absolute', bottom: 12, right: 16,
-            fontSize: 10, fontWeight: 700,
-            color: isNight ? 'rgba(255,255,255,0.18)' : 'rgba(0,0,0,0.22)',
-            letterSpacing: '0.12em', textTransform: 'uppercase',
-            pointerEvents: 'none', zIndex: 2,
-            transition: 'color 0.5s ease',
-          }}
-        >
-          MONIS Studio
+          {/* 13. Monstera Plant — Foreground side element (z:22) */}
+          <AnimatePresence>
+            {monstera && (
+              <motion.div
+                key="monstera"
+                variants={itemVariants}
+                initial="hidden" animate="visible" exit="exit"
+                style={{ position: 'absolute', left: '6%', bottom: '17%', zIndex: 22, cursor: 'pointer' }}
+                whileHover={{ scale: 1.04 }}
+                onMouseEnter={() => setHoveredSlot('plant')}
+                onMouseLeave={() => setHoveredSlot(null)}
+                onClick={() => setSelectedSlot(s => s === 'plant' ? null : 'plant')}
+              >
+                <MonsteraPlant height={110} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* 14. Hover Tooltip (z:40) */}
+          <AnimatePresence>
+            {hoveredSlot && hoveredItem && (
+              <motion.div
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 6 }}
+                transition={{ duration: 0.15 }}
+                style={{
+                  position: 'absolute', bottom: 12,
+                  left: '50%', transform: 'translateX(-50%)',
+                  background: 'rgba(10,14,24,0.96)',
+                  backdropFilter: 'blur(16px)',
+                  border: '1px solid rgba(168,122,52,0.45)',
+                  borderRadius: 30, padding: '6px 18px',
+                  color: '#fff',
+                  display: 'flex', alignItems: 'center', gap: 10,
+                  zIndex: 40, boxShadow: '0 8px 28px rgba(0,0,0,0.4), 0 0 0 1px rgba(168,122,52,0.15)',
+                  pointerEvents: 'none', whiteSpace: 'nowrap',
+                }}
+              >
+                <Sparkles size={11} color="var(--brass)" />
+                <span style={{ fontSize: 11.5, fontWeight: 700 }}>{hoveredItem.name}</span>
+                <div style={{ width: 1, height: 12, background: 'rgba(255,255,255,0.15)' }} />
+                <span style={{ fontSize: 11, color: '#fbbf24', fontWeight: 600 }}>
+                  {formatPrice(hoveredItem.price)}
+                </span>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* 15. Selected item top badge (z:50) */}
+          <AnimatePresence>
+            {selectedSlot && getSlotItem(selectedSlot) && (
+              <motion.div
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.18 }}
+                style={{
+                  position: 'absolute', top: 10,
+                  left: '50%', transform: 'translateX(-50%)',
+                  background: 'rgba(10,14,24,0.97)',
+                  backdropFilter: 'blur(20px)',
+                  border: '1px solid rgba(168,122,52,0.5)',
+                  borderRadius: 30, padding: '6px 16px 6px 12px',
+                  display: 'flex', alignItems: 'center', gap: 10,
+                  zIndex: 50, boxShadow: '0 8px 32px rgba(0,0,0,0.45), 0 0 0 1px rgba(168,122,52,0.12)',
+                }}
+              >
+                <div
+                  style={{
+                    width: 22, height: 22, borderRadius: '50%',
+                    background: 'rgba(168,122,52,0.18)',
+                    border: '1px solid rgba(168,122,52,0.35)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  }}
+                >
+                  <Sparkles size={11} color="var(--brass)" />
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: '#fff', lineHeight: 1.3 }}>
+                    {getSlotItem(selectedSlot)!.name}
+                  </span>
+                  <span style={{ fontSize: 10.5, color: '#fbbf24', fontWeight: 600 }}>
+                    {formatPrice(getSlotItem(selectedSlot)!.price)}
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  aria-label="Close item selection popup"
+                  onClick={() => setSelectedSlot(null)}
+                  style={{
+                    background: 'rgba(255,255,255,0.08)', border: 'none',
+                    borderRadius: '50%', width: 20, height: 20,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    cursor: 'pointer', color: '#9ca3af', marginLeft: 2,
+                    transition: 'background 0.15s ease',
+                  }}
+                >
+                  <X size={11} />
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* 16. Empty State Card with Armchair Icon & Two Integrated CTAs */}
+          <AnimatePresence>
+            {!desk && !chair && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.25 }}
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  pointerEvents: 'none',
+                  zIndex: 30,
+                }}
+              >
+                <div
+                  style={{
+                    pointerEvents: 'auto',
+                    maxWidth: 360,
+                    width: '88%',
+                    padding: '22px 24px',
+                    background: isNight
+                      ? 'rgba(12,17,32,0.88)'
+                      : 'rgba(255,255,255,0.9)',
+                    backdropFilter: 'blur(20px)',
+                    WebkitBackdropFilter: 'blur(20px)',
+                    border: isNight
+                      ? '1px solid rgba(255,255,255,0.09)'
+                      : '1px solid rgba(0,0,0,0.07)',
+                    borderRadius: 20,
+                    textAlign: 'center',
+                    boxShadow: isNight
+                      ? '0 20px 50px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.04)'
+                      : '0 16px 44px rgba(0,0,0,0.09), 0 0 0 1px rgba(0,0,0,0.04)',
+                  }}
+                >
+                  {/* Icon */}
+                  <div
+                    style={{
+                      width: 46,
+                      height: 46,
+                      borderRadius: 14,
+                      margin: '0 auto 14px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      background: isNight
+                        ? 'linear-gradient(135deg, rgba(168,122,52,0.2), rgba(168,122,52,0.08))'
+                        : 'linear-gradient(135deg, rgba(168,122,52,0.12), rgba(168,122,52,0.05))',
+                      border: '1px solid rgba(168,122,52,0.3)',
+                    }}
+                  >
+                    <Armchair size={22} color="var(--brass)" />
+                  </div>
+                  <h4
+                    style={{
+                      margin: 0,
+                      fontSize: 14.5,
+                      fontWeight: 800,
+                      color: isNight ? '#f1f5f9' : 'var(--ink)',
+                      letterSpacing: '-0.01em',
+                    }}
+                  >
+                    Workspace Anda Masih Kosong
+                  </h4>
+                  <p
+                    style={{
+                      margin: '7px 0 18px',
+                      fontSize: 11.5,
+                      color: isNight ? 'rgba(255,255,255,0.45)' : 'var(--ink-soft)',
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    Pilih meja dan kursi dari panel konfigurator untuk melihat komposisi workspace Anda di sini
+                  </p>
+                  <div style={{ display: 'flex', gap: 8, justifyContent: 'center' }}>
+                    <button
+                      type="button"
+                      onClick={() => setBuilderTab('desk')}
+                      style={{
+                        flex: 1,
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 6,
+                        padding: '9px 12px',
+                        borderRadius: 12,
+                        background: 'var(--brass)',
+                        color: '#fff',
+                        fontSize: 12,
+                        fontWeight: 700,
+                        border: 'none',
+                        cursor: 'pointer',
+                        boxShadow: '0 4px 16px rgba(168,122,52,0.35)',
+                        transition: 'all 0.2s ease',
+                      }}
+                    >
+                      <Plus size={12} strokeWidth={2.5} />
+                      <span>Pilih Meja</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setBuilderTab('chair')}
+                      style={{
+                        flex: 1,
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 6,
+                        padding: '9px 12px',
+                        borderRadius: 12,
+                        background: isNight ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.04)',
+                        color: isNight ? '#e2e8f0' : 'var(--ink)',
+                        border: isNight ? '1px solid rgba(255,255,255,0.13)' : '1px solid rgba(0,0,0,0.1)',
+                        fontSize: 12,
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                      }}
+                    >
+                      <Plus size={12} strokeWidth={2.5} />
+                      <span>Pilih Kursi</span>
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Watermark */}
+          <div
+            style={{
+              position: 'absolute', bottom: 10, right: 14,
+              fontSize: 9, fontWeight: 700,
+              color: isNight ? 'rgba(255,255,255,0.14)' : 'rgba(0,0,0,0.18)',
+              letterSpacing: '0.14em', textTransform: 'uppercase',
+              pointerEvents: 'none', zIndex: 2,
+              transition: 'color 0.5s ease',
+            }}
+          >
+            MONIS Studio
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
 }

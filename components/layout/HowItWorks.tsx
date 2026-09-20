@@ -6,25 +6,25 @@ export default function HowItWorks() {
   const steps = [
     {
       num: '01',
-      icon: <Sparkles size={22} color="#111827" />,
+      icon: <Sparkles size={22} />,
       title: 'Pick Gear or Curated Setup',
       desc: 'Choose from standing desks, Herman Miller chairs, and 4K displays in the catalog, or customize your dream setup in our 2D Studio Configurator.',
     },
     {
       num: '02',
-      icon: <Calendar size={22} color="#111827" />,
+      icon: <Calendar size={22} />,
       title: 'Flexible Rental Terms',
       desc: 'Rent daily, weekly (15% off), or monthly (30% off). No security deposit required. Pay only for what you use with zero lock-in.',
     },
     {
       num: '03',
-      icon: <Truck size={22} color="#111827" />,
+      icon: <Truck size={22} />,
       title: 'White-Glove Villa Setup',
       desc: 'Our logistics team delivers, assembles, and tests your entire workstation at your villa in Canggu, Seminyak, Ubud, or Uluwatu.',
     },
     {
       num: '04',
-      icon: <HeartHandshake size={22} color="#111827" />,
+      icon: <HeartHandshake size={22} />,
       title: 'WhatsApp Concierge & Return',
       desc: 'Friendly English & Indonesian support 7 days a week. Swap gear anytime. When your Bali stay ends, we pack and pick up everything.',
     },
@@ -35,8 +35,8 @@ export default function HowItWorks() {
       id="how-it-works"
       style={{
         scrollMarginTop: '80px',
-        background: '#f9fafb',
-        borderBottom: '1px solid #e5e7eb',
+        background: 'var(--paper-2)',
+        borderBottom: '1px solid var(--line)',
         padding: '68px 0',
       }}
     >
@@ -49,7 +49,7 @@ export default function HowItWorks() {
               fontWeight: 700,
               letterSpacing: '0.06em',
               textTransform: 'uppercase',
-              color: '#4b5563',
+              color: 'var(--ink-soft)',
               marginBottom: 8,
             }}
           >
@@ -59,7 +59,7 @@ export default function HowItWorks() {
             style={{
               fontSize: 'clamp(26px, 3.2vw, 36px)',
               fontWeight: 800,
-              color: '#111827',
+              color: 'var(--ink)',
               letterSpacing: '-0.02em',
               lineHeight: 1.2,
               marginBottom: 10,
@@ -70,7 +70,7 @@ export default function HowItWorks() {
           <p
             style={{
               fontSize: 15,
-              color: '#4b5563',
+              color: 'var(--ink-soft)',
               lineHeight: 1.6,
             }}
           >
@@ -90,8 +90,8 @@ export default function HowItWorks() {
             <div
               key={step.num}
               style={{
-                background: '#ffffff',
-                border: '1px solid #e5e7eb',
+                background: 'var(--paper)',
+                border: '1px solid var(--line)',
                 borderRadius: 16,
                 padding: '24px 22px',
                 display: 'flex',
@@ -99,7 +99,6 @@ export default function HowItWorks() {
                 boxShadow: '0 1px 3px rgba(0, 0, 0, 0.04)',
                 transition: 'all 0.2s ease',
               }}
-              className="hover:shadow-md hover:-translate-y-0.5"
             >
               <div
                 style={{
@@ -114,10 +113,11 @@ export default function HowItWorks() {
                     width: 44,
                     height: 44,
                     borderRadius: 12,
-                    background: '#f3f4f6',
+                    background: 'var(--paper-3)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    color: 'var(--ink)',
                   }}
                 >
                   {step.icon}
@@ -126,7 +126,7 @@ export default function HowItWorks() {
                   style={{
                     fontSize: 13,
                     fontWeight: 700,
-                    color: '#4b5563',
+                    color: 'var(--ink-soft)',
                   }}
                 >
                   {step.num}
@@ -137,7 +137,7 @@ export default function HowItWorks() {
                 style={{
                   fontSize: 17,
                   fontWeight: 700,
-                  color: '#111827',
+                  color: 'var(--ink)',
                   marginBottom: 8,
                   lineHeight: 1.3,
                 }}
@@ -148,7 +148,7 @@ export default function HowItWorks() {
               <p
                 style={{
                   fontSize: 13.5,
-                  color: '#4b5563',
+                  color: 'var(--ink-soft)',
                   lineHeight: 1.55,
                   margin: 0,
                   flex: 1,
@@ -165,7 +165,7 @@ export default function HowItWorks() {
           style={{
             marginTop: 44,
             paddingTop: 32,
-            borderTop: '1px solid #e5e7eb',
+            borderTop: '1px solid var(--line)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
@@ -174,10 +174,10 @@ export default function HowItWorks() {
           }}
         >
           <div>
-            <p style={{ fontSize: 17, fontWeight: 700, color: '#111827' }}>
+            <p style={{ fontSize: 17, fontWeight: 700, color: 'var(--ink)' }}>
               Ready to build your Bali workspace?
             </p>
-            <p style={{ fontSize: 14, color: '#4b5563', marginTop: 4 }}>
+            <p style={{ fontSize: 14, color: 'var(--ink-soft)', marginTop: 4 }}>
               Same-day delivery across Canggu, Seminyak, Ubud, Uluwatu, and Sanur.
             </p>
           </div>
@@ -191,8 +191,8 @@ export default function HowItWorks() {
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: 8,
-                background: '#000000',
-                color: '#fff',
+                background: 'var(--ink)',
+                color: 'var(--paper)',
                 border: 'none',
                 borderRadius: '9999px',
                 padding: '12px 22px',
