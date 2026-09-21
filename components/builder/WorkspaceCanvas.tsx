@@ -757,7 +757,7 @@ export default function WorkspaceCanvas() {
                 width: 6,
                 height: 6,
                 borderRadius: '50%',
-                background: '#22c55e',
+                background: 'var(--sage)',
                 display: 'inline-block',
                 boxShadow: '0 0 6px rgba(34, 197, 94, 0.7)',
               }}
@@ -1372,7 +1372,7 @@ export default function WorkspaceCanvas() {
                 <Sparkles size={11} color="var(--brass)" />
                 <span style={{ fontSize: 11.5, fontWeight: 700 }}>{hoveredItem.name}</span>
                 <div style={{ width: 1, height: 12, background: 'rgba(255,255,255,0.15)' }} />
-                <span style={{ fontSize: 11, color: '#fbbf24', fontWeight: 600 }}>
+                <span style={{ fontSize: 11, color: 'var(--brass-light)', fontWeight: 600 }}>
                   {formatPrice(hoveredItem.price)}
                 </span>
               </motion.div>
@@ -1412,7 +1412,7 @@ export default function WorkspaceCanvas() {
                   <span style={{ fontSize: 12, fontWeight: 700, color: '#fff', lineHeight: 1.3 }}>
                     {getSlotItem(selectedSlot)!.name}
                   </span>
-                  <span style={{ fontSize: 10.5, color: '#fbbf24', fontWeight: 600 }}>
+                  <span style={{ fontSize: 10.5, color: 'var(--brass-light)', fontWeight: 600 }}>
                     {formatPrice(getSlotItem(selectedSlot)!.price)}
                   </span>
                 </div>
@@ -1424,7 +1424,7 @@ export default function WorkspaceCanvas() {
                     background: 'rgba(255,255,255,0.08)', border: 'none',
                     borderRadius: '50%', width: 20, height: 20,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    cursor: 'pointer', color: '#9ca3af', marginLeft: 2,
+                    cursor: 'pointer', color: 'var(--ink-subtle)', marginLeft: 2,
                     transition: 'background 0.15s ease',
                   }}
                 >

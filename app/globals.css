@@ -16,6 +16,8 @@
   --line: #e5e7eb;
   --line-soft: rgba(0, 0, 0, 0.06);
   --radius: 12px;
+  /* Font families */
+  --font-heading: var(--font-inter), system-ui, -apple-system, sans-serif;
 }
 
 * {
