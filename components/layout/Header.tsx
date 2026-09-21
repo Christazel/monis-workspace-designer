@@ -304,7 +304,7 @@ export default function Header() {
                 aria-label={`Switch currency between IDR and USD, currently ${currency}`}
                 style={{
                   border: '1px solid #e5e7eb',
-                  background: '#f9fafb',
+                  background: 'var(--paper-2)',
                   fontSize: '11px',
                   fontWeight: 700,
                   padding: '5px 9px',
@@ -325,8 +325,8 @@ export default function Header() {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '4px',
-                  background: '#000000',
-                  color: '#ffffff',
+                  background: 'var(--ink)',
+                  color: 'var(--paper)',
                   border: 'none',
                   borderRadius: '9999px',
                   padding: '6px 10px',
@@ -364,8 +364,8 @@ export default function Header() {
                   height: '34px',
                   borderRadius: '50%',
                   border: '1px solid #e5e7eb',
-                  background: '#ffffff',
-                  color: '#111827',
+                  background: 'var(--paper)',
+                  color: 'var(--ink)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -387,7 +387,7 @@ export default function Header() {
             style={{
               display: 'flex',
               alignItems: 'center',
-              background: '#ffffff',
+              background: 'var(--paper)',
               border: '1px solid #e5e7eb',
               borderRadius: '9999px',
               padding: '4px 6px 4px 14px',
@@ -423,7 +423,7 @@ export default function Header() {
                 style={{
                   fontSize: '9.5px',
                   fontWeight: 600,
-                  color: '#4b5563',
+                  color: 'var(--ink-soft)',
                   textTransform: 'uppercase',
                   letterSpacing: '0.04em',
                   display: 'flex',
@@ -441,7 +441,7 @@ export default function Header() {
                 style={{
                   fontSize: '11.5px',
                   fontWeight: 600,
-                  color: '#111827',
+                  color: 'var(--ink)',
                   whiteSpace: 'nowrap',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis',
@@ -460,7 +460,7 @@ export default function Header() {
                   position: 'absolute',
                   top: '115%',
                   left: 0,
-                  background: '#ffffff',
+                  background: 'var(--paper)',
                   border: '1px solid #e5e7eb',
                   borderRadius: '16px',
                   boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.12)',
@@ -469,7 +469,7 @@ export default function Header() {
                   zIndex: 100,
                 }}
               >
-                <div style={{ fontSize: '11px', fontWeight: 600, color: '#9ca3af', padding: '6px 10px' }}>
+                <div style={{ fontSize: '11px', fontWeight: 600, color: 'var(--ink-subtle)', padding: '6px 10px' }}>
                   POPULAR BALI HUBS
                 </div>
                 {BALI_AREAS.map((area) => (
@@ -499,7 +499,7 @@ export default function Header() {
                     }}
                   >
                     <span>{area}</span>
-                    <span style={{ fontSize: '10px', color: '#10b981', fontWeight: 600 }}>Same-day</span>
+                    <span style={{ fontSize: '10px', color: 'var(--brass)', fontWeight: 600 }}>Same-day</span>
                   </button>
                 ))}
               </div>
@@ -521,7 +521,7 @@ export default function Header() {
                 style={{
                   fontSize: '9.5px',
                   fontWeight: 600,
-                  color: '#4b5563',
+                  color: 'var(--ink-soft)',
                   textTransform: 'uppercase',
                   letterSpacing: '0.04em',
                   display: 'flex',
@@ -537,7 +537,7 @@ export default function Header() {
                 </svg>
                 Delivery
               </span>
-              <span style={{ fontSize: '11.5px', fontWeight: 600, color: '#047857' }}>
+              <span style={{ fontSize: '11.5px', fontWeight: 600, color: 'var(--sage)' }}>
                 Today in Bali
               </span>
             </div>
@@ -569,7 +569,7 @@ export default function Header() {
                   width: '100%',
                   fontSize: '13px',
                   fontWeight: 400,
-                  color: '#111827',
+                  color: 'var(--ink)',
                 }}
               />
             </div>
@@ -582,8 +582,8 @@ export default function Header() {
                 width: '30px',
                 height: '30px',
                 borderRadius: '50%',
-                background: '#000000',
-                color: '#ffffff',
+                background: 'var(--ink)',
+                color: 'var(--paper)',
                 border: 'none',
                 display: 'flex',
                 alignItems: 'center',
@@ -613,7 +613,7 @@ export default function Header() {
                 background: 'transparent',
                 fontSize: '13px',
                 fontWeight: 500,
-                color: '#374151',
+                color: 'var(--ink-soft)',
                 cursor: 'pointer',
                 transition: 'all 0.15s ease',
               }}
@@ -626,7 +626,7 @@ export default function Header() {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                background: '#f3f4f6',
+                background: 'var(--paper-3)',
                 borderRadius: '9999px',
                 padding: '2px',
                 border: '1px solid #e5e7eb',
@@ -713,8 +713,8 @@ export default function Header() {
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '8px',
-                background: '#000000',
-                color: '#ffffff',
+                background: 'var(--ink)',
+                color: 'var(--paper)',
                 border: 'none',
                 borderRadius: '9999px',
                 padding: '8px 14px',
@@ -734,8 +734,8 @@ export default function Header() {
               {totalCount > 0 && (
                 <span
                   style={{
-                    background: '#047857',
-                    color: '#ffffff',
+                    background: 'var(--sage)',
+                    color: 'var(--paper)',
                     fontSize: '11px',
                     fontWeight: 700,
                     width: '18px',
@@ -758,7 +758,7 @@ export default function Header() {
           <div
             style={{
               borderTop: '1px solid rgba(0, 0, 0, 0.05)',
-              background: '#ffffff',
+              background: 'var(--paper)',
             }}
           >
             <div
@@ -817,8 +817,8 @@ export default function Header() {
                   cursor: 'pointer',
                   transition: 'all 0.15s ease',
                   border: '1px solid #e5e7eb',
-                  background: '#ffffff',
-                  color: '#374151',
+                  background: 'var(--paper)',
+                  color: 'var(--ink-soft)',
                 }}
               >
                 <span>Product Bundles</span>
@@ -838,9 +838,9 @@ export default function Header() {
                   whiteSpace: 'nowrap',
                   cursor: 'pointer',
                   transition: 'all 0.15s ease',
-                  border: '1px dashed #10b981',
-                  background: '#ecfdf5',
-                  color: '#065f46',
+                  border: '1px dashed var(--brass)',
+                  background: 'rgba(16, 185, 129, 0.08)',
+                  color: 'var(--sage)',
                   marginLeft: 'auto',
                 }}
               >
@@ -855,14 +855,14 @@ export default function Header() {
           <div
             style={{
               padding: '16px 20px 24px',
-              background: '#ffffff',
+              background: 'var(--paper)',
               borderTop: '1px solid #e5e7eb',
               display: 'flex',
               flexDirection: 'column',
               gap: '12px',
             }}
           >
-            <div style={{ fontSize: '12px', fontWeight: 600, color: '#9ca3af', textTransform: 'uppercase' }}>
+            <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--ink-subtle)', textTransform: 'uppercase' }}>
               Categories
             </div>
             {CATEGORIES.map((cat) => (
@@ -881,14 +881,14 @@ export default function Header() {
                   border: 'none',
                   fontSize: '14px',
                   fontWeight: activeCategory === cat.id ? 600 : 500,
-                  color: '#111827',
+                  color: 'var(--ink)',
                   cursor: 'pointer',
                 }}
               >
                 {cat.label}
               </button>
             ))}
-            <div style={{ height: '1px', background: '#e5e7eb', margin: '4px 0' }} />
+            <div style={{ height: '1px', background: 'var(--line)', margin: '4px 0' }} />
             <button
               type="button"
               onClick={() => handleNav('catalog', '#how-it-works')}
@@ -900,7 +900,7 @@ export default function Header() {
                 border: 'none',
                 fontSize: '14px',
                 fontWeight: 500,
-                color: '#111827',
+                color: 'var(--ink)',
                 cursor: 'pointer',
               }}
             >
@@ -913,8 +913,8 @@ export default function Header() {
                 textAlign: 'center',
                 padding: '12px',
                 borderRadius: '8px',
-                background: '#000000',
-                color: '#ffffff',
+                background: 'var(--ink)',
+                color: 'var(--paper)',
                 border: 'none',
                 fontSize: '14px',
                 fontWeight: 600,
